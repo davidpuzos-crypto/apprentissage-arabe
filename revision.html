@@ -32,25 +32,40 @@
   <script src="js/app.js"></script>
   <script src="donnees/versets.js"></script>
   <script src="donnees/lecons.js"></script>
+  <script src="donnees/frequent.js"></script>
   <script src="donnees/vocabulaire.js"></script>
   <script>
     App.init('revision');
     const zone = document.getElementById('zone-revision');
     const lexique = Vocabulaire.indexParCle();
-    const dus = Repetition.motsADue(Stockage.etat.revisions)
-      .filter((cle) => lexique[cle]); // on ne révise que ce qu'on sait afficher
 
-    if (dus.length === 0) {
+    // Index des phrases clefs (à partir du champ memoriser de chaque leçon).
+    const phrasesIndex = {};
+    Object.keys(Lecons).forEach((id) => {
+      const m = Lecons[id].memoriser;
+      if (m) phrasesIndex[m.cle || ('phrase-' + id)] = m;
+    });
+
+    // Mots dus
+    const items = Repetition.motsADue(Stockage.etat.revisions)
+      .filter((cle) => lexique[cle])
+      .map((cle) => ({ cle, type: 'mot', ...lexique[cle] }));
+    // Phrases dues
+    Stockage.phrasesADue().forEach((cle) => {
+      if (phrasesIndex[cle]) items.push({ cle, type: 'phrase', ...phrasesIndex[cle] });
+    });
+
+    if (items.length === 0) {
       zone.innerHTML = `<div class="carte centre">
         <h3>Rien à réviser pour l'instant</h3>
         <p class="muet">Vous êtes à jour. Revenez après votre prochaine leçon,
-        ou lorsque de nouveaux mots arriveront à échéance.</p>
-        <a class="btn" href="index.html">Retour à l'accueil</a></div>`;
+        ou lorsque de nouveaux mots et phrases arriveront à échéance.</p>
+        <a class="btn" href="vocabulaire.html">Découvrir du vocabulaire fréquent</a></div>`;
     } else {
-      lancerSession(dus);
+      lancerSession(items);
     }
 
-    function lancerSession(cles) {
+    function lancerSession(items) {
       let i = 0, reussis = 0;
       const carte = document.createElement('div');
       carte.className = 'carte';
@@ -60,13 +75,13 @@
       zone.insertBefore(progres, carte);
 
       function montrer() {
-        if (i >= cles.length) return terminer();
-        progres.textContent = 'Carte ' + (i + 1) + ' sur ' + cles.length;
-        const mot = lexique[cles[i]];
+        if (i >= items.length) return terminer();
+        progres.textContent = 'Carte ' + (i + 1) + ' sur ' + items.length;
+        const mot = items[i];
         carte.innerHTML = '';
         const flash = document.createElement('div'); flash.className = 'carte-flash';
         flash.innerHTML = `<div class="ar">${mot.ar}</div>
-          <p class="muet petit">Vous souvenez vous du sens de ce mot ?</p>
+          <p class="muet petit">${mot.type === 'phrase' ? 'Vous souvenez vous de cette phrase et de son sens ?' : 'Vous souvenez vous du sens de ce mot ?'}</p>
           <div class="reponse"><p class="translit">${mot.tr}</p><p style="font-size:1.2rem">${mot.fr}</p></div>`;
         carte.appendChild(flash);
 
@@ -77,7 +92,7 @@
         btnVoir.className = 'btn btn-secondaire'; btnVoir.textContent = 'Afficher la réponse';
         btnVoir.onclick = () => {
           reponse.classList.add('visible');
-          Parole.prononcer(mot.ar, { rate: 0.8 });
+          Parole.prononcer(mot.ar, { rate: mot.type === 'phrase' ? 0.7 : 0.8 });
           actions.innerHTML = '';
           const ko = document.createElement('button');
           ko.className = 'btn btn-secondaire'; ko.textContent = 'À revoir';
@@ -92,7 +107,9 @@
       }
 
       function juger(reussi) {
-        Stockage.enregistrerMot(cles[i], reussi);
+        const it = items[i];
+        if (it.type === 'phrase') Stockage.enregistrerPhrase(it.cle, reussi);
+        else Stockage.enregistrerMot(it.cle, reussi);
         if (reussi) reussis++;
         i++;
         montrer();
@@ -102,7 +119,7 @@
         progres.textContent = '';
         carte.innerHTML = `<div class="carte-flash">
           <h3>Révision terminée</h3>
-          <p class="muet">Vous avez revu ${cles.length} mot${cles.length>1?'s':''},
+          <p class="muet">Vous avez revu ${items.length} élément${items.length>1?'s':''},
           dont ${reussis} retrouvé${reussis>1?'s':''} de mémoire.</p>
           <p class="muet petit">Les mots hésitants reviendront bientôt, les autres s'espaceront.</p>
           <a class="btn" href="index.html">Retour à l'accueil</a></div>`;

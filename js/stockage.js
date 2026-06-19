@@ -17,7 +17,9 @@ const Stockage = (function () {
       serie: 0,                   // jours consécutifs
       joursActifs: [],            // historique des dates de pratique
     },
-    preferences: { theme: 'clair' },
+    preferences: { theme: 'clair', police: 'scheherazade', phonetique: 'masquee' },
+    lecture: { etape: 0, derniereDate: null, faites: [] }, // programme « Lecture du jour »
+    phrases: {},   // suivi de mémorisation des phrases clefs : { cle: {palier, prochaine} }
     creeLe: Date.now(),
   };
 
@@ -32,6 +34,8 @@ const Stockage = (function () {
       return Object.assign(structuredClone(defaut), donnees, {
         pratique: Object.assign({}, defaut.pratique, donnees.pratique || {}),
         preferences: Object.assign({}, defaut.preferences, donnees.preferences || {}),
+        lecture: Object.assign({}, defaut.lecture, donnees.lecture || {}),
+        phrases: donnees.phrases || {},
       });
     } catch (e) {
       console.warn('Lecture du stockage impossible, réinitialisation.', e);
@@ -48,9 +52,9 @@ const Stockage = (function () {
   function leconTerminee(id) { return etat.leconsTerminees.includes(id); }
 
   function leconAccessible(id) {
-    // La leçon 1 est toujours ouverte ; les suivantes le sont si la précédente est finie.
-    if (id <= 1) return true;
-    return leconTerminee(id - 1);
+    // Navigation libre : toute leçon est accessible, afin que chacun aille
+    // au niveau qui lui convient. La progression reste suivie séparément.
+    return id >= 1 && id <= 30;
   }
 
   function enregistrerScoreLecon(id, reussis, total) {
@@ -129,6 +133,28 @@ const Stockage = (function () {
   /* ---- Préférences ---- */
   function theme() { return etat.preferences.theme; }
   function definirTheme(t) { etat.preferences.theme = t; sauver(); }
+  function police() { return etat.preferences.police; }
+  function definirPolice(p) { etat.preferences.police = p; sauver(); }
+  function phonetique() { return etat.preferences.phonetique; }
+  function definirPhonetique(v) { etat.preferences.phonetique = v; sauver(); }
+
+  /* ---- Programme de lecture du jour ---- */
+  function lecture() { return etat.lecture; }
+  function avancerLecture(indexFait) {
+    if (!etat.lecture.faites.includes(indexFait)) etat.lecture.faites.push(indexFait);
+    etat.lecture.etape = Math.max(etat.lecture.etape, indexFait + 1);
+    etat.lecture.derniereDate = dateJour();
+    marquerPratiqueDuJour();
+    sauver();
+  }
+
+  /* ---- Phrases clefs (mémorisation différée) ---- */
+  function enregistrerPhrase(cle, reussi) {
+    Repetition.planifier(etat.phrases, cle, reussi);
+    marquerPratiqueDuJour();
+    sauver();
+  }
+  function phrasesADue() { return Repetition.motsADue(etat.phrases); }
 
   /* ---- Divers ---- */
   function reinitialiser() { etat = structuredClone(defaut); sauver(); }
@@ -139,6 +165,8 @@ const Stockage = (function () {
     leconTerminee, leconAccessible, enregistrerScoreLecon, scoreLecon,
     enregistrerMot, tauxMot, motsMaitrises, motsADecouverts,
     marquerPratiqueDuJour, serieActuelle,
-    theme, definirTheme, reinitialiser, exporter, sauver,
+    theme, definirTheme, police, definirPolice, phonetique, definirPhonetique,
+    lecture, avancerLecture, enregistrerPhrase, phrasesADue,
+    reinitialiser, exporter, sauver,
   };
 })();

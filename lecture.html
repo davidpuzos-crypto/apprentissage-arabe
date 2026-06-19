@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="clair">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lecture du jour · Arabe coranique</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/composants.css">
+  <link rel="stylesheet" href="css/theme-sombre.css">
+</head>
+<body>
+  <div id="barre"></div>
+  <main class="contenu">
+    <header class="centre">
+      <p class="cycle-romain">Lire et méditer, jour après jour</p>
+      <h1>Lecture du jour</h1>
+      <p class="muet" style="max-width:560px;margin:0.4rem auto 0;">
+        Un mot, puis un verset, puis une sourate : on lit chaque jour un peu
+        plus, avec la phonétique en appui et un commentaire pour goûter le
+        sens. Avancez à votre rythme.
+      </p>
+    </header>
+    <hr class="filet">
+    <section id="lecture"></section>
+  </main>
+
+  <script src="js/repetition.js"></script>
+  <script src="js/stockage.js"></script>
+  <script src="js/speech.js"></script>
+  <script src="js/app.js"></script>
+  <script src="donnees/lectures.js"></script>
+  <script>
+    App.init('lecture');
+    const racine = document.getElementById('lecture');
+    const N = Lectures.length;
+    const faites = Stockage.lecture().faites || [];
+
+    // Étape affichée : paramètre ?i=, sinon la prochaine non faite (plafonnée).
+    let i = parseInt(App.param('i'), 10);
+    if (isNaN(i)) i = Math.min(Stockage.lecture().etape || 0, N - 1);
+    i = Math.max(0, Math.min(i, N - 1));
+
+    function rendre() {
+      const L = Lectures[i];
+      const estFaite = (Stockage.lecture().faites || []).includes(i);
+      racine.innerHTML = '';
+
+      const carte = document.createElement('article');
+      carte.className = 'carte lecture-carte apparait';
+
+      const meta = document.createElement('div');
+      meta.className = 'lecture-meta';
+      meta.innerHTML = `<span class="badge-type">${L.type}</span>
+        <span class="muet petit">Étape ${i + 1} sur ${N}${estFaite ? ' · lue' : ''}</span>`;
+      carte.appendChild(meta);
+
+      const h = document.createElement('h2'); h.textContent = L.titre; carte.appendChild(h);
+      if (L.source) carte.appendChild(elt(`<p class="muet petit">${L.source}</p>`));
+
+      const ar = document.createElement('div'); ar.className = 'lecture-ar';
+      ar.textContent = L.ar;
+      ar.style.cursor = 'pointer';
+      ar.title = 'Cliquer pour écouter';
+      ar.onclick = () => Parole.prononcer(L.ar, { rate: 0.75 });
+      carte.appendChild(ar);
+
+      const audio = document.createElement('div'); audio.className = 'centre';
+      const ba = document.createElement('button'); ba.className = 'btn-audio'; ba.type = 'button';
+      ba.innerHTML = '&#9834;'; ba.setAttribute('aria-label', 'Écouter');
+      ba.onclick = () => Parole.prononcer(L.ar, { rate: 0.75 });
+      audio.appendChild(ba);
+      carte.appendChild(audio);
+
+      const ph = document.createElement('p'); ph.className = 'centre'; ph.innerHTML = App.phon(L.tr);
+      carte.appendChild(ph);
+
+      const fr = document.createElement('p'); fr.className = 'lecture-fr centre'; fr.textContent = L.fr;
+      carte.appendChild(fr);
+
+      const com = document.createElement('div'); com.className = 'approfondissement';
+      com.innerHTML = '<h3>Commentaire</h3>' + L.commentaire.split('\n').map((t) => `<p>${t}</p>`).join('');
+      carte.appendChild(com);
+
+      racine.appendChild(carte);
+
+      // Actions
+      const actions = document.createElement('div'); actions.className = 'pied-lecon';
+      const prec = document.createElement('a');
+      prec.className = 'btn btn-secondaire';
+      if (i > 0) { prec.href = 'lecture.html?i=' + (i - 1); prec.textContent = 'Précédente'; }
+      else { prec.href = 'index.html'; prec.textContent = 'Accueil'; }
+      actions.appendChild(prec);
+
+      const milieu = document.createElement('button');
+      milieu.className = 'btn'; milieu.type = 'button';
+      milieu.textContent = estFaite ? 'Relue et méditée' : 'J\'ai lu et médité';
+      milieu.onclick = () => {
+        Stockage.avancerLecture(i);
+        if (i < N - 1) location.href = 'lecture.html?i=' + (i + 1);
+        else rendre();
+      };
+      actions.appendChild(milieu);
+
+      const suiv = document.createElement('a');
+      suiv.className = 'btn btn-secondaire';
+      if (i < N - 1) { suiv.href = 'lecture.html?i=' + (i + 1); suiv.textContent = 'Suivante'; }
+      else { suiv.href = 'progression.html'; suiv.textContent = 'Bilan'; }
+      actions.appendChild(suiv);
+
+      racine.appendChild(actions);
+
+      // Sommaire des lectures
+      const som = document.createElement('section'); som.style.marginTop = '2.5rem';
+      som.innerHTML = '<div class="titre-section">Toutes les lectures</div>';
+      const liste = document.createElement('div'); liste.className = 'sommaire-lectures';
+      Lectures.forEach((l, k) => {
+        const a = document.createElement('a');
+        a.href = 'lecture.html?i=' + k;
+        const lue = (Stockage.lecture().faites || []).includes(k);
+        a.className = 'puce-lecture' + (k === i ? ' actuelle' : '') + (lue ? ' lue' : '');
+        a.textContent = (k + 1) + '. ' + l.titre;
+        liste.appendChild(a);
+      });
+      som.appendChild(liste);
+      racine.appendChild(som);
+    }
+
+    function elt(html) { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstElementChild; }
+    rendre();
+  </script>
+</body>
+</html>

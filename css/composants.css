@@ -65,6 +65,17 @@
 }
 .bascule-theme:hover { border-color: var(--or); color: var(--or-profond); }
 
+/* Bascules texte de la barre (police, phonétique) */
+.bascule-mini {
+  background: none; border: 1px solid var(--bordure); border-radius: 14px;
+  padding: 0.25rem 0.7rem; cursor: pointer; color: var(--texte-doux);
+  font-family: var(--f-ui); font-size: 0.74rem; letter-spacing: 0.02em;
+  transition: all var(--transition); white-space: nowrap;
+}
+.bascule-mini:hover { border-color: var(--or); color: var(--or-profond); }
+.bascule-mini.actif { border-color: var(--or); color: var(--or-profond); background: var(--fond-carte-profond); }
+.barre nav { flex-wrap: wrap; gap: 0.7rem 1rem; justify-content: flex-end; }
+
 /* ---- Cartes ---- */
 .carte {
   background: var(--fond-carte);
@@ -161,6 +172,61 @@
   padding: 1.2rem 1.4rem;
 }
 .note-grammaire h3 { color: var(--or-profond); }
+
+/* Lecture du jour */
+.lecture-carte { padding: 2rem 1.8rem; }
+.lecture-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+.badge-type {
+  font-family: var(--f-ui); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: #fbf7ee; background: var(--or); border-radius: 12px; padding: 0.2rem 0.7rem;
+}
+html[data-theme="sombre"] .badge-type { color: #1a1610; }
+.lecture-ar {
+  font-family: var(--f-arabe); direction: rtl; font-size: 2.7rem; line-height: 2.2;
+  text-align: center; color: var(--encre); margin: 1.2rem 0 0.4rem;
+}
+.lecture-fr { font-size: 1.15rem; margin: 0.6rem 0 1.2rem; }
+.sommaire-lectures { display: flex; flex-direction: column; gap: 0.35rem; }
+.puce-lecture {
+  font-family: var(--f-ui); font-size: 0.9rem; padding: 0.5rem 0.8rem; border-radius: var(--rayon);
+  border: 1px solid var(--bordure); color: var(--texte-doux); transition: all var(--transition);
+}
+.puce-lecture:hover { border-color: var(--or); color: var(--or-profond); }
+.puce-lecture.actuelle { border-color: var(--or); border-width: 2px; color: var(--or-profond); }
+.puce-lecture.lue { background: var(--fond-carte-profond); }
+.puce-lecture.lue::before { content: '✓ '; color: var(--succes); }
+
+/* Grille de cartes du vocabulaire fréquent */
+.grille-cartes { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.7rem; margin: 1rem 0; }
+.carte-mot {
+  border: 1px solid var(--bordure); border-radius: var(--rayon); background: var(--fond-carte);
+  padding: 1rem 0.8rem; cursor: pointer; text-align: center; transition: all var(--transition);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem; min-height: 96px; justify-content: center;
+  font-family: var(--f-ui); color: var(--texte);
+}
+.carte-mot:hover { border-color: var(--or); transform: translateY(-2px); }
+.carte-mot .cm-ar { font-family: var(--f-arabe); direction: rtl; font-size: 2rem; color: var(--encre); line-height: 1.4; }
+.carte-mot .cm-dos { display: none; flex-direction: column; gap: 0.25rem; }
+.carte-mot.retournee .cm-dos { display: flex; }
+.carte-mot.retournee .cm-ar { font-size: 1.5rem; opacity: 0.7; }
+.carte-mot .cm-fr { font-size: 0.98rem; color: var(--texte); }
+.carte-mot .cm-note { font-size: 0.78rem; color: var(--texte-doux); font-style: italic; margin-top: 0.3rem; line-height: 1.35; }
+
+/* Pour aller plus loin : étymologie, sens des lettres, spiritualité */
+.approfondissement {
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  padding: 1.3rem 1.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.approfondissement::before {
+  content: '۞'; position: absolute; top: 0.9rem; left: 0.9rem;
+  color: var(--or); opacity: 0.35; font-size: 1.1rem;
+}
+.approfondissement h3 { color: var(--or-profond); padding-left: 1.8rem; }
+.approfondissement p { font-size: 1.05rem; }
 
 /* Tableau de vocabulaire */
 .tableau-voc { width: 100%; border-collapse: collapse; }
