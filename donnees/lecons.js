@@ -363,4 +363,345 @@ const Lecons = {
     ],
   },
 
+  /* ===================== CYCLE II — PREMIERS MOTS ET STRUCTURES ===================== */
+
+  7: {
+    cycle: 2,
+    titre: 'L\'article défini et les lettres solaires',
+    intro: 'Vous savez lire. Nous entrons maintenant dans le sens des mots et leur agencement.\n' +
+      'L\'arabe n\'a qu\'un seul article, الـ (al-), invariable, qui correspond à « le, la, les ».\n' +
+      'Une subtilité de prononciation l\'accompagne : selon la lettre qui suit, le « l » se prononce ou se fond.',
+    decouverte: [
+      { texte: 'L\'article الـ se colle au mot. Devant la moitié des lettres, dites « lunaires », le « l » se prononce nettement.' },
+      { lignes: [
+        { ar: 'الْقَمَر', tr: 'al-qamar', fr: 'la lune', note: 'lettre lunaire : on entend le l' },
+        { ar: 'الْبَيْت', tr: 'al-bayt', fr: 'la maison', note: 'lettre lunaire' },
+        { ar: 'الْكِتَاب', tr: 'al-kitāb', fr: 'le livre', note: 'lettre lunaire' },
+      ]},
+      { texte: 'Devant les autres lettres, dites « solaires », le « l » disparaît à l\'oral et la consonne suivante double. On l\'écrit toujours, mais on ne le prononce pas.' },
+      { lignes: [
+        { ar: 'الشَّمْس', tr: 'ash-shams', fr: 'le soleil', note: 'lettre solaire : le l se fond dans le ch' },
+        { ar: 'الرَّحْمَٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux', note: 'solaire : ar-r…' },
+        { ar: 'النَّاس', tr: 'an-nās', fr: 'les gens', note: 'solaire : an-n…' },
+      ]},
+    ],
+    grammaire: {
+      titre: 'Lettres solaires et lunaires',
+      corps: 'L\'article s\'écrit toujours الـ, mais sa prononciation dépend de la première lettre du mot.\n' +
+        'Devant une lettre solaire (ت ث د ذ ر ز س ش ص ض ط ظ ل ن), le « l » s\'assimile et la consonne suivante se redouble : ash-shams.\n' +
+        'Devant une lettre lunaire (les autres), le « l » se prononce clairement : al-qamar. Une astuce : si la consonne est faite avec le bout de la langue, elle est souvent solaire.',
+    },
+    vocabulaire: [
+      { ar: 'الْقَمَر', tr: 'al-qamar', fr: 'la lune', cle: 'qamar' },
+      { ar: 'الشَّمْس', tr: 'ash-shams', fr: 'le soleil', cle: 'shams2' },
+      { ar: 'الْبَيْت', tr: 'al-bayt', fr: 'la maison', cle: 'bayt' },
+      { ar: 'الْأَرْض', tr: 'al-arḍ', fr: 'la terre', cle: 'ard' },
+      { ar: 'اللَّيْل', tr: 'al-layl', fr: 'la nuit', cle: 'layl' },
+      { ar: 'النَّاس', tr: 'an-nās', fr: 'les gens', cle: 'nas' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Comment se prononce الشَّمْس ?',
+        options: [{ texte: 'al-shams' }, { texte: 'ash-shams' }, { texte: 'ach-lams' }], bonne: 1, cles: ['shams2'],
+        explication: 'ش est une lettre solaire : le « l » se fond, la consonne double.' },
+      { type: 'qcm', consigne: 'Dans الْقَمَر, le « l » de l\'article :',
+        options: [{ texte: 'se prononce' }, { texte: 'disparaît' }], bonne: 0, cles: ['qamar'],
+        explication: 'ق est lunaire : on entend distinctement al-qamar.' },
+      { type: 'appariement', consigne: 'Reliez chaque mot à sa traduction.',
+        paires: [ { ar: 'الْبَيْت', fr: 'la maison', cle: 'bayt' }, { ar: 'اللَّيْل', fr: 'la nuit', cle: 'layl' }, { ar: 'الْأَرْض', fr: 'la terre', cle: 'ard' }, { ar: 'النَّاس', fr: 'les gens', cle: 'nas' } ] },
+      { type: 'qcm', consigne: 'Laquelle de ces lettres est solaire ?',
+        options: [{ ar: 'ق' }, { ar: 'ب' }, { ar: 'ر' }], bonne: 2,
+        explication: 'ر est solaire : ar-raḥmān, et non al-raḥmān.' },
+      { type: 'trous', consigne: 'Complétez l\'article devant « lune » (lettre lunaire).',
+        segments: [ { options: ['الْ', 'اشّ'], bonne: 0 }, 'قَمَر' ], traduction: 'la lune', cles: ['qamar'] },
+      { type: 'oral', consigne: 'Prononcez en soignant l\'assimilation solaire.',
+        phraseAr: 'الرَّحْمَٰن', translit: 'ar-raḥmān' },
+    ],
+    memoriser: { ar: 'الْحَمْدُ لِلَّهِ', tr: 'al-ḥamdu li-llāh', fr: 'Louange à Allah.' },
+    recap: [
+      'L\'arabe a un seul article : الـ, invariable.',
+      'Devant une lettre lunaire, le « l » se prononce : al-qamar.',
+      'Devant une lettre solaire, le « l » se fond et la consonne double : ash-shams.',
+      'L\'article s\'écrit toujours de la même façon, seule la prononciation change.',
+    ],
+  },
+
+  8: {
+    cycle: 2,
+    titre: 'Les pronoms personnels',
+    intro: 'Pour construire des phrases, il faut savoir dire « je, tu, il, elle ».\n' +
+      'L\'arabe distingue le masculin et le féminin dès la deuxième personne, ce que le français ne fait pas.\n' +
+      'Ces petits mots reviennent sans cesse dans le Coran : huwa, anta, naḥnu.',
+    decouverte: [
+      { texte: 'Voici les pronoms isolés, ceux qui se tiennent seuls en début de phrase.' },
+      { lignes: [
+        { ar: 'أَنَا', tr: 'anā', fr: 'je, moi' },
+        { ar: 'أَنْتَ', tr: 'anta', fr: 'tu (masculin)' },
+        { ar: 'أَنْتِ', tr: 'anti', fr: 'tu (féminin)' },
+        { ar: 'هُوَ', tr: 'huwa', fr: 'il, lui' },
+        { ar: 'هِيَ', tr: 'hiya', fr: 'elle' },
+        { ar: 'نَحْنُ', tr: 'naḥnu', fr: 'nous' },
+        { ar: 'أَنْتُمْ', tr: 'antum', fr: 'vous (masculin pluriel)' },
+        { ar: 'هُمْ', tr: 'hum', fr: 'ils, eux' },
+      ]},
+      { texte: 'Remarquez أَنْتَ et أَنْتِ : seule la voyelle finale change, et avec elle le genre de la personne à qui l\'on parle.' },
+    ],
+    grammaire: {
+      titre: 'Le genre s\'entend dès « tu »',
+      corps: 'Là où le français dit « tu » indistinctement, l\'arabe choisit : anta pour un homme, anti pour une femme.\n' +
+        'De même à la troisième personne : huwa (il), hiya (elle).\n' +
+        'Ces pronoms suffisent à former une phrase complète, car le verbe « être » au présent n\'existe pas : huwa kabīr veut dire « il est grand ».',
+    },
+    vocabulaire: [
+      { ar: 'أَنَا', tr: 'anā', fr: 'je, moi', cle: 'ana' },
+      { ar: 'أَنْتَ', tr: 'anta', fr: 'tu (m.)', cle: 'anta' },
+      { ar: 'هُوَ', tr: 'huwa', fr: 'il', cle: 'huwa' },
+      { ar: 'هِيَ', tr: 'hiya', fr: 'elle', cle: 'hiya' },
+      { ar: 'نَحْنُ', tr: 'naḥnu', fr: 'nous', cle: 'nahnu' },
+      { ar: 'هُمْ', tr: 'hum', fr: 'ils, eux', cle: 'hum' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Comment dit-on « elle » ?',
+        options: [{ ar: 'هُوَ' }, { ar: 'هِيَ' }, { ar: 'هُمْ' }], bonne: 1, cles: ['hiya'],
+        explication: 'هِيَ (hiya) signifie « elle » ; هُوَ (huwa) signifie « il ».' },
+      { type: 'qcm', consigne: 'À qui s\'adresse-t-on avec أَنْتِ (anti) ?',
+        options: [{ texte: 'à un homme' }, { texte: 'à une femme' }, { texte: 'à un groupe' }], bonne: 1,
+        explication: 'La kasra finale marque le féminin : anti s\'adresse à une femme.' },
+      { type: 'appariement', consigne: 'Reliez chaque pronom à sa traduction.',
+        paires: [ { ar: 'أَنَا', fr: 'je', cle: 'ana' }, { ar: 'نَحْنُ', fr: 'nous', cle: 'nahnu' }, { ar: 'هُوَ', fr: 'il', cle: 'huwa' }, { ar: 'هُمْ', fr: 'ils', cle: 'hum' } ] },
+      { type: 'glisser', consigne: 'Reconstituez « huwa muslim » (il est musulman).',
+        ordre: ['هُوَ', 'مُسْلِم'], traduction: 'il est musulman', cles: ['huwa','muslim'] },
+      { type: 'saisie', consigne: 'Écrivez le pronom « nous ».',
+        indice: 'naḥnu', reponse: 'نحن', cles: ['nahnu'] },
+      { type: 'oral', consigne: 'Prononcez ce pronom si fréquent dans le Coran.',
+        phraseAr: 'هُوَ', translit: 'huwa', cles: ['huwa'] },
+    ],
+    memoriser: { ar: 'هُوَ اللَّهُ أَحَدٌ', tr: 'huwa llāhu aḥad', fr: 'Il est Allah, Unique.' },
+    recap: [
+      'Les pronoms isolés : anā, anta/anti, huwa/hiya, naḥnu, antum, hum.',
+      'Le genre se distingue dès la deuxième personne (anta / anti).',
+      'Le verbe « être » au présent ne s\'exprime pas.',
+      'Un pronom et un mot suffisent à faire une phrase : huwa kabīr, il est grand.',
+    ],
+  },
+
+  9: {
+    cycle: 2,
+    titre: 'Le masculin et le féminin',
+    intro: 'En arabe, tout nom est masculin ou féminin. Heureusement, une marque très régulière aide à reconnaître le féminin.\n' +
+      'Cette marque est la tāʾ marbūṭa, une lettre arrondie ة que l\'on rencontre en fin de mot.\n' +
+      'La reconnaître vous évitera bien des erreurs d\'accord par la suite.',
+    decouverte: [
+      { texte: 'On forme souvent le féminin en ajoutant ة (tāʾ marbūṭa) à la forme masculine.' },
+      { lignes: [
+        { ar: 'مُسْلِم', tr: 'muslim', fr: 'un musulman', note: 'masculin' },
+        { ar: 'مُسْلِمَة', tr: 'muslima', fr: 'une musulmane', note: 'féminin en ة' },
+        { ar: 'مُؤْمِن', tr: 'muʾmin', fr: 'un croyant', note: 'masculin' },
+        { ar: 'مُؤْمِنَة', tr: 'muʾmina', fr: 'une croyante', note: 'féminin en ة' },
+      ]},
+      { texte: 'La tāʾ marbūṭa se prononce « a » à la pause, mais « at » quand le mot est lié à un autre. صَلَاة se lit ṣalāt dès qu\'il est suivi d\'un complément.' },
+      { texte: 'Quelques noms sont féminins sans porter la marque : أُمّ (mère), أَرْض (terre), شَمْس (soleil). L\'usage les fixe.' },
+    ],
+    grammaire: {
+      titre: 'La tāʾ marbūṭa, signe du féminin',
+      corps: 'La lettre ة, en fin de mot, indique presque toujours le féminin.\n' +
+        'On l\'obtient en ajoutant ة au masculin : muslim donne muslima.\n' +
+        'À l\'oral, elle se dit « a » quand le mot est isolé, et « at » quand il est suivi d\'un autre mot. Quelques mots sont féminins par nature, sans cette marque.',
+    },
+    vocabulaire: [
+      { ar: 'مُؤْمِن', tr: 'muʾmin', fr: 'croyant', cle: 'mumin' },
+      { ar: 'مُؤْمِنَة', tr: 'muʾmina', fr: 'croyante', cle: 'mumina' },
+      { ar: 'أُمّ', tr: 'umm', fr: 'mère', cle: 'umm' },
+      { ar: 'وَلَد', tr: 'walad', fr: 'enfant, garçon', cle: 'walad' },
+      { ar: 'جَنَّة', tr: 'janna', fr: 'jardin, paradis', cle: 'janna' },
+      { ar: 'رَحْمَة', tr: 'raḥma', fr: 'miséricorde', cle: 'rahma' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Quelle lettre marque le plus souvent le féminin ?',
+        options: [{ ar: 'ة' }, { ar: 'ن' }, { ar: 'ا' }], bonne: 0,
+        explication: 'La tāʾ marbūṭa ة, en fin de mot, signale le féminin.' },
+      { type: 'qcm', consigne: 'Quel est le féminin de مُؤْمِن (croyant) ?',
+        options: [{ ar: 'مُؤْمِنَة' }, { ar: 'مُؤْمِنُون' }, { ar: 'مُؤْمِن' }], bonne: 0, cles: ['mumina'],
+        explication: 'On ajoute ة : muʾmin devient muʾmina.' },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'أُمّ', fr: 'mère', cle: 'umm' }, { ar: 'وَلَد', fr: 'enfant', cle: 'walad' }, { ar: 'جَنَّة', fr: 'jardin', cle: 'janna' }, { ar: 'رَحْمَة', fr: 'miséricorde', cle: 'rahma' } ] },
+      { type: 'qcm', consigne: 'Comment se prononce la ة de صَلَاة quand le mot est isolé ?',
+        options: [{ texte: 'at' }, { texte: 'a' }, { texte: 'on' }], bonne: 1,
+        explication: 'À la pause, on dit ṣalā(t) avec un simple « a » ; liée, elle redevient « at ».' },
+      { type: 'saisie', consigne: 'Écrivez le mot « miséricorde ».',
+        indice: 'raḥma, avec une tāʾ marbūṭa finale.', reponse: 'رحمة', cles: ['rahma'] },
+      { type: 'oral', consigne: 'Prononcez ce mot féminin.',
+        phraseAr: 'جَنَّة', translit: 'janna', cles: ['janna'] },
+    ],
+    memoriser: { ar: 'رَحْمَةٌ لِلْعَالَمِين', tr: 'raḥmatun li-l-ʿālamīn', fr: 'Une miséricorde pour les mondes.' },
+    recap: [
+      'Tout nom arabe est masculin ou féminin.',
+      'La tāʾ marbūṭa ة marque le plus souvent le féminin.',
+      'Elle se dit « a » à la pause, « at » quand le mot est lié.',
+      'Quelques noms sont féminins sans marque : umm, arḍ, shams.',
+    ],
+  },
+
+  10: {
+    cycle: 2,
+    titre: 'La phrase nominale',
+    intro: 'Vous allez former vos premières phrases complètes, et elles sont étonnamment simples.\n' +
+      'La phrase nominale relie un sujet à ce qu\'on en dit, sans aucun verbe.\n' +
+      'C\'est l\'une des structures les plus fréquentes du Coran.',
+    decouverte: [
+      { texte: 'Une phrase nominale réunit un sujet (souvent défini) et un attribut (souvent indéfini), sans verbe « être ».' },
+      { lignes: [
+        { ar: 'الْبَيْتُ كَبِيرٌ', tr: 'al-baytu kabīr', fr: 'la maison est grande', note: 'défini + indéfini' },
+        { ar: 'اللَّهُ غَفُورٌ', tr: 'allāhu ghafūr', fr: 'Allah est pardonneur', note: 'sujet + attribut' },
+        { ar: 'الْوَلَدُ مُسْلِمٌ', tr: 'al-waladu muslim', fr: 'l\'enfant est musulman' },
+      ]},
+      { texte: 'L\'attribut s\'accorde en genre avec le sujet : الْمُؤْمِنَةُ صَابِرَةٌ, « la croyante est patiente », avec un féminin en ة des deux côtés.' },
+    ],
+    grammaire: {
+      titre: 'Sujet défini, attribut indéfini',
+      corps: 'La phrase nominale juxtapose deux éléments : on n\'a pas besoin du verbe « être » au présent.\n' +
+        'En règle générale, le sujet est défini (avec l\'article) et l\'attribut est indéfini (avec un tanwīn).\n' +
+        'C\'est cette différence, défini contre indéfini, qui signale lequel est le sujet et lequel est ce qu\'on en dit.',
+    },
+    vocabulaire: [
+      { ar: 'كَبِير', tr: 'kabīr', fr: 'grand', cle: 'kabir' },
+      { ar: 'صَغِير', tr: 'ṣaghīr', fr: 'petit', cle: 'saghir' },
+      { ar: 'حَكِيم', tr: 'ḥakīm', fr: 'sage', cle: 'hakim' },
+      { ar: 'صَابِر', tr: 'ṣābir', fr: 'patient, endurant', cle: 'sabir' },
+      { ar: 'قَرِيب', tr: 'qarīb', fr: 'proche', cle: 'qarib' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie الْبَيْتُ كَبِيرٌ ?',
+        options: [{ texte: 'la grande maison' }, { texte: 'la maison est grande' }, { texte: 'une maison grande' }], bonne: 1,
+        explication: 'Sujet défini + attribut indéfini, sans verbe : « la maison est grande ».' },
+      { type: 'qcm', consigne: 'Dans une phrase nominale, le sujet est en général :',
+        options: [{ texte: 'indéfini' }, { texte: 'défini (avec article)' }], bonne: 1,
+        explication: 'Le sujet porte d\'ordinaire l\'article ; l\'attribut reste indéfini.' },
+      { type: 'glisser', consigne: 'Reconstituez « Allah est sage » (allāhu ḥakīm).',
+        ordre: ['اللَّهُ', 'حَكِيمٌ'], traduction: 'Allah est sage', cles: ['hakim'] },
+      { type: 'trous', consigne: 'Complétez : « l\'enfant est petit ».',
+        segments: [ 'الْوَلَدُ', { options: ['صَغِيرٌ', 'كَبِيرَةٌ'], bonne: 0 } ], traduction: 'l\'enfant est petit', cles: ['saghir'] },
+      { type: 'appariement', consigne: 'Reliez chaque adjectif à son sens.',
+        paires: [ { ar: 'كَبِير', fr: 'grand', cle: 'kabir' }, { ar: 'صَغِير', fr: 'petit', cle: 'saghir' }, { ar: 'قَرِيب', fr: 'proche', cle: 'qarib' }, { ar: 'حَكِيم', fr: 'sage', cle: 'hakim' } ] },
+      { type: 'oral', consigne: 'Lisez cette phrase nominale.',
+        phraseAr: 'اللَّهُ غَفُورٌ', translit: 'allāhu ghafūr' },
+    ],
+    memoriser: { ar: 'اللَّهُ حَكِيمٌ', tr: 'allāhu ḥakīm', fr: 'Allah est sage.' },
+    recap: [
+      'La phrase nominale n\'a pas de verbe « être » au présent.',
+      'Sujet généralement défini, attribut généralement indéfini.',
+      'L\'attribut s\'accorde en genre avec le sujet.',
+      'C\'est une structure omniprésente dans le Coran.',
+    ],
+  },
+
+  11: {
+    cycle: 2,
+    titre: 'Les démonstratifs',
+    intro: 'Pour dire « ceci » et « cela », l\'arabe choisit un mot selon le genre et la distance.\n' +
+      'Nous voyons les quatre plus courants : hādhā, hādhihi, dhālika, tilka.\n' +
+      'Ils ouvrent souvent les versets : « Ceci est le Livre… ».',
+    decouverte: [
+      { texte: 'Pour ce qui est proche, on emploie hādhā (masculin) et hādhihi (féminin).' },
+      { lignes: [
+        { ar: 'هَٰذَا كِتَابٌ', tr: 'hādhā kitāb', fr: 'ceci est un livre', note: 'masculin proche' },
+        { ar: 'هَٰذِهِ جَنَّةٌ', tr: 'hādhihi janna', fr: 'ceci est un jardin', note: 'féminin proche' },
+      ]},
+      { texte: 'Pour ce qui est éloigné, on emploie dhālika (masculin) et tilka (féminin).' },
+      { lignes: [
+        { ar: 'ذَٰلِكَ الْكِتَابُ', tr: 'dhālika l-kitāb', fr: 'ce Livre-là, voilà le Livre', note: 'masculin éloigné' },
+        { ar: 'تِلْكَ آيَاتٌ', tr: 'tilka āyāt', fr: 'ce sont là des signes', note: 'féminin éloigné' },
+      ]},
+    ],
+    grammaire: {
+      titre: 'Genre et distance',
+      corps: 'Le démonstratif s\'accorde en genre avec le nom : hādhā pour un masculin, hādhihi pour un féminin.\n' +
+        'La distance compte aussi : hādhā désigne le proche (ceci), dhālika le lointain (cela).\n' +
+        'Devant un nom indéfini, on traduit par « ceci est… » ; devant un nom avec article, par « ce… là ».',
+    },
+    vocabulaire: [
+      { ar: 'هَٰذَا', tr: 'hādhā', fr: 'ceci (m.)', cle: 'hadha' },
+      { ar: 'هَٰذِهِ', tr: 'hādhihi', fr: 'ceci (f.)', cle: 'hadhihi' },
+      { ar: 'ذَٰلِكَ', tr: 'dhālika', fr: 'cela (m.)', cle: 'dhalika' },
+      { ar: 'تِلْكَ', tr: 'tilka', fr: 'cela (f.)', cle: 'tilka' },
+      { ar: 'آيَة', tr: 'āya', fr: 'signe, verset', cle: 'aya' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Quel démonstratif emploie-t-on pour un objet féminin proche ?',
+        options: [{ ar: 'هَٰذَا' }, { ar: 'هَٰذِهِ' }, { ar: 'ذَٰلِكَ' }], bonne: 1, cles: ['hadhihi'],
+        explication: 'hādhihi désigne un féminin proche : hādhihi janna.' },
+      { type: 'qcm', consigne: 'Que signifie ذَٰلِكَ الْكِتَابُ ?',
+        options: [{ texte: 'ceci est un livre' }, { texte: 'voilà le Livre' }, { texte: 'ce livre est grand' }], bonne: 1, cles: ['dhalika'],
+        explication: 'Démonstratif lointain + nom défini : « ce Livre-là, voilà le Livre ».' },
+      { type: 'appariement', consigne: 'Reliez chaque démonstratif à sa valeur.',
+        paires: [ { ar: 'هَٰذَا', fr: 'ceci (m.)', cle: 'hadha' }, { ar: 'هَٰذِهِ', fr: 'ceci (f.)', cle: 'hadhihi' }, { ar: 'ذَٰلِكَ', fr: 'cela (m.)', cle: 'dhalika' }, { ar: 'تِلْكَ', fr: 'cela (f.)', cle: 'tilka' } ] },
+      { type: 'glisser', consigne: 'Reconstituez « ceci est un livre » (hādhā kitāb).',
+        ordre: ['هَٰذَا', 'كِتَابٌ'], traduction: 'ceci est un livre', cles: ['hadha','kitab'] },
+      { type: 'trous', consigne: 'Complétez : « ceci est un jardin » (féminin).',
+        segments: [ { options: ['هَٰذِهِ', 'هَٰذَا'], bonne: 0 }, 'جَنَّةٌ' ], traduction: 'ceci est un jardin', cles: ['hadhihi','janna'] },
+      { type: 'oral', consigne: 'Lisez ce début de verset très connu.',
+        phraseAr: 'ذَٰلِكَ الْكِتَابُ', translit: 'dhālika l-kitāb', cles: ['dhalika'] },
+    ],
+    memoriser: { ar: 'هَٰذَا صِرَاطٌ مُسْتَقِيمٌ', tr: 'hādhā ṣirāṭun mustaqīm', fr: 'Ceci est un droit chemin.' },
+    recap: [
+      'Proche : hādhā (m.), hādhihi (f.).',
+      'Éloigné : dhālika (m.), tilka (f.).',
+      'Le démonstratif s\'accorde en genre avec le nom.',
+      'Devant un indéfini : « ceci est… » ; devant un défini : « ce… là ».',
+    ],
+  },
+
+  12: {
+    cycle: 2,
+    titre: 'Premier verset entier : sourate al-Ikhlāṣ',
+    intro: 'Le moment est venu de lire une sourate complète. al-Ikhlāṣ, le Monothéisme pur, ne compte que quatre versets.\n' +
+      'Vous y reconnaîtrez presque tous les mots déjà vus : huwa, allāh, aḥad, lam.\n' +
+      'Lisez lentement, verset par verset, en vous appuyant sur la translittération puis sur le sens.',
+    decouverte: [
+      { texte: 'Sourate 112, al-Ikhlāṣ. Cliquez sur chaque verset pour l\'entendre.' },
+      { lignes: [
+        { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ', tr: 'qul huwa llāhu aḥad', fr: 'Dis : il est Allah, Unique.' },
+        { ar: 'اللَّهُ الصَّمَدُ', tr: 'allāhu ṣ-ṣamad', fr: 'Allah, le Soutien universel.' },
+        { ar: 'لَمْ يَلِدْ وَلَمْ يُولَدْ', tr: 'lam yalid wa-lam yūlad', fr: 'Il n\'a pas engendré et n\'a pas été engendré.' },
+        { ar: 'وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ', tr: 'wa-lam yakun lahu kufuwan aḥad', fr: 'Et nul ne Lui est égal.' },
+      ]},
+      { texte: 'لَمْ devant un verbe exprime la négation au passé : « il n\'a pas… ». La particule وَ relie deux propositions : « et ».' },
+    ],
+    grammaire: {
+      titre: 'Lire en s\'appuyant sur le connu',
+      corps: 'Vous ne partez pas de rien : قُلْ (dis), هُوَ (il), اللَّه (Allah), أَحَد (un) vous sont familiers.\n' +
+        'Le sens d\'un verset se devine souvent en reconnaissant ses mots-clés, sans tout analyser.\n' +
+        'C\'est ainsi qu\'on progresse : par reconnaissance, puis par compréhension, enfin par mémorisation.',
+    },
+    vocabulaire: [
+      { ar: 'الصَّمَد', tr: 'aṣ-ṣamad', fr: 'le Soutien, l\'Absolu', cle: 'samad' },
+      { ar: 'لَمْ', tr: 'lam', fr: 'ne... pas (passé)', cle: 'lam' },
+      { ar: 'يَلِد', tr: 'yalid', fr: 'il engendre', cle: 'yalid' },
+      { ar: 'كُفُو', tr: 'kufuw', fr: 'égal, équivalent', cle: 'kufuw' },
+      { ar: 'لَهُ', tr: 'lahu', fr: 'à lui, pour lui', cle: 'lahu' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie قُلْ هُوَ اللَّهُ أَحَدٌ ?',
+        options: [{ texte: 'Dis : il est Allah, Unique' }, { texte: 'Allah est le Soutien' }, { texte: 'Louange à Allah' }], bonne: 0, cles: ['qul','huwa','ahad'],
+        explication: 'qul (dis) + huwa (il) + allāh + aḥad (unique).' },
+      { type: 'qcm', consigne: 'À quoi sert لَمْ devant un verbe ?',
+        options: [{ texte: 'à interroger' }, { texte: 'à nier au passé' }, { texte: 'à insister' }], bonne: 1, cles: ['lam'],
+        explication: 'lam exprime la négation passée : lam yalid, « il n\'a pas engendré ».' },
+      { type: 'glisser', consigne: 'Remettez dans l\'ordre le premier verset.',
+        ordre: ['قُلْ', 'هُوَ', 'اللَّهُ', 'أَحَدٌ'], traduction: 'Dis : il est Allah, Unique', cles: ['qul','huwa','ahad'] },
+      { type: 'appariement', consigne: 'Reliez chaque mot du verset à son sens.',
+        paires: [ { ar: 'الصَّمَد', fr: 'le Soutien', cle: 'samad' }, { ar: 'لَمْ', fr: 'ne... pas', cle: 'lam' }, { ar: 'لَهُ', fr: 'à lui', cle: 'lahu' }, { ar: 'كُفُو', fr: 'égal', cle: 'kufuw' } ] },
+      { type: 'trous', consigne: 'Complétez le deuxième verset.',
+        segments: [ 'اللَّهُ', { options: ['الصَّمَدُ', 'أَحَدٌ'], bonne: 0 } ], traduction: 'Allah, le Soutien universel', cles: ['samad'] },
+      { type: 'oral', consigne: 'Récitez le premier verset, lentement.',
+        phraseAr: 'قُلْ هُوَ اللَّهُ أَحَدٌ', translit: 'qul huwa llāhu aḥad', cles: ['qul'] },
+    ],
+    memoriser: { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ', tr: 'qul huwa llāhu aḥad', fr: 'Dis : il est Allah, Unique. (al-Ikhlāṣ, 1)' },
+    recap: [
+      'al-Ikhlāṣ, sourate 112, compte quatre versets.',
+      'لَمْ nie au passé ; وَ relie par « et ».',
+      'Le sens se construit en reconnaissant les mots déjà connus.',
+      'Vous venez de lire et comprendre votre première sourate entière.',
+    ],
+  },
+
 };
