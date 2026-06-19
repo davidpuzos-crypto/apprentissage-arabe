@@ -1047,4 +1047,346 @@ const Lecons = {
     ],
   },
 
+  /* ===================== CYCLE IV — GRAMMAIRE APPROFONDIE ===================== */
+
+  19: {
+    cycle: 4,
+    titre: 'Les particules de coordination',
+    intro: 'De petits mots relient les propositions entre elles et donnent au texte son mouvement.\n' +
+      'Trois reviennent sans cesse : wa (et), fa (alors, donc), thumma (ensuite, puis).\n' +
+      'Les deux premières se collent au mot suivant ; elles sont faciles à repérer une fois connues.',
+    decouverte: [
+      { texte: 'Les particules wa et fa s\'attachent directement au mot qui suit.' },
+      { lignes: [
+        { ar: 'وَالْعَصْرِ', tr: 'wa-l-ʿaṣr', fr: 'par le Temps', note: 'وَ collé : « et / par »' },
+        { ar: 'فَصَلِّ', tr: 'fa-ṣalli', fr: 'prie donc', note: 'فَ collé : « alors, donc »' },
+        { ar: 'ثُمَّ', tr: 'thumma', fr: 'ensuite, puis', note: 'mot séparé' },
+      ]},
+      { texte: 'wa relie deux éléments de même rang ; fa marque une conséquence ou une suite immédiate ; thumma indique une succession dans le temps, avec un délai.' },
+    ],
+    grammaire: {
+      titre: 'wa, fa, thumma : trois nuances de liaison',
+      corps: 'وَ (wa) est le « et » le plus neutre ; il joint simplement deux mots ou deux phrases.\n' +
+        'فَ (fa) ajoute une idée de conséquence ou d\'enchaînement rapide : « et alors, donc ».\n' +
+        'ثُمَّ (thumma) marque une succession espacée : « puis, ensuite ». Le sens du verset dépend souvent de ces nuances.',
+    },
+    vocabulaire: [
+      { ar: 'وَ', tr: 'wa', fr: 'et', cle: 'wa' },
+      { ar: 'فَ', tr: 'fa', fr: 'alors, donc', cle: 'fa' },
+      { ar: 'ثُمَّ', tr: 'thumma', fr: 'ensuite, puis', cle: 'thumma' },
+      { ar: 'الْعَصْر', tr: 'al-ʿaṣr', fr: 'le temps, l\'après-midi', cle: 'asr' },
+      { ar: 'صَلَّى', tr: 'ṣallā', fr: 'il a prié', cle: 'salla' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Quelle particule marque une conséquence, « alors, donc » ?',
+        options: [{ ar: 'وَ' }, { ar: 'فَ' }, { ar: 'ثُمَّ' }], bonne: 1, cles: ['fa'],
+        explication: 'فَ (fa) introduit une suite ou une conséquence immédiate.' },
+      { type: 'qcm', consigne: 'ثُمَّ exprime :',
+        options: [{ texte: 'une simple addition' }, { texte: 'une succession dans le temps' }, { texte: 'une cause' }], bonne: 1, cles: ['thumma'],
+        explication: 'thumma marque « ensuite, puis », avec un intervalle.' },
+      { type: 'decomposition', consigne: 'Séparez la particule du mot dans وَالْعَصْرِ.',
+        segments: [ { ar: 'وَ', role: 'particule' }, { ar: 'الْعَصْرِ', role: 'nom' } ], roles: ['particule','nom'], cles: ['wa','asr'] },
+      { type: 'appariement', consigne: 'Reliez chaque particule à son sens.',
+        paires: [ { ar: 'وَ', fr: 'et', cle: 'wa' }, { ar: 'فَ', fr: 'donc', cle: 'fa' }, { ar: 'ثُمَّ', fr: 'ensuite', cle: 'thumma' }, { ar: 'الْعَصْر', fr: 'le temps', cle: 'asr' } ] },
+      { type: 'trous', consigne: 'Complétez « prie donc ton Seigneur » avec la bonne particule.',
+        segments: [ { options: ['فَ', 'ثُمَّ'], bonne: 0 }, 'صَلِّ لِرَبِّكَ' ], traduction: 'prie donc ton Seigneur', cles: ['fa'] },
+      { type: 'oral', consigne: 'Lisez ce serment qui ouvre une sourate.',
+        phraseAr: 'وَالْعَصْرِ', translit: 'wa-l-ʿaṣr', cles: ['wa','asr'] },
+    ],
+    memoriser: { ar: 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', tr: 'fa-ṣalli li-rabbika wa-nḥar', fr: 'Prie donc ton Seigneur et sacrifie. (al-Kawthar, 2)' },
+    recap: [
+      'wa : « et », liaison neutre.',
+      'fa : « alors, donc », conséquence ou suite immédiate.',
+      'thumma : « ensuite, puis », succession espacée.',
+      'wa et fa se collent au mot suivant.',
+    ],
+  },
+
+  20: {
+    cycle: 4,
+    titre: 'Les prépositions principales',
+    intro: 'Les prépositions situent, relient, orientent. Six d\'entre elles couvrent l\'essentiel du Coran.\n' +
+      'Trois s\'écrivent séparément (fī, ʿalā, ilā), trois se collent au mot (bi-, li-, et parfois min).\n' +
+      'Le nom qui suit une préposition se met toujours au cas indirect, avec une kasra.',
+    decouverte: [
+      { texte: 'Les prépositions séparées :' },
+      { lignes: [
+        { ar: 'فِي', tr: 'fī', fr: 'dans, en' },
+        { ar: 'عَلَىٰ', tr: 'ʿalā', fr: 'sur' },
+        { ar: 'إِلَىٰ', tr: 'ilā', fr: 'vers, jusqu\'à' },
+        { ar: 'مِنْ', tr: 'min', fr: 'de, depuis, contre' },
+      ]},
+      { texte: 'Les prépositions collées, qui s\'attachent au mot :' },
+      { lignes: [
+        { ar: 'بِاللَّهِ', tr: 'bi-llāh', fr: 'par Allah, en Allah', note: 'بِـ collé' },
+        { ar: 'لِلَّهِ', tr: 'li-llāh', fr: 'à Allah, pour Allah', note: 'لِـ collé' },
+      ]},
+    ],
+    grammaire: {
+      titre: 'Le cas indirect après la préposition',
+      corps: 'Toute préposition entraîne le cas indirect : le nom qui suit prend une kasra (ou un tanwīn kasra).\n' +
+        'بِـ (bi) signifie « par, avec, en » ; لِـ (li) signifie « à, pour, appartenant à ».\n' +
+        'On reconnaît bi-smi llāh, « au nom d\'Allah », où bi- est collé et Allāh porte la kasra.',
+    },
+    vocabulaire: [
+      { ar: 'فِي', tr: 'fī', fr: 'dans', cle: 'fi' },
+      { ar: 'عَلَىٰ', tr: 'ʿalā', fr: 'sur', cle: 'ala' },
+      { ar: 'إِلَىٰ', tr: 'ilā', fr: 'vers', cle: 'ila' },
+      { ar: 'بِـ', tr: 'bi-', fr: 'par, avec', cle: 'bi' },
+      { ar: 'لِـ', tr: 'li-', fr: 'à, pour', cle: 'li' },
+      { ar: 'صَدْر', tr: 'ṣadr', fr: 'poitrine', cle: 'sadr' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie la préposition فِي ?',
+        options: [{ texte: 'sur' }, { texte: 'dans, en' }, { texte: 'vers' }], bonne: 1, cles: ['fi'],
+        explication: 'fī signifie « dans, en » : fī ṣudūri n-nās, « dans les poitrines des hommes ».' },
+      { type: 'qcm', consigne: 'Après une préposition, le nom se met :',
+        options: [{ texte: 'au cas indirect (kasra)' }, { texte: 'au cas sujet (ḍamma)' }], bonne: 0,
+        explication: 'La préposition régit le cas indirect, marqué par la kasra.' },
+      { type: 'appariement', consigne: 'Reliez chaque préposition à son sens.',
+        paires: [ { ar: 'فِي', fr: 'dans', cle: 'fi' }, { ar: 'عَلَىٰ', fr: 'sur', cle: 'ala' }, { ar: 'إِلَىٰ', fr: 'vers', cle: 'ila' }, { ar: 'لِـ', fr: 'pour', cle: 'li' } ] },
+      { type: 'decomposition', consigne: 'Séparez la préposition de son nom dans لِلَّهِ.',
+        segments: [ { ar: 'لِـ', role: 'préposition' }, { ar: 'اللَّهِ', role: 'nom' } ], roles: ['préposition','nom'], cles: ['li'] },
+      { type: 'trous', consigne: 'Complétez « dans les poitrines » (fī ṣudūr).',
+        segments: [ { options: ['فِي', 'عَلَىٰ'], bonne: 0 }, 'صُدُورِ النَّاسِ' ], traduction: 'dans les poitrines des hommes', cles: ['fi'] },
+      { type: 'oral', consigne: 'Lisez ce groupe prépositionnel.',
+        phraseAr: 'فِي الْعُقَدِ', translit: 'fī l-ʿuqad', cles: ['fi'] },
+    ],
+    memoriser: { ar: 'فِي صُدُورِ النَّاسِ', tr: 'fī ṣudūri n-nās', fr: 'dans les poitrines des hommes. (an-Nās, 5)' },
+    recap: [
+      'Prépositions séparées : fī (dans), ʿalā (sur), ilā (vers), min (de).',
+      'Prépositions collées : bi- (par), li- (à, pour).',
+      'Le nom régi par une préposition prend la kasra.',
+      'bi-smi llāh : « au nom d\'Allah ».',
+    ],
+  },
+
+  21: {
+    cycle: 4,
+    titre: 'Le pluriel',
+    intro: 'L\'arabe forme ses pluriels de trois manières, dont une qui déroute d\'abord : le pluriel brisé.\n' +
+      'Le pluriel sain ajoute une terminaison régulière. Le pluriel brisé, lui, remodèle l\'intérieur du mot.\n' +
+      'Ne cherchez pas de règle unique : on retient les pluriels brisés mot par mot, comme en allemand.',
+    decouverte: [
+      { texte: 'Le pluriel sain masculin ajoute ـُونَ ou ـِينَ. Le pluriel sain féminin ajoute ـَات.' },
+      { lignes: [
+        { ar: 'مُسْلِم ← مُسْلِمُونَ', tr: 'muslim → muslimūn', fr: 'musulman → musulmans', note: 'sain masculin' },
+        { ar: 'مُؤْمِنَة ← مُؤْمِنَات', tr: 'muʾmina → muʾmināt', fr: 'croyante → croyantes', note: 'sain féminin' },
+      ]},
+      { texte: 'Le pluriel brisé change la forme interne du mot, sans terminaison régulière.' },
+      { lignes: [
+        { ar: 'كِتَاب ← كُتُب', tr: 'kitāb → kutub', fr: 'livre → livres', note: 'brisé' },
+        { ar: 'رَسُول ← رُسُل', tr: 'rasūl → rusul', fr: 'messager → messagers', note: 'brisé' },
+        { ar: 'قَلْب ← قُلُوب', tr: 'qalb → qulūb', fr: 'cœur → cœurs', note: 'brisé' },
+      ]},
+    ],
+    grammaire: {
+      titre: 'Trois pluriels, un réflexe',
+      corps: 'Le pluriel sain masculin se forme avec ـُونَ / ـِينَ, le sain féminin avec ـَات : ce sont les plus réguliers.\n' +
+        'Le pluriel brisé reconstruit le mot de l\'intérieur : kitāb donne kutub, qalb donne qulūb.\n' +
+        'La racine reste lisible sous le pluriel brisé : repérez-la, et le sens reste accessible même si la forme surprend.',
+    },
+    vocabulaire: [
+      { ar: 'قَلْب', tr: 'qalb', fr: 'cœur', cle: 'qalb' },
+      { ar: 'قُلُوب', tr: 'qulūb', fr: 'cœurs', cle: 'qulub' },
+      { ar: 'كُتُب', tr: 'kutub', fr: 'livres', cle: 'kutub' },
+      { ar: 'رُسُل', tr: 'rusul', fr: 'messagers', cle: 'rusul' },
+      { ar: 'آيَات', tr: 'āyāt', fr: 'signes, versets', cle: 'ayat' },
+      { ar: 'صَالِحَات', tr: 'ṣāliḥāt', fr: 'bonnes œuvres', cle: 'salihat' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Quel est le pluriel de مُسْلِم (musulman) ?',
+        options: [{ ar: 'مُسْلِمَات' }, { ar: 'مُسْلِمُونَ' }, { ar: 'مَسَاجِد' }], bonne: 1,
+        explication: 'Pluriel sain masculin : on ajoute ـُونَ, muslimūn.' },
+      { type: 'qcm', consigne: 'كِتَاب → كُتُب est un pluriel :',
+        options: [{ texte: 'sain masculin' }, { texte: 'sain féminin' }, { texte: 'brisé' }], bonne: 2, cles: ['kutub'],
+        explication: 'La forme interne change : c\'est un pluriel brisé.' },
+      { type: 'appariement', consigne: 'Reliez chaque pluriel à son singulier.',
+        paires: [ { ar: 'قُلُوب', fr: 'cœurs (qalb)', cle: 'qulub' }, { ar: 'رُسُل', fr: 'messagers (rasūl)', cle: 'rusul' }, { ar: 'كُتُب', fr: 'livres (kitāb)', cle: 'kutub' }, { ar: 'آيَات', fr: 'signes (āya)', cle: 'ayat' } ] },
+      { type: 'racine', consigne: 'Retrouvez la racine sous le pluriel brisé قُلُوب (cœurs).',
+        mot: 'قُلُوب', racine: ['ق','ل','ب'], distracteurs: ['ك','ت','ر'], cles: ['qulub'] },
+      { type: 'trous', consigne: 'Complétez « les bonnes œuvres » au pluriel féminin.',
+        segments: [ 'الصَّالِحَ', { options: ['ات', 'ون', 'ين'], bonne: 0 } ], traduction: 'les bonnes œuvres', cles: ['salihat'] },
+      { type: 'oral', consigne: 'Prononcez ce pluriel brisé.',
+        phraseAr: 'قُلُوب', translit: 'qulūb', cles: ['qulub'] },
+    ],
+    memoriser: { ar: 'وَعَمِلُوا الصَّالِحَاتِ', tr: 'wa-ʿamilū ṣ-ṣāliḥāt', fr: 'et ont accompli les bonnes œuvres. (al-ʿAṣr, 3)' },
+    recap: [
+      'Pluriel sain masculin : ـُونَ / ـِينَ.',
+      'Pluriel sain féminin : ـَات.',
+      'Pluriel brisé : la forme interne change (kitāb → kutub).',
+      'La racine reste repérable sous le pluriel brisé.',
+    ],
+  },
+
+  22: {
+    cycle: 4,
+    titre: 'La négation',
+    intro: 'Nier, c\'est essentiel pour comprendre le Coran, qui affirme autant qu\'il écarte.\n' +
+      'L\'arabe choisit l\'outil de négation selon le temps et la nature de ce qu\'on nie : lā, mā, lam, laysa.\n' +
+      'Vous connaissez déjà lam, qui nie au passé. Complétons le tableau.',
+    decouverte: [
+      { lignes: [
+        { ar: 'لَا إِلَٰهَ إِلَّا اللَّهُ', tr: 'lā ilāha illā llāh', fr: 'il n\'est de dieu sinon Allah', note: 'لَا nie le nom' },
+        { ar: 'لَمْ يَلِدْ', tr: 'lam yalid', fr: 'il n\'a pas engendré', note: 'لَمْ nie le passé' },
+        { ar: 'مَا خَلَقَ', tr: 'mā khalaq', fr: 'ce qu\'il a créé / il n\'a pas créé', note: 'مَا : « ce que » ou négation' },
+        { ar: 'لَيْسَ كَذَٰلِكَ', tr: 'laysa ka-dhālika', fr: 'il n\'est pas ainsi', note: 'لَيْسَ : « ne pas être »' },
+      ]},
+      { texte: 'لَا nie de façon générale, souvent un nom ou le présent. لَمْ nie une action passée, suivie d\'un verbe à l\'inaccompli. لَيْسَ nie l\'existence ou l\'attribut : « il n\'est pas ».' },
+    ],
+    grammaire: {
+      titre: 'Choisir la bonne négation',
+      corps: 'لَا (lā) est la négation la plus générale : elle nie un nom (lā ilāha, « pas de dieu ») ou le présent.\n' +
+        'لَمْ (lam) nie le passé et se construit avec un verbe à l\'inaccompli : lam yalid, « il n\'a pas engendré ».\n' +
+        'لَيْسَ (laysa) est un verbe qui signifie « ne pas être » ; مَا (mā) sert aussi de négation, surtout du passé.',
+    },
+    vocabulaire: [
+      { ar: 'لَا', tr: 'lā', fr: 'non, ne... pas', cle: 'la' },
+      { ar: 'مَا', tr: 'mā', fr: 'ne... pas ; ce que', cle: 'ma' },
+      { ar: 'لَيْسَ', tr: 'laysa', fr: 'il n\'est pas', cle: 'laysa' },
+      { ar: 'إِلَّا', tr: 'illā', fr: 'sinon, sauf', cle: 'illa' },
+      { ar: 'إِلَٰه', tr: 'ilāh', fr: 'divinité', cle: 'ilah' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Quelle négation emploie-t-on dans لَا إِلَٰهَ إِلَّا اللَّهُ ?',
+        options: [{ ar: 'لَمْ' }, { ar: 'لَا' }, { ar: 'لَيْسَ' }], bonne: 1, cles: ['la'],
+        explication: 'لَا nie le nom : « il n\'est aucune divinité… ».' },
+      { type: 'qcm', consigne: 'لَمْ se construit avec :',
+        options: [{ texte: 'un nom' }, { texte: 'un verbe à l\'inaccompli, sens passé' }, { texte: 'rien' }], bonne: 1, cles: ['lam'],
+        explication: 'lam yalid : lam + inaccompli = négation du passé.' },
+      { type: 'qcm', consigne: 'Que signifie إِلَّا ?',
+        options: [{ texte: 'et' }, { texte: 'sinon, sauf' }, { texte: 'dans' }], bonne: 1, cles: ['illa'],
+        explication: 'illā introduit l\'exception : « sinon, sauf ».' },
+      { type: 'appariement', consigne: 'Reliez chaque outil à sa valeur.',
+        paires: [ { ar: 'لَا', fr: 'ne... pas (général)', cle: 'la' }, { ar: 'لَمْ', fr: 'ne... pas (passé)', cle: 'lam' }, { ar: 'لَيْسَ', fr: 'il n\'est pas', cle: 'laysa' }, { ar: 'إِلَّا', fr: 'sinon', cle: 'illa' } ] },
+      { type: 'glisser', consigne: 'Reconstituez la formule « il n\'est de dieu sinon Allah ».',
+        ordre: ['لَا', 'إِلَٰهَ', 'إِلَّا', 'اللَّهُ'], traduction: 'il n\'est de dieu sinon Allah', cles: ['la','ilah','illa'] },
+      { type: 'oral', consigne: 'Récitez cette attestation fondamentale.',
+        phraseAr: 'لَا إِلَٰهَ إِلَّا اللَّهُ', translit: 'lā ilāha illā llāh', cles: ['la','illa'] },
+    ],
+    memoriser: { ar: 'لَا إِلَٰهَ إِلَّا اللَّهُ', tr: 'lā ilāha illā llāh', fr: 'Il n\'est de divinité sinon Allah.' },
+    recap: [
+      'لَا : négation générale (nom ou présent).',
+      'لَمْ : négation du passé, avec un verbe à l\'inaccompli.',
+      'لَيْسَ : « ne pas être ».',
+      'إِلَّا : exception, « sinon, sauf ».',
+    ],
+  },
+
+  23: {
+    cycle: 4,
+    titre: 'Les pronoms relatifs',
+    intro: 'Pour dire « celui qui », « celle que », l\'arabe dispose de relatifs qui s\'accordent en genre.\n' +
+      'Les deux plus courants sont alladhī (masculin) et allatī (féminin).\n' +
+      'On les rencontre dès le début de la Fātiḥa et dans an-Nās : alladhī yuwaswisu.',
+    decouverte: [
+      { lignes: [
+        { ar: 'الَّذِي', tr: 'alladhī', fr: 'celui qui (m.)' },
+        { ar: 'الَّتِي', tr: 'allatī', fr: 'celle qui (f.)' },
+        { ar: 'الَّذِينَ', tr: 'alladhīna', fr: 'ceux qui (m. pluriel)' },
+      ]},
+      { texte: 'Le relatif renvoie à un être ou une chose déjà défini. الَّذِينَ آمَنُوا : « ceux qui ont cru ».' },
+      { lignes: [
+        { ar: 'الَّذِي يُوَسْوِسُ', tr: 'alladhī yuwaswisu', fr: 'celui qui souffle (le mal)', note: 'an-Nās, 5' },
+        { ar: 'الَّذِينَ آمَنُوا', tr: 'alladhīna āmanū', fr: 'ceux qui ont cru', note: 'al-ʿAṣr, 3' },
+      ]},
+    ],
+    grammaire: {
+      titre: 'Un relatif qui s\'accorde',
+      corps: 'Le pronom relatif s\'accorde en genre et en nombre avec ce qu\'il reprend : الَّذِي (masculin singulier), الَّتِي (féminin singulier), الَّذِينَ (masculin pluriel).\n' +
+        'Il ne s\'emploie qu\'avec un antécédent défini ; après un indéfini, l\'arabe se passe de relatif.\n' +
+        'La proposition qui suit complète le sens : alladhī khalaqa, « celui qui a créé ».',
+    },
+    vocabulaire: [
+      { ar: 'الَّذِي', tr: 'alladhī', fr: 'celui qui', cle: 'alladhi' },
+      { ar: 'الَّتِي', tr: 'allatī', fr: 'celle qui', cle: 'allati' },
+      { ar: 'الَّذِينَ', tr: 'alladhīna', fr: 'ceux qui', cle: 'alladhina' },
+      { ar: 'آمَنُوا', tr: 'āmanū', fr: 'ils ont cru', cle: 'amanu' },
+      { ar: 'يُوَسْوِسُ', tr: 'yuwaswisu', fr: 'il souffle (le mal)', cle: 'yuwaswisu' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Comment dit-on « celle qui » ?',
+        options: [{ ar: 'الَّذِي' }, { ar: 'الَّتِي' }, { ar: 'الَّذِينَ' }], bonne: 1, cles: ['allati'],
+        explication: 'الَّتِي est le relatif féminin singulier.' },
+      { type: 'qcm', consigne: 'الَّذِينَ آمَنُوا signifie :',
+        options: [{ texte: 'celui qui croit' }, { texte: 'ceux qui ont cru' }, { texte: 'la foi' }], bonne: 1, cles: ['alladhina','amanu'],
+        explication: 'الَّذِينَ (ceux qui) + آمَنُوا (ils ont cru).' },
+      { type: 'qcm', consigne: 'Le relatif s\'emploie avec un antécédent :',
+        options: [{ texte: 'défini' }, { texte: 'indéfini' }], bonne: 0,
+        explication: 'On n\'emploie alladhī, allatī qu\'après un nom défini.' },
+      { type: 'appariement', consigne: 'Reliez chaque relatif à sa valeur.',
+        paires: [ { ar: 'الَّذِي', fr: 'celui qui', cle: 'alladhi' }, { ar: 'الَّتِي', fr: 'celle qui', cle: 'allati' }, { ar: 'الَّذِينَ', fr: 'ceux qui', cle: 'alladhina' }, { ar: 'آمَنُوا', fr: 'ils ont cru', cle: 'amanu' } ] },
+      { type: 'glisser', consigne: 'Reconstituez « celui qui souffle le mal ».',
+        ordre: ['الَّذِي', 'يُوَسْوِسُ'], traduction: 'celui qui souffle le mal', cles: ['alladhi','yuwaswisu'] },
+      { type: 'oral', consigne: 'Lisez ce fragment d\'an-Nās.',
+        phraseAr: 'الَّذِي يُوَسْوِسُ', translit: 'alladhī yuwaswisu', cles: ['alladhi'] },
+    ],
+    memoriser: { ar: 'إِلَّا الَّذِينَ آمَنُوا', tr: 'illā lladhīna āmanū', fr: 'sauf ceux qui ont cru. (al-ʿAṣr, 3)' },
+    recap: [
+      'Relatifs : الَّذِي (m.), الَّتِي (f.), الَّذِينَ (m. pluriel).',
+      'Le relatif s\'accorde en genre et en nombre.',
+      'Il suppose un antécédent défini.',
+      'La proposition suivante précise le sens.',
+    ],
+  },
+
+  24: {
+    cycle: 4,
+    titre: 'Sourates al-Kawthar et al-ʿAṣr',
+    intro: 'Deux sourates brèves mais denses. al-Kawthar est la plus courte du Coran ; al-ʿAṣr tient en un serment et une leçon de vie.\n' +
+      'Vous y mobiliserez tout le cycle : particules, prépositions, pluriels, négation, relatifs.\n' +
+      'Lisez, comprenez, puis laissez les mots résonner.',
+    decouverte: [
+      { texte: 'Sourate 108, al-Kawthar, l\'Abondance.' },
+      { lignes: [
+        { ar: 'إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ', tr: 'innā aʿṭaynāka l-kawthar', fr: 'Nous t\'avons certes accordé l\'abondance.' },
+        { ar: 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', tr: 'fa-ṣalli li-rabbika wa-nḥar', fr: 'Prie donc ton Seigneur et sacrifie.' },
+        { ar: 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ', tr: 'inna shāni\'aka huwa l-abtar', fr: 'Celui qui te hait sera, lui, sans postérité.' },
+      ]},
+      { texte: 'Sourate 103, al-ʿAṣr, le Temps.' },
+      { lignes: [
+        { ar: 'وَالْعَصْرِ', tr: 'wa-l-ʿaṣr', fr: 'Par le Temps,' },
+        { ar: 'إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ', tr: 'inna l-insāna la-fī khusr', fr: 'l\'être humain est certes en perdition,' },
+        { ar: 'إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ', tr: 'illā lladhīna āmanū wa-ʿamilū ṣ-ṣāliḥāt', fr: 'sauf ceux qui croient et accomplissent les bonnes œuvres,' },
+      ]},
+    ],
+    grammaire: {
+      titre: 'inna, particule d\'insistance',
+      corps: 'إِنَّ (inna) renforce l\'affirmation : « certes, vraiment ». Elle ouvre souvent un verset.\n' +
+        'Le nom qui la suit prend une fatḥa : inna l-insāna, « l\'être humain, certes ».\n' +
+        'La particule لَـ (la-) ajoutée renforce encore : la-fī khusr, « bien en perdition ».',
+    },
+    vocabulaire: [
+      { ar: 'الْكَوْثَر', tr: 'al-kawthar', fr: 'l\'abondance', cle: 'kawthar' },
+      { ar: 'إِنَّ', tr: 'inna', fr: 'certes, vraiment', cle: 'inna' },
+      { ar: 'الْإِنْسَان', tr: 'al-insān', fr: 'l\'être humain', cle: 'insan' },
+      { ar: 'خُسْر', tr: 'khusr', fr: 'perte, perdition', cle: 'khusr' },
+      { ar: 'الصَّبْر', tr: 'aṣ-ṣabr', fr: 'la patience', cle: 'sabr' },
+      { ar: 'الْحَقّ', tr: 'al-ḥaqq', fr: 'la vérité, le vrai', cle: 'haqq' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie إِنَّ en tête de verset ?',
+        options: [{ texte: 'si' }, { texte: 'certes, vraiment' }, { texte: 'mais' }], bonne: 1, cles: ['inna'],
+        explication: 'inna renforce l\'affirmation : « certes ».' },
+      { type: 'qcm', consigne: 'Que signifie خُسْر ?',
+        options: [{ texte: 'abondance' }, { texte: 'perdition, perte' }, { texte: 'patience' }], bonne: 1, cles: ['khusr'],
+        explication: 'khusr : la perte, la perdition.' },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'الْكَوْثَر', fr: 'l\'abondance', cle: 'kawthar' }, { ar: 'الْإِنْسَان', fr: 'l\'être humain', cle: 'insan' }, { ar: 'الصَّبْر', fr: 'la patience', cle: 'sabr' }, { ar: 'الْحَقّ', fr: 'la vérité', cle: 'haqq' } ] },
+      { type: 'glisser', consigne: 'Reconstituez « par le Temps, l\'être humain est en perdition ».',
+        ordre: ['وَالْعَصْرِ', 'إِنَّ', 'الْإِنْسَانَ', 'لَفِي', 'خُسْرٍ'], traduction: 'Par le Temps, l\'être humain est certes en perdition', cles: ['insan','khusr','inna'] },
+      { type: 'decomposition', consigne: 'Décomposez لَفِي : la particule d\'insistance et la préposition.',
+        segments: [ { ar: 'لَـ', role: 'insistance' }, { ar: 'فِي', role: 'préposition' } ], roles: ['insistance','préposition'], cles: ['fi'] },
+      { type: 'oral', consigne: 'Récitez al-ʿAṣr en entier, lentement.',
+        phraseAr: 'وَالْعَصْرِ إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ', translit: 'wa-l-ʿaṣr, inna l-insāna la-fī khusr', cles: ['insan','khusr'] },
+    ],
+    memoriser: { ar: 'إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ', tr: 'inna l-insāna la-fī khusr', fr: 'L\'être humain est certes en perdition. (al-ʿAṣr, 2)' },
+    recap: [
+      'al-Kawthar : la plus courte sourate, trois versets.',
+      'al-ʿAṣr : un serment par le Temps, puis la voie du salut.',
+      'إِنَّ renforce l\'affirmation ; le nom qui suit prend la fatḥa.',
+      'لَـ ajoute encore de l\'insistance : la-fī khusr.',
+    ],
+  },
+
 };
