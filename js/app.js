@@ -84,6 +84,39 @@ const App = (function () {
     if (cible) cible.innerHTML = barre(pageActive);
   }
 
+  // Avis audio : prévient si aucune voix arabe n'est disponible.
+  function afficherAvis(message) {
+    if (localStorage.getItem('avis-audio-vu') === '1') return;
+    const barre = document.getElementById('barre');
+    if (!barre) return;
+    const avis = document.createElement('div');
+    avis.className = 'avis-audio';
+    avis.innerHTML = `<span>${message}</span>
+      <button class="avis-fermer" aria-label="Fermer" title="Ne plus afficher">×</button>`;
+    avis.querySelector('.avis-fermer').onclick = () => {
+      localStorage.setItem('avis-audio-vu', '1');
+      avis.remove();
+    };
+    barre.insertAdjacentElement('afterend', avis);
+  }
+
+  function verifierAudio() {
+    if (!('speechSynthesis' in window)) {
+      afficherAvis('La synthèse vocale n\'est pas disponible sur ce navigateur. Les boutons d\'écoute resteront silencieux ; essayez un autre navigateur, comme Chrome.');
+      return;
+    }
+    let essais = 0;
+    const check = () => {
+      const voix = window.speechSynthesis.getVoices();
+      if (voix.length === 0 && essais < 6) { essais++; setTimeout(check, 400); return; }
+      const ar = voix.some((v) => v.lang && v.lang.toLowerCase().startsWith('ar'));
+      if (!ar && voix.length > 0) {
+        afficherAvis('Aucune voix arabe ne semble installée sur votre appareil : l\'écoute emploiera une voix par défaut, à la prononciation approximative. Pour un meilleur son, ajoutez une voix arabe dans les réglages de synthèse vocale de votre système.');
+      }
+    };
+    check();
+  }
+
   // Rend un fragment phonétique masquable. Retourne une chaîne HTML.
   // Usage : App.phon('al-ḥamdu li-llāh')
   function phon(tr) {
@@ -104,7 +137,7 @@ const App = (function () {
   }
 
   return {
-    init, param, romain, phon,
+    init, param, romain, phon, verifierAudio,
     basculerTheme, basculerPolice, basculerPhonetique,
     appliquerTheme, appliquerPolice, appliquerPhonetique,
   };
