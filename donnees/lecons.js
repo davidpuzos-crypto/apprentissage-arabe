@@ -704,4 +704,347 @@ const Lecons = {
     ],
   },
 
+  /* ===================== CYCLE III — LE VERBE ET L'ANNEXION ===================== */
+
+  13: {
+    cycle: 3,
+    titre: 'Le verbe accompli à la troisième personne',
+    intro: 'Nous abordons le verbe, et avec lui une idée centrale de l\'arabe : la racine.\n' +
+      'Presque tout mot arabe est bâti sur trois consonnes qui en portent le sens. La racine ك ت ب tourne autour de l\'écriture.\n' +
+      'L\'accompli exprime une action achevée. Commençons par la troisième personne, la forme la plus simple.',
+    decouverte: [
+      { texte: 'La forme de base du verbe, à la 3e personne du masculin, suit souvent le schéma faʿala : trois consonnes portant chacune une fatḥa.' },
+      { lignes: [
+        { ar: 'كَتَبَ', tr: 'kataba', fr: 'il a écrit', note: 'racine ك-ت-ب' },
+        { ar: 'خَلَقَ', tr: 'khalaqa', fr: 'il a créé', note: 'racine خ-ل-ق' },
+        { ar: 'نَصَرَ', tr: 'naṣara', fr: 'il a secouru', note: 'racine ن-ص-ر' },
+      ]},
+      { texte: 'Pour le féminin, on ajoute ـَتْ : kataba devient katabat, « elle a écrit ». Pour le pluriel masculin, on ajoute ـُوا : katabū, « ils ont écrit ».' },
+      { lignes: [
+        { ar: 'كَتَبَتْ', tr: 'katabat', fr: 'elle a écrit' },
+        { ar: 'كَتَبُوا', tr: 'katabū', fr: 'ils ont écrit' },
+      ]},
+    ],
+    grammaire: {
+      titre: 'La racine, cœur du sens',
+      corps: 'La plupart des mots arabes reposent sur une racine de trois consonnes qui en fixe le sens général.\n' +
+        'Sur la racine ك-ت-ب (idée d\'écrire) se forment kataba (il a écrit), kitāb (livre), kātib (scribe).\n' +
+        'Reconnaître la racine d\'un mot, c\'est deviner sa famille de sens : un réflexe précieux pour la lecture.',
+    },
+    vocabulaire: [
+      { ar: 'خَلَقَ', tr: 'khalaqa', fr: 'il a créé', cle: 'khalaqa' },
+      { ar: 'نَصَرَ', tr: 'naṣara', fr: 'il a secouru', cle: 'nasara' },
+      { ar: 'سَمِعَ', tr: 'samiʿa', fr: 'il a entendu', cle: 'samia' },
+      { ar: 'عَلِمَ', tr: 'ʿalima', fr: 'il a su', cle: 'alima' },
+      { ar: 'فَعَلَ', tr: 'faʿala', fr: 'il a fait', cle: 'faala' },
+      { ar: 'رَزَقَ', tr: 'razaqa', fr: 'il a pourvu', cle: 'razaqa' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie خَلَقَ ?',
+        options: [{ texte: 'il a écrit' }, { texte: 'il a créé' }, { texte: 'il a entendu' }], bonne: 1, cles: ['khalaqa'],
+        explication: 'خَلَقَ, « il a créé », de la racine خ-ل-ق.' },
+      { type: 'racine', consigne: 'Reconstituez la racine de كَتَبَ en choisissant ses trois consonnes.',
+        mot: 'كَتَبَ', racine: ['ك','ت','ب'], distracteurs: ['ن','ل','ر'], cles: ['kataba'] },
+      { type: 'qcm', consigne: 'Comment dit-on « elle a écrit » ?',
+        options: [{ ar: 'كَتَبَ' }, { ar: 'كَتَبَتْ' }, { ar: 'كَتَبُوا' }], bonne: 1,
+        explication: 'On ajoute ـَتْ au masculin : katabat.' },
+      { type: 'appariement', consigne: 'Reliez chaque verbe à son sens.',
+        paires: [ { ar: 'سَمِعَ', fr: 'il a entendu', cle: 'samia' }, { ar: 'عَلِمَ', fr: 'il a su', cle: 'alima' }, { ar: 'رَزَقَ', fr: 'il a pourvu', cle: 'razaqa' }, { ar: 'نَصَرَ', fr: 'il a secouru', cle: 'nasara' } ] },
+      { type: 'racine', consigne: 'Quelle est la racine de خَلَقَ (il a créé) ?',
+        mot: 'خَلَقَ', racine: ['خ','ل','ق'], distracteurs: ['ك','ت','ب'], cles: ['khalaqa'] },
+      { type: 'oral', consigne: 'Prononcez ce verbe coranique fréquent.',
+        phraseAr: 'خَلَقَ', translit: 'khalaqa', cles: ['khalaqa'] },
+    ],
+    memoriser: { ar: 'خَلَقَ الْإِنْسَانَ', tr: 'khalaqa l-insān', fr: 'Il a créé l\'être humain.' },
+    recap: [
+      'La racine de trois consonnes porte le sens d\'une famille de mots.',
+      'L\'accompli exprime une action achevée.',
+      'Masculin : kataba ; féminin : katabat ; pluriel masculin : katabū.',
+      'Repérer la racine aide à deviner le sens d\'un mot.',
+    ],
+  },
+
+  14: {
+    cycle: 3,
+    titre: 'La conjugaison complète de l\'accompli',
+    intro: 'Vous connaissez la troisième personne. Voyons maintenant tout le tableau de l\'accompli.\n' +
+      'La bonne nouvelle : la racine ne bouge pas, on ne fait qu\'ajouter des terminaisons.\n' +
+      'Apprenez ce tableau peu à peu ; il vous servira pour tous les verbes réguliers.',
+    decouverte: [
+      { texte: 'Conjugaison de كَتَبَ (écrire) à l\'accompli. La terminaison varie, la base katab- reste.' },
+      { lignes: [
+        { ar: 'كَتَبْتُ', tr: 'katabtu', fr: 'j\'ai écrit', note: 'ـْتُ' },
+        { ar: 'كَتَبْتَ', tr: 'katabta', fr: 'tu as écrit (m.)', note: 'ـْتَ' },
+        { ar: 'كَتَبْتِ', tr: 'katabti', fr: 'tu as écrit (f.)', note: 'ـْتِ' },
+        { ar: 'كَتَبَ', tr: 'kataba', fr: 'il a écrit', note: 'ـَ' },
+        { ar: 'كَتَبَتْ', tr: 'katabat', fr: 'elle a écrit', note: 'ـَتْ' },
+        { ar: 'كَتَبْنَا', tr: 'katabnā', fr: 'nous avons écrit', note: 'ـْنَا' },
+        { ar: 'كَتَبْتُمْ', tr: 'katabtum', fr: 'vous avez écrit', note: 'ـْتُمْ' },
+        { ar: 'كَتَبُوا', tr: 'katabū', fr: 'ils ont écrit', note: 'ـُوا' },
+      ]},
+    ],
+    grammaire: {
+      titre: 'Des terminaisons qui s\'ajoutent',
+      corps: 'À l\'accompli, on part de la base verbale et on ajoute un suffixe selon la personne.\n' +
+        'Les terminaisons en ـتُ، ـتَ، ـتِ marquent celui qui parle ou à qui l\'on parle ; ـَ et ـَتْ marquent la troisième personne.\n' +
+        'Inutile de tout retenir d\'un coup : la régularité fait que ces formes s\'ancrent vite par la pratique.',
+    },
+    vocabulaire: [
+      { ar: 'عَبَدَ', tr: 'ʿabada', fr: 'il a adoré', cle: 'abada' },
+      { ar: 'شَكَرَ', tr: 'shakara', fr: 'il a remercié', cle: 'shakara' },
+      { ar: 'صَبَرَ', tr: 'ṣabara', fr: 'il a patienté', cle: 'sabara' },
+      { ar: 'غَفَرَ', tr: 'ghafara', fr: 'il a pardonné', cle: 'ghafara' },
+      { ar: 'دَخَلَ', tr: 'dakhala', fr: 'il est entré', cle: 'dakhala' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Comment dit-on « nous avons écrit » ?',
+        options: [{ ar: 'كَتَبْتُ' }, { ar: 'كَتَبْنَا' }, { ar: 'كَتَبُوا' }], bonne: 1,
+        explication: 'La terminaison ـْنَا marque « nous » : katabnā.' },
+      { type: 'qcm', consigne: 'La forme كَتَبْتُ se traduit par :',
+        options: [{ texte: 'j\'ai écrit' }, { texte: 'tu as écrit' }, { texte: 'il a écrit' }], bonne: 0,
+        explication: 'ـْتُ marque la première personne : katabtu, « j\'ai écrit ».' },
+      { type: 'appariement', consigne: 'Reliez chaque forme conjuguée à sa personne.',
+        paires: [ { ar: 'كَتَبْتَ', fr: 'tu as écrit (m.)' }, { ar: 'كَتَبَتْ', fr: 'elle a écrit' }, { ar: 'كَتَبْتُمْ', fr: 'vous avez écrit' }, { ar: 'كَتَبُوا', fr: 'ils ont écrit' } ] },
+      { type: 'trous', consigne: 'Complétez « nous avons adoré » à partir de عَبَدَ.',
+        segments: [ 'عَبَدْ', { options: ['نَا', 'تُ', 'وا'], bonne: 0 } ], traduction: 'nous avons adoré', cles: ['abada'] },
+      { type: 'racine', consigne: 'Donnez la racine de غَفَرَ (il a pardonné).',
+        mot: 'غَفَرَ', racine: ['غ','ف','ر'], distracteurs: ['ع','ق','ل'], cles: ['ghafara'] },
+      { type: 'oral', consigne: 'Prononcez « nous avons adoré ».',
+        phraseAr: 'عَبَدْنَا', translit: 'ʿabadnā', cles: ['abada'] },
+    ],
+    memoriser: { ar: 'إِيَّاكَ نَعْبُدُ', tr: 'iyyāka naʿbudu', fr: 'C\'est Toi que nous adorons. (al-Fātiḥa, 5)' },
+    recap: [
+      'L\'accompli ajoute un suffixe à la base verbale.',
+      'ـتُ (je), ـتَ/ـتِ (tu), ـَ/ـَتْ (il/elle), ـنَا (nous), ـتُمْ (vous), ـُوا (ils).',
+      'La racine reste stable d\'une forme à l\'autre.',
+      'La pratique ancre le tableau bien mieux que la mémorisation forcée.',
+    ],
+  },
+
+  15: {
+    cycle: 3,
+    titre: 'Le verbe inaccompli',
+    intro: 'L\'accompli regardait vers le passé. L\'inaccompli, lui, exprime le présent et le futur, l\'action en cours ou à venir.\n' +
+      'Sa marque la plus visible est un préfixe : un petit son placé devant la racine.\n' +
+      'C\'est le temps de نَعْبُدُ (nous adorons), que vous avez déjà rencontré.',
+    decouverte: [
+      { texte: 'À l\'inaccompli, un préfixe annonce la personne, et la voyelle finale est souvent une ḍamma.' },
+      { lignes: [
+        { ar: 'يَكْتُبُ', tr: 'yaktubu', fr: 'il écrit', note: 'préfixe يَـ' },
+        { ar: 'تَكْتُبُ', tr: 'taktubu', fr: 'elle écrit, tu écris', note: 'préfixe تَـ' },
+        { ar: 'أَكْتُبُ', tr: 'aktubu', fr: 'j\'écris', note: 'préfixe أَـ' },
+        { ar: 'نَكْتُبُ', tr: 'naktubu', fr: 'nous écrivons', note: 'préfixe نَـ' },
+      ]},
+      { texte: 'On résume les préfixes par le moyen mnémotechnique أَنَيْتُ (a, n, y, t), qui réunit les quatre marques de personne.' },
+      { lignes: [
+        { ar: 'يَعْلَمُ', tr: 'yaʿlamu', fr: 'il sait' },
+        { ar: 'نَعْبُدُ', tr: 'naʿbudu', fr: 'nous adorons' },
+      ]},
+    ],
+    grammaire: {
+      titre: 'Le préfixe de l\'inaccompli',
+      corps: 'L\'inaccompli se reconnaît à son préfixe : يَـ (il), تَـ (elle ou tu), أَـ (je), نَـ (nous).\n' +
+        'La racine se loge entre le préfixe et la terminaison, souvent avec un sukūn puis une ḍamma : ya-ktub-u.\n' +
+        'Ce temps couvre le présent et le futur ; le contexte précise lequel.',
+    },
+    vocabulaire: [
+      { ar: 'يَعْلَمُ', tr: 'yaʿlamu', fr: 'il sait', cle: 'yalamu' },
+      { ar: 'يَعْبُدُ', tr: 'yaʿbudu', fr: 'il adore', cle: 'yabudu' },
+      { ar: 'يَقُولُ', tr: 'yaqūlu', fr: 'il dit', cle: 'yaqulu' },
+      { ar: 'يُؤْمِنُ', tr: 'yuʾminu', fr: 'il croit', cle: 'yuminu' },
+      { ar: 'نَسْتَعِينُ', tr: 'nastaʿīnu', fr: 'nous implorons le secours', cle: 'nastain' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Quel préfixe marque « nous » à l\'inaccompli ?',
+        options: [{ ar: 'يَـ' }, { ar: 'نَـ' }, { ar: 'أَـ' }], bonne: 1,
+        explication: 'نَـ marque « nous » : naktubu, naʿbudu.' },
+      { type: 'qcm', consigne: 'Que signifie يَقُولُ ?',
+        options: [{ texte: 'il a dit' }, { texte: 'il dit' }, { texte: 'dis !' }], bonne: 1, cles: ['yaqulu'],
+        explication: 'Inaccompli de la racine ق-و-ل : « il dit ».' },
+      { type: 'appariement', consigne: 'Reliez chaque verbe à son sens.',
+        paires: [ { ar: 'يَعْلَمُ', fr: 'il sait', cle: 'yalamu' }, { ar: 'يَعْبُدُ', fr: 'il adore', cle: 'yabudu' }, { ar: 'يَقُولُ', fr: 'il dit', cle: 'yaqulu' }, { ar: 'يُؤْمِنُ', fr: 'il croit', cle: 'yuminu' } ] },
+      { type: 'trous', consigne: 'Complétez « nous adorons » avec le bon préfixe.',
+        segments: [ { options: ['نَـ', 'يَـ', 'أَـ'], bonne: 0 }, 'عْبُدُ' ], traduction: 'nous adorons', cles: ['yabudu'] },
+      { type: 'racine', consigne: 'Quelle est la racine de يَعْلَمُ (il sait) ?',
+        mot: 'يَعْلَمُ', racine: ['ع','ل','م'], distracteurs: ['ي','ك','ت'], cles: ['yalamu'] },
+      { type: 'oral', consigne: 'Lisez ce verbe de la Fātiḥa.',
+        phraseAr: 'نَعْبُدُ', translit: 'naʿbudu', cles: ['yabudu'] },
+    ],
+    memoriser: { ar: 'وَإِيَّاكَ نَسْتَعِينُ', tr: 'wa-iyyāka nastaʿīn', fr: 'Et c\'est Toi dont nous implorons le secours. (al-Fātiḥa, 5)' },
+    recap: [
+      'L\'inaccompli exprime le présent et le futur.',
+      'Préfixes : يَـ (il), تَـ (elle/tu), أَـ (je), نَـ (nous), résumés par أَنَيْتُ.',
+      'La racine s\'insère entre préfixe et terminaison.',
+      'Le contexte distingue présent et futur.',
+    ],
+  },
+
+  16: {
+    cycle: 3,
+    titre: 'L\'annexion (idāfa)',
+    intro: 'Comment dire « le livre d\'Allah », « le Seigneur des mondes » ? L\'arabe procède par simple juxtaposition.\n' +
+      'On accole deux noms : le premier est possédé, le second possesseur. C\'est l\'idāfa, l\'annexion.\n' +
+      'Cette construction est partout dans le Coran : rabbi l-ʿālamīn, māliki yawmi d-dīn.',
+    decouverte: [
+      { texte: 'Dans l\'annexion, le premier nom perd son article et le second se met au cas indirect (kasra finale).' },
+      { lignes: [
+        { ar: 'كِتَابُ اللَّهِ', tr: 'kitābu llāh', fr: 'le livre d\'Allah', note: 'kitāb sans article + Allāh' },
+        { ar: 'رَبُّ الْعَالَمِينَ', tr: 'rabbu l-ʿālamīn', fr: 'le Seigneur des mondes' },
+        { ar: 'يَوْمُ الدِّينِ', tr: 'yawmu d-dīn', fr: 'le Jour de la rétribution' },
+      ]},
+      { texte: 'Le premier mot ne prend jamais l\'article : on ne dit pas al-kitābu llāh, mais kitābu llāh. C\'est le second mot, défini, qui rend l\'ensemble défini.' },
+    ],
+    grammaire: {
+      titre: 'Deux noms accolés',
+      corps: 'L\'idāfa relie un possédé et un possesseur en les juxtaposant, sans préposition.\n' +
+        'Le premier nom ne porte jamais d\'article ni de tanwīn ; le second se met à la kasra et peut, lui, porter l\'article.\n' +
+        'On traduit par « de » : bābu l-bayt, « la porte de la maison ».',
+    },
+    vocabulaire: [
+      { ar: 'رَبّ', tr: 'rabb', fr: 'seigneur', cle: 'rabb' },
+      { ar: 'عَالَمِين', tr: 'ʿālamīn', fr: 'les mondes', cle: 'alamin' },
+      { ar: 'يَوْم', tr: 'yawm', fr: 'jour', cle: 'yawm' },
+      { ar: 'دِين', tr: 'dīn', fr: 'religion, rétribution', cle: 'din' },
+      { ar: 'رَسُول', tr: 'rasūl', fr: 'messager, envoyé', cle: 'rasul' },
+      { ar: 'كَلِمَة', tr: 'kalima', fr: 'parole, mot', cle: 'kalima' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie كِتَابُ اللَّهِ ?',
+        options: [{ texte: 'un livre et Allah' }, { texte: 'le livre d\'Allah' }, { texte: 'Allah a un livre' }], bonne: 1, cles: ['kitab','rabb'],
+        explication: 'Annexion : possédé (kitāb) + possesseur (Allāh) = « le livre d\'Allah ».' },
+      { type: 'qcm', consigne: 'Dans une idāfa, le premier nom :',
+        options: [{ texte: 'porte l\'article' }, { texte: 'ne porte jamais l\'article' }], bonne: 1,
+        explication: 'Le premier terme est défini par le second, jamais par un article propre.' },
+      { type: 'glisser', consigne: 'Reconstituez « le Seigneur des mondes ».',
+        ordre: ['رَبُّ', 'الْعَالَمِينَ'], traduction: 'le Seigneur des mondes', cles: ['rabb','alamin'] },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'رَسُول', fr: 'messager', cle: 'rasul' }, { ar: 'دِين', fr: 'religion', cle: 'din' }, { ar: 'كَلِمَة', fr: 'parole', cle: 'kalima' }, { ar: 'يَوْم', fr: 'jour', cle: 'yawm' } ] },
+      { type: 'trous', consigne: 'Complétez « le Jour de la rétribution ».',
+        segments: [ 'يَوْمُ', { options: ['الدِّينِ', 'دِينٌ'], bonne: 0 } ], traduction: 'le Jour de la rétribution', cles: ['yawm','din'] },
+      { type: 'oral', consigne: 'Lisez cette annexion célèbre.',
+        phraseAr: 'رَبِّ الْعَالَمِينَ', translit: 'rabbi l-ʿālamīn', cles: ['rabb','alamin'] },
+    ],
+    memoriser: { ar: 'مَالِكِ يَوْمِ الدِّينِ', tr: 'māliki yawmi d-dīn', fr: 'Maître du Jour de la rétribution. (al-Fātiḥa, 4)' },
+    recap: [
+      'L\'idāfa accole un possédé et un possesseur, sans préposition.',
+      'Le premier nom ne porte ni article ni tanwīn.',
+      'Le second nom se met à la kasra et peut porter l\'article.',
+      'On traduit l\'annexion par « de ».',
+    ],
+  },
+
+  17: {
+    cycle: 3,
+    titre: 'Les pronoms suffixes',
+    intro: 'Pour dire « mon Seigneur », « son livre », l\'arabe attache un petit pronom à la fin du mot.\n' +
+      'Ces pronoms suffixes expriment la possession sur un nom, et le complément sur un verbe ou une préposition.\n' +
+      'Vous les avez déjà croisés : lahu (à lui), iyyāka (Toi).',
+    decouverte: [
+      { texte: 'Sur un nom, le pronom suffixe marque le possesseur. Sur رَبّ (seigneur) :' },
+      { lignes: [
+        { ar: 'رَبِّي', tr: 'rabbī', fr: 'mon Seigneur', note: 'ـِي = mon' },
+        { ar: 'رَبُّكَ', tr: 'rabbuka', fr: 'ton Seigneur (m.)', note: 'ـكَ = ton' },
+        { ar: 'رَبُّهُ', tr: 'rabbuhu', fr: 'son Seigneur', note: 'ـهُ = son' },
+        { ar: 'رَبُّنَا', tr: 'rabbunā', fr: 'notre Seigneur', note: 'ـنَا = notre' },
+        { ar: 'رَبُّهُمْ', tr: 'rabbuhum', fr: 'leur Seigneur', note: 'ـهُمْ = leur' },
+      ]},
+      { texte: 'Le même suffixe, attaché à une préposition, donne : لَهُ (à lui), بِهِ (par lui), عَلَيْهِمْ (sur eux).' },
+    ],
+    grammaire: {
+      titre: 'Un pronom collé à la fin',
+      corps: 'Le pronom suffixe s\'attache directement au mot, sans espace : ـِي (mon), ـكَ (ton), ـهُ (son), ـنَا (notre), ـهُمْ (leur).\n' +
+        'Sur un nom, il exprime la possession ; sur un verbe, le complément d\'objet ; sur une préposition, son régime.\n' +
+        'Ainsi رَبَّنَا signifie « notre Seigneur », et عَلَيْهِمْ « sur eux ».',
+    },
+    vocabulaire: [
+      { ar: 'رَبِّي', tr: 'rabbī', fr: 'mon Seigneur', cle: 'rabbi' },
+      { ar: 'رَبُّنَا', tr: 'rabbunā', fr: 'notre Seigneur', cle: 'rabbuna' },
+      { ar: 'عَلَيْهِمْ', tr: 'ʿalayhim', fr: 'sur eux', cle: 'alayhim' },
+      { ar: 'بِهِ', tr: 'bihi', fr: 'par lui, en lui', cle: 'bihi' },
+      { ar: 'مِنْهُ', tr: 'minhu', fr: 'de lui', cle: 'minhu' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie رَبِّي ?',
+        options: [{ texte: 'notre Seigneur' }, { texte: 'mon Seigneur' }, { texte: 'ton Seigneur' }], bonne: 1, cles: ['rabbi'],
+        explication: 'Le suffixe ـِي marque « mon » : rabbī.' },
+      { type: 'qcm', consigne: 'Le suffixe ـهُمْ signifie :',
+        options: [{ texte: 'son' }, { texte: 'leur' }, { texte: 'notre' }], bonne: 1,
+        explication: 'ـهُمْ marque le pluriel « leur, eux » : rabbuhum, ʿalayhim.' },
+      { type: 'appariement', consigne: 'Reliez chaque forme à sa traduction.',
+        paires: [ { ar: 'رَبِّي', fr: 'mon Seigneur', cle: 'rabbi' }, { ar: 'رَبُّنَا', fr: 'notre Seigneur', cle: 'rabbuna' }, { ar: 'عَلَيْهِمْ', fr: 'sur eux', cle: 'alayhim' }, { ar: 'مِنْهُ', fr: 'de lui', cle: 'minhu' } ] },
+      { type: 'decomposition', consigne: 'Analysez رَبُّنَا : séparez le nom de son pronom suffixe.',
+        segments: [ { ar: 'رَبّ', role: 'nom' }, { ar: 'نَا', role: 'suffixe' } ], roles: ['nom','suffixe'], cles: ['rabbuna'] },
+      { type: 'trous', consigne: 'Complétez « ton Seigneur » (à un homme).',
+        segments: [ 'رَبُّ', { options: ['كَ', 'هُ', 'نَا'], bonne: 0 } ], traduction: 'ton Seigneur', cles: ['rabbi'] },
+      { type: 'oral', consigne: 'Prononcez « notre Seigneur ».',
+        phraseAr: 'رَبَّنَا', translit: 'rabbanā', cles: ['rabbuna'] },
+    ],
+    memoriser: { ar: 'أَنْعَمْتَ عَلَيْهِمْ', tr: 'anʿamta ʿalayhim', fr: 'Tu les as comblés de grâces. (al-Fātiḥa, 7)' },
+    recap: [
+      'Les pronoms suffixes s\'attachent à la fin du mot.',
+      'ـِي (mon), ـكَ (ton), ـهُ (son), ـنَا (notre), ـهُمْ (leur).',
+      'Sur un nom : possession ; sur un verbe : complément ; sur une préposition : régime.',
+      'Exemples coraniques : rabbanā, ʿalayhim, bihi.',
+    ],
+  },
+
+  18: {
+    cycle: 3,
+    titre: 'Sourates al-Falaq et an-Nās',
+    intro: 'Deux sourates de protection, souvent récitées ensemble, closent le Coran. Elles partagent le même élan : chercher refuge auprès d\'Allah.\n' +
+      'Vous y retrouverez l\'annexion (rabbi l-falaq), les pronoms suffixes et la préposition min.\n' +
+      'Lisez-les verset par verset, sans hâte, en savourant les mots reconnus.',
+    decouverte: [
+      { texte: 'Sourate 113, al-Falaq, l\'Aube naissante.' },
+      { lignes: [
+        { ar: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ', tr: 'qul aʿūdhu bi-rabbi l-falaq', fr: 'Dis : je cherche refuge auprès du Seigneur de l\'aube,' },
+        { ar: 'مِنْ شَرِّ مَا خَلَقَ', tr: 'min sharri mā khalaq', fr: 'contre le mal de ce qu\'Il a créé,' },
+        { ar: 'وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ', tr: 'wa-min sharri ghāsiqin idhā waqab', fr: 'contre le mal de l\'obscurité quand elle s\'étend,' },
+      ]},
+      { texte: 'Sourate 114, an-Nās, les Hommes.' },
+      { lignes: [
+        { ar: 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ', tr: 'qul aʿūdhu bi-rabbi n-nās', fr: 'Dis : je cherche refuge auprès du Seigneur des hommes,' },
+        { ar: 'مَلِكِ النَّاسِ', tr: 'maliki n-nās', fr: 'le Roi des hommes,' },
+        { ar: 'إِلَٰهِ النَّاسِ', tr: 'ilāhi n-nās', fr: 'le Dieu des hommes,' },
+      ]},
+    ],
+    grammaire: {
+      titre: 'Chercher refuge : aʿūdhu bi-',
+      corps: 'Le verbe أَعُوذُ (je cherche refuge) se construit avec la préposition بِـ : aʿūdhu bi-rabbi, « je me réfugie auprès du Seigneur ».\n' +
+        'La préposition مِنْ (de, contre) introduit ce dont on se protège : min sharri, « contre le mal de ».\n' +
+        'Trois annexions se suivent dans an-Nās : rabbi n-nās, maliki n-nās, ilāhi n-nās.',
+    },
+    vocabulaire: [
+      { ar: 'أَعُوذُ', tr: 'aʿūdhu', fr: 'je cherche refuge', cle: 'audhu' },
+      { ar: 'شَرّ', tr: 'sharr', fr: 'mal', cle: 'sharr' },
+      { ar: 'الْفَلَق', tr: 'al-falaq', fr: 'l\'aube', cle: 'falaq' },
+      { ar: 'مَلِك', tr: 'malik', fr: 'roi', cle: 'malik' },
+      { ar: 'إِلَٰه', tr: 'ilāh', fr: 'dieu, divinité', cle: 'ilah' },
+      { ar: 'مِنْ', tr: 'min', fr: 'de, contre', cle: 'min' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie أَعُوذُ بِرَبِّ الْفَلَقِ ?',
+        options: [{ texte: 'Louange au Seigneur de l\'aube' }, { texte: 'Je cherche refuge auprès du Seigneur de l\'aube' }, { texte: 'Dis : Allah est l\'aube' }], bonne: 1, cles: ['audhu','falaq'],
+        explication: 'aʿūdhu bi- : « je me réfugie auprès de » ; rabbi l-falaq : « le Seigneur de l\'aube ».' },
+      { type: 'qcm', consigne: 'La préposition مِنْ introduit ici :',
+        options: [{ texte: 'le lieu d\'où l\'on vient' }, { texte: 'ce dont on se protège' }, { texte: 'le moment' }], bonne: 1, cles: ['min'],
+        explication: 'min sharri : « contre le mal de ».' },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'شَرّ', fr: 'mal', cle: 'sharr' }, { ar: 'مَلِك', fr: 'roi', cle: 'malik' }, { ar: 'إِلَٰه', fr: 'dieu', cle: 'ilah' }, { ar: 'الْفَلَق', fr: 'l\'aube', cle: 'falaq' } ] },
+      { type: 'glisser', consigne: 'Reconstituez « le Roi des hommes ».',
+        ordre: ['مَلِكِ', 'النَّاسِ'], traduction: 'le Roi des hommes', cles: ['malik','nas'] },
+      { type: 'racine', consigne: 'Quelle est la racine de أَعُوذُ (je cherche refuge) ?',
+        mot: 'أَعُوذُ', racine: ['ع','و','ذ'], distracteurs: ['ء','ر','ب'], cles: ['audhu'] },
+      { type: 'oral', consigne: 'Récitez le premier verset d\'an-Nās.',
+        phraseAr: 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ', translit: 'qul aʿūdhu bi-rabbi n-nās', cles: ['audhu','nas'] },
+    ],
+    memoriser: { ar: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ', tr: 'qul aʿūdhu bi-rabbi l-falaq', fr: 'Dis : je cherche refuge auprès du Seigneur de l\'aube. (al-Falaq, 1)' },
+    recap: [
+      'al-Falaq et an-Nās sont deux sourates de protection.',
+      'aʿūdhu bi- : « je cherche refuge auprès de ».',
+      'min sharri : « contre le mal de ».',
+      'an-Nās enchaîne trois annexions : rabbi, maliki, ilāhi n-nās.',
+    ],
+  },
+
 };
