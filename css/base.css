@@ -7,25 +7,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;500;700&family=Noto+Naskh+Arabic:wght@400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
 
 :root {
-  /* Palette claire */
-  --papier: #f5efe2;
-  --papier-profond: #ede4d0;
-  --encre: #2a2418;
-  --encre-douce: #5a4f3a;
-  --or: #a8853a;
+  /* Palette claire, inspiration soufie : vert naqshbandi et or de manuscrit.
+     Le vert est la couleur primaire (gestes, structure) ; l'or reste l'ornement. */
+  --papier: #f3efe4;
+  --papier-profond: #e8e1d0;
+  --encre: #1f2620;          /* encre légèrement verdie */
+  --encre-douce: #565f51;
+  --vert: #1c5440;           /* vert émeraude profond, primaire */
+  --vert-profond: #123a2c;
+  --vert-doux: #2f7355;      /* vert clair pour survols et liens */
+  --or: #a8853a;             /* or, ornement */
   --or-profond: #7a5f24;
-  --filet: #c9bda2;
-  --succes: #3a5f3e;
+  --filet: #c7bca0;
+  --succes: #2f7355;
   --erreur: #8a2c2c;
 
-  /* Couleurs dérivées (calculées une fois pour rester cohérentes en thème sombre) */
+  /* Couleurs dérivées */
   --fond: var(--papier);
-  --fond-carte: #fbf7ee;
+  --fond-carte: #fbf8f0;
   --fond-carte-profond: var(--papier-profond);
   --texte: var(--encre);
   --texte-doux: var(--encre-douce);
   --bordure: var(--filet);
-  --ombre-carte: 0 1px 3px rgba(42, 36, 24, 0.08), 0 6px 22px rgba(42, 36, 24, 0.05);
+  --accent: var(--vert);          /* couleur primaire d'action */
+  --accent-doux: var(--vert-doux);
+  --sur-accent: #f7f3e8;          /* texte posé sur l'accent */
+  --ombre-carte: 0 1px 3px rgba(18, 40, 30, 0.07), 0 8px 28px rgba(18, 40, 30, 0.06);
 
   /* Typographies
      Police arabe par défaut : Scheherazade New, dessinée pour la lecture des
@@ -54,8 +61,9 @@ body {
   min-height: 100vh;
   transition: background-color var(--transition), color var(--transition);
   background-image:
-    radial-gradient(circle at 20% 10%, rgba(168, 133, 58, 0.025), transparent 40%),
-    radial-gradient(circle at 80% 90%, rgba(168, 133, 58, 0.02), transparent 45%);
+    radial-gradient(circle at 18% 8%, rgba(28, 84, 64, 0.045), transparent 42%),
+    radial-gradient(circle at 82% 92%, rgba(168, 133, 58, 0.035), transparent 46%);
+  background-attachment: fixed;
 }
 
 /* Conteneur central */
@@ -79,8 +87,8 @@ h3 { font-size: 1.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 
 p { margin-bottom: 0.9rem; font-size: 1.12rem; }
 
-a { color: var(--or-profond); text-decoration: none; transition: color var(--transition); }
-a:hover { color: var(--or); }
+a { color: var(--vert); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--vert-doux); }
 
 /* Bascules de police arabe */
 html[data-police="amiri"] { --f-arabe: 'Amiri', 'Scheherazade New', serif; }
@@ -153,7 +161,7 @@ html[data-phonetique="visible"] .ph-bouton { display: none; }
 }
 
 /* Accessibilité */
-:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0;
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;

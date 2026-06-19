@@ -1,40 +1,51 @@
 /* =========================================================================
-   theme-sombre.css — palette inversée, l'or est conservé
+   theme-sombre.css — nuit soufie : vert profond et or
    Activé par l'attribut data-theme="sombre" sur <html>
    ========================================================================= */
 
 html[data-theme="sombre"] {
-  --papier: #1a1610;
-  --papier-profond: #221d15;
-  --encre: #e8dfc8;
-  --encre-douce: #b6ab8f;
-  --or: #c4a052;
-  --or-profond: #d4b876;
-  --filet: #3a3326;
+  --papier: #0e1a14;
+  --papier-profond: #14241b;
+  --encre: #e8e1cb;
+  --encre-douce: #a7b0a1;
+  --vert: #4f9e7a;          /* émeraude plus clair pour fond sombre */
+  --vert-profond: #6cbb95;
+  --vert-doux: #6cbb95;
+  --or: #c8a85a;
+  --or-profond: #d8be7e;
+  --filet: #2c3a30;
+  --succes: #5fae84;
+  --erreur: #c46a6a;
 
   --fond: var(--papier);
-  --fond-carte: #221d15;
-  --fond-carte-profond: #2a241a;
+  --fond-carte: #14241b;
+  --fond-carte-profond: #1b3025;
   --texte: var(--encre);
   --texte-doux: var(--encre-douce);
   --bordure: var(--filet);
-  --ombre-carte: 0 1px 3px rgba(0,0,0,0.3), 0 6px 22px rgba(0,0,0,0.2);
+  --accent: var(--vert);
+  --accent-doux: var(--vert-doux);
+  --sur-accent: #0e1a14;
+  --ombre-carte: 0 1px 3px rgba(0,0,0,0.35), 0 8px 28px rgba(0,0,0,0.25);
 }
 
 html[data-theme="sombre"] body {
   background-image:
-    radial-gradient(circle at 20% 10%, rgba(196, 160, 82, 0.04), transparent 40%),
-    radial-gradient(circle at 80% 90%, rgba(196, 160, 82, 0.03), transparent 45%);
+    radial-gradient(circle at 18% 8%, rgba(79, 158, 122, 0.07), transparent 42%),
+    radial-gradient(circle at 82% 92%, rgba(200, 168, 90, 0.05), transparent 46%);
 }
 
 html[data-theme="sombre"] h1,
 html[data-theme="sombre"] h2,
 html[data-theme="sombre"] h3 { color: var(--encre); }
 
-html[data-theme="sombre"] .btn { color: #1a1610; }
-html[data-theme="sombre"] .case-lecon.terminee { color: #1a1610; }
-html[data-theme="sombre"] .touche-ar:active { color: #1a1610; }
-html[data-theme="sombre"] .btn-micro:hover { color: #1a1610; }
+/* Sur fond sombre, le texte posé sur l'accent vert doit rester lisible */
+html[data-theme="sombre"] .btn { color: var(--sur-accent); }
+html[data-theme="sombre"] .case-lecon.terminee { color: var(--sur-accent); }
+html[data-theme="sombre"] .touche-ar:active { color: var(--sur-accent); }
+html[data-theme="sombre"] .btn-micro:hover { color: var(--sur-accent); }
+html[data-theme="sombre"] .badge-type { color: var(--sur-accent); }
 html[data-theme="sombre"] .a-memoriser .ar,
 html[data-theme="sombre"] .ligne-decouverte .ar,
+html[data-theme="sombre"] .lecture-ar,
 html[data-theme="sombre"] .tuile-lettre .gros { color: var(--encre); }
