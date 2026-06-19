@@ -28,7 +28,11 @@
 
     <div class="actions-accueil">
       <a class="btn" id="reprendre" href="#">Reprendre où j'en étais</a>
+      <a class="btn btn-secondaire" id="lecture" href="lecture.html">Ma lecture du jour</a>
+    </div>
+    <div class="actions-accueil">
       <a class="btn btn-secondaire" id="reviser" href="revision.html">Faire ma révision du jour</a>
+      <a class="btn btn-secondaire" href="vocabulaire.html">Vocabulaire fréquent</a>
     </div>
 
     <hr class="filet">
@@ -62,6 +66,7 @@
   <script src="js/app.js"></script>
   <script src="donnees/versets.js"></script>
   <script src="donnees/lecons.js"></script>
+  <script src="donnees/frequent.js"></script>
   <script src="donnees/vocabulaire.js"></script>
   <script>
     App.init('accueil');
@@ -82,10 +87,14 @@
     document.getElementById('reprendre').textContent =
       terminees === 0 ? 'Commencer la leçon I' : 'Reprendre la leçon ' + App.romain(courante);
 
-    // Révision : indique le nombre de mots dus
-    const dus = Repetition.nbADue(Stockage.etat.revisions);
+    // Révision : indique le nombre d'éléments dus (mots + phrases)
+    const dus = Repetition.nbADue(Stockage.etat.revisions) + Stockage.phrasesADue().length;
     if (dus > 0) document.getElementById('reviser').textContent =
       'Faire ma révision du jour (' + dus + ')';
+
+    // Lecture du jour : indique l'étape atteinte
+    const etapeLecture = Stockage.lecture().etape || 0;
+    document.getElementById('lecture').href = 'lecture.html?i=' + Math.min(etapeLecture, 12);
 
     // Construction des cycles et de la grille
     const titresCycles = [

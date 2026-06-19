@@ -356,7 +356,11 @@ const Exercices = (function () {
     phrase.appendChild(document.createTextNode(exo.phraseAr));
     phrase.appendChild(boutonAudio(exo.phraseAr, idLecon));
     zone.appendChild(phrase);
-    if (exo.translit) zone.appendChild(el('p', 'translit centre', exo.translit));
+    if (exo.translit) {
+      const ph = el('p', 'centre');
+      ph.innerHTML = (typeof App !== 'undefined') ? App.phon(exo.translit) : '<span class="translit">' + exo.translit + '</span>';
+      zone.appendChild(ph);
+    }
 
     if (!Parole.disponibleReconnaissance()) {
       const info = el('p', 'muet petit centre',
@@ -513,8 +517,43 @@ const Exercices = (function () {
     const retour = ajouterRetour(carte);
   }
 
+  /* ====================================================================
+     9. Phonétique : lire le mot arabe, choisir la bonne transcription
+     { type:'phonetique', consigne, motAr, options:[translit...], bonne, cles? }
+     L'arabe est mis en avant ; les options sont des transcriptions.
+     ==================================================================== */
+  function phonetique(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    const e = el('div', 'enonce-ar');
+    e.appendChild(document.createTextNode(exo.motAr));
+    e.appendChild(boutonAudio(exo.motAr, idLecon));
+    carte.appendChild(e);
+    const liste = el('div', 'options-qcm');
+    let repondu = false;
+    exo.options.forEach((opt, i) => {
+      const b = el('button', 'option');
+      b.type = 'button';
+      const s = el('span', 'translit'); s.textContent = opt; b.appendChild(s);
+      b.addEventListener('click', () => {
+        if (repondu) return;
+        repondu = true;
+        const reussi = i === exo.bonne;
+        Array.from(liste.children).forEach((c) => c.classList.add('fige'));
+        b.classList.add(reussi ? 'juste' : 'faux');
+        if (!reussi) liste.children[exo.bonne].classList.add('juste');
+        montrerRetour(retour, reussi,
+          'Bonne lecture. La transcription est exacte.',
+          'La bonne transcription est mise en évidence. Réécoutez le mot.');
+        surReponse(reussi, exo.cles);
+      });
+      liste.appendChild(b);
+    });
+    carte.appendChild(liste);
+    const retour = ajouterRetour(carte);
+  }
+
   /* ---- Aiguillage ---- */
-  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition };
+  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique };
 
   function rendre(exo, index, conteneur, surReponse, idLecon) {
     const fn = types[exo.type];

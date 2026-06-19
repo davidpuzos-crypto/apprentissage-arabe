@@ -14,12 +14,30 @@ Aucune installation, aucun serveur, aucune dépendance. Ouvrez simplement
 arabe-coranique/
 ├── index.html          tableau de bord d'accueil
 ├── lecon.html          template de leçon, paramétré par ?id=1 … ?id=30
-├── revision.html       salle de révision (répétition espacée)
+├── lecture.html        lecture du jour (programme progressif commenté)
+├── vocabulaire.html    vocabulaire coranique fréquent (dès le premier jour)
+├── revision.html       salle de révision (mots et phrases, répétition espacée)
 ├── progression.html    statistiques détaillées
 ├── css/                base, composants, thème sombre
 ├── js/                 moteur (stockage, répétition, exercices, voix, clavier)
-└── donnees/            contenu des 30 leçons, vocabulaire, versets
+└── donnees/            leçons, vocabulaire, versets, mots fréquents, lectures
 ```
+
+## Naviguer et personnaliser
+
+- **Navigation libre** : toutes les leçons sont accessibles, pour aller directement au niveau qui vous convient. La progression reste suivie (leçon acquise quand quatre exercices sur cinq sont réussis), sans jamais vous bloquer.
+- **Phonétique masquée par défaut** : on s'habitue à voir surtout l'arabe. Un bouton révèle la phonétique au besoin, et la barre du haut permet de l'afficher partout d'un seul geste.
+- **Police arabe au choix** : Scheherazade New (par défaut, très lisible pour débuter), Noto Naskh, ou Amiri (plus calligraphique). Bascule dans la barre du haut.
+
+## Vocabulaire fréquent, dès le départ
+
+La page « Vocabulaire » réunit les mots les plus courants du Coran, classés par thème (outils grammaticaux, noms divins, création, foi, personnes, verbes), dans l'esprit du corpus « 80% des mots du Coran ». Chaque carte se retourne, se prononce, et peut être programmée dans la salle de révision. Inutile d'attendre : reconnaître ces mots éclaire aussitôt de nombreux versets.
+
+## Lecture du jour
+
+Une fois la lecture acquise, le programme « Lecture du jour » propose chaque jour un peu plus : un mot, puis un verset court, un verset plus long, une petite sourate, une plus grande, jusqu'à al-Fātiḥa entière. Chaque étape donne l'arabe mis en avant, la phonétique révélable, la traduction, et un commentaire mêlant langue, étymologie et spiritualité.
+
+Les phrases clefs de chaque leçon peuvent être ajoutées à vos rappels (« Je veux retenir cette phrase ») : la salle de révision vous redemandera, plus tard, si vous les connaissez encore.
 
 Pour de meilleurs résultats, utilisez un navigateur à jour. La reconnaissance
 vocale (lecture à voix haute notée) repose sur l'API Web Speech, mieux prise en
@@ -59,6 +77,11 @@ jour les mots arrivés à échéance, sous forme de cartes éclair.
 6. Lecture à voix haute, notée par reconnaissance vocale
 7. Identification de la racine trilitère (à partir du cycle 3)
 8. Décomposition de mot, préfixe, racine, suffixe (à partir du cycle 4)
+9. Lecture phonétique : lire un mot arabe et choisir, dans une liste, sa transcription exacte
+
+## Note sur l'exactitude et l'adab
+
+Le texte coranique est donné en orthographe standard vocalisée et a été vérifié avec soin ; signalez-moi toute correction souhaitée. Les commentaires spirituels et étymologiques sont offerts avec humilité, comme une ouverture : ils ne remplacent ni les grands tafsīr ni l'enseignement vivant d'un maître. Vérifiez, approfondissez, et référez-vous à vos guides.
 
 ## L'architecture des trente leçons
 

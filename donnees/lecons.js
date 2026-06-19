@@ -46,6 +46,12 @@ const Lecons = {
       { texte: 'Trois de ces lettres ne se distinguent que par les points : ب porte un point dessous, ت deux points dessus, ث trois points dessus. La vigilance sur les points est essentielle.' },
       { texte: 'De même, ح et خ ont la même forme : seul le point au-dessus du خ les sépare. Le ح est un souffle de gorge, le خ un raclement plus rugueux.' },
     ],
+    approfondissement: [
+      { titre: 'Le secret de l\'alif et du point',
+        corps: 'Dans la tradition des lettres, ʿilm al-ḥurūf, l\'alif ا occupe une place à part. Droit, unique, sans courbe, il est souvent vu comme la trace de l\'Unicité : tout part de lui, et les autres lettres en dérivent par flexions et liaisons.\n' +
+          'Le point, la nuqṭa, est plus subtil encore. Les savants disent que toutes les lettres naissent du point, comme la parole naît d\'un souffle premier. Un seul point déplacé change la lettre, et donc le sens : voilà pourquoi la lecture demande une attention du cœur autant que de l\'œil.\n' +
+          'Sans verser dans la spéculation, retenez cette idée simple et féconde : en arabe, la forme porte du sens. Apprendre les lettres, c\'est déjà entrer dans une contemplation.' },
+    ],
     vocabulaire: [
       { ar: 'بَاب', tr: 'bāb', fr: 'porte', cle: 'bab' },
       { ar: 'تَاج', tr: 'tāj', fr: 'couronne', cle: 'taj' },
@@ -151,6 +157,12 @@ const Lecons = {
         { ar: 'ع', nom: 'ʿayn', son: 'son de gorge serrée' },
         { ar: 'غ', nom: 'ghayn', son: 'r grasseyé' },
       ]},
+    ],
+    approfondissement: [
+      { titre: 'ʿayn : la lettre, l\'œil et la source',
+        corps: 'Le mot ʿayn (عَيْن) qui nomme cette lettre signifie aussi, en arabe, l\'œil, la source d\'eau, et l\'essence même d\'une chose. Une même racine pour le regard, la source vive et le cœur des choses : la langue arabe tisse ainsi des liens de sens insoupçonnés.\n' +
+          'Ce son qui vient du fond de la gorge n\'existe pas en français ; il demande un effort, presque un dépouillement. Beaucoup de mots majeurs en sont issus : ʿilm (le savoir), ʿabd (le serviteur), ʿibāda (l\'adoration).\n' +
+          'Prendre le temps de bien former le ʿayn, c\'est honorer ces mots dès leur première lettre.' },
     ],
     vocabulaire: [
       { ar: 'صَلَاة', tr: 'ṣalāt', fr: 'prière', cle: 'salat' },
@@ -272,6 +284,12 @@ const Lecons = {
         'Le sukūn indique au contraire qu\'aucune voyelle ne suit : la consonne ferme la syllabe.\n' +
         'La shadda double la consonne : on prononce le son deux fois, en appuyant. Ces signes sont la clé de toute lecture juste.',
     },
+    approfondissement: [
+      { titre: 'La voyelle, souffle qui anime la lettre',
+        corps: 'Une consonne sans voyelle est comme un corps sans souffle : présente, mais muette. La voyelle, la ḥaraka, vient l\'animer, la mettre en mouvement. Le mot ḥaraka signifie d\'ailleurs « mouvement ».\n' +
+          'Cette image n\'est pas qu\'une jolie comparaison : elle dit quelque chose de la lecture du Coran, où le souffle, le rythme et la juste vocalisation font passer le texte de l\'écrit au vivant.\n' +
+          'En vocalisant un mot, vous ne faites pas qu\'ajouter des signes : vous lui rendez sa voix.' },
+    ],
     vocabulaire: [
       { ar: 'مُسْلِم', tr: 'muslim', fr: 'musulman', cle: 'muslim' },
       { ar: 'كَتَبَ', tr: 'kataba', fr: 'il a écrit', cle: 'kataba' },
@@ -472,6 +490,8 @@ const Lecons = {
         ordre: ['هُوَ', 'مُسْلِم'], traduction: 'il est musulman', cles: ['huwa','muslim'] },
       { type: 'saisie', consigne: 'Écrivez le pronom « nous ».',
         indice: 'naḥnu', reponse: 'نحن', cles: ['nahnu'] },
+      { type: 'phonetique', consigne: 'Lisez ce pronom et choisissez sa transcription exacte.',
+        motAr: 'هِيَ', options: ['huwa', 'hiya', 'hum'], bonne: 1, cles: ['hiya'] },
       { type: 'oral', consigne: 'Prononcez ce pronom si fréquent dans le Coran.',
         phraseAr: 'هُوَ', translit: 'huwa', cles: ['huwa'] },
     ],
@@ -672,6 +692,12 @@ const Lecons = {
         'Le sens d\'un verset se devine souvent en reconnaissant ses mots-clés, sans tout analyser.\n' +
         'C\'est ainsi qu\'on progresse : par reconnaissance, puis par compréhension, enfin par mémorisation.',
     },
+    approfondissement: [
+      { titre: 'Ikhlāṣ : la sincérité qui purifie',
+        corps: 'Le nom de la sourate, al-Ikhlāṣ, vient de la racine خ-ل-ص, qui évoque ce qui est pur, débarrassé de tout mélange. L\'ikhlāṣ, c\'est la sincérité du cœur qui n\'adore que pour Allah, sans rien Lui associer.\n' +
+          'La sourate ne contient pas le mot ikhlāṣ : elle porte ce nom parce qu\'elle purifie la conception qu\'on se fait d\'Allah, en écartant tout associé, tout semblable, toute filiation.\n' +
+          'La réciter en conscience, c\'est polir le miroir du cœur. Dans la voie spirituelle, cette purification du regard intérieur, le tawḥīd vécu, est le commencement et la fin du chemin.' },
+    ],
     vocabulaire: [
       { ar: 'الصَّمَد', tr: 'aṣ-ṣamad', fr: 'le Soutien, l\'Absolu', cle: 'samad' },
       { ar: 'لَمْ', tr: 'lam', fr: 'ne... pas (passé)', cle: 'lam' },
@@ -921,6 +947,8 @@ const Lecons = {
         paires: [ { ar: 'رَسُول', fr: 'messager', cle: 'rasul' }, { ar: 'دِين', fr: 'religion', cle: 'din' }, { ar: 'كَلِمَة', fr: 'parole', cle: 'kalima' }, { ar: 'يَوْم', fr: 'jour', cle: 'yawm' } ] },
       { type: 'trous', consigne: 'Complétez « le Jour de la rétribution ».',
         segments: [ 'يَوْمُ', { options: ['الدِّينِ', 'دِينٌ'], bonne: 0 } ], traduction: 'le Jour de la rétribution', cles: ['yawm','din'] },
+      { type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription exacte.',
+        motAr: 'رَسُول', options: ['rasūl', 'rusul', 'rasīl'], bonne: 0, cles: ['rasul'] },
       { type: 'oral', consigne: 'Lisez cette annexion célèbre.',
         phraseAr: 'رَبِّ الْعَالَمِينَ', translit: 'rabbi l-ʿālamīn', cles: ['rabb','alamin'] },
     ],
@@ -1264,7 +1292,10 @@ const Lecons = {
       { type: 'oral', consigne: 'Récitez cette attestation fondamentale.',
         phraseAr: 'لَا إِلَٰهَ إِلَّا اللَّهُ', translit: 'lā ilāha illā llāh', cles: ['la','illa'] },
     ],
-    memoriser: { ar: 'لَا إِلَٰهَ إِلَّا اللَّهُ', tr: 'lā ilāha illā llāh', fr: 'Il n\'est de divinité sinon Allah.' },
+    memoriser: { ar: 'لَا إِلَٰهَ إِلَّا اللَّهُ', tr: 'lā ilāha illā llāh', fr: 'Il n\'est de divinité sinon Allah.',
+      construction: 'Cette formule, la première moitié de l\'attestation de foi, repose sur la structure « négation puis exception ».\n' +
+        'لَا إِلَٰهَ : « aucune divinité » ; le لَا de négation absolue nie l\'existence de tout dieu, et إِلَٰهَ se met à la fatḥa.\n' +
+        'إِلَّا اللَّهُ : « sinon Allah » ; la particule d\'exception إِلَّا réintroduit le seul vrai Dieu. On nie d\'abord tout, pour n\'affirmer que Lui : c\'est le mouvement même du tawḥīd.' },
     recap: [
       'لَا : négation générale (nom ou présent).',
       'لَمْ : négation du passé, avec un verbe à l\'inaccompli.',
@@ -1414,6 +1445,12 @@ const Lecons = {
         'Ce schéma exprime une qualité stable, intense et permanente.\n' +
         'Reconnaître la racine sous le nom en dévoile aussitôt le sens : sous ʿalīm, la racine ع-ل-م du savoir.',
     },
+    approfondissement: [
+      { titre: 'Les beaux noms et le dhikr',
+        corps: 'Le Coran enseigne : « À Allah appartiennent les plus beaux noms, invoquez-Le par eux » (al-Aʿrāf, 180). La tradition en compte un grand nombre, souvent évoqué par le chiffre de quatre-vingt-dix-neuf.\n' +
+          'Chaque nom ouvre une porte vers une qualité divine : ar-Raḥmān vers la miséricorde, al-ʿAlīm vers le savoir, al-Ḥakīm vers la sagesse. Les connaître, c\'est apprendre à lire les bienfaits et les épreuves à la lumière de Celui qui les dispose.\n' +
+          'Dans la voie naqshbandi comme dans tout cheminement, l\'évocation des noms, le dhikr, polit le cœur et le rapproche de son Seigneur. Que cette leçon de vocabulaire soit aussi, si vous le souhaitez, une invitation à l\'invocation.' },
+    ],
     vocabulaire: [
       { ar: 'الرَّحْمَٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux', cle: 'rahman' },
       { ar: 'الرَّحِيم', tr: 'ar-raḥīm', fr: 'le Très Miséricordieux', cle: 'rahim' },
@@ -1435,6 +1472,8 @@ const Lecons = {
         explication: 'Tous deux dérivent de la racine de la miséricorde, ر-ح-م.' },
       { type: 'trous', consigne: 'Complétez le couple de noms qui clôt tant de versets.',
         segments: [ 'الرَّحْمَٰنِ', { options: ['الرَّحِيمِ', 'الْعَلِيمِ'], bonne: 0 } ], traduction: 'le Tout Miséricordieux, le Très Miséricordieux', cles: ['rahim'] },
+      { type: 'phonetique', consigne: 'Lisez ce nom divin et choisissez sa transcription.',
+        motAr: 'الْعَزِيز', options: ['al-ʿalīm', 'al-ʿazīz', 'al-ʿazīm'], bonne: 1, cles: ['aziz'] },
       { type: 'oral', consigne: 'Prononcez ce couple de noms.',
         phraseAr: 'الرَّحْمَٰنِ الرَّحِيمِ', translit: 'ar-raḥmāni r-raḥīm', cles: ['rahman','rahim'] },
     ],
@@ -1545,7 +1584,10 @@ const Lecons = {
       { type: 'oral', consigne: 'Récitez la basmala, lentement.',
         phraseAr: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', translit: 'bismi llāhi r-raḥmāni r-raḥīm', cles: ['bism'] },
     ],
-    memoriser: { ar: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', tr: 'al-ḥamdu li-llāhi rabbi l-ʿālamīn', fr: 'Louange à Allah, Seigneur des mondes. (al-Fātiḥa, 2)' },
+    memoriser: { ar: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', tr: 'al-ḥamdu li-llāhi rabbi l-ʿālamīn', fr: 'Louange à Allah, Seigneur des mondes. (al-Fātiḥa, 2)',
+      construction: 'Trois blocs s\'enchaînent. الْحَمْدُ : « la louange », nom défini par l\'article, sujet de la phrase.\n' +
+        'لِلَّهِ : la préposition لِـ (à, pour) collée au nom اللَّه ; littéralement « est à Allah », c\'est-à-dire Lui appartient en propre.\n' +
+        'رَبِّ الْعَالَمِينَ : une annexion (idāfa), « le Seigneur des mondes », qui qualifie Allah. Reconnaissez ici tout ce que vous avez appris : article, préposition collée, et annexion.' },
     recap: [
       'بِسْمِ = بِـ (au) + اسْم (nom) : « au nom de ».',
       'الْحَمْدُ لِلَّهِ : « la louange appartient à Allah ».',
