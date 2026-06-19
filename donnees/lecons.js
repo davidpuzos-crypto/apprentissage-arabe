@@ -1389,4 +1389,327 @@ const Lecons = {
     ],
   },
 
+  /* ===================== CYCLE V — PREMIÈRES LECTURES CORANIQUES ===================== */
+
+  25: {
+    cycle: 5,
+    titre: 'Les noms d\'Allah les plus fréquents',
+    intro: 'Le Coran nomme Allah par de nombreux attributs. En connaître les principaux éclaire d\'innombrables versets.\n' +
+      'Beaucoup sont bâtis sur une racine que vous savez maintenant repérer : ر-ح-م pour la miséricorde, ع-ل-م pour le savoir.\n' +
+      'Ces noms reviennent en fin de verset, comme une signature du sens.',
+    decouverte: [
+      { lignes: [
+        { ar: 'الرَّحْمَٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux', note: 'racine ر-ح-م' },
+        { ar: 'الرَّحِيم', tr: 'ar-raḥīm', fr: 'le Très Miséricordieux', note: 'même racine' },
+        { ar: 'الْعَلِيم', tr: 'al-ʿalīm', fr: 'l\'Omniscient', note: 'racine ع-ل-م' },
+        { ar: 'الْحَكِيم', tr: 'al-ḥakīm', fr: 'le Sage', note: 'racine ح-ك-م' },
+        { ar: 'الْغَفُور', tr: 'al-ghafūr', fr: 'le Pardonneur', note: 'racine غ-ف-ر' },
+        { ar: 'الْعَزِيز', tr: 'al-ʿazīz', fr: 'le Tout-Puissant', note: 'racine ع-ز-ز' },
+      ]},
+      { texte: 'ar-Raḥmān et ar-Raḥīm partagent la racine de la miséricorde. Le premier dit une miséricorde immense et générale, le second une miséricorde continue et agissante.' },
+    ],
+    grammaire: {
+      titre: 'Des noms sur le schéma faʿīl',
+      corps: 'Beaucoup de noms divins suivent le schéma faʿīl : ʿalīm (savant), ḥakīm (sage), raḥīm (miséricordieux), ʿazīz (puissant).\n' +
+        'Ce schéma exprime une qualité stable, intense et permanente.\n' +
+        'Reconnaître la racine sous le nom en dévoile aussitôt le sens : sous ʿalīm, la racine ع-ل-م du savoir.',
+    },
+    vocabulaire: [
+      { ar: 'الرَّحْمَٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux', cle: 'rahman' },
+      { ar: 'الرَّحِيم', tr: 'ar-raḥīm', fr: 'le Très Miséricordieux', cle: 'rahim' },
+      { ar: 'الْعَلِيم', tr: 'al-ʿalīm', fr: 'l\'Omniscient', cle: 'alim' },
+      { ar: 'الْغَفُور', tr: 'al-ghafūr', fr: 'le Pardonneur', cle: 'ghafur' },
+      { ar: 'الْعَزِيز', tr: 'al-ʿazīz', fr: 'le Tout-Puissant', cle: 'aziz' },
+      { ar: 'الْقَدِير', tr: 'al-qadīr', fr: 'le Tout-Capable', cle: 'qadir' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie الْعَلِيم ?',
+        options: [{ texte: 'le Sage' }, { texte: 'l\'Omniscient' }, { texte: 'le Pardonneur' }], bonne: 1, cles: ['alim'],
+        explication: 'al-ʿalīm, de la racine ع-ل-م, « l\'Omniscient ».' },
+      { type: 'racine', consigne: 'Quelle racine se cache sous الْغَفُور (le Pardonneur) ?',
+        mot: 'الْغَفُور', racine: ['غ','ف','ر'], distracteurs: ['ع','ل','م'], cles: ['ghafur'] },
+      { type: 'appariement', consigne: 'Reliez chaque nom divin à son sens.',
+        paires: [ { ar: 'الرَّحْمَٰن', fr: 'le Tout Miséricordieux', cle: 'rahman' }, { ar: 'الْعَزِيز', fr: 'le Tout-Puissant', cle: 'aziz' }, { ar: 'الْحَكِيم', fr: 'le Sage', cle: 'hakim' }, { ar: 'الْغَفُور', fr: 'le Pardonneur', cle: 'ghafur' } ] },
+      { type: 'qcm', consigne: 'ar-Raḥmān et ar-Raḥīm partagent :',
+        options: [{ texte: 'la même racine, ر-ح-م' }, { texte: 'le même nombre de lettres' }, { texte: 'rien' }], bonne: 0, cles: ['rahman','rahim'],
+        explication: 'Tous deux dérivent de la racine de la miséricorde, ر-ح-م.' },
+      { type: 'trous', consigne: 'Complétez le couple de noms qui clôt tant de versets.',
+        segments: [ 'الرَّحْمَٰنِ', { options: ['الرَّحِيمِ', 'الْعَلِيمِ'], bonne: 0 } ], traduction: 'le Tout Miséricordieux, le Très Miséricordieux', cles: ['rahim'] },
+      { type: 'oral', consigne: 'Prononcez ce couple de noms.',
+        phraseAr: 'الرَّحْمَٰنِ الرَّحِيمِ', translit: 'ar-raḥmāni r-raḥīm', cles: ['rahman','rahim'] },
+    ],
+    memoriser: { ar: 'الرَّحْمَٰنِ الرَّحِيمِ', tr: 'ar-raḥmāni r-raḥīm', fr: 'Le Tout Miséricordieux, le Très Miséricordieux.' },
+    recap: [
+      'De nombreux noms divins suivent le schéma faʿīl (qualité stable).',
+      'ar-Raḥmān et ar-Raḥīm dérivent de la racine de la miséricorde.',
+      'Reconnaître la racine révèle aussitôt le sens du nom.',
+      'Ces noms signent souvent la fin d\'un verset.',
+    ],
+  },
+
+  26: {
+    cycle: 5,
+    titre: 'Le vocabulaire de la prière et de la spiritualité',
+    intro: 'Avant d\'aborder la Fātiḥa, rassemblons les mots du culte et de la vie intérieure.\n' +
+      'Beaucoup vous sont déjà familiers : ṣalāt, dhikr, raḥma. Nous les complétons.\n' +
+      'Ce lexique forme le socle de la compréhension de la prière quotidienne.',
+    decouverte: [
+      { lignes: [
+        { ar: 'صَلَاة', tr: 'ṣalāt', fr: 'prière rituelle' },
+        { ar: 'دُعَاء', tr: 'duʿāʾ', fr: 'invocation' },
+        { ar: 'سُجُود', tr: 'sujūd', fr: 'prosternation' },
+        { ar: 'ذِكْر', tr: 'dhikr', fr: 'évocation, rappel d\'Allah' },
+        { ar: 'تَوْبَة', tr: 'tawba', fr: 'repentir, retour' },
+        { ar: 'هِدَايَة', tr: 'hidāya', fr: 'guidance' },
+      ]},
+      { texte: 'Le mot هِدَايَة (guidance) vient de la racine ه-د-ي, celle du verbe ihdinā, « guide-nous », que vous lirez dans la Fātiḥa.' },
+    ],
+    grammaire: {
+      titre: 'Du verbe au nom d\'action',
+      corps: 'À côté du verbe existe souvent un nom d\'action, qui désigne le fait même d\'agir.\n' +
+        'De la racine de la guidance ه-د-ي viennent à la fois ihdī (guide) et hidāya (la guidance).\n' +
+        'Repérer ce lien entre verbe et nom d\'action enrichit la lecture : un même sens se décline en plusieurs mots.',
+    },
+    vocabulaire: [
+      { ar: 'دُعَاء', tr: 'duʿāʾ', fr: 'invocation', cle: 'dua' },
+      { ar: 'سُجُود', tr: 'sujūd', fr: 'prosternation', cle: 'sujud' },
+      { ar: 'تَوْبَة', tr: 'tawba', fr: 'repentir', cle: 'tawba' },
+      { ar: 'هِدَايَة', tr: 'hidāya', fr: 'guidance', cle: 'hidaya' },
+      { ar: 'صِرَاط', tr: 'ṣirāṭ', fr: 'voie, chemin', cle: 'sirat' },
+      { ar: 'نِعْمَة', tr: 'niʿma', fr: 'bienfait, grâce', cle: 'nima' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie سُجُود ?',
+        options: [{ texte: 'invocation' }, { texte: 'prosternation' }, { texte: 'repentir' }], bonne: 1, cles: ['sujud'],
+        explication: 'sujūd : la prosternation, moment fort de la prière.' },
+      { type: 'qcm', consigne: 'Le mot هِدَايَة (guidance) partage sa racine avec :',
+        options: [{ texte: 'ihdinā, « guide-nous »' }, { texte: 'ṣalāt, « prière »' }, { texte: 'tawba, « repentir »' }], bonne: 0, cles: ['hidaya'],
+        explication: 'Tous deux viennent de la racine ه-د-ي de la guidance.' },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'دُعَاء', fr: 'invocation', cle: 'dua' }, { ar: 'صِرَاط', fr: 'chemin', cle: 'sirat' }, { ar: 'نِعْمَة', fr: 'bienfait', cle: 'nima' }, { ar: 'تَوْبَة', fr: 'repentir', cle: 'tawba' } ] },
+      { type: 'racine', consigne: 'Quelle est la racine de هِدَايَة (guidance) ?',
+        mot: 'هِدَايَة', racine: ['ه','د','ي'], distracteurs: ['ص','ر','ط'], cles: ['hidaya'] },
+      { type: 'saisie', consigne: 'Écrivez le mot « chemin, voie ».',
+        indice: 'ṣirāṭ, que vous lirez dans la Fātiḥa.', reponse: 'صراط', cles: ['sirat'] },
+      { type: 'oral', consigne: 'Prononcez ce mot central de la Fātiḥa.',
+        phraseAr: 'الصِّرَاط الْمُسْتَقِيم', translit: 'aṣ-ṣirāṭ al-mustaqīm', cles: ['sirat'] },
+    ],
+    memoriser: { ar: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ', tr: 'ihdinā ṣ-ṣirāṭa l-mustaqīm', fr: 'Guide-nous vers le droit chemin. (al-Fātiḥa, 6)' },
+    recap: [
+      'Lexique du culte : ṣalāt, duʿāʾ, sujūd, dhikr.',
+      'Lexique de la vie intérieure : tawba, hidāya, niʿma.',
+      'Un même sens se décline du verbe au nom d\'action (ihdī / hidāya).',
+      'ṣirāṭ, « la voie », prépare la lecture de la Fātiḥa.',
+    ],
+  },
+
+  27: {
+    cycle: 5,
+    titre: 'Sourate al-Fātiḥa, versets 1 à 3',
+    intro: 'Voici l\'Ouverture, la sourate qui inaugure le Coran et que l\'on récite à chaque prière.\n' +
+      'Nous l\'abordons en deux temps. Aujourd\'hui, les trois premiers versets : la formule d\'ouverture et la louange.\n' +
+      'Chaque mot vous est désormais accessible. Savourez ce moment.',
+    decouverte: [
+      { lignes: [
+        { ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', tr: 'bismi llāhi r-raḥmāni r-raḥīm', fr: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux.' },
+        { ar: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', tr: 'al-ḥamdu li-llāhi rabbi l-ʿālamīn', fr: 'Louange à Allah, Seigneur des mondes,' },
+        { ar: 'الرَّحْمَٰنِ الرَّحِيمِ', tr: 'ar-raḥmāni r-raḥīm', fr: 'le Tout Miséricordieux, le Très Miséricordieux,' },
+      ]},
+      { texte: 'بِسْمِ se décompose en بِـ (au, par) + اسْم (nom) : « au nom de ». الْحَمْدُ لِلَّهِ : « la louange appartient à Allah », avec lām de l\'appartenance.' },
+    ],
+    grammaire: {
+      titre: 'al-ḥamdu li-llāh : la louange à Allah',
+      corps: 'الْحَمْدُ est le sujet, défini par l\'article ; لِلَّهِ associe la préposition لِـ (à, pour) au nom Allāh.\n' +
+        'L\'ensemble dit, mot à mot, « la louange est à Allah », c\'est-à-dire lui appartient en propre.\n' +
+        'Puis vient une annexion déjà connue : rabbi l-ʿālamīn, « le Seigneur des mondes ».',
+    },
+    vocabulaire: [
+      { ar: 'بِسْم', tr: 'bism', fr: 'au nom de', cle: 'bism' },
+      { ar: 'اسْم', tr: 'ism', fr: 'nom', cle: 'ism' },
+      { ar: 'الْحَمْد', tr: 'al-ḥamd', fr: 'la louange', cle: 'hamd' },
+      { ar: 'لِلَّه', tr: 'li-llāh', fr: 'à Allah', cle: 'lillah' },
+      { ar: 'الْعَالَمِين', tr: 'al-ʿālamīn', fr: 'les mondes', cle: 'alamin' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Que signifie الْحَمْدُ لِلَّهِ ?',
+        options: [{ texte: 'au nom d\'Allah' }, { texte: 'louange à Allah' }, { texte: 'Allah est grand' }], bonne: 1, cles: ['hamd','lillah'],
+        explication: 'al-ḥamd (la louange) + li-llāh (à Allah).' },
+      { type: 'decomposition', consigne: 'Décomposez بِسْمِ : la préposition et le nom.',
+        segments: [ { ar: 'بِـ', role: 'préposition' }, { ar: 'اسْمِ', role: 'nom' } ], roles: ['préposition','nom'], cles: ['bism','ism'] },
+      { type: 'glisser', consigne: 'Reconstituez « Louange à Allah, Seigneur des mondes ».',
+        ordre: ['الْحَمْدُ', 'لِلَّهِ', 'رَبِّ', 'الْعَالَمِينَ'], traduction: 'Louange à Allah, Seigneur des mondes', cles: ['hamd','lillah','alamin'] },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'اسْم', fr: 'nom', cle: 'ism' }, { ar: 'الْحَمْد', fr: 'la louange', cle: 'hamd' }, { ar: 'الْعَالَمِين', fr: 'les mondes', cle: 'alamin' }, { ar: 'بِسْم', fr: 'au nom de', cle: 'bism' } ] },
+      { type: 'trous', consigne: 'Complétez la formule d\'ouverture.',
+        segments: [ 'بِسْمِ اللَّهِ', { options: ['الرَّحْمَٰنِ الرَّحِيمِ', 'رَبِّ الْعَالَمِينَ'], bonne: 0 } ], traduction: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux', cles: ['bism'] },
+      { type: 'oral', consigne: 'Récitez la basmala, lentement.',
+        phraseAr: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', translit: 'bismi llāhi r-raḥmāni r-raḥīm', cles: ['bism'] },
+    ],
+    memoriser: { ar: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', tr: 'al-ḥamdu li-llāhi rabbi l-ʿālamīn', fr: 'Louange à Allah, Seigneur des mondes. (al-Fātiḥa, 2)' },
+    recap: [
+      'بِسْمِ = بِـ (au) + اسْم (nom) : « au nom de ».',
+      'الْحَمْدُ لِلَّهِ : « la louange appartient à Allah ».',
+      'rabbi l-ʿālamīn : annexion, « le Seigneur des mondes ».',
+      'Vous lisez les trois premiers versets de la Fātiḥa.',
+    ],
+  },
+
+  28: {
+    cycle: 5,
+    titre: 'Sourate al-Fātiḥa, versets 4 à 7',
+    intro: 'Nous achevons l\'Ouverture. Ces versets passent de la louange à la demande : adoration, secours, guidance.\n' +
+      'Vous y retrouverez iyyāka (Toi seul), naʿbudu (nous adorons), ihdinā (guide-nous), alladhīna (ceux que).\n' +
+      'Au terme de cette leçon, vous saurez lire et comprendre la Fātiḥa en entier.',
+    decouverte: [
+      { lignes: [
+        { ar: 'مَالِكِ يَوْمِ الدِّينِ', tr: 'māliki yawmi d-dīn', fr: 'Maître du Jour de la rétribution.' },
+        { ar: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ', tr: 'iyyāka naʿbudu wa-iyyāka nastaʿīn', fr: 'C\'est Toi que nous adorons, et c\'est Toi dont nous implorons le secours.' },
+        { ar: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ', tr: 'ihdinā ṣ-ṣirāṭa l-mustaqīm', fr: 'Guide-nous vers le droit chemin,' },
+        { ar: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ', tr: 'ṣirāṭa lladhīna anʿamta ʿalayhim', fr: 'le chemin de ceux que Tu as comblés de grâces,' },
+      ]},
+      { texte: 'إِيَّاكَ place le complément en tête pour insister : « Toi seul, nous T\'adorons ». اهْدِنَا = ihdi (guide) + nā (nous).' },
+    ],
+    grammaire: {
+      titre: 'Mettre le complément en avant',
+      corps: 'En plaçant إِيَّاكَ (Toi) avant le verbe نَعْبُدُ (nous adorons), l\'arabe insiste : c\'est Toi, et nul autre.\n' +
+        'Cette mise en avant exprime l\'exclusivité de l\'adoration et de la demande de secours.\n' +
+        'Le verbe اهْدِنَا joint l\'impératif ihdi (guide) au pronom suffixe nā (nous) : « guide-nous ».',
+    },
+    vocabulaire: [
+      { ar: 'مَالِك', tr: 'mālik', fr: 'maître, possesseur', cle: 'malik2' },
+      { ar: 'إِيَّاكَ', tr: 'iyyāka', fr: 'Toi (seul)', cle: 'iyyaka' },
+      { ar: 'نَعْبُدُ', tr: 'naʿbudu', fr: 'nous adorons', cle: 'nabudu' },
+      { ar: 'اهْدِنَا', tr: 'ihdinā', fr: 'guide-nous', cle: 'ihdina' },
+      { ar: 'الْمُسْتَقِيم', tr: 'al-mustaqīm', fr: 'le droit, le rectiligne', cle: 'mustaqim' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Pourquoi إِيَّاكَ est-il placé avant le verbe ?',
+        options: [{ texte: 'par hasard' }, { texte: 'pour insister : Toi seul' }, { texte: 'pour nier' }], bonne: 1, cles: ['iyyaka'],
+        explication: 'La mise en tête marque l\'exclusivité : « C\'est Toi que nous adorons ».' },
+      { type: 'decomposition', consigne: 'Décomposez اهْدِنَا : le verbe et le pronom.',
+        segments: [ { ar: 'اهْدِ', role: 'verbe' }, { ar: 'نَا', role: 'suffixe' } ], roles: ['verbe','suffixe'], cles: ['ihdina'] },
+      { type: 'glisser', consigne: 'Reconstituez « C\'est Toi que nous adorons ».',
+        ordre: ['إِيَّاكَ', 'نَعْبُدُ'], traduction: 'C\'est Toi que nous adorons', cles: ['iyyaka','nabudu'] },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'مَالِك', fr: 'maître', cle: 'malik2' }, { ar: 'نَعْبُدُ', fr: 'nous adorons', cle: 'nabudu' }, { ar: 'اهْدِنَا', fr: 'guide-nous', cle: 'ihdina' }, { ar: 'الْمُسْتَقِيم', fr: 'le droit', cle: 'mustaqim' } ] },
+      { type: 'trous', consigne: 'Complétez « guide-nous vers le droit chemin ».',
+        segments: [ 'اهْدِنَا الصِّرَاطَ', { options: ['الْمُسْتَقِيمَ', 'الدِّينِ'], bonne: 0 } ], traduction: 'guide-nous vers le droit chemin', cles: ['mustaqim'] },
+      { type: 'oral', consigne: 'Récitez ce verset de demande.',
+        phraseAr: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ', translit: 'ihdinā ṣ-ṣirāṭa l-mustaqīm', cles: ['ihdina','mustaqim'] },
+    ],
+    memoriser: { ar: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ', tr: 'iyyāka naʿbudu wa-iyyāka nastaʿīn', fr: 'C\'est Toi que nous adorons, et c\'est Toi dont nous implorons le secours. (al-Fātiḥa, 5)' },
+    recap: [
+      'إِيَّاكَ en tête marque l\'exclusivité de l\'adoration.',
+      'اهْدِنَا = ihdi (guide) + nā (nous).',
+      'الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ : « ceux que Tu as comblés ».',
+      'Vous lisez et comprenez désormais la Fātiḥa en entier.',
+    ],
+  },
+
+  29: {
+    cycle: 5,
+    titre: 'Synthèse grammaticale et lecture de versets variés',
+    intro: 'Avant le bilan, rassemblons les acquis sur des versets nouveaux mais accessibles.\n' +
+      'Vous y reconnaîtrez phrase nominale, annexion, négation, relatifs, pronoms suffixes.\n' +
+      'L\'objectif n\'est pas de tout analyser, mais de saisir le sens général en s\'appuyant sur les mots connus.',
+    decouverte: [
+      { lignes: [
+        { ar: 'إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'inna llāha ʿalā kulli shayʾin qadīr', fr: 'Allah est, certes, capable de toute chose.', note: 'inna + ʿalā + qadīr' },
+        { ar: 'وَاللَّهُ غَفُورٌ رَحِيمٌ', tr: 'wa-llāhu ghafūrun raḥīm', fr: 'et Allah est Pardonneur, Miséricordieux.', note: 'phrase nominale, deux attributs' },
+        { ar: 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ', tr: 'alladhīna yuʾminūna bi-l-ghayb', fr: 'ceux qui croient à l\'invisible', note: 'relatif + inaccompli + bi-' },
+      ]},
+      { texte: 'Chacun de ces versets combine des structures déjà vues. Repérez d\'abord les mots connus, puis laissez le sens se former.' },
+    ],
+    grammaire: {
+      titre: 'Lire par reconnaissance',
+      corps: 'Face à un verset nouveau, ne traduisez pas mot à mot d\'emblée : repérez les piliers.\n' +
+        'Cherchez le nom d\'Allah, le verbe, la particule (inna, wa), la préposition, le relatif.\n' +
+        'Le sens général émerge de ces points d\'appui, puis se précise. C\'est ainsi qu\'on lit, avec aisance et sans crispation.',
+    },
+    vocabulaire: [
+      { ar: 'كُلّ', tr: 'kull', fr: 'tout, chaque', cle: 'kull' },
+      { ar: 'شَيْء', tr: 'shayʾ', fr: 'chose', cle: 'shay' },
+      { ar: 'قَدِير', tr: 'qadīr', fr: 'capable, puissant', cle: 'qadir' },
+      { ar: 'الْغَيْب', tr: 'al-ghayb', fr: 'l\'invisible, le mystère', cle: 'ghayb' },
+      { ar: 'يُؤْمِنُونَ', tr: 'yuʾminūn', fr: 'ils croient', cle: 'yuminun' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Dans عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ, que signifie كُلّ شَيْء ?',
+        options: [{ texte: 'aucune chose' }, { texte: 'toute chose' }, { texte: 'quelque chose' }], bonne: 1, cles: ['kull','shay'],
+        explication: 'kull (tout) + shayʾ (chose) : « toute chose ».' },
+      { type: 'qcm', consigne: 'وَاللَّهُ غَفُورٌ رَحِيمٌ est :',
+        options: [{ texte: 'une phrase nominale à deux attributs' }, { texte: 'une annexion' }, { texte: 'une négation' }], bonne: 0,
+        explication: 'Sujet (Allāh) + deux attributs indéfinis : phrase nominale.' },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'كُلّ', fr: 'tout', cle: 'kull' }, { ar: 'شَيْء', fr: 'chose', cle: 'shay' }, { ar: 'الْغَيْب', fr: 'l\'invisible', cle: 'ghayb' }, { ar: 'قَدِير', fr: 'capable', cle: 'qadir' } ] },
+      { type: 'glisser', consigne: 'Reconstituez « Allah est Pardonneur, Miséricordieux ».',
+        ordre: ['اللَّهُ', 'غَفُورٌ', 'رَحِيمٌ'], traduction: 'Allah est Pardonneur, Miséricordieux', cles: ['ghafur','rahim'] },
+      { type: 'racine', consigne: 'Quelle racine porte يُؤْمِنُونَ (ils croient) ?',
+        mot: 'يُؤْمِنُونَ', racine: ['ء','م','ن'], distracteurs: ['ع','ل','م'], cles: ['yuminun'] },
+      { type: 'oral', consigne: 'Lisez ce verset de synthèse.',
+        phraseAr: 'إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', translit: 'inna llāha ʿalā kulli shayʾin qadīr', cles: ['kull','qadir'] },
+    ],
+    memoriser: { ar: 'إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'inna llāha ʿalā kulli shayʾin qadīr', fr: 'Allah est, certes, capable de toute chose.' },
+    recap: [
+      'Les structures se combinent dans un même verset.',
+      'On lit en repérant d\'abord les piliers : nom divin, verbe, particule.',
+      'Le sens général précède l\'analyse détaillée.',
+      'كُلّ شَيْء : « toute chose », expression fréquente.',
+    ],
+  },
+
+  30: {
+    cycle: 5,
+    titre: 'Bilan, auto-évaluation et chemins pour continuer',
+    intro: 'Vous voici au terme du parcours. De l\'alphabet inconnu à la lecture comprise de plusieurs sourates, le chemin parcouru est réel.\n' +
+      'Cette dernière leçon fait le point, vous invite à vous évaluer avec honnêteté et bienveillance, et trace des voies pour aller plus loin.\n' +
+      'Quoi que vous décidiez ensuite, vous possédez désormais une base solide et autonome.',
+    decouverte: [
+      { texte: 'Ce que vous savez faire maintenant : lire tout mot arabe vocalisé, reconnaître une racine, comprendre une phrase nominale, une annexion, une négation, un relatif, et déchiffrer six sourates courtes.' },
+      { texte: 'Pour continuer, trois voies se complètent.' },
+      { lignes: [
+        { ar: 'الْقُرْآن', tr: 'al-qurʾān', fr: 'le Coran', note: 'lire chaque jour un court passage vocalisé' },
+        { ar: 'الْمُرَاجَعَة', tr: 'al-murājaʿa', fr: 'la révision', note: 'entretenir le vocabulaire par la salle de révision' },
+        { ar: 'الصَّبْر', tr: 'aṣ-ṣabr', fr: 'la patience', note: 'avancer à petites doses, sans relâche' },
+      ]},
+      { texte: 'Reprenez les sourates apprises dans un Coran annoté, écoutez de bons récitateurs, et abordez peu à peu des sourates un peu plus longues. La méthode reste la même : douceur, régularité, imprégnation.' },
+    ],
+    grammaire: {
+      titre: 'Apprendre, c\'est entretenir',
+      corps: 'Une langue ne se garde qu\'en la pratiquant. Quelques minutes par jour valent mieux qu\'un long effort épisodique.\n' +
+        'Servez-vous de la salle de révision : elle ramène les mots au moment précis où l\'on risque de les oublier.\n' +
+        'Et relisez les sourates connues : chaque relecture les enracine davantage et prépare les suivantes.',
+    },
+    vocabulaire: [
+      { ar: 'الْقُرْآن', tr: 'al-qurʾān', fr: 'le Coran, la récitation', cle: 'quran' },
+      { ar: 'مُرَاجَعَة', tr: 'murājaʿa', fr: 'révision', cle: 'murajaa' },
+      { ar: 'قِرَاءَة', tr: 'qirāʾa', fr: 'lecture, récitation', cle: 'qiraa' },
+      { ar: 'فَهْم', tr: 'fahm', fr: 'compréhension', cle: 'fahm' },
+      { ar: 'بَرَكَة', tr: 'baraka', fr: 'bénédiction', cle: 'baraka' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'D\'où vient le mot الْقُرْآن (le Coran) ?',
+        options: [{ texte: 'de la racine de la lecture, ق-ر-أ' }, { texte: 'de la racine du savoir' }, { texte: 'de la racine de la prière' }], bonne: 0, cles: ['quran'],
+        explication: 'al-qurʾān, « la récitation », vient de la racine ق-ر-أ, lire et réciter.' },
+      { type: 'appariement', consigne: 'Révision : reliez chaque sourate à son thème.',
+        paires: [ { ar: 'الْإِخْلَاص', fr: 'l\'unicité d\'Allah' }, { ar: 'الْفَلَق', fr: 'le refuge contre le mal' }, { ar: 'الْعَصْر', fr: 'le temps et le salut' }, { ar: 'الْفَاتِحَة', fr: 'l\'ouverture et la demande' } ] },
+      { type: 'qcm', consigne: 'Quelle attitude la méthode recommande-t-elle pour continuer ?',
+        options: [{ texte: 'de longues sessions espacées' }, { texte: 'de petites doses régulières' }, { texte: 'tout réapprendre depuis le début' }], bonne: 1,
+        explication: 'La régularité douce ancre mieux qu\'un effort intense et rare.' },
+      { type: 'glisser', consigne: 'Reconstituez la formule d\'ouverture du Coran.',
+        ordre: ['بِسْمِ', 'اللَّهِ', 'الرَّحْمَٰنِ', 'الرَّحِيمِ'], traduction: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux', cles: ['bism','rahman','rahim'] },
+      { type: 'racine', consigne: 'Pour finir, retrouvez la racine de الْقُرْآن.',
+        mot: 'الْقُرْآن', racine: ['ق','ر','أ'], distracteurs: ['ك','ت','ب'], cles: ['quran'] },
+      { type: 'oral', consigne: 'Récitez une dernière fois la sourate al-Ikhlāṣ en entier.',
+        phraseAr: 'قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ', translit: 'qul huwa llāhu aḥad, allāhu ṣ-ṣamad', cles: ['quran'] },
+    ],
+    memoriser: { ar: 'وَتَوَاصَوْا بِالصَّبْرِ', tr: 'wa-tawāṣaw bi-ṣ-ṣabr', fr: 'et se sont enjoint mutuellement la patience. (al-ʿAṣr, 3)' },
+    recap: [
+      'Vous lisez tout mot vocalisé et comprenez six sourates courtes.',
+      'Entretenez vos acquis par la révision espacée, quelques minutes par jour.',
+      'Relisez les sourates connues : chaque relecture les enracine.',
+      'Avancez ensuite vers des sourates plus longues, avec la même douceur.',
+    ],
+  },
+
 };
