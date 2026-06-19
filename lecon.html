@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="clair">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leçon · Arabe coranique</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/composants.css">
+  <link rel="stylesheet" href="css/theme-sombre.css">
+</head>
+<body>
+  <div id="barre"></div>
+  <main class="contenu" id="lecon"></main>
+
+  <script src="js/repetition.js"></script>
+  <script src="js/stockage.js"></script>
+  <script src="js/speech.js"></script>
+  <script src="js/clavier-arabe.js"></script>
+  <script src="js/exercices.js"></script>
+  <script src="js/app.js"></script>
+  <script src="donnees/versets.js"></script>
+  <script src="donnees/lecons.js"></script>
+  <script src="donnees/vocabulaire.js"></script>
+  <script>
+    App.init(null);
+    const id = parseInt(App.param('id'), 10) || 1;
+    const racine = document.getElementById('lecon');
+
+    if (!Stockage.leconAccessible(id)) {
+      racine.innerHTML = `<div class="centre" style="margin-top:3rem;">
+        <h2>Cette leçon n'est pas encore ouverte</h2>
+        <p class="muet">Terminez la leçon précédente pour y accéder.</p>
+        <a class="btn" href="lecon.html?id=${id-1}">Aller à la leçon ${App.romain(id-1)}</a></div>`;
+      throw new Error('Leçon verrouillée');
+    }
+
+    const lecon = Lecons[id];
+    if (!lecon) {
+      racine.innerHTML = `<div class="centre" style="margin-top:3rem;">
+        <h2>Leçon introuvable</h2><a class="btn" href="index.html">Retour à l'accueil</a></div>`;
+      throw new Error('Leçon absente');
+    }
+
+    document.title = 'Leçon ' + id + ' · ' + lecon.titre;
+
+    /* ---- Utilitaires de rendu ---- */
+    function elt(html) { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstElementChild; }
+    function audioBtn(texte) {
+      const b = document.createElement('button');
+      b.className = 'btn-audio'; b.type = 'button'; b.innerHTML = '&#9834;';
+      b.setAttribute('aria-label', 'Écouter');
+      b.onclick = (e) => { e.stopPropagation(); Parole.prononcer(texte, { rate: Parole.rateSelonLecon(id) }); };
+      return b;
+    }
+    function section(titre) {
+      const s = document.createElement('section');
+      s.className = 'section-lecon';
+      if (titre) s.appendChild(elt(`<div class="titre-section">${titre}</div>`));
+      return s;
+    }
+
+    /* ---- En-tête ---- */
+    const entete = section(null);
+    entete.innerHTML = `
+      <p class="cycle-romain">Cycle ${App.romain(lecon.cycle)} &middot; Leçon ${App.romain(id)}</p>
+      <h1>${lecon.titre}</h1>`;
+    racine.appendChild(entete);
+
+    /* ---- Introduction ---- */
+    const intro = section('Avant de commencer');
+    const pIntro = document.createElement('div');
+    pIntro.className = 'cartouche';
+    pIntro.innerHTML = lecon.intro.split('\n').map((t) => `<p>${t}</p>`).join('');
+    intro.appendChild(pIntro);
+    racine.appendChild(intro);
+
+    /* ---- Découverte ---- */
+    if (lecon.decouverte && lecon.decouverte.length) {
+      const dec = section('Découverte');
+      lecon.decouverte.forEach((bloc) => {
+        if (bloc.texte) dec.appendChild(elt(`<p>${bloc.texte}</p>`));
+        if (bloc.lettres) {
+          const v = document.createElement('div'); v.className = 'vitrine-lettres';
+          bloc.lettres.forEach((l) => {
+            const tuile = document.createElement('div'); tuile.className = 'tuile-lettre';
+            tuile.innerHTML = `<div class="gros">${l.ar}</div><div class="nom">${l.nom}</div><div class="son">${l.son}</div>`;
+            tuile.onclick = () => Parole.prononcer(l.ar, { rate: Parole.rateSelonLecon(id) });
+            v.appendChild(tuile);
+          });
+          dec.appendChild(v);
+        }
+        if (bloc.lignes) {
+          const tab = document.createElement('div');
+          bloc.lignes.forEach((lg) => {
+            const ligne = document.createElement('div'); ligne.className = 'ligne-decouverte';
+            const ar = document.createElement('div'); ar.className = 'ar';
+            ar.textContent = lg.ar; ar.appendChild(audioBtn(lg.ar));
+            ar.style.cursor = 'pointer';
+            ar.onclick = () => Parole.prononcer(lg.ar, { rate: Parole.rateSelonLecon(id) });
+            const infos = document.createElement('div'); infos.className = 'infos';
+            infos.innerHTML = `<span class="translit">${lg.tr || ''}</span><span class="fr">${lg.fr || ''}</span>` +
+              (lg.note ? `<span class="note">${lg.note}</span>` : '');
+            ligne.appendChild(ar); ligne.appendChild(infos);
+            tab.appendChild(ligne);
+          });
+          dec.appendChild(tab);
+        }
+      });
+      racine.appendChild(dec);
+    }
+
+    /* ---- Note grammaticale ---- */
+    if (lecon.grammaire) {
+      const g = section('Note grammaticale');
+      const note = document.createElement('div'); note.className = 'note-grammaire';
+      note.innerHTML = `<h3>${lecon.grammaire.titre}</h3>` +
+        lecon.grammaire.corps.split('\n').map((t) => `<p>${t}</p>`).join('');
+      g.appendChild(note);
+      racine.appendChild(g);
+    }
+
+    /* ---- Vocabulaire ---- */
+    if (lecon.vocabulaire && lecon.vocabulaire.length) {
+      const v = section('Vocabulaire de la leçon');
+      const tab = document.createElement('table'); tab.className = 'tableau-voc';
+      lecon.vocabulaire.forEach((mot) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="col-ar">${mot.ar}</td>
+          <td class="col-tr">${mot.tr}</td>
+          <td class="col-fr">${mot.fr}</td>
+          <td class="ic-audio">&#9834;</td>`;
+        tr.onclick = () => Parole.prononcer(mot.ar, { rate: Parole.rateSelonLecon(id) });
+        tab.appendChild(tr);
+      });
+      v.appendChild(tab);
+      racine.appendChild(v);
+    }
+
+    /* ---- Exercices ---- */
+    const sEx = section('Exercices');
+    const intro2 = document.createElement('p');
+    intro2.className = 'muet petit';
+    intro2.textContent = 'Complétez au moins quatre exercices sur cinq pour ouvrir la leçon suivante.';
+    sEx.appendChild(intro2);
+
+    const barreP = elt('<div class="barre-progres-exo"><span style="width:0"></span></div>');
+    sEx.appendChild(barreP);
+    const conteneurEx = document.createElement('div');
+    sEx.appendChild(conteneurEx);
+    racine.appendChild(sEx);
+
+    const total = lecon.exercices.length;
+    let repondus = 0, reussis = 0;
+    const motsRates = new Set();
+
+    function surReponse(reussi, cles) {
+      repondus++;
+      if (reussi) reussis++;
+      // Suivi du vocabulaire pour la répétition espacée
+      (cles || []).forEach((cle) => {
+        Stockage.enregistrerMot(cle, reussi);
+        if (!reussi) motsRates.add(cle);
+      });
+      barreP.firstElementChild.style.width = Math.round((repondus / total) * 100) + '%';
+      majPied();
+    }
+
+    lecon.exercices.forEach((exo, i) => {
+      Exercices.rendre(exo, i, conteneurEx, surReponse, id);
+    });
+
+    /* ---- Phrase à mémoriser ---- */
+    if (lecon.memoriser) {
+      const m = section('À mémoriser');
+      const bloc = document.createElement('div'); bloc.className = 'a-memoriser';
+      bloc.innerHTML = `<div class="ornement">۞</div>
+        <div class="ar">${lecon.memoriser.ar}</div>
+        <div class="tr">${lecon.memoriser.tr}</div>
+        <div class="fr">${lecon.memoriser.fr}</div>`;
+      bloc.style.cursor = 'pointer';
+      bloc.onclick = () => Parole.prononcer(lecon.memoriser.ar, { rate: Parole.rateSelonLecon(id) });
+      const b = audioBtn(lecon.memoriser.ar);
+      b.style.marginTop = '0.6rem';
+      bloc.appendChild(b);
+      m.appendChild(bloc);
+      racine.appendChild(m);
+    }
+
+    /* ---- Récapitulatif ---- */
+    if (lecon.recap && lecon.recap.length) {
+      const r = section('Récapitulatif');
+      const ul = document.createElement('ul'); ul.className = 'recap';
+      lecon.recap.forEach((pt) => { const li = document.createElement('li'); li.innerHTML = pt; ul.appendChild(li); });
+      r.appendChild(ul);
+      racine.appendChild(r);
+    }
+
+    /* ---- Pied : navigation ---- */
+    const pied = document.createElement('div'); pied.className = 'pied-lecon';
+    pied.innerHTML = `
+      <a class="btn-secondaire btn" href="${id > 1 ? 'lecon.html?id=' + (id-1) : 'index.html'}">${id > 1 ? 'Leçon précédente' : 'Accueil'}</a>
+      <div id="zone-suivant"></div>`;
+    racine.appendChild(pied);
+
+    function majPied() {
+      const zone = document.getElementById('zone-suivant');
+      const seuil = Math.ceil(total * 0.8);
+      const ok = reussis >= seuil;
+      if (ok) {
+        Stockage.enregistrerScoreLecon(id, reussis, total);
+        if (id < 30) {
+          zone.innerHTML = `<a class="btn" href="lecon.html?id=${id+1}">Passer à la leçon ${App.romain(id+1)}</a>`;
+        } else {
+          zone.innerHTML = `<a class="btn" href="progression.html">Voir mon bilan</a>`;
+        }
+      } else {
+        const reste = seuil - reussis;
+        zone.innerHTML = `<div class="message-deblocage">Encore ${reste} exercice${reste>1?'s':''} réussi${reste>1?'s':''} pour ouvrir la suite (${reussis}/${seuil}).</div>`;
+      }
+    }
+    majPied();
+  </script>
+</body>
+</html>

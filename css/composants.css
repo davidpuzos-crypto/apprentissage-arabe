@@ -1,0 +1,355 @@
+/* =========================================================================
+   composants.css — boutons, cartes, exercices, navigation, clavier
+   ========================================================================= */
+
+/* ---- Navigation supérieure ---- */
+.barre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--bordure);
+}
+.barre .marque {
+  font-family: var(--f-titre);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--encre);
+  letter-spacing: 0.02em;
+}
+.barre nav { display: flex; gap: 1.2rem; align-items: center; }
+.barre nav a { font-size: 0.92rem; color: var(--texte-doux); }
+.barre nav a:hover, .barre nav a.actif { color: var(--or-profond); }
+
+/* ---- Boutons ---- */
+.btn {
+  font-family: var(--f-ui);
+  font-size: 0.98rem;
+  font-weight: 500;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--rayon);
+  border: 1px solid var(--or);
+  background: var(--or);
+  color: #fbf7ee;
+  cursor: pointer;
+  transition: all var(--transition);
+  letter-spacing: 0.01em;
+}
+.btn:hover:not(:disabled) { background: var(--or-profond); border-color: var(--or-profond); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-secondaire {
+  background: transparent;
+  color: var(--or-profond);
+  border: 1px solid var(--bordure);
+}
+.btn-secondaire:hover:not(:disabled) { border-color: var(--or); color: var(--or); background: var(--fond-carte); }
+
+.btn-fantome {
+  background: transparent; border: none; color: var(--texte-doux);
+  padding: 0.5rem 0.8rem;
+}
+.btn-fantome:hover { color: var(--or-profond); }
+
+.btn-petit { padding: 0.45rem 1rem; font-size: 0.88rem; }
+.btn-bloc { display: block; width: 100%; }
+
+/* ---- Bascule thème ---- */
+.bascule-theme {
+  background: none; border: 1px solid var(--bordure); border-radius: 50%;
+  width: 36px; height: 36px; cursor: pointer; color: var(--texte-doux);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1rem; transition: all var(--transition);
+}
+.bascule-theme:hover { border-color: var(--or); color: var(--or-profond); }
+
+/* ---- Cartes ---- */
+.carte {
+  background: var(--fond-carte);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  padding: 1.5rem;
+  box-shadow: var(--ombre-carte);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* ---- Tableau de bord : grille des 30 leçons ---- */
+.grille-lecons {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.6rem;
+  margin: 1.5rem 0;
+}
+.case-lecon {
+  aspect-ratio: 1;
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-ui); font-size: 0.95rem; font-weight: 500;
+  color: var(--texte-doux);
+  background: var(--fond-carte);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-decoration: none;
+  position: relative;
+}
+.case-lecon:hover { border-color: var(--or); color: var(--or-profond); transform: translateY(-2px); }
+.case-lecon.terminee {
+  background: var(--or); color: #fbf7ee; border-color: var(--or);
+}
+.case-lecon.terminee::after {
+  content: '✓'; position: absolute; top: 2px; right: 5px; font-size: 0.6rem; opacity: 0.9;
+}
+.case-lecon.en-cours { border-color: var(--or); border-width: 2px; color: var(--or-profond); font-weight: 600; }
+.case-lecon.verrouillee { opacity: 0.45; cursor: not-allowed; }
+.case-lecon.verrouillee:hover { transform: none; border-color: var(--bordure); color: var(--texte-doux); }
+
+@media (max-width: 520px) {
+  .grille-lecons { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* ---- Statistiques d'accueil ---- */
+.stats-accueil {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0;
+}
+.stat { text-align: center; padding: 1rem 0.5rem; }
+.stat .valeur { font-family: var(--f-titre); font-size: 2.4rem; font-weight: 600; color: var(--or-profond); line-height: 1; }
+.stat .label { font-family: var(--f-ui); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texte-doux); margin-top: 0.4rem; }
+
+.actions-accueil { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+.actions-accueil .btn { flex: 1; min-width: 200px; text-align: center; }
+
+/* ---- Leçon : sections ---- */
+.section-lecon { margin: 2.2rem 0; }
+.section-lecon > .titre-section {
+  font-family: var(--f-ui); font-size: 0.8rem; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--or-profond); font-weight: 600;
+  margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.6rem;
+}
+.titre-section::before { content: ''; width: 18px; height: 1px; background: var(--or); display: inline-block; }
+
+/* Bloc découverte : ligne arabe / translit / français */
+.ligne-decouverte {
+  display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 1.2rem;
+  align-items: baseline; padding: 0.9rem 0; border-bottom: 1px solid var(--bordure);
+}
+.ligne-decouverte:last-child { border-bottom: none; }
+.ligne-decouverte .ar { font-family: var(--f-arabe); direction: rtl; font-size: 2.2rem; color: var(--encre); }
+.ligne-decouverte .infos { display: flex; flex-direction: column; gap: 0.15rem; }
+.ligne-decouverte .fr { font-size: 1.1rem; }
+.ligne-decouverte .note { font-size: 0.95rem; color: var(--texte-doux); }
+
+/* Lettres en vitrine */
+.vitrine-lettres { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
+.tuile-lettre {
+  min-width: 90px; padding: 1rem; text-align: center; cursor: pointer;
+  border: 1px solid var(--bordure); border-radius: var(--rayon); background: var(--fond-carte);
+  transition: all var(--transition);
+}
+.tuile-lettre:hover { border-color: var(--or); transform: translateY(-3px); }
+.tuile-lettre .gros { font-family: var(--f-arabe); font-size: 3rem; color: var(--encre); line-height: 1; }
+.tuile-lettre .nom { font-family: var(--f-ui); font-size: 0.85rem; color: var(--texte-doux); margin-top: 0.5rem; }
+.tuile-lettre .son { font-style: italic; color: var(--or-profond); font-size: 0.95rem; }
+
+/* Note grammaticale */
+.note-grammaire {
+  background: var(--fond-carte-profond);
+  border-left: 3px solid var(--or);
+  border-radius: 0 var(--rayon) var(--rayon) 0;
+  padding: 1.2rem 1.4rem;
+}
+.note-grammaire h3 { color: var(--or-profond); }
+
+/* Tableau de vocabulaire */
+.tableau-voc { width: 100%; border-collapse: collapse; }
+.tableau-voc tr { border-bottom: 1px solid var(--bordure); cursor: pointer; transition: background var(--transition); }
+.tableau-voc tr:hover { background: var(--fond-carte-profond); }
+.tableau-voc td { padding: 0.75rem 0.6rem; vertical-align: middle; }
+.tableau-voc .col-ar { font-family: var(--f-arabe); direction: rtl; font-size: 1.9rem; text-align: right; width: 38%; }
+.tableau-voc .col-tr { font-style: italic; color: var(--or-profond); }
+.tableau-voc .col-fr { text-align: left; }
+.tableau-voc .ic-audio { color: var(--texte-doux); font-size: 0.9rem; }
+
+/* Phrase à mémoriser */
+.a-memoriser {
+  text-align: center; padding: 2rem 1.5rem; background: var(--fond-carte-profond);
+  border: 1px solid var(--or); border-radius: var(--rayon); position: relative;
+}
+.a-memoriser .ornement { color: var(--or); font-size: 1.4rem; letter-spacing: 0.5rem; opacity: 0.6; }
+.a-memoriser .ar { font-family: var(--f-arabe); direction: rtl; font-size: 2.6rem; line-height: 1.8; margin: 0.6rem 0; }
+.a-memoriser .tr { font-style: italic; color: var(--or-profond); font-size: 1.1rem; }
+.a-memoriser .fr { font-size: 1.15rem; margin-top: 0.4rem; }
+
+/* Récapitulatif */
+.recap { list-style: none; }
+.recap li { padding: 0.6rem 0 0.6rem 1.8rem; position: relative; border-bottom: 1px solid var(--bordure); }
+.recap li:last-child { border-bottom: none; }
+.recap li::before { content: '◆'; position: absolute; left: 0; color: var(--or); font-size: 0.7rem; top: 0.95rem; }
+
+/* ---- Exercices ---- */
+.exercice {
+  background: var(--fond-carte); border: 1px solid var(--bordure);
+  border-radius: var(--rayon); padding: 1.5rem; margin-bottom: 1.2rem;
+  box-shadow: var(--ombre-carte);
+}
+.exercice .consigne { font-family: var(--f-ui); font-size: 0.95rem; color: var(--texte-doux); margin-bottom: 1rem; }
+.exercice .enonce-ar { font-family: var(--f-arabe); direction: rtl; font-size: 2.2rem; text-align: center; margin: 1rem 0; }
+.exercice-numero {
+  font-family: var(--f-ui); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--or-profond); font-weight: 600; margin-bottom: 0.4rem; display: block;
+}
+
+/* QCM */
+.options-qcm { display: grid; gap: 0.6rem; }
+.option {
+  padding: 0.85rem 1.1rem; border: 1px solid var(--bordure); border-radius: var(--rayon);
+  background: var(--fond); cursor: pointer; transition: all var(--transition);
+  font-family: var(--f-ui); display: flex; align-items: center; gap: 0.8rem; text-align: left;
+  width: 100%; color: var(--texte); font-size: 1rem;
+}
+.option .ar-opt { font-family: var(--f-arabe); direction: rtl; font-size: 1.8rem; }
+.option:hover:not(.fige) { border-color: var(--or); background: var(--fond-carte-profond); }
+.option.juste { border-color: var(--succes); background: rgba(58, 95, 62, 0.08); color: var(--succes); }
+.option.faux { border-color: var(--erreur); background: rgba(138, 44, 44, 0.07); color: var(--erreur); }
+.option.fige { cursor: default; }
+
+/* Appariement */
+.zone-appariement { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.colonne-app { display: flex; flex-direction: column; gap: 0.6rem; }
+.jeton-app {
+  padding: 0.7rem 1rem; border: 1px solid var(--bordure); border-radius: var(--rayon);
+  background: var(--fond); cursor: pointer; transition: all var(--transition); text-align: center;
+}
+.jeton-app .ar-j { font-family: var(--f-arabe); direction: rtl; font-size: 1.7rem; }
+.jeton-app.selection { border-color: var(--or); background: var(--fond-carte-profond); }
+.jeton-app.apparie { border-color: var(--succes); background: rgba(58,95,62,0.08); cursor: default; opacity: 0.7; }
+
+/* Glisser-déposer */
+.zone-mots, .zone-cible {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; min-height: 56px;
+  padding: 0.7rem; border-radius: var(--rayon); direction: rtl;
+}
+.zone-cible { border: 1px dashed var(--or); background: var(--fond-carte-profond); margin-bottom: 1rem; }
+.zone-mots { border: 1px solid var(--bordure); }
+.mot-glissable {
+  font-family: var(--f-arabe); font-size: 1.7rem; padding: 0.3rem 0.9rem;
+  border: 1px solid var(--bordure); border-radius: var(--rayon); background: var(--fond);
+  cursor: grab; transition: all var(--transition); user-select: none;
+}
+.mot-glissable:hover { border-color: var(--or); }
+.mot-glissable.dragging { opacity: 0.4; }
+
+/* Texte à trous */
+.texte-trous { font-family: var(--f-arabe); direction: rtl; font-size: 2.1rem; line-height: 2.4; text-align: center; }
+.trou {
+  display: inline-block; min-width: 80px; border-bottom: 2px solid var(--or);
+  margin: 0 0.3rem; text-align: center;
+}
+.trou select {
+  font-family: var(--f-arabe); font-size: 1.6rem; border: none; background: transparent;
+  color: var(--or-profond); cursor: pointer; direction: rtl;
+}
+
+/* Saisie clavier */
+.zone-saisie {
+  font-family: var(--f-arabe); direction: rtl; font-size: 2rem; text-align: center;
+  width: 100%; padding: 0.8rem; border: 1px solid var(--bordure); border-radius: var(--rayon);
+  background: var(--fond); color: var(--encre); margin-bottom: 0.8rem;
+}
+
+/* Décomposition / racine */
+.zone-decompo { display: flex; gap: 0.6rem; justify-content: center; direction: rtl; flex-wrap: wrap; }
+.segment {
+  padding: 0.6rem 1rem; border: 1px solid var(--bordure); border-radius: var(--rayon);
+  text-align: center; min-width: 70px;
+}
+.segment .ar-s { font-family: var(--f-arabe); font-size: 1.7rem; }
+.segment .et { font-family: var(--f-ui); font-size: 0.72rem; text-transform: uppercase; color: var(--texte-doux); letter-spacing: 0.08em; }
+.cases-racine { display: flex; gap: 0.5rem; justify-content: center; direction: rtl; }
+.case-racine {
+  width: 60px; height: 60px; border: 1px solid var(--or); border-radius: var(--rayon);
+  font-family: var(--f-arabe); font-size: 1.9rem; text-align: center;
+  background: var(--fond); color: var(--encre);
+}
+
+/* Lecture orale */
+.zone-orale { text-align: center; }
+.btn-micro {
+  width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--or);
+  background: var(--fond-carte); color: var(--or-profond); font-size: 1.6rem; cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-micro:hover { background: var(--or); color: #fbf7ee; }
+.btn-micro.ecoute { animation: pulsation 1.3s ease-in-out infinite; border-color: var(--erreur); color: var(--erreur); }
+@keyframes pulsation { 0%,100% { box-shadow: 0 0 0 0 rgba(138,44,44,0.3); } 50% { box-shadow: 0 0 0 12px rgba(138,44,44,0); } }
+
+/* Retours d'exercice */
+.retour-exo {
+  margin-top: 1rem; padding: 0.8rem 1rem; border-radius: var(--rayon); font-family: var(--f-ui);
+  font-size: 0.95rem; display: none;
+}
+.retour-exo.visible { display: block; }
+.retour-exo.bon { background: rgba(58,95,62,0.1); color: var(--succes); border: 1px solid var(--succes); }
+.retour-exo.moins { background: rgba(138,44,44,0.08); color: var(--erreur); border: 1px solid var(--erreur); }
+
+/* Barre de progression d'exercices */
+.barre-progres-exo { height: 4px; background: var(--bordure); border-radius: 2px; overflow: hidden; margin: 1rem 0; }
+.barre-progres-exo > span { display: block; height: 100%; background: var(--or); transition: width var(--transition); }
+
+/* Bouton de bouton audio */
+.btn-audio {
+  background: none; border: 1px solid var(--bordure); border-radius: 50%; width: 32px; height: 32px;
+  cursor: pointer; color: var(--or-profond); transition: all var(--transition); font-size: 0.85rem;
+}
+.btn-audio:hover { border-color: var(--or); background: var(--fond-carte-profond); }
+
+/* ---- Clavier arabe virtuel ---- */
+.clavier-arabe {
+  position: fixed; bottom: 0; left: 0; right: 0; background: var(--fond-carte);
+  border-top: 1px solid var(--or); padding: 0.8rem; box-shadow: 0 -4px 20px rgba(42,36,24,0.12);
+  z-index: 100; transform: translateY(110%); transition: transform 0.3s ease;
+}
+.clavier-arabe.ouvert { transform: translateY(0); }
+.clavier-rangees { max-width: 620px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.4rem; }
+.clavier-rangee { display: flex; gap: 0.3rem; justify-content: center; }
+.touche-ar {
+  font-family: var(--f-arabe); font-size: 1.5rem; min-width: 38px; height: 44px;
+  border: 1px solid var(--bordure); border-radius: 5px; background: var(--fond); cursor: pointer;
+  color: var(--encre); transition: all var(--transition); flex: 1;
+}
+.touche-ar:hover { border-color: var(--or); background: var(--fond-carte-profond); }
+.touche-ar:active { background: var(--or); color: #fbf7ee; }
+.touche-fonction { font-family: var(--f-ui); font-size: 0.8rem; flex: 1.6; }
+
+/* ---- Pied de leçon : navigation ---- */
+.pied-lecon {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--bordure); gap: 1rem;
+}
+.message-deblocage { font-family: var(--f-ui); font-size: 0.85rem; color: var(--texte-doux); }
+
+/* ---- Salle de révision ---- */
+.carte-flash {
+  text-align: center; padding: 3rem 2rem; min-height: 300px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+}
+.carte-flash .ar { font-family: var(--f-arabe); direction: rtl; font-size: 3.5rem; }
+.carte-flash .reponse { opacity: 0; transition: opacity var(--transition); }
+.carte-flash .reponse.visible { opacity: 1; }
+
+/* ---- Graphique SVG progression ---- */
+.graphique { width: 100%; height: auto; }
+.legende-graphique { display: flex; gap: 1.5rem; justify-content: center; font-family: var(--f-ui); font-size: 0.82rem; color: var(--texte-doux); margin-top: 0.8rem; }
+.legende-graphique span::before { content: '●'; margin-right: 0.4rem; }
+
+/* Animation d'apparition */
+.apparait { animation: fondu 0.4s ease both; }
+@keyframes fondu { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 520px) {
+  .stats-accueil { grid-template-columns: 1fr 1fr; }
+  .zone-appariement { gap: 0.8rem; }
+  h1 { font-size: 2rem; }
+}

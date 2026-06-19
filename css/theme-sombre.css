@@ -1,0 +1,40 @@
+/* =========================================================================
+   theme-sombre.css — palette inversée, l'or est conservé
+   Activé par l'attribut data-theme="sombre" sur <html>
+   ========================================================================= */
+
+html[data-theme="sombre"] {
+  --papier: #1a1610;
+  --papier-profond: #221d15;
+  --encre: #e8dfc8;
+  --encre-douce: #b6ab8f;
+  --or: #c4a052;
+  --or-profond: #d4b876;
+  --filet: #3a3326;
+
+  --fond: var(--papier);
+  --fond-carte: #221d15;
+  --fond-carte-profond: #2a241a;
+  --texte: var(--encre);
+  --texte-doux: var(--encre-douce);
+  --bordure: var(--filet);
+  --ombre-carte: 0 1px 3px rgba(0,0,0,0.3), 0 6px 22px rgba(0,0,0,0.2);
+}
+
+html[data-theme="sombre"] body {
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(196, 160, 82, 0.04), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(196, 160, 82, 0.03), transparent 45%);
+}
+
+html[data-theme="sombre"] h1,
+html[data-theme="sombre"] h2,
+html[data-theme="sombre"] h3 { color: var(--encre); }
+
+html[data-theme="sombre"] .btn { color: #1a1610; }
+html[data-theme="sombre"] .case-lecon.terminee { color: #1a1610; }
+html[data-theme="sombre"] .touche-ar:active { color: #1a1610; }
+html[data-theme="sombre"] .btn-micro:hover { color: #1a1610; }
+html[data-theme="sombre"] .a-memoriser .ar,
+html[data-theme="sombre"] .ligne-decouverte .ar,
+html[data-theme="sombre"] .tuile-lettre .gros { color: var(--encre); }

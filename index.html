@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="clair">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arabe coranique, méthode progressive</title>
+  <meta name="description" content="Apprendre l'arabe coranique depuis zéro, pas à pas, dans l'esprit d'un manuel élégant.">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/composants.css">
+  <link rel="stylesheet" href="css/theme-sombre.css">
+</head>
+<body>
+  <div id="barre"></div>
+  <main class="contenu">
+
+    <header class="centre">
+      <p class="cycle-romain">Méthode progressive</p>
+      <h1>L'arabe du Coran, pas à pas</h1>
+      <p class="muet" style="max-width:520px;margin:0.5rem auto 0;">
+        Trente leçons pour passer du déchiffrage des premières lettres
+        à la lecture comprise de sourates courtes. Quinze à vingt-cinq minutes par jour suffisent.
+      </p>
+    </header>
+
+    <hr class="filet">
+
+    <section class="stats-accueil" id="stats"></section>
+
+    <div class="actions-accueil">
+      <a class="btn" id="reprendre" href="#">Reprendre où j'en étais</a>
+      <a class="btn btn-secondaire" id="reviser" href="revision.html">Faire ma révision du jour</a>
+    </div>
+
+    <hr class="filet">
+
+    <section>
+      <h2>Votre parcours</h2>
+      <p class="muet petit">Trente leçons réparties en cinq cycles. Chaque leçon s'ouvre quand la précédente est acquise.</p>
+      <div id="cycles"></div>
+    </section>
+
+    <hr class="filet">
+
+    <section class="cartouche">
+      <h3>L'esprit de la méthode</h3>
+      <p class="petit muet">
+        On apprend par imprégnation, en comprenant avant de produire, sans jamais
+        trop de nouveautés à la fois. La grammaire émerge d'exemples concrets.
+        Les mots reviennent régulièrement, et la salle de révision les ramène
+        au bon moment pour les ancrer durablement.
+      </p>
+    </section>
+
+    <footer class="centre muet petit" style="margin-top:3rem;">
+      <button class="btn-fantome petit" onclick="if(confirm('Effacer toute votre progression ? Cette action est définitive.')){Stockage.reinitialiser();location.reload();}">Réinitialiser ma progression</button>
+    </footer>
+
+  </main>
+
+  <script src="js/repetition.js"></script>
+  <script src="js/stockage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="donnees/versets.js"></script>
+  <script src="donnees/lecons.js"></script>
+  <script src="donnees/vocabulaire.js"></script>
+  <script>
+    App.init('accueil');
+
+    // Statistiques
+    const motsMaitrises = Stockage.motsMaitrises().length;
+    const motsVus = Stockage.motsADecouverts();
+    const serie = Stockage.serieActuelle();
+    const terminees = Stockage.etat.leconsTerminees.length;
+    document.getElementById('stats').innerHTML = `
+      <div class="stat"><div class="valeur">${terminees}/30</div><div class="label">Leçons acquises</div></div>
+      <div class="stat"><div class="valeur">${motsMaitrises}</div><div class="label">Mots maîtrisés</div></div>
+      <div class="stat"><div class="valeur">${serie}</div><div class="label">Jours de suite</div></div>`;
+
+    // Bouton reprendre
+    const courante = Stockage.etat.leconCourante;
+    document.getElementById('reprendre').href = 'lecon.html?id=' + courante;
+    document.getElementById('reprendre').textContent =
+      terminees === 0 ? 'Commencer la leçon I' : 'Reprendre la leçon ' + App.romain(courante);
+
+    // Révision : indique le nombre de mots dus
+    const dus = Repetition.nbADue(Stockage.etat.revisions);
+    if (dus > 0) document.getElementById('reviser').textContent =
+      'Faire ma révision du jour (' + dus + ')';
+
+    // Construction des cycles et de la grille
+    const titresCycles = [
+      'Le système d\'écriture',
+      'Premiers mots et structures',
+      'Le verbe et l\'annexion',
+      'Grammaire approfondie',
+      'Premières lectures coraniques',
+    ];
+    const conteneurCycles = document.getElementById('cycles');
+    for (let c = 1; c <= 5; c++) {
+      const bloc = document.createElement('div');
+      bloc.style.marginTop = '1.6rem';
+      bloc.innerHTML = `<p class="cycle-romain">Cycle ${App.romain(c)} &middot; ${titresCycles[c-1]}</p>`;
+      const grille = document.createElement('div');
+      grille.className = 'grille-lecons';
+      for (let i = (c-1)*6 + 1; i <= c*6; i++) {
+        const lecon = (typeof Lecons !== 'undefined') ? Lecons[i] : null;
+        const accessible = Stockage.leconAccessible(i);
+        const terminee = Stockage.leconTerminee(i);
+        const enCours = i === courante && !terminee;
+        const a = document.createElement(accessible ? 'a' : 'span');
+        a.className = 'case-lecon' +
+          (terminee ? ' terminee' : '') +
+          (enCours ? ' en-cours' : '') +
+          (!accessible ? ' verrouillee' : '');
+        a.textContent = i;
+        if (accessible) a.href = 'lecon.html?id=' + i;
+        a.title = lecon ? ('Leçon ' + i + ' : ' + lecon.titre) : ('Leçon ' + i);
+        if (!accessible) a.title = 'Terminez la leçon précédente pour ouvrir celle-ci';
+        grille.appendChild(a);
+      }
+      bloc.appendChild(grille);
+      conteneurCycles.appendChild(bloc);
+    }
+  </script>
+</body>
+</html>

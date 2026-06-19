@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="clair">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progression · Arabe coranique</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/composants.css">
+  <link rel="stylesheet" href="css/theme-sombre.css">
+</head>
+<body>
+  <div id="barre"></div>
+  <main class="contenu">
+    <header class="centre">
+      <p class="cycle-romain">Tableau de bord</p>
+      <h1>Votre progression</h1>
+    </header>
+    <hr class="filet">
+    <section class="stats-accueil" id="stats"></section>
+    <hr class="filet">
+    <section>
+      <h2>Avancée par cycle</h2>
+      <div id="graphique-cycles"></div>
+    </section>
+    <hr class="filet">
+    <section>
+      <h2>Maîtrise du vocabulaire</h2>
+      <p class="muet petit">Répartition des mots rencontrés selon leur degré d'ancrage.</p>
+      <div id="graphique-voc"></div>
+    </section>
+    <hr class="filet">
+    <section>
+      <h2>Détail des leçons</h2>
+      <div id="detail-lecons"></div>
+    </section>
+  </main>
+
+  <script src="js/repetition.js"></script>
+  <script src="js/stockage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="donnees/versets.js"></script>
+  <script src="donnees/lecons.js"></script>
+  <script src="donnees/vocabulaire.js"></script>
+  <script>
+    App.init('progression');
+
+    const terminees = Stockage.etat.leconsTerminees.length;
+    const motsVus = Stockage.motsADecouverts();
+    const maitrises = Stockage.motsMaitrises().length;
+    const serie = Stockage.serieActuelle();
+    const jours = Stockage.etat.pratique.joursActifs.length;
+
+    document.getElementById('stats').innerHTML = `
+      <div class="stat"><div class="valeur">${terminees}/30</div><div class="label">Leçons acquises</div></div>
+      <div class="stat"><div class="valeur">${maitrises}</div><div class="label">Mots maîtrisés</div></div>
+      <div class="stat"><div class="valeur">${jours}</div><div class="label">Jours de pratique</div></div>`;
+
+    /* ---- Graphique en barres : avancée par cycle (SVG) ---- */
+    function barresSVG(donnees, hauteurBarre = 34) {
+      const largeur = 680, gauche = 130, droite = 40;
+      const h = donnees.length * (hauteurBarre + 14) + 20;
+      const largeurMax = largeur - gauche - droite;
+      let svg = `<svg class="graphique" viewBox="0 0 ${largeur} ${h}" role="img">`;
+      donnees.forEach((d, i) => {
+        const y = 14 + i * (hauteurBarre + 14);
+        const l = Math.max(2, (d.valeur / d.max) * largeurMax);
+        svg += `<text x="0" y="${y + hauteurBarre/2 + 5}" fill="var(--texte-doux)" font-family="Inter" font-size="13">${d.label}</text>`;
+        svg += `<rect x="${gauche}" y="${y}" width="${largeurMax}" height="${hauteurBarre}" rx="4" fill="var(--bordure)" opacity="0.4"/>`;
+        svg += `<rect x="${gauche}" y="${y}" width="${l}" height="${hauteurBarre}" rx="4" fill="var(--or)"/>`;
+        svg += `<text x="${gauche + l + 8}" y="${y + hauteurBarre/2 + 5}" fill="var(--texte-doux)" font-family="Inter" font-size="12">${d.valeur}/${d.max}</text>`;
+      });
+      svg += '</svg>';
+      return svg;
+    }
+
+    const titresCycles = ['Écriture', 'Premiers mots', 'Verbe et annexion', 'Grammaire', 'Lectures'];
+    const parCycle = titresCycles.map((t, c) => {
+      const debut = c * 6 + 1;
+      let n = 0;
+      for (let i = debut; i < debut + 6; i++) if (Stockage.leconTerminee(i)) n++;
+      return { label: t, valeur: n, max: 6 };
+    });
+    document.getElementById('graphique-cycles').innerHTML = barresSVG(parCycle);
+
+    /* ---- Vocabulaire par palier d'ancrage ---- */
+    const revs = Stockage.etat.revisions;
+    const paliers = [0, 0, 0, 0, 0];
+    Object.values(revs).forEach((e) => { paliers[Math.min(e.palier, 4)]++; });
+    const nomsPaliers = ['À consolider', 'En cours', 'Familier', 'Solide', 'Ancré'];
+    const maxVoc = Math.max(1, ...paliers);
+    document.getElementById('graphique-voc').innerHTML = motsVus === 0
+      ? '<p class="muet">Aucun mot rencontré pour l\'instant. Commencez une leçon.</p>'
+      : barresSVG(nomsPaliers.map((n, i) => ({ label: n, valeur: paliers[i], max: maxVoc })));
+
+    /* ---- Détail des leçons ---- */
+    const detail = document.getElementById('detail-lecons');
+    let html = '<table class="tableau-voc"><tbody>';
+    for (let i = 1; i <= 30; i++) {
+      const lecon = Lecons[i];
+      if (!lecon) continue;
+      const score = Stockage.scoreLecon(i);
+      const etat = Stockage.leconTerminee(i) ? 'acquise'
+        : (Stockage.leconAccessible(i) ? 'ouverte' : 'à venir');
+      const couleur = etat === 'acquise' ? 'var(--succes)' : (etat === 'ouverte' ? 'var(--or-profond)' : 'var(--texte-doux)');
+      html += `<tr onclick="${Stockage.leconAccessible(i) ? `location.href='lecon.html?id=${i}'` : ''}" style="cursor:${Stockage.leconAccessible(i)?'pointer':'default'}">
+        <td style="width:48px;color:var(--or-profond)">${App.romain(i)}</td>
+        <td class="col-fr" style="font-size:1.05rem">${lecon.titre}</td>
+        <td style="text-align:right;color:${couleur};font-family:Inter;font-size:0.85rem">${score ? score.pourcentage + '%' : etat}</td></tr>`;
+    }
+    html += '</tbody></table>';
+    detail.innerHTML = html;
+  </script>
+</body>
+</html>
