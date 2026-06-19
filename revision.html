@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="clair">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salle de révision · Arabe coranique</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/composants.css">
+  <link rel="stylesheet" href="css/theme-sombre.css">
+</head>
+<body>
+  <div id="barre"></div>
+  <main class="contenu">
+    <header class="centre">
+      <p class="cycle-romain">Répétition espacée</p>
+      <h1>Salle de révision</h1>
+      <p class="muet" style="max-width:520px;margin:0.4rem auto 0;">
+        Les mots rencontrés reviennent ici au bon moment, à un jour, trois jours,
+        puis une semaine d'écart, pour s'ancrer sans effort.
+      </p>
+    </header>
+
+    <hr class="filet">
+    <section id="zone-revision"></section>
+  </main>
+
+  <script src="js/repetition.js"></script>
+  <script src="js/stockage.js"></script>
+  <script src="js/speech.js"></script>
+  <script src="js/exercices.js"></script>
+  <script src="js/clavier-arabe.js"></script>
+  <script src="js/app.js"></script>
+  <script src="donnees/versets.js"></script>
+  <script src="donnees/lecons.js"></script>
+  <script src="donnees/vocabulaire.js"></script>
+  <script>
+    App.init('revision');
+    const zone = document.getElementById('zone-revision');
+    const lexique = Vocabulaire.indexParCle();
+    const dus = Repetition.motsADue(Stockage.etat.revisions)
+      .filter((cle) => lexique[cle]); // on ne révise que ce qu'on sait afficher
+
+    if (dus.length === 0) {
+      zone.innerHTML = `<div class="carte centre">
+        <h3>Rien à réviser pour l'instant</h3>
+        <p class="muet">Vous êtes à jour. Revenez après votre prochaine leçon,
+        ou lorsque de nouveaux mots arriveront à échéance.</p>
+        <a class="btn" href="index.html">Retour à l'accueil</a></div>`;
+    } else {
+      lancerSession(dus);
+    }
+
+    function lancerSession(cles) {
+      let i = 0, reussis = 0;
+      const carte = document.createElement('div');
+      carte.className = 'carte';
+      zone.appendChild(carte);
+      const progres = document.createElement('p');
+      progres.className = 'muet petit centre';
+      zone.insertBefore(progres, carte);
+
+      function montrer() {
+        if (i >= cles.length) return terminer();
+        progres.textContent = 'Carte ' + (i + 1) + ' sur ' + cles.length;
+        const mot = lexique[cles[i]];
+        carte.innerHTML = '';
+        const flash = document.createElement('div'); flash.className = 'carte-flash';
+        flash.innerHTML = `<div class="ar">${mot.ar}</div>
+          <p class="muet petit">Vous souvenez vous du sens de ce mot ?</p>
+          <div class="reponse"><p class="translit">${mot.tr}</p><p style="font-size:1.2rem">${mot.fr}</p></div>`;
+        carte.appendChild(flash);
+
+        const reponse = flash.querySelector('.reponse');
+        const actions = document.createElement('div');
+        actions.style.cssText = 'display:flex;gap:0.8rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;';
+        const btnVoir = document.createElement('button');
+        btnVoir.className = 'btn btn-secondaire'; btnVoir.textContent = 'Afficher la réponse';
+        btnVoir.onclick = () => {
+          reponse.classList.add('visible');
+          Parole.prononcer(mot.ar, { rate: 0.8 });
+          actions.innerHTML = '';
+          const ko = document.createElement('button');
+          ko.className = 'btn btn-secondaire'; ko.textContent = 'À revoir';
+          ko.onclick = () => juger(false);
+          const ok = document.createElement('button');
+          ok.className = 'btn'; ok.textContent = 'Je le savais';
+          ok.onclick = () => juger(true);
+          actions.appendChild(ko); actions.appendChild(ok);
+        };
+        actions.appendChild(btnVoir);
+        carte.appendChild(actions);
+      }
+
+      function juger(reussi) {
+        Stockage.enregistrerMot(cles[i], reussi);
+        if (reussi) reussis++;
+        i++;
+        montrer();
+      }
+
+      function terminer() {
+        progres.textContent = '';
+        carte.innerHTML = `<div class="carte-flash">
+          <h3>Révision terminée</h3>
+          <p class="muet">Vous avez revu ${cles.length} mot${cles.length>1?'s':''},
+          dont ${reussis} retrouvé${reussis>1?'s':''} de mémoire.</p>
+          <p class="muet petit">Les mots hésitants reviendront bientôt, les autres s'espaceront.</p>
+          <a class="btn" href="index.html">Retour à l'accueil</a></div>`;
+        Stockage.marquerPratiqueDuJour();
+        Stockage.sauver();
+      }
+
+      montrer();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+/* =========================================================================
+   base.css — variables, reset, typographie
+   Application d'apprentissage de l'arabe coranique
+   Inspiration : manuscrits coraniques anciens, minimalisme contemporain
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* Palette claire */
+  --papier: #f5efe2;
+  --papier-profond: #ede4d0;
+  --encre: #2a2418;
+  --encre-douce: #5a4f3a;
+  --or: #a8853a;
+  --or-profond: #7a5f24;
+  --filet: #c9bda2;
+  --succes: #3a5f3e;
+  --erreur: #8a2c2c;
+
+  /* Couleurs dérivées (calculées une fois pour rester cohérentes en thème sombre) */
+  --fond: var(--papier);
+  --fond-carte: #fbf7ee;
+  --fond-carte-profond: var(--papier-profond);
+  --texte: var(--encre);
+  --texte-doux: var(--encre-douce);
+  --bordure: var(--filet);
+  --ombre-carte: 0 1px 3px rgba(42, 36, 24, 0.08), 0 6px 22px rgba(42, 36, 24, 0.05);
+
+  /* Typographies */
+  --f-arabe: 'Amiri', serif;
+  --f-titre: 'Cormorant Garamond', serif;
+  --f-prose: 'Cormorant Garamond', serif;
+  --f-ui: 'Inter', system-ui, sans-serif;
+
+  /* Mesures */
+  --largeur-max: 760px;
+  --rayon: 6px;
+  --transition: 0.28s ease;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 17px; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--f-prose);
+  background-color: var(--fond);
+  color: var(--texte);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color var(--transition), color var(--transition);
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(168, 133, 58, 0.025), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(168, 133, 58, 0.02), transparent 45%);
+}
+
+/* Conteneur central */
+.contenu {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+}
+
+/* Titres */
+h1, h2, h3 {
+  font-family: var(--f-titre);
+  font-weight: 600;
+  color: var(--encre);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+h1 { font-size: 2.6rem; margin-bottom: 0.4rem; }
+h2 { font-size: 1.9rem; margin-bottom: 0.8rem; font-weight: 500; }
+h3 { font-size: 1.35rem; margin-bottom: 0.5rem; font-weight: 600; }
+
+p { margin-bottom: 0.9rem; font-size: 1.12rem; }
+
+a { color: var(--or-profond); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--or); }
+
+/* Texte arabe */
+.arabe {
+  font-family: var(--f-arabe);
+  direction: rtl;
+  font-size: 2.5rem;
+  line-height: 1.9;
+  color: var(--encre);
+}
+.arabe-inline {
+  font-family: var(--f-arabe);
+  direction: rtl;
+  unicode-bidi: isolate;
+  font-size: 1.5rem;
+}
+
+/* Translittération */
+.translit { font-family: var(--f-prose); font-style: italic; color: var(--or-profond); font-size: 1.05rem; }
+
+/* Éléments UI en Inter */
+.ui, button, input, .etiquette, nav { font-family: var(--f-ui); }
+
+/* Filet décoratif doré */
+.filet {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--or) 20%, var(--or) 80%, transparent);
+  opacity: 0.5;
+  margin: 2rem 0;
+  border: none;
+}
+.filet-court { width: 60px; margin: 1rem auto; }
+
+/* Chiffres romains de cycle */
+.cycle-romain {
+  font-family: var(--f-titre);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: var(--or-profond);
+  font-weight: 600;
+}
+
+/* Cartouche discret */
+.cartouche {
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  padding: 1.4rem 1.6rem;
+  background: var(--fond-carte);
+  position: relative;
+}
+
+/* Accessibilité */
+:focus-visible { outline: 2px solid var(--or); outline-offset: 2px; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* Utilitaires */
+.centre { text-align: center; }
+.muet { color: var(--texte-doux); }
+.petit { font-size: 0.92rem; }
+
+@media (max-width: 520px) {
+  html { font-size: 16px; }
+  h1 { font-size: 2.1rem; }
+  .arabe { font-size: 2.1rem; }
+  .contenu { padding: 1.6rem 1.1rem 4rem; }
+}
