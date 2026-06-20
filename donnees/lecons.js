@@ -157,6 +157,11 @@ const Lecons = {
         { ar: 'ع', nom: 'ʿayn', son: 'son de gorge serrée' },
         { ar: 'غ', nom: 'ghayn', son: 'r grasseyé' },
       ]},
+      { texte: 'Tout l\'enjeu est d\'entendre la différence avec la consonne simple voisine. Une emphatique n\'est pas un caprice d\'accent : changer ص en س, ou ط en ت, change le mot. Comparez ces paires à voix haute :' },
+      { lignes: [
+        { ar: 'سَيْف ← صَيْف', tr: 'sayf → ṣayf', fr: 'épée → été', note: 'س simple ↔ ص emphatique' },
+        { ar: 'تِين ← طِين', tr: 'tīn → ṭīn', fr: 'figue → argile', note: 'ت simple ↔ ط emphatique' },
+      ]},
     ],
     approfondissement: [
       { titre: 'ʿayn : la lettre, l\'œil et la source',
@@ -187,12 +192,18 @@ const Lecons = {
         indice: 'Le son de gorge serrée, sans équivalent en français.', reponse: 'ع' },
       { type: 'oral', consigne: 'Prononcez ce mot en soignant le ع de gorge.',
         phraseAr: 'عِلْم', translit: 'ʿilm', cles: ['ilm'] },
+      { type: 'phonetique', consigne: 'Écoutez, puis choisissez la transcription exacte de صَيْف.',
+        motAr: 'صَيْف', options: ['sayf (épée)', 'ṣayf (été)'], bonne: 1 },
+      { type: 'qcm', consigne: 'Dans la paire تِين / طِين, lequel commence par une emphatique ?',
+        options: [{ ar: 'تِين' }, { ar: 'طِين' }], bonne: 1,
+        explication: 'طِين (ṭīn, l\'argile) débute par le ط emphatique ; تِين (tīn, la figue) par le ت simple.' },
     ],
     memoriser: { ar: 'عَبْد', tr: 'ʿabd', fr: 'Un serviteur (d\'Allah).' },
     recap: [
       'Quatre emphatiques : ص ض ط ظ, graves et bouche pleine.',
       'Deux gutturales : ع (gorge serrée) et غ (r grasseyé).',
       'L\'emphase assombrit la voyelle voisine.',
+      'Une emphatique distingue des mots : sayf (épée) ↔ ṣayf (été).',
       'Mots-clés : صَلَاة (prière), عِلْم (savoir), عَبْد (serviteur).',
     ],
   },
@@ -216,6 +227,7 @@ const Lecons = {
         { ar: 'ي', nom: 'yāʾ', son: 'y / i' },
       ]},
       { texte: 'Le ق est un k prononcé très en arrière, presque dans la gorge ; le ك est notre k ordinaire.' },
+      { texte: 'Là encore, la nuance n\'est pas un détail : قَلْب (le cœur) et كَلْب (le chien) ne se distinguent que par ce point d\'articulation. Le ق vient du fond, le ك du milieu de la bouche.' },
       { texte: 'و et ي sont doubles : ils servent de consonnes (w, y) mais aussi de voyelles longues (ū, ī), ce que nous verrons bientôt.' },
       { texte: 'Les formes contextuelles. La lettre nūn par exemple : isolée ن, au début نـ, au milieu ـنـ, à la fin ـن. Le squelette reste reconnaissable.' },
       { lignes: [
@@ -247,11 +259,13 @@ const Lecons = {
         indice: 'yawm, composé de ي و م.', reponse: 'يوم', cles: ['yawm'] },
       { type: 'oral', consigne: 'Lisez ce mot à voix haute.',
         phraseAr: 'كِتَاب', translit: 'kitāb', cles: ['kitab'] },
+      { type: 'phonetique', consigne: 'Soignez le point d\'articulation : quelle transcription pour قَلْب ?',
+        motAr: 'قَلْب', options: ['kalb (chien)', 'qalb (cœur)'], bonne: 1 },
     ],
     memoriser: { ar: 'كِتَاب', tr: 'kitāb', fr: 'Un livre (le Coran est al-kitāb, le Livre par excellence).' },
     recap: [
       'L\'alphabet arabe est désormais complet : 28 lettres.',
-      'ق est un k profond, ك un k ordinaire.',
+      'ق est un k profond, ك un k ordinaire — qalb (cœur) ≠ kalb (chien).',
       'و et ي sont à la fois consonnes (w, y) et voyelles longues (ū, ī).',
       'Les lettres se lient et changent de forme selon leur place dans le mot.',
     ],
@@ -341,6 +355,15 @@ const Lecons = {
         { ar: 'كِتَابًا', tr: 'kitāban', fr: 'un livre (cas direct)', note: 'tanwīn fatḥa : son « an »' },
       ]},
       { texte: 'La hamza (ء) note un bref coup de glotte, comme entre les deux « a » de « la-aïe ». Elle se pose souvent sur un support : أ، إ، ؤ، ئ.' },
+      { texte: 'Avant de quitter le système d\'écriture, exerçons l\'oreille sur les sons les plus délicats pour un francophone. Ces consonnes se ressemblent, mais l\'arabe — et plus encore la récitation du Coran — les distingue avec soin : changer l\'une pour l\'autre, c\'est changer de mot. Lisez chaque paire à voix haute.' },
+      { lignes: [
+        { ar: 'كَلْب ← قَلْب', tr: 'kalb → qalb', fr: 'chien → cœur', note: 'ك ordinaire ↔ ق profond' },
+        { ar: 'أَمَل ← عَمَل', tr: 'amal → ʿamal', fr: 'espoir → œuvre', note: 'ء hamza ↔ ع de gorge' },
+        { ar: 'هَمّ ← عَمّ', tr: 'hamm → ʿamm', fr: 'souci → oncle', note: 'ه soufflé ↔ ع serré' },
+        { ar: 'نَذِير ← نَظِير', tr: 'nadhīr → naẓīr', fr: 'avertisseur → semblable', note: 'ذ simple ↔ ظ emphatique' },
+        { ar: 'أَسَاس ← أَثَاث', tr: 'asās → athāth', fr: 'fondation → mobilier', note: 'س sifflant ↔ ث interdental' },
+        { ar: 'غِشَاء ← عِشَاء', tr: 'ghishāʾ → ʿishāʾ', fr: 'voile → soir', note: 'غ grasseyé ↔ ع de gorge' },
+      ]},
     ],
     grammaire: {
       titre: 'Voyelle longue ou voyelle courte ?',
@@ -354,6 +377,10 @@ const Lecons = {
           'Le lām suivi d\'un alif fusionne obligatoirement en لا : on le voit dans لَا (non) et dans سَلَام (paix).\n' +
           'Deux alifs qui se rencontrent se fondent en un seul, surmonté d\'une madda : آ, comme dans آمَنَ (il a cru) ou القُرْآن.\n' +
           'Enfin, l\'alif maqṣūra ى est un alif final écrit comme un yāʾ sans points : il note un â à la fin de mots comme عَلَىٰ, إِلَىٰ, مُوسَىٰ.' },
+      { titre: 'Distinguer les sons proches : le sens en dépend',
+        corps: 'Confondre deux lettres voisines n\'est pas une simple maladresse d\'accent : en arabe, cela change le mot tout entier. Dire kalb (chien) pour qalb (cœur), ou amal (espoir) pour ʿamal (œuvre), c\'est dire autre chose.\n' +
+          'Dans la récitation du Coran, cette exactitude porte un nom : le tajwīd, l\'art de donner à chaque lettre son point de sortie (makhraj) et ses qualités propres. Vous n\'en êtes qu\'au seuil, mais former l\'oreille dès maintenant, en écoutant et en imitant de bons récitateurs, prépare toute la suite.\n' +
+          'Un conseil simple : lisez lentement, à voix haute, en exagérant d\'abord la différence (le ع bien dans la gorge, le ط bouche pleine, le ق tout au fond), puis revenez peu à peu au naturel. L\'oreille apprend par contraste.' },
     ],
     vocabulaire: [
       { ar: 'قَالَ', tr: 'qāla', fr: 'il a dit', cle: 'qala' },
@@ -378,12 +405,20 @@ const Lecons = {
         indice: 'īmān, avec une hamza initiale sur kasra : إِيمَان.', reponse: 'إيمان', cles: ['iman'] },
       { type: 'oral', consigne: 'Distinguez bien la voyelle longue à la lecture.',
         phraseAr: 'قَالَ اللَّهُ', translit: 'qāla llāh', cles: ['qala'] },
+      { type: 'phonetique', consigne: 'Distinguez le ق du ك : quelle transcription pour قَلْب ?',
+        motAr: 'قَلْب', options: ['kalb (chien)', 'qalb (cœur)'], bonne: 1 },
+      { type: 'phonetique', consigne: 'Écoutez le ع de gorge : quelle transcription pour عَمَل ?',
+        motAr: 'عَمَل', options: ['amal (espoir)', 'ʿamal (œuvre)'], bonne: 1 },
+      { type: 'qcm', consigne: 'Dans la paire نَذِير / نَظِير, lequel porte l\'emphatique ظ ?',
+        options: [{ ar: 'نَذِير' }, { ar: 'نَظِير' }], bonne: 1,
+        explication: 'نَظِير (naẓīr, « le semblable ») contient le ظ emphatique ; نَذِير (nadhīr, « l\'avertisseur ») contient le ذ simple, comme dans dhikr.' },
     ],
     memoriser: { ar: 'اللَّهُ الصَّمَدُ', tr: 'allāhu ṣ-ṣamad', fr: 'Allah, le Soutien universel. (sourate al-Ikhlāṣ, verset 2)' },
     recap: [
       'Voyelles longues : ā (ا), ū (و), ī (ي), deux fois plus longues que les courtes.',
       'Le tanwīn double la voyelle finale avec un son « n », marque de l\'indéfini.',
       'La hamza note le coup de glotte, souvent sur un support.',
+      'Distinguez les sons proches : qalb (cœur) ≠ kalb (chien), ʿamal ≠ amal.',
       'Vous savez désormais déchiffrer tout mot arabe vocalisé.',
     ],
   },
