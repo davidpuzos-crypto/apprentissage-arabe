@@ -134,6 +134,13 @@ Un mot revient à un jour, puis trois jours, puis sept jours, et ainsi de suite 
 un mot raté repart au début du calendrier. La salle de révision propose chaque
 jour les mots arrivés à échéance, sous forme de cartes éclair.
 
+Comme la répétition espacée planifie les rappels pour les jours suivants, il
+peut n'y avoir aucun mot « dû » juste après une leçon. La salle de révision
+propose alors toujours une **révision libre** : on peut réviser quand on veut
+l'ensemble du vocabulaire rencontré (ou, pour un nouvel arrivant, le
+vocabulaire fréquent), par séances courtes. Aucune base de données n'est
+nécessaire : tout est conservé dans le navigateur via localStorage.
+
 ## Les huit types d'exercices
 
 1. QCM de reconnaissance (lettre, mot, sens)

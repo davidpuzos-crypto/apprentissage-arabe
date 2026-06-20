@@ -46,24 +46,48 @@
       if (m) phrasesIndex[m.cle || ('phrase-' + id)] = m;
     });
 
-    // Mots dus
-    const items = Repetition.motsADue(Stockage.etat.revisions)
+    function melange(a) { a = a.slice(); for (let k = a.length - 1; k > 0; k--) { const j = Math.floor(Math.random() * (k + 1)); [a[k], a[j]] = [a[j], a[k]]; } return a; }
+
+    // Éléments arrivés à échéance (répétition espacée)
+    const dus = Repetition.motsADue(Stockage.etat.revisions)
       .filter((cle) => lexique[cle])
       .map((cle) => ({ cle, type: 'mot', ...lexique[cle] }));
-    // Phrases dues
     Stockage.phrasesADue().forEach((cle) => {
-      if (phrasesIndex[cle]) items.push({ cle, type: 'phrase', ...phrasesIndex[cle] });
+      if (phrasesIndex[cle]) dus.push({ cle, type: 'phrase', ...phrasesIndex[cle] });
     });
 
-    if (items.length === 0) {
-      zone.innerHTML = `<div class="carte centre">
-        <h3>Rien à réviser pour l'instant</h3>
-        <p class="muet">Vous êtes à jour. Revenez après votre prochaine leçon,
-        ou lorsque de nouveaux mots et phrases arriveront à échéance.</p>
-        <a class="btn" href="vocabulaire.html">Découvrir du vocabulaire fréquent</a></div>`;
+    // Tout ce que l'on peut réviser : mots déjà rencontrés (sinon tout le
+    // vocabulaire fréquent, pour qu'un nouvel arrivant puisse réviser aussi),
+    // plus les phrases inscrites.
+    const rencontres = Object.keys(Stockage.etat.vocabulaire).filter((c) => lexique[c]);
+    const baseMots = (rencontres.length ? rencontres : Object.keys(lexique));
+    const tous = baseMots.map((cle) => ({ cle, type: 'mot', ...lexique[cle] }));
+    Object.keys(Stockage.etat.phrases).forEach((cle) => {
+      if (phrasesIndex[cle]) tous.push({ cle, type: 'phrase', ...phrasesIndex[cle] });
+    });
+
+    // Menu de révision : on peut toujours réviser quelque chose.
+    const menu = document.createElement('div');
+    menu.className = 'carte centre';
+    let html = '';
+    if (dus.length) {
+      html += `<h3>${dus.length} élément${dus.length > 1 ? 's' : ''} à revoir aujourd'hui</h3>
+        <p class="muet petit">La répétition espacée les a ramenés au bon moment.</p>
+        <button class="btn" id="btn-dus">Commencer ma révision du jour</button>`;
     } else {
-      lancerSession(items);
+      html += `<h3>Vous êtes à jour</h3>
+        <p class="muet petit">Aucun mot n'est arrivé à échéance pour aujourd'hui.
+        Vous pouvez tout de même réviser librement, autant que vous voulez.</p>`;
     }
+    html += `<div style="margin-top:1rem"><button class="btn ${dus.length ? 'btn-secondaire' : ''}" id="btn-tous">Réviser librement (${tous.length} mot${tous.length > 1 ? 's' : ''})</button></div>`;
+    menu.innerHTML = html;
+    zone.appendChild(menu);
+
+    if (dus.length) document.getElementById('btn-dus').onclick = () => { zone.innerHTML = ''; lancerSession(dus); };
+    document.getElementById('btn-tous').onclick = () => {
+      zone.innerHTML = '';
+      lancerSession(melange(tous).slice(0, 20)); // séance courte de 20 cartes
+    };
 
     function lancerSession(items) {
       let i = 0, reussis = 0;
@@ -122,7 +146,10 @@
           <p class="muet">Vous avez revu ${items.length} élément${items.length>1?'s':''},
           dont ${reussis} retrouvé${reussis>1?'s':''} de mémoire.</p>
           <p class="muet petit">Les mots hésitants reviendront bientôt, les autres s'espaceront.</p>
-          <a class="btn" href="index.html">Retour à l'accueil</a></div>`;
+          <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:0.5rem">
+            <button class="btn" onclick="location.reload()">Réviser encore</button>
+            <a class="btn btn-secondaire" href="index.html">Accueil</a>
+          </div></div>`;
         Stockage.marquerPratiqueDuJour();
         Stockage.sauver();
       }
