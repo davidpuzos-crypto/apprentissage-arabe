@@ -60,20 +60,30 @@
       return s;
     }
 
-    /* ---- En-tête ---- */
-    const entete = section(null);
-    entete.innerHTML = `
+    /* ===== Structure en parcours : Cours → Exercices → Bilan ===== */
+    const tete = document.createElement('div'); tete.className = 'lecon-tete';
+    tete.innerHTML = `
       <p class="cycle-romain">Cycle ${App.romain(lecon.cycle)} &middot; Leçon ${App.romain(id)}</p>
-      <h1>${lecon.titre}</h1>`;
-    racine.appendChild(entete);
+      <h1>${lecon.titre}</h1>
+      <div class="lecon-onglets" role="tablist">
+        <button class="onglet" data-vue="cours">Cours</button>
+        <button class="onglet" data-vue="exo">Exercices</button>
+        <button class="onglet" data-vue="bilan">Bilan</button>
+      </div>`;
+    racine.appendChild(tete);
 
-    /* ---- Introduction ---- */
+    const vueCours = document.createElement('div'); vueCours.className = 'vue';
+    const vueExo = document.createElement('div'); vueExo.className = 'vue';
+    const vueBilan = document.createElement('div'); vueBilan.className = 'vue';
+    racine.appendChild(vueCours); racine.appendChild(vueExo); racine.appendChild(vueBilan);
+
+    /* ---- COURS : introduction ---- */
     const intro = section('Avant de commencer');
     const pIntro = document.createElement('div');
     pIntro.className = 'cartouche';
     pIntro.innerHTML = lecon.intro.split('\n').map((t) => `<p>${t}</p>`).join('');
     intro.appendChild(pIntro);
-    racine.appendChild(intro);
+    vueCours.appendChild(intro);
 
     /* ---- Découverte ---- */
     if (lecon.decouverte && lecon.decouverte.length) {
@@ -123,7 +133,7 @@
           dec.appendChild(conv);
         }
       });
-      racine.appendChild(dec);
+      vueCours.appendChild(dec);
     }
 
     /* ---- Note grammaticale ---- */
@@ -133,7 +143,7 @@
       note.innerHTML = `<h3>${lecon.grammaire.titre}</h3>` +
         lecon.grammaire.corps.split('\n').map((t) => `<p>${t}</p>`).join('');
       g.appendChild(note);
-      racine.appendChild(g);
+      vueCours.appendChild(g);
     }
 
     /* ---- Pour aller plus loin : étymologie et spiritualité ---- */
@@ -144,7 +154,7 @@
         d.innerHTML = `<h3>${bloc.titre}</h3>` + bloc.corps.split('\n').map((t) => `<p>${t}</p>`).join('');
         a.appendChild(d);
       });
-      racine.appendChild(a);
+      vueCours.appendChild(a);
     }
 
     /* ---- Vocabulaire ---- */
@@ -161,21 +171,15 @@
         tab.appendChild(tr);
       });
       v.appendChild(tab);
-      racine.appendChild(v);
+      vueCours.appendChild(v);
     }
 
-    /* ---- Exercices ---- */
-    const sEx = section('Exercices');
-    const intro2 = document.createElement('p');
-    intro2.className = 'muet petit';
-    intro2.textContent = 'Réussissez environ quatre exercices sur cinq pour valider la leçon. Vous restez libre d\'avancer à votre rythme.';
-    sEx.appendChild(intro2);
-
-    const barreP = elt('<div class="barre-progres-exo"><span style="width:0"></span></div>');
-    sEx.appendChild(barreP);
-    const conteneurEx = document.createElement('div');
-    sEx.appendChild(conteneurEx);
-    racine.appendChild(sEx);
+    /* ---- Bouton de fin de cours : lancer les exercices ---- */
+    const lancer = document.createElement('button');
+    lancer.className = 'btn btn-bloc'; lancer.style.marginTop = '1.6rem';
+    lancer.textContent = 'Commencer les exercices';
+    lancer.onclick = () => { montrer('exo'); };
+    vueCours.appendChild(lancer);
 
     // Exercices supplémentaires générés à partir du vocabulaire de la leçon,
     // pour densifier l'entraînement. Toujours corrects, car tirés des données.
@@ -213,26 +217,63 @@
 
     const exercices = lecon.exercices.concat(genererSupplementaires(lecon));
     const total = exercices.length;
-    let repondus = 0, reussis = 0;
+    let repondus = 0, reussis = 0, idx = 0;
     const motsRates = new Set();
 
-    function surReponse(reussi, cles) {
+    function enregistrer(reussi, cles) {
       repondus++;
       if (reussi) reussis++;
-      // Suivi du vocabulaire pour la répétition espacée
       (cles || []).forEach((cle) => {
         Stockage.enregistrerMot(cle, reussi);
         if (!reussi) motsRates.add(cle);
       });
-      barreP.firstElementChild.style.width = Math.round((repondus / total) * 100) + '%';
-      majPied();
     }
 
-    exercices.forEach((exo, i) => {
-      Exercices.rendre(exo, i, conteneurEx, surReponse, id);
-    });
+    /* ---- VUE EXERCICES : un par un ---- */
+    vueExo.innerHTML = `
+      <div class="exo-tete">
+        <button class="btn-fantome petit" id="retour-cours">‹ Revoir le cours</button>
+        <span class="exo-compteur" id="exo-compteur"></span>
+      </div>
+      <div class="barre-progres-exo"><span id="exo-barre" style="width:0"></span></div>
+      <div id="exo-slot"></div>`;
 
-    /* ---- Phrase à mémoriser ---- */
+    function afficherExo() {
+      const slot = document.getElementById('exo-slot');
+      if (idx >= total) { montrer('bilan'); return; }
+      slot.innerHTML = '';
+      document.getElementById('exo-compteur').textContent = 'Exercice ' + (idx + 1) + ' / ' + total;
+      document.getElementById('exo-barre').style.width = Math.round((idx / total) * 100) + '%';
+
+      const nav = document.createElement('div'); nav.className = 'exo-nav';
+      const passer = document.createElement('button');
+      passer.className = 'btn-fantome petit'; passer.textContent = 'Passer';
+      passer.onclick = () => { idx++; afficherExo(); };
+      nav.appendChild(passer);
+
+      let repondu = false;
+      Exercices.rendre(exercices[idx], idx, slot, (reussi, cles) => {
+        if (!repondu) { repondu = true; enregistrer(reussi, cles); }
+        nav.innerHTML = '';
+        const suivant = document.createElement('button');
+        suivant.className = 'btn btn-bloc';
+        suivant.textContent = (idx === total - 1) ? 'Terminer la leçon' : 'Exercice suivant';
+        suivant.onclick = () => {
+          idx++;
+          document.getElementById('exo-barre').style.width = Math.round((idx / total) * 100) + '%';
+          afficherExo();
+        };
+        nav.appendChild(suivant);
+        suivant.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }, id);
+      slot.appendChild(nav);
+    }
+    document.getElementById('retour-cours').onclick = () => montrer('cours');
+
+    /* ---- VUE BILAN : score, à mémoriser, récapitulatif, navigation ---- */
+    const scoreEl = document.createElement('div'); scoreEl.id = 'bilan-score';
+    vueBilan.appendChild(scoreEl);
+
     if (lecon.memoriser) {
       const m = section('À mémoriser');
       const bloc = document.createElement('div'); bloc.className = 'a-memoriser';
@@ -240,69 +281,61 @@
         <div class="ar">${lecon.memoriser.ar}</div>
         <div class="tr-phon">${App.phon(lecon.memoriser.tr)}</div>
         <div class="fr">${lecon.memoriser.fr}</div>`;
-      const b = audioBtn(lecon.memoriser.ar);
-      b.style.marginTop = '0.6rem';
-      bloc.appendChild(b);
-      m.appendChild(bloc);
-
-      // Explication de construction, le cas échéant
+      const b = audioBtn(lecon.memoriser.ar); b.style.marginTop = '0.6rem';
+      bloc.appendChild(b); m.appendChild(bloc);
       if (lecon.memoriser.construction) {
-        const c = document.createElement('div'); c.className = 'note-grammaire';
-        c.style.marginTop = '1rem';
+        const c = document.createElement('div'); c.className = 'note-grammaire'; c.style.marginTop = '1rem';
         c.innerHTML = '<h3>Comment cette phrase est construite</h3>' +
           lecon.memoriser.construction.split('\n').map((t) => `<p>${t}</p>`).join('');
         m.appendChild(c);
       }
-
-      // Bouton : inscrire la phrase pour un rappel différé
       const cle = lecon.memoriser.cle || ('phrase-' + id);
       const wrap = document.createElement('div'); wrap.className = 'centre'; wrap.style.marginTop = '1rem';
-      const bm = document.createElement('button'); bm.className = 'btn btn-secondaire btn-petit';
-      bm.type = 'button'; bm.textContent = 'Je veux retenir cette phrase';
-      bm.onclick = () => {
-        Stockage.enregistrerPhrase(cle, true);
-        bm.textContent = 'Phrase ajoutée à vos rappels';
-        bm.disabled = true;
-      };
-      wrap.appendChild(bm);
-      m.appendChild(wrap);
-      racine.appendChild(m);
+      const bm = document.createElement('button'); bm.className = 'btn btn-secondaire btn-petit'; bm.type = 'button';
+      bm.textContent = 'Je veux retenir cette phrase';
+      bm.onclick = () => { Stockage.enregistrerPhrase(cle, true); bm.textContent = 'Phrase ajoutée à vos rappels'; bm.disabled = true; };
+      wrap.appendChild(bm); m.appendChild(wrap);
+      vueBilan.appendChild(m);
     }
 
-    /* ---- Récapitulatif ---- */
     if (lecon.recap && lecon.recap.length) {
       const r = section('Récapitulatif');
       const ul = document.createElement('ul'); ul.className = 'recap';
       lecon.recap.forEach((pt) => { const li = document.createElement('li'); li.innerHTML = pt; ul.appendChild(li); });
       r.appendChild(ul);
-      racine.appendChild(r);
+      vueBilan.appendChild(r);
     }
 
-    /* ---- Pied : navigation libre ---- */
     const pied = document.createElement('div'); pied.className = 'pied-lecon';
-    const lienSuivant = id < 30
-      ? `lecon.html?id=${id+1}` : 'progression.html';
-    const txtSuivant = id < 30
-      ? `Leçon ${App.romain(id+1)}` : 'Voir mon bilan';
+    const lienSuivant = id < 30 ? `lecon.html?id=${id+1}` : 'progression.html';
+    const txtSuivant = id < 30 ? `Leçon ${App.romain(id+1)}` : 'Voir mon bilan';
     pied.innerHTML = `
-      <a class="btn-secondaire btn" href="${id > 1 ? 'lecon.html?id=' + (id-1) : 'index.html'}">${id > 1 ? 'Leçon précédente' : 'Accueil'}</a>
-      <div id="etat-lecon" class="message-deblocage"></div>
+      <button class="btn-secondaire btn" id="refaire">Refaire les exercices</button>
       <a class="btn" href="${lienSuivant}">${txtSuivant}</a>`;
-    racine.appendChild(pied);
+    vueBilan.appendChild(pied);
 
-    function majPied() {
-      const etat = document.getElementById('etat-lecon');
+    function majBilan() {
       const seuil = Math.ceil(total * 0.8);
-      if (reussis >= seuil) {
-        Stockage.enregistrerScoreLecon(id, reussis, total);
-        etat.innerHTML = '<span style="color:var(--succes)">Leçon acquise (' + reussis + '/' + total + ')</span>';
-      } else if (repondus > 0) {
-        etat.textContent = reussis + ' réussite' + (reussis > 1 ? 's' : '') + ' sur ' + total + ' ; ' + seuil + ' pour la valider.';
-      } else {
-        etat.textContent = '';
-      }
+      const acquis = reussis >= seuil;
+      if (acquis) Stockage.enregistrerScoreLecon(id, reussis, total);
+      scoreEl.innerHTML = acquis
+        ? `<div class="bilan-score bon"><div class="grand">${reussis} / ${total}</div><p>Leçon acquise, bārak Allāhu fīk. Vos mots rejoignent la révision.</p></div>`
+        : `<div class="bilan-score"><div class="grand">${reussis} / ${total}</div><p>Encore ${seuil - reussis} réussite${(seuil-reussis)>1?'s':''} pour valider la leçon. Vous pouvez refaire les exercices.</p></div>`;
     }
-    majPied();
+    document.getElementById('refaire').onclick = () => { idx = 0; repondus = 0; reussis = 0; montrer('exo'); };
+
+    /* ---- Aiguillage des vues ---- */
+    function montrer(quoi) {
+      vueCours.style.display = quoi === 'cours' ? 'block' : 'none';
+      vueExo.style.display = quoi === 'exo' ? 'block' : 'none';
+      vueBilan.style.display = quoi === 'bilan' ? 'block' : 'none';
+      document.querySelectorAll('.onglet').forEach((o) => o.classList.toggle('actif', o.dataset.vue === quoi));
+      if (quoi === 'exo') afficherExo();
+      if (quoi === 'bilan') majBilan();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    document.querySelectorAll('.onglet').forEach((o) => { o.onclick = () => montrer(o.dataset.vue); });
+    montrer('cours');
   </script>
 </body>
 </html>

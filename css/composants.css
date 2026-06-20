@@ -600,3 +600,28 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
 }
 .stat + .stat { border-left: 1px solid var(--bordure); }
 @media (max-width: 520px) { .stat + .stat { border-left: none; } }
+
+/* =========================================================================
+   Parcours de leçon : Cours → Exercices → Bilan
+   ========================================================================= */
+.lecon-tete { margin-bottom: 1.4rem; }
+.lecon-tete h1 { margin-bottom: 0.8rem; }
+.lecon-onglets { display: inline-flex; gap: 0.3rem; padding: 0.25rem; background: var(--fond-carte-profond); border: 1px solid var(--bordure); border-radius: 999px; }
+.onglet {
+  font-family: var(--f-ui); font-size: 0.85rem; padding: 0.4rem 1rem; border: none; border-radius: 999px;
+  background: transparent; color: var(--texte-doux); cursor: pointer; transition: all var(--transition);
+}
+.onglet:hover { color: var(--accent); }
+.onglet.actif { background: var(--accent); color: var(--sur-accent); box-shadow: 0 1px 3px rgba(18,40,30,0.25); }
+html[data-theme="sombre"] .onglet.actif { color: var(--sur-accent); }
+
+.exo-tete { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; }
+.exo-compteur { font-family: var(--f-ui); font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--or-profond); }
+.exo-nav { margin-top: 1.2rem; display: flex; justify-content: center; }
+#exo-slot .exercice { margin-bottom: 0; }
+
+.bilan-score { text-align: center; padding: 1.6rem 1.2rem; margin-bottom: 1.5rem; border: 1px solid var(--bordure); border-radius: var(--rayon); background: var(--fond-carte); box-shadow: var(--ombre-carte); }
+.bilan-score .grand { font-family: var(--f-titre); font-size: 2.8rem; font-weight: 600; color: var(--or-profond); line-height: 1; }
+.bilan-score p { margin-top: 0.6rem; margin-bottom: 0; color: var(--texte-doux); }
+.bilan-score.bon { border-color: var(--succes); }
+.bilan-score.bon .grand { color: var(--succes); }
