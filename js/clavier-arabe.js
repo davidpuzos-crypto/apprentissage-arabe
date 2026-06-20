@@ -111,6 +111,10 @@ const ClavierArabe = (function () {
     construire();
     cibleActive = champ;
     conteneur.classList.add('ouvert');
+    // Sur mobile, le clavier fixe peut masquer le champ : on le ramène en vue.
+    setTimeout(() => {
+      try { champ.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) { champ.scrollIntoView(); }
+    }, 60);
   }
 
   function fermer() {

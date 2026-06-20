@@ -68,13 +68,23 @@ const App = (function () {
     return `
       <div class="barre">
         <a href="index.html" class="marque">Institut Naqshbandi</a>
+        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" onclick="App.basculerMenu(this)">☰</button>
         <nav>
           ${nav}
-          <button class="bascule-mini bascule-phonetique ${vis ? 'actif' : ''}" title="Afficher ou masquer la phonétique" onclick="App.basculerPhonetique()">${vis ? 'phonétique visible' : 'phonétique masquée'}</button>
-          <button class="bascule-mini bascule-police" title="Changer la police arabe" onclick="App.basculerPolice()">ا ${nomPolice(Stockage.police())}</button>
-          <button class="bascule-theme" aria-label="Basculer le thème" onclick="App.basculerTheme()">${sombre ? '☀' : '☾'}</button>
+          <div class="reglages">
+            <button class="bascule-mini bascule-phonetique ${vis ? 'actif' : ''}" title="Afficher ou masquer la phonétique" onclick="App.basculerPhonetique()">${vis ? 'phonétique visible' : 'phonétique masquée'}</button>
+            <button class="bascule-mini bascule-police" title="Changer la police arabe" onclick="App.basculerPolice()">ا ${nomPolice(Stockage.police())}</button>
+            <button class="bascule-theme" aria-label="Basculer le thème" onclick="App.basculerTheme()">${sombre ? '☀' : '☾'}</button>
+          </div>
         </nav>
       </div>`;
+  }
+
+  function basculerMenu(btn) {
+    const barre = document.querySelector('.barre');
+    if (!barre) return;
+    const ouvert = barre.classList.toggle('menu-ouvert');
+    if (btn) btn.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
   }
 
   function init(pageActive) {
@@ -138,7 +148,7 @@ const App = (function () {
   }
 
   return {
-    init, param, romain, phon, verifierAudio,
+    init, param, romain, phon, verifierAudio, basculerMenu,
     basculerTheme, basculerPolice, basculerPhonetique,
     appliquerTheme, appliquerPolice, appliquerPhonetique,
   };
