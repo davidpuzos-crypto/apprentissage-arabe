@@ -95,8 +95,8 @@ const Exercices = (function () {
         b.classList.add(reussi ? 'juste' : 'faux');
         if (!reussi) liste.children[exo.bonne].classList.add('juste');
         montrerRetour(retour, reussi,
-          exo.explication ? exo.explication : null,
-          'La bonne réponse est mise en évidence. ' + (exo.explication || ''));
+          'Très bien, c\'est exact.',
+          'La bonne réponse est mise en évidence.');
         surReponse(reussi, exo.cles);
       });
       liste.appendChild(b);
@@ -383,39 +383,66 @@ const Exercices = (function () {
     micro.setAttribute('aria-label', 'Parler');
     const detail = el('div', 'petit muet');
     detail.style.marginTop = '0.8rem';
-    let valide = false;
 
-    micro.addEventListener('click', () => {
-      if (valide) return;
+    // Boutons réessayer / valider, affichés après une tentative ratée.
+    const actions = el('div'); actions.style.cssText = 'display:flex;gap:0.6rem;justify-content:center;margin-top:0.8rem;flex-wrap:wrap;';
+    const btnReessayer = el('button', 'btn btn-secondaire btn-petit', 'Réessayer');
+    btnReessayer.type = 'button';
+    const btnValider = el('button', 'btn-fantome petit', 'Valider et continuer');
+    btnValider.type = 'button';
+    actions.appendChild(btnReessayer); actions.appendChild(btnValider);
+    actions.style.display = 'none';
+
+    let succes = false, compte = false;
+
+    function tenter() {
+      if (succes) return;
+      actions.style.display = 'none';
+      micro.disabled = false;
       micro.classList.add('ecoute');
       detail.textContent = 'Je vous écoute, prononcez la phrase…';
       Parole.ecouter({
         surResultat: (alternatives) => {
           const { texte, score } = Parole.meilleureAlternative(exo.phraseAr, alternatives);
           const reussi = score >= 60;
-          valide = true;
           micro.classList.remove('ecoute');
-          micro.disabled = true;
           const mots = Parole.motsReconnus(exo.phraseAr, texte);
           const detailMots = mots.map((m) =>
             '<span style="color:' + (m.reconnu ? 'var(--succes)' : 'var(--erreur)') + '">' + m.mot + '</span>'
           ).join(' ');
           detail.innerHTML = 'Reconnu : <span class="arabe-inline">' + (texte || '—') +
             '</span><br>Score : ' + score + '%<br>Mots : ' + detailMots;
-          montrerRetour(retour, reussi,
-            'Prononciation reconnue à ' + score + '%. Beau travail.',
-            'Score de ' + score + '%. Réécoutez le modèle et reprenez, sans précipitation.');
-          surReponse(reussi, exo.cles);
+          if (reussi) {
+            succes = true; micro.disabled = true;
+            montrerRetour(retour, true, 'Prononciation reconnue à ' + score + '%. Beau travail.');
+            if (!compte) { compte = true; surReponse(true, exo.cles); }
+          } else {
+            // On NE verrouille pas : l'élève peut réessayer autant qu'il veut.
+            montrerRetour(retour, false, null, 'Score de ' + score + '%. Réécoutez le modèle, puis réessayez sans vous presser.');
+            actions.style.display = 'flex';
+          }
         },
         surErreur: () => {
           micro.classList.remove('ecoute');
           detail.textContent = 'La captation a échoué. Réessayez dans un endroit calme.';
+          actions.style.display = 'flex';
         },
         surFin: () => micro.classList.remove('ecoute'),
       });
+    }
+
+    micro.addEventListener('click', tenter);
+    btnReessayer.addEventListener('click', tenter);
+    btnValider.addEventListener('click', () => {
+      if (succes || compte) return;
+      compte = true; micro.disabled = true; actions.style.display = 'none';
+      montrerRetour(retour, false, null, 'Vous pourrez revenir prononcer cette phrase plus tard ; l\'aisance vient avec la répétition.');
+      surReponse(false, exo.cles);
     });
+
     zone.appendChild(micro);
     zone.appendChild(detail);
+    zone.appendChild(actions);
     carte.appendChild(zone);
     const retour = ajouterRetour(carte);
   }
@@ -558,9 +585,24 @@ const Exercices = (function () {
   function rendre(exo, index, conteneur, surReponse, idLecon) {
     const fn = types[exo.type];
     if (!fn) { console.warn('Type d\'exercice inconnu :', exo.type); return; }
-    // On garantit que surReponse n'est compté qu'une fois.
+    const avant = conteneur.children.length;
+    // On garantit que surReponse n'est compté qu'une fois, et on ajoute
+    // l'explication (contexte de la correction) au retour, pour tout type.
     let compte = false;
-    const wrap = (reussi, cles) => { if (compte) return; compte = true; surReponse(reussi, cles); };
+    const wrap = (reussi, cles) => {
+      if (compte) return; compte = true;
+      if (exo.explication) {
+        const carte = conteneur.children[avant];
+        const r = carte && carte.querySelector('.retour-exo');
+        if (r) {
+          const e = document.createElement('span');
+          e.className = 'expl';
+          e.innerHTML = exo.explication;
+          r.appendChild(e);
+        }
+      }
+      surReponse(reussi, cles);
+    };
     fn(exo, index, conteneur, wrap, idLecon);
   }
 
