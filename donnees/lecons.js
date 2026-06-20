@@ -682,7 +682,10 @@ const Lecons = {
       { type: 'oral', consigne: 'Lisez cette phrase nominale.',
         phraseAr: 'اللَّهُ غَفُورٌ', translit: 'allāhu ghafūr' },
     ],
-    memoriser: { ar: 'اللَّهُ حَكِيمٌ', tr: 'allāhu ḥakīm', fr: 'Allah est sage.' },
+    memoriser: { ar: 'اللَّهُ حَكِيمٌ', tr: 'allāhu ḥakīm', fr: 'Allah est sage.',
+      construction: 'Phrase nominale, sans verbe « être ». اللَّهُ (Allah) est le sujet, le mubtadaʾ : il porte la ḍamma finale (-u), marque du cas sujet.\n' +
+        'حَكِيمٌ (sage) est l\'attribut, le khabar : il porte un tanwīn ḍamma (-un), marque de l\'indéfini au cas sujet.\n' +
+        'Le schéma défini + indéfini suffit à dire « Allah est sage ». Retenez ce squelette : il porte des centaines de versets.' },
     recap: [
       'La phrase nominale n\'a pas de verbe « être » au présent.',
       'Sujet généralement défini, attribut généralement indéfini.',
@@ -1065,7 +1068,10 @@ const Lecons = {
       { type: 'oral', consigne: 'Lisez cette annexion célèbre.',
         phraseAr: 'رَبِّ الْعَالَمِينَ', translit: 'rabbi l-ʿālamīn', cles: ['rabb','alamin'] },
     ],
-    memoriser: { ar: 'مَالِكِ يَوْمِ الدِّينِ', tr: 'māliki yawmi d-dīn', fr: 'Maître du Jour de la rétribution. (al-Fātiḥa, 4)' },
+    memoriser: { ar: 'مَالِكِ يَوْمِ الدِّينِ', tr: 'māliki yawmi d-dīn', fr: 'Maître du Jour de la rétribution. (al-Fātiḥa, 4)',
+      construction: 'Trois noms, deux annexions (idāfa) emboîtées : مَالِكِ (maître) annexé à يَوْمِ (jour), lui-même annexé à الدِّينِ (la rétribution).\n' +
+        'Dans une annexion, seul le dernier mot porte l\'article : c\'est الدِّين qui est défini, et toute la chaîne devient définie — « le maître du jour de la rétribution ».\n' +
+        'Les termes annexés prennent la kasra : mālik-i, yawm-i, d-dīn-i. Ce petit « i » répété est la signature sonore de l\'idāfa.' },
     recap: [
       'L\'idāfa accole un possédé et un possesseur, sans préposition.',
       'Le premier nom ne porte ni article ni tanwīn.',
@@ -1090,6 +1096,14 @@ const Lecons = {
         { ar: 'رَبُّهُمْ', tr: 'rabbuhum', fr: 'leur Seigneur', note: 'ـهُمْ = leur' },
       ]},
       { texte: 'Le même suffixe, attaché à une préposition, donne : لَهُ (à lui), بِهِ (par lui), عَلَيْهِمْ (sur eux).' },
+      { titreDialogue: 'À qui est-ce ? Un échange tout en pronoms suffixes.',
+        dialogue: [
+          { qui: 'A', ar: 'هَٰذَا كِتَابُكَ ؟', tr: 'hādhā kitābuka', fr: 'Ceci est ton livre ?' },
+          { qui: 'B', ar: 'نَعَمْ، هَٰذَا كِتَابِي.', tr: 'naʿam, hādhā kitābī', fr: 'Oui, ceci est mon livre.' },
+          { qui: 'A', ar: 'وَأَيْنَ بَيْتُهُ ؟', tr: 'wa-ayna baytuhu', fr: 'Et où est sa maison (à lui) ?' },
+          { qui: 'B', ar: 'بَيْتُهُ قَرِيبٌ.', tr: 'baytuhu qarīb', fr: 'Sa maison est proche.' },
+        ] },
+      { texte: 'Tout est construit de mots connus : le démonstratif هَٰذَا, l\'interrogatif أَيْنَ, et les suffixes du jour — كِتَابُكَ (ton livre), كِتَابِي (mon livre), بَيْتُهُ (sa maison). Le pronom suffixe vous fait passer de « un livre » à « ton livre » : c\'est un grand pas vers la phrase vivante.' },
     ],
     grammaire: {
       titre: 'Un pronom collé à la fin',
@@ -1120,7 +1134,10 @@ const Lecons = {
       { type: 'oral', consigne: 'Prononcez « notre Seigneur ».',
         phraseAr: 'رَبَّنَا', translit: 'rabbanā', cles: ['rabbuna'] },
     ],
-    memoriser: { ar: 'أَنْعَمْتَ عَلَيْهِمْ', tr: 'anʿamta ʿalayhim', fr: 'Tu les as comblés de grâces. (al-Fātiḥa, 7)' },
+    memoriser: { ar: 'أَنْعَمْتَ عَلَيْهِمْ', tr: 'anʿamta ʿalayhim', fr: 'Tu les as comblés de grâces. (al-Fātiḥa, 7)',
+      construction: 'أَنْعَمْتَ se lit anʿam-ta : le verbe anʿama (combler de grâces) à l\'accompli, avec le suffixe ـتَ « tu » (2e pers. masc.). « Tu as comblé de grâces ».\n' +
+        'عَلَيْهِمْ se lit ʿalay-him : la préposition عَلَىٰ (sur) à laquelle se colle le pronom suffixe ـهِمْ « eux ». « sur eux ».\n' +
+        'Un suffixe sur un verbe dit le sujet ou l\'objet ; sur une préposition ou un nom, il dit « eux, leur ». Même petit bloc ـهِمْ, deux emplois à reconnaître.' },
     recap: [
       'Les pronoms suffixes s\'attachent à la fin du mot.',
       'ـِي (mon), ـكَ (ton), ـهُ (son), ـنَا (notre), ـهُمْ (leur).',
@@ -1235,7 +1252,10 @@ const Lecons = {
       { type: 'oral', consigne: 'Lisez ce serment qui ouvre une sourate.',
         phraseAr: 'وَالْعَصْرِ', translit: 'wa-l-ʿaṣr', cles: ['wa','asr'] },
     ],
-    memoriser: { ar: 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', tr: 'fa-ṣalli li-rabbika wa-nḥar', fr: 'Prie donc ton Seigneur et sacrifie. (al-Kawthar, 2)' },
+    memoriser: { ar: 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', tr: 'fa-ṣalli li-rabbika wa-nḥar', fr: 'Prie donc ton Seigneur et sacrifie. (al-Kawthar, 2)',
+      construction: 'فَـ (fa) est ici la conjonction « alors, donc » collée au verbe : elle tire une conséquence de ce qui précède (le don d\'al-Kawthar).\n' +
+        'صَلِّ (prie) est un impératif ; لِرَبِّكَ se lit li-rabbi-ka : لِـ (à, pour) + رَبّ (Seigneur) + ـكَ (ton). « pour ton Seigneur ».\n' +
+        'وَ (et) relie deux ordres : وَانْحَرْ « et sacrifie ». Distinguez fa (conséquence) de wa (simple addition) : deux liaisons, deux nuances.' },
     recap: [
       'wa : « et », liaison neutre.',
       'fa : « alors, donc », conséquence ou suite immédiate.',
@@ -1263,6 +1283,16 @@ const Lecons = {
         { ar: 'بِاللَّهِ', tr: 'bi-llāh', fr: 'par Allah, en Allah', note: 'بِـ collé' },
         { ar: 'لِلَّهِ', tr: 'li-llāh', fr: 'à Allah, pour Allah', note: 'لِـ collé' },
       ]},
+      { titreDialogue: 'Où est… ? Situer les choses, tout en mots connus.',
+        dialogue: [
+          { qui: 'A', ar: 'أَيْنَ الْكِتَابُ ؟', tr: 'ayna l-kitāb', fr: 'Où est le livre ?' },
+          { qui: 'B', ar: 'الْكِتَابُ فِي الْبَيْتِ.', tr: 'al-kitāb fī l-bayt', fr: 'Le livre est dans la maison.' },
+          { qui: 'A', ar: 'وَأَيْنَ الْوَلَدُ ؟', tr: 'wa-ayna l-walad', fr: 'Et où est l\'enfant ?' },
+          { qui: 'B', ar: 'الْوَلَدُ أَمَامَ الْبَيْتِ.', tr: 'al-walad amāma l-bayt', fr: 'L\'enfant est devant la maison.' },
+          { qui: 'A', ar: 'وَالطَّيْرُ ؟', tr: 'wa-ṭ-ṭayr', fr: 'Et l\'oiseau ?' },
+          { qui: 'B', ar: 'الطَّيْرُ فَوْقَ الشَّجَرَةِ.', tr: 'aṭ-ṭayr fawqa sh-shajara', fr: 'L\'oiseau est au-dessus de l\'arbre.' },
+        ] },
+      { texte: 'Remarquez la kasra après chaque préposition : fī l-bayt-i, amāma l-bayt-i, fawqa sh-shajara-ti. Avec أَيْنَ et trois prépositions, vous posez et répondez déjà à de vraies questions de lieu.' },
     ],
     grammaire: {
       titre: 'Le cas indirect après la préposition',
@@ -1552,7 +1582,10 @@ const Lecons = {
       { type: 'oral', consigne: 'Récitez al-ʿAṣr en entier, lentement.',
         phraseAr: 'وَالْعَصْرِ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ', translit: 'wa-l-ʿaṣr, inna l-insāna la-fī khusr', cles: ['insan','khusr'] },
     ],
-    memoriser: { ar: 'إِنَّ الْإِنسَانَ لَفِي خُسْرٍ', tr: 'inna l-insāna la-fī khusr', fr: 'L\'être humain est certes en perdition. (al-ʿAṣr, 2)' },
+    memoriser: { ar: 'إِنَّ الْإِنسَانَ لَفِي خُسْرٍ', tr: 'inna l-insāna la-fī khusr', fr: 'L\'être humain est certes en perdition. (al-ʿAṣr, 2)',
+      construction: 'إِنَّ (certes) ouvre la phrase en insistant ; elle met son sujet au cas direct : الْإِنسَانَ porte la fatḥa (-a), « l\'être humain ».\n' +
+        'لَـ (la-) est un second outil d\'insistance, soudé à ce qui suit : لَفِي « est bien dans ».\n' +
+        'فِي خُسْرٍ : la préposition فِي (dans) régit خُسْرٍ (perdition), qui prend une kasra avec tanwīn (-in), indéfini au cas indirect. Mot à mot : « certes l\'humain [est] bien en perdition ».' },
     recap: [
       'al-Kawthar : la plus courte sourate, trois versets.',
       'al-ʿAṣr : un serment par le Temps, puis la voie du salut.',
@@ -1786,7 +1819,10 @@ const Lecons = {
       { type: 'oral', consigne: 'Récitez ce verset de demande.',
         phraseAr: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ', translit: 'ihdinā ṣ-ṣirāṭa l-mustaqīm', cles: ['ihdina','mustaqim'] },
     ],
-    memoriser: { ar: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ', tr: 'iyyāka naʿbudu wa-iyyāka nastaʿīn', fr: 'C\'est Toi que nous adorons, et c\'est Toi dont nous implorons le secours. (al-Fātiḥa, 5)' },
+    memoriser: { ar: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ', tr: 'iyyāka naʿbudu wa-iyyāka nastaʿīn', fr: 'C\'est Toi que nous adorons, et c\'est Toi dont nous implorons le secours. (al-Fātiḥa, 5)',
+      construction: 'إِيَّاكَ (Toi) est placé AVANT le verbe : cet ordre crée l\'exclusivité — « C\'est Toi, et nul autre ».\n' +
+        'نَعْبُدُ se lit na-ʿbudu : verbe à l\'inaccompli avec le préfixe نَـ « nous » — « nous adorons ». De même نَسْتَعِينُ « nous implorons le secours ».\n' +
+        'وَ relie les deux propositions parallèles. Tout le verset tient sur ce balancement : Toi seul nous adorons / Toi seul nous implorons.' },
     recap: [
       'إِيَّاكَ en tête marque l\'exclusivité de l\'adoration.',
       'اهْدِنَا = ihdi (guide) + nā (nous).',

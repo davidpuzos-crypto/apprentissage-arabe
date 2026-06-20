@@ -26,6 +26,20 @@ const Lectures = [
       'Méditez ce point : avant de Se nommer Juge ou Puissant dans l\'ouverture du Livre, Allah Se nomme par la miséricorde. C\'est le climat dans lequel tout le Coran se lit.',
   },
   {
+    type: 'Mot', titre: 'le Très Miséricordieux', ar: 'الرَّحِيم', tr: 'ar-raḥīm', fr: 'le Très Miséricordieux',
+    commentaire:
+      'ar-Raḥīm partage la racine ر-ح-م avec ar-Raḥmān, mais en dit une autre facette. Là où ar-Raḥmān embrasse toute la création, ar-Raḥīm désigne une miséricorde agissante et continue, tournée en particulier vers les croyants.\n' +
+      'Le schème faʿīl (raḥīm, ʿalīm, ḥakīm) exprime souvent une qualité stable, installée. La miséricorde n\'est pas un éclat passager : elle dure.\n' +
+      'Les deux noms se suivent dans la basmala, que nous lisons à l\'étape suivante : d\'abord l\'immense, puis le constant. Le croyant avance enveloppé des deux.',
+  },
+  {
+    type: 'Mot', titre: 'le Seigneur', ar: 'رَبّ', tr: 'rabb', fr: 'Seigneur, Éducateur',
+    commentaire:
+      'رَبّ vient de la racine ر-ب-ب, qui dit bien plus que « maître ». Le rabb est celui qui possède, certes, mais surtout qui nourrit, élève, prend soin et mène une chose à sa perfection, degré après degré.\n' +
+      'C\'est par ce nom que s\'ouvre la louange de la Fātiḥa : rabbi l-ʿālamīn, « Seigneur des mondes ». Et c\'est auprès du Rabb que l\'on cherche refuge dans al-Falaq et an-Nās.\n' +
+      'Méditez la tendresse cachée dans ce nom : invoquer son Rabb, c\'est s\'adresser à Celui qui nous façonne avec soin, comme un éducateur attentif à chaque pas.',
+  },
+  {
     type: 'Verset', titre: 'La basmala', ar: 'بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ', tr: 'bismi llāhi r-raḥmāni r-raḥīm',
     fr: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux.', source: 'Ouverture de presque toute sourate',
     commentaire:
@@ -50,12 +64,36 @@ const Lectures = [
       'Spirituellement, ce nom enseigne le tawakkul, la remise confiante : c\'est vers Lui seul que se dirige le cœur dans la détresse, car Lui seul ne fait jamais défaut.',
   },
   {
+    type: 'Verset', titre: 'La louange', ar: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', tr: 'al-ḥamdu li-llāhi rabbi l-ʿālamīn',
+    fr: 'Louange à Allah, Seigneur des mondes.', source: 'al-Fātiḥa, 2',
+    commentaire:
+      'Le Livre s\'ouvre, après la basmala, par la louange. الْحَمْد, c\'est la louange qui est à la fois reconnaissance et amour : on loue Allah pour ce qu\'Il fait, et pour ce qu\'Il est.\n' +
+      'Décomposez : al-ḥamdu (la louange) li-llāhi (à Allah, avec le لِـ d\'appartenance) rabbi l-ʿālamīn (Seigneur des mondes). Vous reconnaissez la préposition collée et l\'annexion rabbi + ʿālamīn.\n' +
+      'Commencer par louer avant de demander : c\'est l\'ordre même de la Fātiḥa, et une politesse du cœur envers son Seigneur.',
+  },
+  {
+    type: 'Verset', titre: 'le Maître du Jour', ar: 'مَالِكِ يَوْمِ الدِّينِ', tr: 'māliki yawmi d-dīn',
+    fr: 'Maître du Jour de la rétribution.', source: 'al-Fātiḥa, 4',
+    commentaire:
+      'Trois mots, deux annexions emboîtées : mālik (maître) de yawm (jour) de d-dīn (la rétribution). Le génie de l\'arabe : enchaîner les noms sans préposition pour dire « le maître du jour de la rétribution ».\n' +
+      'Le mot دِين porte ici le sens de « rétribution, jugement », mais c\'est le même mot que « religion » : la religion est ce selon quoi l\'on sera jugé.\n' +
+      'Après la miséricorde vient la justice : Allah est Raḥmān et Raḥīm, et Il est aussi Maître du Jour où chacun retrouvera ses actes. Crainte et espérance, les deux ailes du croyant.',
+  },
+  {
     type: 'Verset', titre: 'L\'adoration exclusive', ar: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ', tr: 'iyyāka naʿbudu wa-iyyāka nastaʿīn',
     fr: 'C\'est Toi que nous adorons, et c\'est Toi dont nous implorons le secours.', source: 'al-Fātiḥa, 5',
     commentaire:
       'En arabe, placer إِيَّاكَ (Toi) avant le verbe crée une exclusivité : Toi, et nul autre. C\'est le cœur battant de la Fātiḥa et de tout l\'islam.\n' +
       'Notez le passage au « nous » : naʿbudu, nastaʿīn. Le croyant ne prie pas seul, il se tient dans la communauté, devant son Seigneur.\n' +
       'Les maîtres relèvent l\'ordre des deux verbes : d\'abord l\'adoration, ensuite la demande de secours. On donne à Allah Son dû avant de demander pour soi. L\'aide vient à qui se tourne d\'abord vers Lui.',
+  },
+  {
+    type: 'Verset', titre: 'La grande demande', ar: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ', tr: 'ihdinā ṣ-ṣirāṭa l-mustaqīm',
+    fr: 'Guide-nous vers le droit chemin.', source: 'al-Fātiḥa, 6',
+    commentaire:
+      'Voici le cœur de la prière : une demande, ihdinā, « guide-nous ». Le verbe hadā (guider), que vous connaissez, reçoit le pronom suffixe ـنَا (nous).\n' +
+      'الصِّرَاط est le chemin large et droit ; مُسْتَقِيم (droit, qui se tient droit) est son adjectif épithète, qui le suit et reprend l\'article. On reconnaît la structure : nom défini + adjectif défini.\n' +
+      'De tout ce qu\'il pourrait demander, le croyant demande d\'abord la guidance. Le reste — santé, subsistance, réussite — n\'a de valeur que sur le chemin droit. On répète cette demande dans chaque prière, jour après jour.',
   },
   {
     type: 'Sourate', titre: 'al-Ikhlāṣ, le Monothéisme pur (112)',
@@ -117,5 +155,15 @@ const Lectures = [
       'Elle se partage en deux : la première moitié est louange et reconnaissance d\'Allah (Seigneur, Miséricordieux, Maître du Jour) ; la seconde est demande (guide-nous). Entre les deux, le verset charnière إِيَّاكَ نَعْبُدُ unit l\'adorateur à son Seigneur.\n' +
       'La grande demande de toute la sourate tient en un mot : ihdinā, « guide-nous », vers le ṣirāṭ mustaqīm, le chemin droit. Tout le reste de la vie spirituelle découle de cette requête répétée jour et nuit.\n' +
       'Vous voici au terme du programme : vous lisez et comprenez la sourate qui ouvre le Coran. Reprenez-la souvent ; chaque retour en dévoile une saveur nouvelle.',
+  },
+  {
+    type: 'Sourate', titre: 'an-Naṣr, le Secours (110) — pour continuer',
+    ar: 'إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ ۝ وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا ۝ فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ إِنَّهُ كَانَ تَوَّابًا',
+    tr: 'idhā jāʾa naṣru llāhi wa-l-fatḥ · wa-raʾayta n-nāsa yadkhulūna fī dīni llāhi afwājā · fa-sabbiḥ bi-ḥamdi rabbika wa-staghfirhu innahu kāna tawwābā',
+    fr: 'Lorsque viennent le secours d\'Allah et la victoire, et que tu vois les gens entrer en foule dans la religion d\'Allah, alors glorifie ton Seigneur par la louange et implore Son pardon. Certes, Il est Celui qui accueille le repentir.',
+    commentaire:
+      'Une nouvelle sourate, pour montrer que la route continue. Vous y reconnaissez déjà beaucoup : naṣr (le secours), an-nās (les gens), dīn (la religion), yadkhulūna (ils entrent, de dakhala), bi-ḥamdi (par la louange), rabbika (ton Seigneur, avec le suffixe ـكَ).\n' +
+      'On la dit révélée vers la fin de la vie du Prophète ﷺ : à l\'heure du triomphe, l\'ordre n\'est pas de se glorifier, mais de glorifier Allah et de demander pardon. La victoire véritable rend humble.\n' +
+      'تَوَّاب, sur le schème intensif faʿʿāl, dit Celui qui ne cesse d\'accueillir le repentir, encore et encore. Quel que soit l\'éloignement, la porte du retour reste ouverte. Voilà de quoi reprendre, demain, une sourate de plus.',
   },
 ];
