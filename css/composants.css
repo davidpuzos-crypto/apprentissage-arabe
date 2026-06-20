@@ -44,15 +44,16 @@
   font-weight: 500;
   padding: 0.72rem 1.6rem;
   border-radius: var(--rayon);
-  border: 1px solid var(--accent);
-  background: var(--accent);
+  border: 1px solid var(--vert-profond);
+  background: linear-gradient(180deg, var(--vert-doux), var(--accent));
   color: var(--sur-accent);
   cursor: pointer;
-  transition: all var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
   letter-spacing: 0.01em;
-  box-shadow: 0 1px 2px rgba(18,40,30,0.12);
+  box-shadow: 0 1px 2px rgba(18,40,30,0.18), inset 0 1px 0 rgba(255,255,255,0.12);
 }
-.btn:hover:not(:disabled) { background: var(--vert-profond); border-color: var(--vert-profond); transform: translateY(-1px); box-shadow: 0 3px 10px rgba(18,40,30,0.18); }
+.btn:hover:not(:disabled) { background: linear-gradient(180deg, var(--accent), var(--vert-profond)); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(18,40,30,0.22), inset 0 1px 0 rgba(255,255,255,0.12); }
+.btn:active:not(:disabled) { transform: translateY(0); box-shadow: 0 1px 2px rgba(18,40,30,0.2); }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
 
 .btn-secondaire {
@@ -437,8 +438,8 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
 .retour-exo .expl { display: block; margin-top: 0.45rem; padding-top: 0.45rem; border-top: 1px solid currentColor; opacity: 0.92; font-size: 0.9rem; line-height: 1.5; }
 
 /* Barre de progression d'exercices */
-.barre-progres-exo { height: 4px; background: var(--bordure); border-radius: 2px; overflow: hidden; margin: 1rem 0; }
-.barre-progres-exo > span { display: block; height: 100%; background: var(--accent); transition: width var(--transition); }
+.barre-progres-exo { height: 6px; background: var(--bordure); border-radius: 3px; overflow: hidden; margin: 1rem 0; box-shadow: inset 0 1px 2px rgba(0,0,0,0.08); }
+.barre-progres-exo > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--vert-doux)); border-radius: 3px; transition: width 0.45s cubic-bezier(.2,.8,.2,1); }
 
 /* Bouton de bouton audio */
 .btn-audio {
@@ -542,3 +543,60 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
   .grille-lecons { grid-template-columns: repeat(4, 1fr); }
   .touche-ar { min-width: 26px; font-size: 1.2rem; }
 }
+
+/* =========================================================================
+   Finitions « application pro » : profondeur, états soignés, animations
+   ========================================================================= */
+
+/* Marques de correction sur les options de QCM */
+.option { position: relative; }
+.option.juste, .option.faux { padding-right: 2.6rem; }
+.option.juste::after { content: '✓'; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--succes); font-weight: 700; }
+.option.faux::after { content: '✕'; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--erreur); font-weight: 700; }
+.option:hover:not(.fige) { transform: translateY(-1px); }
+.option.juste, .option.faux { transition: transform var(--transition), background var(--transition), border-color var(--transition); }
+
+/* Animations de réponse */
+@keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.035); } 100% { transform: scale(1); } }
+@keyframes secousse { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+.anim-pop { animation: pop 0.34s ease; }
+.anim-secousse { animation: secousse 0.4s ease; }
+
+/* Leçon en cours : anneau qui respire ; leçon acquise : dégradé soyeux */
+.case-lecon.en-cours { animation: anneau 2.4s ease-out infinite; }
+@keyframes anneau {
+  0% { box-shadow: 0 0 0 0 rgba(28,84,64,0.35); }
+  70% { box-shadow: 0 0 0 9px rgba(28,84,64,0); }
+  100% { box-shadow: 0 0 0 0 rgba(28,84,64,0); }
+}
+.case-lecon.terminee { background: linear-gradient(155deg, var(--vert-doux), var(--accent)); box-shadow: 0 2px 8px rgba(18,40,30,0.18); }
+
+/* Cartes du tableau de bord et vitrines : élévation au survol */
+.carte-mot:hover, .tuile-lettre:hover, .case-lecon:hover { box-shadow: 0 6px 18px rgba(18,40,30,0.12); }
+
+/* Panneau « à mémoriser » : halo doré discret */
+.a-memoriser {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(168,133,58,0.08), transparent 60%),
+    var(--fond-carte-profond);
+}
+
+/* Entraînement : étoiles de fin et annonce animée */
+.jeu-annonce { animation: pop 0.3s ease; }
+.jeu-etoiles { font-size: 2.1rem; letter-spacing: 0.35rem; color: var(--or); margin: 0.2rem 0 0.4rem; }
+.jeu-etoiles .vide { color: var(--bordure); }
+.jeu-pts { display: inline-block; }
+
+/* Sections de leçon : apparition douce */
+.section-lecon { animation: fondu 0.4s ease both; }
+
+/* Liens de la barre : transition de soulignement */
+.barre nav a.actif::after { transition: opacity var(--transition); }
+
+/* Tableau de bord : panneau de statistiques soigné */
+.stats-accueil {
+  background: var(--fond-carte); border: 1px solid var(--bordure);
+  border-radius: var(--rayon); box-shadow: var(--ombre-carte); padding: 0.5rem 0.3rem;
+}
+.stat + .stat { border-left: 1px solid var(--bordure); }
+@media (max-width: 520px) { .stat + .stat { border-left: none; } }

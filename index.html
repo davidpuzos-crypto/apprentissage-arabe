@@ -78,9 +78,21 @@
     const serie = Stockage.serieActuelle();
     const terminees = Stockage.etat.leconsTerminees.length;
     document.getElementById('stats').innerHTML = `
-      <div class="stat"><div class="valeur">${terminees}/30</div><div class="label">Leçons acquises</div></div>
-      <div class="stat"><div class="valeur">${motsMaitrises}</div><div class="label">Mots maîtrisés</div></div>
-      <div class="stat"><div class="valeur">${serie}</div><div class="label">Jours de suite</div></div>`;
+      <div class="stat"><div class="valeur" data-cible="${terminees}" data-suffixe="/30">0/30</div><div class="label">Leçons acquises</div></div>
+      <div class="stat"><div class="valeur" data-cible="${motsMaitrises}">0</div><div class="label">Mots maîtrisés</div></div>
+      <div class="stat"><div class="valeur" data-cible="${serie}">0</div><div class="label">Jours de suite</div></div>`;
+    // Compteurs animés (effet « application »)
+    document.querySelectorAll('#stats .valeur').forEach((el) => {
+      const cible = +el.dataset.cible || 0, suf = el.dataset.suffixe || '';
+      if (cible === 0) { el.textContent = '0' + suf; return; }
+      const t0 = performance.now();
+      (function anime(t) {
+        const p = Math.min(1, (t - t0) / 650);
+        const v = Math.round(cible * (0.5 - Math.cos(p * Math.PI) / 2));
+        el.textContent = v + suf;
+        if (p < 1) requestAnimationFrame(anime);
+      })(t0);
+    });
 
     // Bouton reprendre
     const courante = Stockage.etat.leconCourante;

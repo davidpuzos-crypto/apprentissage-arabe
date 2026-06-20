@@ -93,6 +93,7 @@ const Exercices = (function () {
         const reussi = i === exo.bonne;
         Array.from(liste.children).forEach((c) => c.classList.add('fige'));
         b.classList.add(reussi ? 'juste' : 'faux');
+        b.classList.add(reussi ? 'anim-pop' : 'anim-secousse');
         if (!reussi) liste.children[exo.bonne].classList.add('juste');
         montrerRetour(retour, reussi,
           'Très bien, c\'est exact.',
@@ -567,6 +568,7 @@ const Exercices = (function () {
         const reussi = i === exo.bonne;
         Array.from(liste.children).forEach((c) => c.classList.add('fige'));
         b.classList.add(reussi ? 'juste' : 'faux');
+        b.classList.add(reussi ? 'anim-pop' : 'anim-secousse');
         if (!reussi) liste.children[exo.bonne].classList.add('juste');
         montrerRetour(retour, reussi,
           'Bonne lecture. La transcription est exacte.',
