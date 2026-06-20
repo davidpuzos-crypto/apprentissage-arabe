@@ -348,6 +348,13 @@ const Lecons = {
         'كَتَبَ (kataba, il a écrit) et كَاتِب (kātib, celui qui écrit) ne diffèrent que par l\'allongement.\n' +
         'Tendez l\'oreille : la voyelle longue dure environ deux fois plus que la courte.',
     },
+    approfondissement: [
+      { titre: 'Ligatures et signes à reconnaître',
+        corps: 'Quelques assemblages reviennent sans cesse et méritent d\'être identifiés tout de suite.\n' +
+          'Le lām suivi d\'un alif fusionne obligatoirement en لا : on le voit dans لَا (non) et dans سَلَام (paix).\n' +
+          'Deux alifs qui se rencontrent se fondent en un seul, surmonté d\'une madda : آ, comme dans آمَنَ (il a cru) ou القُرْآن.\n' +
+          'Enfin, l\'alif maqṣūra ى est un alif final écrit comme un yāʾ sans points : il note un â à la fin de mots comme عَلَىٰ, إِلَىٰ, مُوسَىٰ.' },
+    ],
     vocabulaire: [
       { ar: 'قَالَ', tr: 'qāla', fr: 'il a dit', cle: 'qala' },
       { ar: 'كَبِير', tr: 'kabīr', fr: 'grand', cle: 'kabir' },
@@ -469,6 +476,12 @@ const Lecons = {
         'De même à la troisième personne : huwa (il), hiya (elle).\n' +
         'Ces pronoms suffisent à former une phrase complète, car le verbe « être » au présent n\'existe pas : huwa kabīr veut dire « il est grand ».',
     },
+    approfondissement: [
+      { titre: 'Se saluer et se présenter',
+        corps: 'Avec les pronoms, vous pouvez déjà tenir un premier échange. السَّلَامُ عَلَيْكُمْ (que la paix soit sur vous) se répond par وَعَلَيْكُمُ السَّلَام.\n' +
+          'Pour demander un nom : مَا اسْمُكَ ؟ (à un homme), مَا اسْمُكِ ؟ (à une femme) ; on répond اِسْمِي… (mon nom est…). Le ـِي final, c\'est « mon ».\n' +
+          'Pour l\'origine : مِنْ أَيْنَ أَنْتَ ؟ (d\'où es-tu ?), et l\'on répond أَنَا مِنْ… (je suis de…). De petites phrases, mais déjà de l\'arabe vivant.' },
+    ],
     vocabulaire: [
       { ar: 'أَنَا', tr: 'anā', fr: 'je, moi', cle: 'ana' },
       { ar: 'أَنْتَ', tr: 'anta', fr: 'tu (m.)', cle: 'anta' },
@@ -582,6 +595,12 @@ const Lecons = {
         'En règle générale, le sujet est défini (avec l\'article) et l\'attribut est indéfini (avec un tanwīn).\n' +
         'C\'est cette différence, défini contre indéfini, qui signale lequel est le sujet et lequel est ce qu\'on en dit.',
     },
+    approfondissement: [
+      { titre: 'Thème, propos, et l\'adjectif qui suit',
+        corps: 'Les deux termes de la phrase nominale ont un nom en arabe : le sujet est le mubtadaʾ (المُبْتَدَأ, « le propos initial »), et l\'attribut est le khabar (الخَبَر, « le propos »).\n' +
+          'Une oreille attentive remarque la déclinaison : le mubtadaʾ se termine souvent par « ou » (ḍamma) et le khabar par « oun » (tanwīn). On y reviendra ; pour l\'instant, il suffit de l\'entendre.\n' +
+          'L\'adjectif épithète, lui, se place toujours APRÈS le nom et s\'accorde avec lui. S\'il qualifie un nom défini, il reprend l\'article : comparez هَٰذَا صِرَاطٌ مُسْتَقِيمٌ (un chemin droit, deux indéfinis) et الصِّرَاطَ الْمُسْتَقِيمَ (le chemin droit, deux définis).' },
+    ],
     vocabulaire: [
       { ar: 'كَبِير', tr: 'kabīr', fr: 'grand', cle: 'kabir' },
       { ar: 'صَغِير', tr: 'ṣaghīr', fr: 'petit', cle: 'saghir' },
@@ -602,6 +621,11 @@ const Lecons = {
         segments: [ 'الْوَلَدُ', { options: ['صَغِيرٌ', 'كَبِيرَةٌ'], bonne: 0 } ], traduction: 'l\'enfant est petit', cles: ['saghir'] },
       { type: 'appariement', consigne: 'Reliez chaque adjectif à son sens.',
         paires: [ { ar: 'كَبِير', fr: 'grand', cle: 'kabir' }, { ar: 'صَغِير', fr: 'petit', cle: 'saghir' }, { ar: 'قَرِيب', fr: 'proche', cle: 'qarib' }, { ar: 'حَكِيم', fr: 'sage', cle: 'hakim' } ] },
+      { type: 'qcm', consigne: 'Pour dire « la grande maison » (nom défini), l\'adjectif s\'écrit :',
+        options: [{ ar: 'الْكَبِيرُ' }, { ar: 'كَبِيرٌ' }], bonne: 0,
+        explication: 'Le nom étant défini, l\'épithète reprend l\'article : الْبَيْتُ الْكَبِيرُ.' },
+      { type: 'glisser', consigne: 'Reconstituez ce passage coranique (phrase nominale avec épithète).',
+        ordre: ['هَٰذَا', 'صِرَاطٌ', 'مُسْتَقِيمٌ'], traduction: 'Ceci est un chemin droit. (al-Ḥijr, 41)', cles: ['hadha'] },
       { type: 'oral', consigne: 'Lisez cette phrase nominale.',
         phraseAr: 'اللَّهُ غَفُورٌ', translit: 'allāhu ghafūr' },
     ],
@@ -638,7 +662,16 @@ const Lecons = {
         'La distance compte aussi : hādhā désigne le proche (ceci), dhālika le lointain (cela).\n' +
         'Devant un nom indéfini, on traduit par « ceci est… » ; devant un nom avec article, par « ce… là ».',
     },
+    approfondissement: [
+      { titre: 'Poser une question',
+        corps: 'Les démonstratifs appellent vite des questions. Trois outils suffisent pour commencer.\n' +
+          'هَلْ ouvre une question fermée, à laquelle on répond par oui ou non : هَلْ هَٰذَا وَلَدٌ ؟ (est-ce un garçon ?). On répond نَعَمْ (oui) ou لَا (non).\n' +
+          'مَا demande « quoi » : مَا هَٰذَا ؟ (qu\'est-ce ?). أَيْنَ demande « où » : أَيْنَ الرَّجُلُ ؟ (où est l\'homme ?). Avec مِنْ, on obtient مِنْ أَيْنَ (d\'où).' },
+    ],
     vocabulaire: [
+      { ar: 'هَلْ', tr: 'hal', fr: 'est-ce que (question)', cle: 'hal' },
+      { ar: 'أَيْنَ', tr: 'ayna', fr: 'où', cle: 'ayna' },
+      { ar: 'نَعَمْ', tr: 'naʿam', fr: 'oui', cle: 'naam' },
       { ar: 'هَٰذَا', tr: 'hādhā', fr: 'ceci (m.)', cle: 'hadha' },
       { ar: 'هَٰذِهِ', tr: 'hādhihi', fr: 'ceci (f.)', cle: 'hadhihi' },
       { ar: 'ذَٰلِكَ', tr: 'dhālika', fr: 'cela (m.)', cle: 'dhalika' },
@@ -658,6 +691,11 @@ const Lecons = {
         ordre: ['هَٰذَا', 'كِتَابٌ'], traduction: 'ceci est un livre', cles: ['hadha','kitab'] },
       { type: 'trous', consigne: 'Complétez : « ceci est un jardin » (féminin).',
         segments: [ { options: ['هَٰذِهِ', 'هَٰذَا'], bonne: 0 }, 'جَنَّةٌ' ], traduction: 'ceci est un jardin', cles: ['hadhihi','janna'] },
+      { type: 'trous', consigne: 'Complétez la question fermée « … ceci un garçon ? ».',
+        segments: [ { options: ['هَلْ', 'مَا'], bonne: 0 }, 'هَٰذَا وَلَدٌ' ], traduction: 'est-ce un garçon ?', cles: ['hal'] },
+      { type: 'qcm', consigne: 'Comment demande-t-on « où est l\'homme ? »',
+        options: [{ ar: 'أَيْنَ الرَّجُلُ ؟' }, { ar: 'مَا الرَّجُلُ ؟' }, { ar: 'هَلِ الرَّجُلُ ؟' }], bonne: 0, cles: ['ayna'],
+        explication: 'أَيْنَ interroge sur le lieu : « où ».' },
       { type: 'oral', consigne: 'Lisez ce début de verset très connu.',
         phraseAr: 'ذَٰلِكَ الْكِتَابُ', translit: 'dhālika l-kitāb', cles: ['dhalika'] },
     ],
@@ -1156,7 +1194,17 @@ const Lecons = {
         'بِـ (bi) signifie « par, avec, en » ; لِـ (li) signifie « à, pour, appartenant à ».\n' +
         'On reconnaît bi-smi llāh, « au nom d\'Allah », où bi- est collé et Allāh porte la kasra.',
     },
+    approfondissement: [
+      { titre: 'Le prédicat en tête : la phrase locative',
+        corps: 'Quand on situe quelque chose, l\'arabe place souvent le groupe prépositionnel (le khabar) AVANT le sujet indéfini. On lit alors, mot à mot, « dans tel lieu, telle chose ».\n' +
+          'Ainsi وَفِي الْأَرْضِ آيَاتٌ se traduit « et sur la terre il y a des signes » (al-Dhāriyāt, 20). Le sens « il y a » naît de cette inversion, sans aucun verbe.\n' +
+          'Pour situer avec précision, voici les prépositions de lieu : أَمَامَ (devant), خَلْفَ (derrière), فَوْقَ (au-dessus), تَحْتَ (dessous), جَنْبَ (à côté), بَيْنَ (entre), عِنْدَ (auprès de).' },
+    ],
     vocabulaire: [
+      { ar: 'فَوْقَ', tr: 'fawqa', fr: 'au-dessus de', cle: 'fawqa' },
+      { ar: 'تَحْتَ', tr: 'taḥta', fr: 'au-dessous de', cle: 'tahta' },
+      { ar: 'أَمَامَ', tr: 'amāma', fr: 'devant', cle: 'amama' },
+      { ar: 'عِنْدَ', tr: 'ʿinda', fr: 'auprès de, chez', cle: 'inda' },
       { ar: 'فِي', tr: 'fī', fr: 'dans', cle: 'fi' },
       { ar: 'عَلَىٰ', tr: 'ʿalā', fr: 'sur', cle: 'ala' },
       { ar: 'إِلَىٰ', tr: 'ilā', fr: 'vers', cle: 'ila' },
@@ -1177,6 +1225,9 @@ const Lecons = {
         segments: [ { ar: 'لِـ', role: 'préposition' }, { ar: 'اللَّهِ', role: 'nom' } ], roles: ['préposition','nom'], cles: ['li'] },
       { type: 'trous', consigne: 'Complétez « dans les poitrines » (fī ṣudūr).',
         segments: [ { options: ['فِي', 'عَلَىٰ'], bonne: 0 }, 'صُدُورِ النَّاسِ' ], traduction: 'dans les poitrines des hommes', cles: ['fi'] },
+      { type: 'qcm', consigne: 'Que signifie la préposition فَوْقَ ?',
+        options: [{ texte: 'au-dessus de' }, { texte: 'au-dessous de' }, { texte: 'devant' }], bonne: 0, cles: ['fawqa'],
+        explication: 'فَوْقَ : au-dessus ; son opposé est تَحْتَ (dessous).' },
       { type: 'oral', consigne: 'Lisez ce groupe prépositionnel.',
         phraseAr: 'فِي الْعُقَدِ', translit: 'fī l-ʿuqad', cles: ['fi'] },
     ],
@@ -1268,7 +1319,14 @@ const Lecons = {
         'لَمْ (lam) nie le passé et se construit avec un verbe à l\'inaccompli : lam yalid, « il n\'a pas engendré ».\n' +
         'لَيْسَ (laysa) est un verbe qui signifie « ne pas être » ; مَا (mā) sert aussi de négation, surtout du passé.',
     },
+    approfondissement: [
+      { titre: 'Conjuguer laysa : « ne pas être »',
+        corps: 'Pour nier une phrase nominale, l\'arabe emploie le verbe لَيْسَ, « ne pas être ». Il n\'existe qu\'à une seule forme mais exprime le présent.\n' +
+          'Aux premières personnes : لَسْتُ (je ne suis pas), لَسْتَ (tu n\'es pas, masc.), لَسْتِ (tu n\'es pas, fém.), لَيْسَ (il n\'est pas), لَيْسَتْ (elle n\'est pas).\n' +
+          'Exemple : لَسْتُ غَنِيًّا, « je ne suis pas riche ». Remarquez que l\'attribut qui suit laysa prend la terminaison « an » (cas direct).' },
+    ],
     vocabulaire: [
+      { ar: 'لَسْتُ', tr: 'lastu', fr: 'je ne suis pas', cle: 'lastu' },
       { ar: 'لَا', tr: 'lā', fr: 'non, ne... pas', cle: 'la' },
       { ar: 'مَا', tr: 'mā', fr: 'ne... pas ; ce que', cle: 'ma' },
       { ar: 'لَيْسَ', tr: 'laysa', fr: 'il n\'est pas', cle: 'laysa' },
@@ -1289,6 +1347,8 @@ const Lecons = {
         paires: [ { ar: 'لَا', fr: 'ne... pas (général)', cle: 'la' }, { ar: 'لَمْ', fr: 'ne... pas (passé)', cle: 'lam' }, { ar: 'لَيْسَ', fr: 'il n\'est pas', cle: 'laysa' }, { ar: 'إِلَّا', fr: 'sinon', cle: 'illa' } ] },
       { type: 'glisser', consigne: 'Reconstituez la formule « il n\'est de dieu sinon Allah ».',
         ordre: ['لَا', 'إِلَـٰهَ', 'إِلَّا', 'اللَّهُ'], traduction: 'il n\'est de dieu sinon Allah', cles: ['la','ilah','illa'] },
+      { type: 'trous', consigne: 'Complétez « je ne suis pas riche » avec la forme de laysa.',
+        segments: [ { options: ['لَسْتُ', 'لَيْسَ'], bonne: 0 }, 'غَنِيًّا' ], traduction: 'je ne suis pas riche', cles: ['lastu'] },
       { type: 'oral', consigne: 'Récitez cette attestation fondamentale.',
         phraseAr: 'لَا إِلَـٰهَ إِلَّا اللَّهُ', translit: 'lā ilāha illā llāh', cles: ['la','illa'] },
     ],
@@ -1450,6 +1510,10 @@ const Lecons = {
         corps: 'Le Coran enseigne : « À Allah appartiennent les plus beaux noms, invoquez-Le par eux » (al-Aʿrāf, 180). La tradition en compte un grand nombre, souvent évoqué par le chiffre de quatre-vingt-dix-neuf.\n' +
           'Chaque nom ouvre une porte vers une qualité divine : ar-Raḥmān vers la miséricorde, al-ʿAlīm vers le savoir, al-Ḥakīm vers la sagesse. Les connaître, c\'est apprendre à lire les bienfaits et les épreuves à la lumière de Celui qui les dispose.\n' +
           'Dans la voie naqshbandi comme dans tout cheminement, l\'évocation des noms, le dhikr, polit le cœur et le rapproche de son Seigneur. Que cette leçon de vocabulaire soit aussi, si vous le souhaitez, une invitation à l\'invocation.' },
+      { titre: 'Le schème faʿʿāl : du métier au Nom divin',
+        corps: 'Beaucoup de noms suivent le schème faʿʿāl, où la deuxième consonne est redoublée. Il exprime l\'intensité ou le métier : خَبَّاز (boulanger, de khubz), صَيَّاد (pêcheur, chasseur), بَنَّاء (bâtisseur).\n' +
+          'Appliqué à Allah, ce même schème dit une qualité portée à son comble : الغَفَّار (Celui qui pardonne sans cesse, de la racine غ-ف-ر), الرَّزَّاق (Celui qui pourvoit en abondance, de رزق), الوَهَّاب (le Donateur inlassable).\n' +
+          'Reconnaître ce schème, c\'est entendre dans le Nom une générosité ou une miséricorde sans limite, et non une simple qualité.' },
     ],
     vocabulaire: [
       { ar: 'الرَّحْمَـٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux', cle: 'rahman' },
