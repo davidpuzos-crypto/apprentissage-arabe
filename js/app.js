@@ -54,8 +54,9 @@ const App = (function () {
   function barre(pageActive) {
     const liens = [
       { href: 'index.html', txt: 'Accueil', cle: 'accueil' },
-      { href: 'lecture.html', txt: 'Lecture du jour', cle: 'lecture' },
+      { href: 'lecture.html', txt: 'Lecture', cle: 'lecture' },
       { href: 'vocabulaire.html', txt: 'Vocabulaire', cle: 'vocabulaire' },
+      { href: 'entrainement.html', txt: 'Entraînement', cle: 'entrainement' },
       { href: 'revision.html', txt: 'Révision', cle: 'revision' },
       { href: 'progression.html', txt: 'Progression', cle: 'progression' },
     ];
@@ -66,7 +67,7 @@ const App = (function () {
     const vis = Stockage.phonetique() === 'visible';
     return `
       <div class="barre">
-        <a href="index.html" class="marque">Arabe coranique</a>
+        <a href="index.html" class="marque">Institut Naqshbandi</a>
         <nav>
           ${nav}
           <button class="bascule-mini bascule-phonetique ${vis ? 'actif' : ''}" title="Afficher ou masquer la phonétique" onclick="App.basculerPhonetique()">${vis ? 'phonétique visible' : 'phonétique masquée'}</button>

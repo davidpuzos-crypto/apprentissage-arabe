@@ -19,14 +19,14 @@ const Lectures = [
       'À l\'oral, observez le lām emphatique et appuyé, puis le souffle final du hā. Dans la tradition spirituelle, la simple évocation de ce Nom, le dhikr, est une lumière pour le cœur. Prononcez-le lentement, en conscience.',
   },
   {
-    type: 'Mot', titre: 'Le Tout Miséricordieux', ar: 'الرَّحْمَٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux',
+    type: 'Mot', titre: 'Le Tout Miséricordieux', ar: 'الرَّحْمَـٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux',
     commentaire:
       'ar-Raḥmān vient de la racine ر-ح-م, qui désigne aussi le sein maternel, raḥim. La miséricorde divine y est comparée, en plus immense encore, à la tendresse d\'une mère.\n' +
       'ar-Raḥmān dit une miséricorde débordante qui embrasse toute la création, croyants et non-croyants. Son frère ar-Raḥīm, que nous verrons, dit une miséricorde continue et particulière.\n' +
       'Méditez ce point : avant de Se nommer Juge ou Puissant dans l\'ouverture du Livre, Allah Se nomme par la miséricorde. C\'est le climat dans lequel tout le Coran se lit.',
   },
   {
-    type: 'Verset', titre: 'La basmala', ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', tr: 'bismi llāhi r-raḥmāni r-raḥīm',
+    type: 'Verset', titre: 'La basmala', ar: 'بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ', tr: 'bismi llāhi r-raḥmāni r-raḥīm',
     fr: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux.', source: 'Ouverture de presque toute sourate',
     commentaire:
       'Voici la formule par laquelle s\'ouvre presque chaque sourate, et que le croyant prononce avant chaque acte. بِسْمِ se décompose en بِـ (au, par) et اسْم (nom).\n' +
@@ -59,7 +59,7 @@ const Lectures = [
   },
   {
     type: 'Sourate', titre: 'al-Ikhlāṣ, le Monothéisme pur (112)',
-    ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ',
+    ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ',
     tr: 'qul huwa llāhu aḥad · allāhu ṣ-ṣamad · lam yalid wa-lam yūlad · wa-lam yakun lahu kufuwan aḥad',
     fr: 'Dis : il est Allah, Unique. Allah, le Soutien universel. Il n\'a pas engendré et n\'a pas été engendré, et nul ne Lui est égal.',
     commentaire:
@@ -69,7 +69,7 @@ const Lectures = [
   },
   {
     type: 'Sourate', titre: 'al-ʿAṣr, le Temps (103)',
-    ar: 'وَالْعَصْرِ ۝ إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ',
+    ar: 'وَالْعَصْرِ ۝ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ ۝ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ',
     tr: 'wa-l-ʿaṣr · inna l-insāna la-fī khusr · illā lladhīna āmanū wa-ʿamilū ṣ-ṣāliḥāti wa-tawāṣaw bi-l-ḥaqqi wa-tawāṣaw bi-ṣ-ṣabr',
     fr: 'Par le Temps, l\'être humain est certes en perdition, sauf ceux qui croient, accomplissent les bonnes œuvres, s\'enjoignent mutuellement la vérité et s\'enjoignent mutuellement la patience.',
     commentaire:
@@ -79,7 +79,7 @@ const Lectures = [
   },
   {
     type: 'Sourate', titre: 'al-Falaq, l\'Aube (113)',
-    ar: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِنْ شَرِّ مَا خَلَقَ ۝ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ',
+    ar: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ',
     tr: 'qul aʿūdhu bi-rabbi l-falaq · min sharri mā khalaq · wa-min sharri ghāsiqin idhā waqab · wa-min sharri n-naffāthāti fī l-ʿuqad · wa-min sharri ḥāsidin idhā ḥasad',
     fr: 'Dis : je cherche refuge auprès du Seigneur de l\'aube, contre le mal de ce qu\'Il a créé, contre le mal de l\'obscurité quand elle s\'étend, contre le mal de celles qui soufflent sur les nœuds, et contre le mal de l\'envieux quand il envie.',
     commentaire:
@@ -89,7 +89,7 @@ const Lectures = [
   },
   {
     type: 'Sourate', titre: 'an-Nās, les Hommes (114)',
-    ar: 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ',
+    ar: 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَـٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ',
     tr: 'qul aʿūdhu bi-rabbi n-nās · maliki n-nās · ilāhi n-nās · min sharri l-waswāsi l-khannās · alladhī yuwaswisu fī ṣudūri n-nās · mina l-jinnati wa-n-nās',
     fr: 'Dis : je cherche refuge auprès du Seigneur des hommes, le Roi des hommes, le Dieu des hommes, contre le mal du tentateur furtif qui souffle le mal dans les poitrines des hommes, qu\'il soit des djinns ou des hommes.',
     commentaire:
@@ -109,7 +109,7 @@ const Lectures = [
   },
   {
     type: 'Sourate', titre: 'al-Fātiḥa, l\'Ouverture (1)',
-    ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
+    ar: 'بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَـٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',
     tr: 'bismi llāhi r-raḥmāni r-raḥīm · al-ḥamdu li-llāhi rabbi l-ʿālamīn · ar-raḥmāni r-raḥīm · māliki yawmi d-dīn · iyyāka naʿbudu wa-iyyāka nastaʿīn · ihdinā ṣ-ṣirāṭa l-mustaqīm · ṣirāṭa lladhīna anʿamta ʿalayhim ghayri l-maghḍūbi ʿalayhim wa-lā ḍ-ḍāllīn',
     fr: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux. Louange à Allah, Seigneur des mondes, le Tout Miséricordieux, le Très Miséricordieux, Maître du Jour de la rétribution. C\'est Toi que nous adorons et c\'est Toi dont nous implorons le secours. Guide-nous vers le droit chemin, le chemin de ceux que Tu as comblés de grâces, non de ceux qui ont encouru Ta colère, ni des égarés.',
     commentaire:

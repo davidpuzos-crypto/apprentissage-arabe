@@ -1,9 +1,13 @@
-# Arabe coranique, méthode progressive
+# Institut Naqshbandi · Apprentissage coranique
 
 Une application web autonome pour apprendre l'arabe coranique depuis zéro,
 dans l'esprit d'un manuel élégant et exigeant. Trente leçons mènent du
 déchiffrage des premières lettres à la lecture comprise de plusieurs sourates
 courtes.
+
+Le texte des six sourates du parcours est aligné caractère par caractère sur
+une référence Tanzil (quran-simple, riwāya Ḥafṣ), avec l'orthographe du muṣḥaf
+(assimilations, alif suscrit), vérifié verset par verset.
 
 ## Lancer l'application
 
@@ -16,6 +20,7 @@ arabe-coranique/
 ├── lecon.html          template de leçon, paramétré par ?id=1 … ?id=30
 ├── lecture.html        lecture du jour (programme progressif commenté)
 ├── vocabulaire.html    vocabulaire coranique fréquent (dès le premier jour)
+├── entrainement.html   entraînement libre avec points et niveaux
 ├── revision.html       salle de révision (mots et phrases, répétition espacée)
 ├── progression.html    statistiques détaillées
 ├── css/                base, composants, thème sombre
@@ -32,6 +37,18 @@ arabe-coranique/
 ## Vocabulaire fréquent, dès le départ
 
 La page « Vocabulaire » réunit les mots les plus courants du Coran, classés par thème (outils grammaticaux, noms divins, création, foi, personnes, verbes), dans l'esprit du corpus « 80% des mots du Coran ». Chaque carte se retourne, se prononce, et peut être programmée dans la salle de révision. Inutile d'attendre : reconnaître ces mots éclaire aussitôt de nombreux versets.
+
+## Entraînement et points
+
+La page « Entraînement » génère des questions tirées de tout le vocabulaire
+rencontré (leçons et mots fréquents) : reconnaissance du sens, choix du mot
+arabe, lecture phonétique. Chaque bonne réponse rapporte des points, avec un
+bonus de série, et fait progresser un niveau. C'est la révision libre et
+ludique, dans l'esprit des applications de langue, mais sobre.
+
+Par ailleurs, chaque leçon complète désormais ses exercices rédigés par des
+questions générées à partir de son propre vocabulaire (appariement, sens,
+lecture phonétique), pour un entraînement plus dense.
 
 ## Lecture du jour
 

@@ -37,7 +37,7 @@ const Frequent = {
       mots: [
         { ar: 'اللَّه', tr: 'allāh', fr: 'Allah', cle: 'f_allah', note: 'Le Nom suprême. Présent près de trois mille fois dans le Coran.' },
         { ar: 'رَبّ', tr: 'rabb', fr: 'Seigneur, Éducateur', cle: 'f_rabb', note: 'Racine ر-ب-ب : celui qui nourrit, élève et mène une chose à sa perfection.' },
-        { ar: 'الرَّحْمَٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux', cle: 'f_rahman', note: 'Miséricorde immense, embrassant toute la création.' },
+        { ar: 'الرَّحْمَـٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux', cle: 'f_rahman', note: 'Miséricorde immense, embrassant toute la création.' },
         { ar: 'الرَّحِيم', tr: 'ar-raḥīm', fr: 'le Très Miséricordieux', cle: 'f_rahim', note: 'Miséricorde agissante, continue, en particulier envers les croyants.' },
         { ar: 'الْعَلِيم', tr: 'al-ʿalīm', fr: 'l\'Omniscient', cle: 'f_alim', note: 'Racine ع-ل-م du savoir.' },
         { ar: 'الْحَكِيم', tr: 'al-ḥakīm', fr: 'le Sage', cle: 'f_hakim' },

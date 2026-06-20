@@ -152,7 +152,7 @@
     const sEx = section('Exercices');
     const intro2 = document.createElement('p');
     intro2.className = 'muet petit';
-    intro2.textContent = 'Réussissez au moins quatre exercices sur cinq pour valider la leçon. Vous restez libre d\'avancer à votre rythme.';
+    intro2.textContent = 'Réussissez environ quatre exercices sur cinq pour valider la leçon. Vous restez libre d\'avancer à votre rythme.';
     sEx.appendChild(intro2);
 
     const barreP = elt('<div class="barre-progres-exo"><span style="width:0"></span></div>');
@@ -161,7 +161,42 @@
     sEx.appendChild(conteneurEx);
     racine.appendChild(sEx);
 
-    const total = lecon.exercices.length;
+    // Exercices supplémentaires générés à partir du vocabulaire de la leçon,
+    // pour densifier l'entraînement. Toujours corrects, car tirés des données.
+    function genererSupplementaires(lecon) {
+      const voc = (lecon.vocabulaire || []).filter((m) => m.ar && m.tr && m.fr && m.cle);
+      if (voc.length < 3) return [];
+      const mel = (a) => Exercices.melanger(a);
+      const autresQue = (mot, champ, n) => {
+        const out = [];
+        for (const m of mel(voc)) { if (out.length >= n) break; if (m[champ] !== mot[champ]) out.push(m); }
+        return out;
+      };
+      const sup = [];
+      // Appariement de l'ensemble du vocabulaire (jusqu'à 6 paires)
+      sup.push({ type: 'appariement', consigne: 'Reliez chaque mot de la leçon à sa traduction.',
+        paires: mel(voc).slice(0, 6).map((m) => ({ ar: m.ar, fr: m.fr, cle: m.cle })) });
+      // Deux QCM de sens (arabe vers français)
+      mel(voc).slice(0, 2).forEach((mot) => {
+        const d = autresQue(mot, 'fr', 2);
+        if (d.length < 2) return;
+        const opts = mel([{ texte: mot.fr, ok: true }, { texte: d[0].fr }, { texte: d[1].fr }]);
+        sup.push({ type: 'qcm', consigne: 'Que signifie ce mot ?', enonceAr: mot.ar,
+          options: opts.map((o) => ({ texte: o.texte })), bonne: opts.findIndex((o) => o.ok), cles: [mot.cle] });
+      });
+      // Deux exercices de lecture phonétique (arabe vers transcription)
+      mel(voc).slice(0, 2).forEach((mot) => {
+        const d = autresQue(mot, 'tr', 2);
+        if (d.length < 2) return;
+        const opts = mel([{ tr: mot.tr, ok: true }, { tr: d[0].tr }, { tr: d[1].tr }]);
+        sup.push({ type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription exacte.',
+          motAr: mot.ar, options: opts.map((o) => o.tr), bonne: opts.findIndex((o) => o.ok), cles: [mot.cle] });
+      });
+      return sup;
+    }
+
+    const exercices = lecon.exercices.concat(genererSupplementaires(lecon));
+    const total = exercices.length;
     let repondus = 0, reussis = 0;
     const motsRates = new Set();
 
@@ -177,7 +212,7 @@
       majPied();
     }
 
-    lecon.exercices.forEach((exo, i) => {
+    exercices.forEach((exo, i) => {
       Exercices.rendre(exo, i, conteneurEx, surReponse, id);
     });
 

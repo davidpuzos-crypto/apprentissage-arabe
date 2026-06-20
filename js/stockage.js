@@ -20,6 +20,7 @@ const Stockage = (function () {
     preferences: { theme: 'clair', police: 'scheherazade', phonetique: 'masquee' },
     lecture: { etape: 0, derniereDate: null, faites: [] }, // programme « Lecture du jour »
     phrases: {},   // suivi de mémorisation des phrases clefs : { cle: {palier, prochaine} }
+    jeu: { xp: 0, parties: 0, meilleureSerie: 0 }, // entraînement avec points
     creeLe: Date.now(),
   };
 
@@ -36,6 +37,7 @@ const Stockage = (function () {
         preferences: Object.assign({}, defaut.preferences, donnees.preferences || {}),
         lecture: Object.assign({}, defaut.lecture, donnees.lecture || {}),
         phrases: donnees.phrases || {},
+        jeu: Object.assign({}, defaut.jeu, donnees.jeu || {}),
       });
     } catch (e) {
       console.warn('Lecture du stockage impossible, réinitialisation.', e);
@@ -156,6 +158,25 @@ const Stockage = (function () {
   }
   function phrasesADue() { return Repetition.motsADue(etat.phrases); }
 
+  /* ---- Entraînement et points (XP) ---- */
+  // Paliers de niveau : XP cumulé requis pour atteindre chaque niveau.
+  function niveauPour(xp) {
+    // Progression douce : niveau n requiert 50·n·(n+1)/2 environ.
+    let n = 1, seuil = 0, pas = 100;
+    while (xp >= seuil + pas) { seuil += pas; n++; pas += 50; }
+    return { niveau: n, dansNiveau: xp - seuil, pourNiveau: pas };
+  }
+  function jeu() { return etat.jeu; }
+  function niveau() { return niveauPour(etat.jeu.xp); }
+  function ajouterPartie(points, meilleureSerie) {
+    etat.jeu.xp += points;
+    etat.jeu.parties += 1;
+    if (meilleureSerie > etat.jeu.meilleureSerie) etat.jeu.meilleureSerie = meilleureSerie;
+    marquerPratiqueDuJour();
+    sauver();
+    return niveau();
+  }
+
   /* ---- Divers ---- */
   function reinitialiser() { etat = structuredClone(defaut); sauver(); }
   function exporter() { return JSON.stringify(etat, null, 2); }
@@ -167,6 +188,7 @@ const Stockage = (function () {
     marquerPratiqueDuJour, serieActuelle,
     theme, definirTheme, police, definirPolice, phonetique, definirPhonetique,
     lecture, avancerLecture, enregistrerPhrase, phrasesADue,
+    jeu, niveau, ajouterPartie,
     reinitialiser, exporter, sauver,
   };
 })();
