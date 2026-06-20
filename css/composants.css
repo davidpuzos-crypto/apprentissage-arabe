@@ -91,6 +91,13 @@
 .bascule-mini:hover { border-color: var(--accent); color: var(--accent); }
 .bascule-mini.actif { border-color: var(--accent); color: var(--accent); background: rgba(28,84,64,0.07); }
 .barre nav { flex-wrap: wrap; gap: 0.7rem 1rem; justify-content: flex-end; }
+.reglages { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.burger {
+  display: none; background: none; border: 1px solid var(--bordure); border-radius: var(--rayon);
+  width: 42px; height: 38px; font-size: 1.2rem; color: var(--texte-doux); cursor: pointer;
+  align-items: center; justify-content: center; transition: all var(--transition);
+}
+.burger:hover { border-color: var(--accent); color: var(--accent); }
 
 /* Entraînement (points) */
 .jeu-tete { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.4rem; }
@@ -484,19 +491,54 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
 @keyframes fondu { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 760px) {
-  /* Barre plus ergonomique : marque centrée au-dessus, navigation dessous */
-  .barre { flex-direction: column; align-items: center; gap: 0.6rem; padding: 0.7rem 1rem; }
-  .barre nav { justify-content: center; gap: 0.6rem 0.9rem; }
+  /* Navigation repliable : la marque et le burger restent en tête,
+     les liens et réglages se déploient au clic. */
+  .barre { flex-wrap: wrap; align-items: center; padding: 0.7rem 1rem; gap: 0.5rem; }
+  .burger { display: inline-flex; }
+  .barre nav { display: none; flex-basis: 100%; flex-direction: column; align-items: stretch;
+    justify-content: flex-start; gap: 0; margin-top: 0.4rem; }
+  .barre.menu-ouvert nav { display: flex; }
+  .barre nav a { padding: 0.85rem 0.5rem; font-size: 1.02rem; border-top: 1px solid var(--bordure); }
+  .barre nav a.actif::after { display: none; }
+  .barre nav a.actif { background: var(--fond-carte-profond); border-radius: var(--rayon); }
+  .reglages { justify-content: center; gap: 0.6rem; padding: 0.7rem 0; border-top: 1px solid var(--bordure); }
+
   .pied-lecon { flex-wrap: wrap; }
   .pied-lecon > * { flex: 1 1 auto; text-align: center; }
+  /* Cibles tactiles plus confortables */
+  .option { padding: 0.95rem 1rem; }
+  .btn { padding: 0.8rem 1.4rem; }
+  .touche-ar { height: 48px; }
 }
 
 @media (max-width: 520px) {
+  .contenu { padding: 1.3rem 0.9rem 5rem; }
   .stats-accueil { grid-template-columns: 1fr 1fr; }
-  .zone-appariement { gap: 0.8rem; }
-  h1 { font-size: 2rem; }
-  .carte-flash .ar { font-size: 2.8rem; }
-  .lecture-ar { font-size: 2.2rem; }
+  .zone-appariement { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.55rem; }
+  .arabe { font-size: 2.2rem; }
+  .carte-flash .ar { font-size: 2.6rem; }
+  .lecture-ar { font-size: 2.1rem; }
+  .a-memoriser .ar { font-size: 2.1rem; }
+  .enonce-ar { font-size: 1.9rem; }
   .actions-accueil { flex-direction: column; }
   .actions-accueil .btn { min-width: 0; }
+  /* Vocabulaire : tableau plus compact */
+  .tableau-voc .col-ar { font-size: 1.6rem; width: 34%; }
+  .tableau-voc td { padding: 0.6rem 0.35rem; }
+  .carte, .exercice, .lecture-carte { padding: 1.1rem; }
+  /* Entraînement : bandeau de score empilé */
+  .jeu-tete { flex-wrap: wrap; gap: 0.5rem 0.8rem; }
+  .jeu-progres { order: 3; flex-basis: 100%; }
+  /* Clavier arabe : touches plus petites pour tenir sur l'écran */
+  .touche-ar { min-width: 30px; height: 44px; font-size: 1.3rem; }
+  .clavier-arabe { padding: 0.5rem 0.3rem; }
+  .bulle { max-width: 95%; }
+  .grille-cartes { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 360px) {
+  .grille-lecons { grid-template-columns: repeat(4, 1fr); }
+  .touche-ar { min-width: 26px; font-size: 1.2rem; }
 }

@@ -38,6 +38,14 @@ arabe-coranique/
 
 La page « Vocabulaire » réunit les mots les plus courants du Coran, classés par thème (outils grammaticaux, noms divins, création, foi, personnes, verbes), dans l'esprit du corpus « 80% des mots du Coran ». Chaque carte se retourne, se prononce, et peut être programmée dans la salle de révision. Inutile d'attendre : reconnaître ces mots éclaire aussitôt de nombreux versets.
 
+## Usage mobile
+
+L'interface est pensée pour le téléphone : la navigation se replie derrière
+un bouton menu (les six rubriques et les réglages se déploient au clic), les
+cibles tactiles sont agrandies, les tableaux, cartes, dialogues et le bandeau
+de l'entraînement s'adaptent aux petits écrans, et le clavier arabe ramène le
+champ de saisie au-dessus de lui à l'ouverture.
+
 ## Exactitude et mode sombre
 
 Toutes les citations de versets affichées (références « sourate, numéro ») ont
