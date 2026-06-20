@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arabe coranique, méthode progressive</title>
+  <title>Institut Naqshbandi · Apprentissage coranique</title>
   <meta name="description" content="Apprendre l'arabe coranique depuis zéro, pas à pas, dans l'esprit d'un manuel élégant.">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/composants.css">
@@ -14,7 +14,7 @@
   <main class="contenu">
 
     <header class="centre">
-      <p class="cycle-romain">Méthode progressive</p>
+      <p class="cycle-romain">Institut Naqshbandi · Apprentissage coranique</p>
       <h1>L'arabe du Coran, pas à pas</h1>
       <p class="muet" style="max-width:520px;margin:0.5rem auto 0;">
         Trente leçons pour passer du déchiffrage des premières lettres
@@ -32,6 +32,7 @@
     </div>
     <div class="actions-accueil">
       <a class="btn btn-secondaire" id="reviser" href="revision.html">Faire ma révision du jour</a>
+      <a class="btn btn-secondaire" id="entrainer" href="entrainement.html">M'entraîner (points)</a>
       <a class="btn btn-secondaire" href="vocabulaire.html">Vocabulaire fréquent</a>
     </div>
 
@@ -95,6 +96,12 @@
     // Lecture du jour : indique l'étape atteinte
     const etapeLecture = Stockage.lecture().etape || 0;
     document.getElementById('lecture').href = 'lecture.html?i=' + Math.min(etapeLecture, 12);
+
+    // Entraînement : affiche le niveau et les points cumulés
+    const nv = Stockage.niveau();
+    const xp = Stockage.jeu().xp;
+    document.getElementById('entrainer').textContent =
+      xp > 0 ? ('M\'entraîner · niveau ' + nv.niveau + ' (' + xp + ' pts)') : 'M\'entraîner (points)';
 
     // Construction des cycles et de la grille
     const titresCycles = [

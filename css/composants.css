@@ -92,6 +92,19 @@
 .bascule-mini.actif { border-color: var(--accent); color: var(--accent); background: rgba(28,84,64,0.07); }
 .barre nav { flex-wrap: wrap; gap: 0.7rem 1rem; justify-content: flex-end; }
 
+/* Entraînement (points) */
+.jeu-tete { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.4rem; }
+.jeu-score { font-family: var(--f-ui); font-size: 0.95rem; color: var(--texte-doux); white-space: nowrap; }
+.jeu-pts { font-family: var(--f-titre); font-size: 1.6rem; font-weight: 600; color: var(--or-profond); }
+.jeu-niveau { font-family: var(--f-ui); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); white-space: nowrap; }
+.jeu-progres { flex: 1; height: 8px; background: var(--bordure); border-radius: 4px; overflow: hidden; }
+.jeu-progres > span { display: block; height: 100%; background: linear-gradient(to right, var(--accent), var(--vert-doux)); transition: width 0.4s ease; }
+#jeu .exercice-numero { display: none; }
+.jeu-annonce { text-align: center; font-family: var(--f-ui); font-weight: 600; margin-top: 0.8rem; }
+.jeu-annonce.bon { color: var(--succes); }
+.jeu-annonce.neutre { color: var(--texte-doux); }
+.jeu-bilan-pts { font-family: var(--f-titre); font-size: 2.4rem; font-weight: 600; color: var(--or-profond); margin: 0.4rem 0; }
+
 /* Avis audio discret */
 .avis-audio {
   max-width: var(--largeur-max); margin: 0.8rem auto 0; padding: 0.7rem 1rem;
