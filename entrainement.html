@@ -70,7 +70,7 @@
         motAr:mot.ar, options:opts.map(o=>o.tr), bonne:opts.findIndex(o=>o.ok), cles:[mot.cle] };
     }
 
-    let i=0, points=0, serie=0, meilleureSerie=0;
+    let i=0, points=0, serie=0, meilleureSerie=0, bonnes=0;
 
     // Bandeau de score
     const tete = document.createElement('div'); tete.className='jeu-tete';
@@ -90,11 +90,11 @@
       let repondu=false;
       Exercices.rendre(exo, i, qZone, (reussi)=>{
         if (repondu) return; repondu=true;
-        if (reussi){ serie++; meilleureSerie=Math.max(meilleureSerie,serie);
+        if (reussi){ bonnes++; serie++; meilleureSerie=Math.max(meilleureSerie,serie);
           const bonus = Math.min((serie-1)*2, 10);
           const gagne = 10 + bonus; points += gagne;
           document.getElementById('pts').textContent = points;
-          annonce('+'+gagne+(bonus?' (série '+serie+')':''), true);
+          annonce('+'+gagne+(bonus?' · série '+serie:''), true);
         } else { serie=0; annonce('Réponse notée', false); }
         const suite = document.createElement('button');
         suite.className='btn btn-bloc'; suite.style.marginTop='1rem';
@@ -116,17 +116,30 @@
       const avant = Stockage.niveau().niveau;
       const apres = Stockage.ajouterPartie(points, meilleureSerie);
       const monteNiveau = apres.niveau > avant;
+      const taux = bonnes / N;
+      const nbEtoiles = taux >= 0.9 ? 3 : (taux >= 0.6 ? 2 : 1);
+      const etoiles = '★★★'.slice(0, nbEtoiles).padEnd(3, '☆');
+      const etoilesHtml = etoiles.split('').map(c => c === '★' ? '★' : '<span class="vide">☆</span>').join('');
+      const mot = nbEtoiles === 3 ? 'Excellent, mā shāʾa Llāh.' : (nbEtoiles === 2 ? 'Bien joué, continuez ainsi.' : 'C\'est un début ; la régularité fera le reste.');
       qZone.innerHTML = `<div class="carte centre apparait">
         <h2>Partie terminée</h2>
-        <p class="jeu-bilan-pts">+${points} points</p>
-        <p class="muet">Meilleure série : ${meilleureSerie} bonnes réponses d'affilée.</p>
-        ${monteNiveau?`<p style="color:var(--accent);font-weight:600">Vous passez au niveau ${apres.niveau} !</p>`:`<p class="muet petit">Niveau ${apres.niveau} · ${apres.dansNiveau}/${apres.pourNiveau} points vers le suivant</p>`}
-        <div class="jeu-progres" style="max-width:280px;margin:1rem auto"><span style="width:${Math.round(apres.dansNiveau/apres.pourNiveau*100)}%"></span></div>
+        <div class="jeu-etoiles">${etoilesHtml}</div>
+        <p class="jeu-bilan-pts" id="bilan-pts">+0 points</p>
+        <p class="muet">${bonnes}/${N} bonnes réponses · meilleure série : ${meilleureSerie}</p>
+        <p class="muet petit">${mot}</p>
+        ${monteNiveau?`<p style="color:var(--accent);font-weight:600;font-size:1.1rem">Vous passez au niveau ${apres.niveau} !</p>`:`<p class="muet petit">Niveau ${apres.niveau} · ${apres.dansNiveau}/${apres.pourNiveau} points vers le suivant</p>`}
+        <div class="jeu-progres" style="max-width:280px;margin:1rem auto"><span id="bilan-barre" style="width:0"></span></div>
         <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
           <button class="btn" onclick="location.reload()">Rejouer</button>
           <a class="btn btn-secondaire" href="index.html">Accueil</a>
         </div>
       </div>`;
+      // Compteur de points animé + remplissage de la barre de niveau
+      const cible = points; const el = document.getElementById('bilan-pts'); const t0 = performance.now();
+      (function compte(t){ const p = Math.min(1, (t - t0) / 700); const v = Math.round(cible * (0.5 - Math.cos(p * Math.PI) / 2));
+        el.textContent = '+' + v + ' points'; if (p < 1) requestAnimationFrame(compte); })(t0);
+      setTimeout(() => { const b = document.getElementById('bilan-barre'); if (b) b.style.width = Math.round(apres.dansNiveau / apres.pourNiveau * 100) + '%'; }, 120);
+      return;
     }
 
     if (pool.length < 6){
