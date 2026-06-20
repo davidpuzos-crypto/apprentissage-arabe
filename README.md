@@ -38,6 +38,17 @@ arabe-coranique/
 
 La page « Vocabulaire » réunit les mots les plus courants du Coran, classés par thème (outils grammaticaux, noms divins, création, foi, personnes, verbes), dans l'esprit du corpus « 80% des mots du Coran ». Chaque carte se retourne, se prononce, et peut être programmée dans la salle de révision. Inutile d'attendre : reconnaître ces mots éclaire aussitôt de nombreux versets.
 
+## Densité pédagogique
+
+Le parcours a été densifié en s'inspirant d'un excellent module débutant
+(Institut Imtiyaz, « Unité 1 : la phrase nominale ») : règles complémentaires
+intégrées sans changer le déroulé (le couple mubtadaʾ/khabar et l'iʿrāb,
+l'adjectif épithète, les interrogatifs hal / mā / ayna, la phrase locative et
+les prépositions de lieu, la conjugaison de laysa, les ligatures lām-alif /
+madda / alif maqṣūra, le schème intensif faʿʿāl des noms divins), un
+vocabulaire concret du quotidien attesté dans le Coran, des salutations
+usuelles, et des proverbes coraniques vérifiés mot pour mot.
+
 ## Entraînement et points
 
 La page « Entraînement » génère des questions tirées de tout le vocabulaire
