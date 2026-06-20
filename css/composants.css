@@ -377,6 +377,14 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
   font-family: var(--f-arabe); font-size: 1.6rem; border: none; background: transparent;
   color: var(--accent); cursor: pointer; direction: rtl;
 }
+/* Listes déroulantes des exercices : lisibles dans les deux thèmes */
+.exercice select, .segment select {
+  background: var(--fond-carte); color: var(--texte);
+  border: 1px solid var(--bordure); border-radius: 5px; padding: 0.15rem 0.3rem;
+}
+.exercice select option, .trou select option, .segment select option {
+  background: var(--fond-carte); color: var(--texte);
+}
 
 /* Saisie clavier */
 .zone-saisie {
