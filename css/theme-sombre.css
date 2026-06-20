@@ -4,6 +4,7 @@
    ========================================================================= */
 
 html[data-theme="sombre"] {
+  color-scheme: dark; /* contrôles natifs (listes, champs) adoptent le sombre */
   --papier: #0e1a14;
   --papier-profond: #14241b;
   --encre: #e8e1cb;
