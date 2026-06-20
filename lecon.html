@@ -106,6 +106,22 @@
           });
           dec.appendChild(tab);
         }
+        if (bloc.dialogue) {
+          if (bloc.titreDialogue) dec.appendChild(elt(`<p class="muet petit" style="margin-top:1rem">${bloc.titreDialogue}</p>`));
+          const conv = document.createElement('div'); conv.className = 'dialogue';
+          bloc.dialogue.forEach((tour) => {
+            const b = document.createElement('div');
+            b.className = 'bulle ' + (tour.qui === 'B' ? 'bulle-b' : 'bulle-a');
+            const ar = document.createElement('div'); ar.className = 'bulle-ar';
+            ar.textContent = tour.ar; ar.appendChild(audioBtn(tour.ar));
+            ar.style.cursor = 'pointer';
+            ar.onclick = () => Parole.prononcer(tour.ar, { rate: Parole.rateSelonLecon(id) });
+            b.appendChild(ar);
+            b.insertAdjacentHTML('beforeend', (tour.tr ? App.phon(tour.tr) : '') + `<span class="bulle-fr">${tour.fr || ''}</span>`);
+            conv.appendChild(b);
+          });
+          dec.appendChild(conv);
+        }
       });
       racine.appendChild(dec);
     }

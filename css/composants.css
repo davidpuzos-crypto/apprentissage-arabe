@@ -207,6 +207,17 @@
 .tuile-lettre .nom { font-family: var(--f-ui); font-size: 0.85rem; color: var(--texte-doux); margin-top: 0.5rem; }
 .tuile-lettre .son { font-style: italic; color: var(--or-profond); font-size: 0.95rem; }
 
+/* Dialogue (échanges parlés) */
+.dialogue { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0; }
+.bulle {
+  max-width: 85%; padding: 0.7rem 1rem; border-radius: 12px; border: 1px solid var(--bordure);
+  background: var(--fond-carte);
+}
+.bulle-a { align-self: flex-start; border-bottom-left-radius: 3px; }
+.bulle-b { align-self: flex-end; border-bottom-right-radius: 3px; background: var(--fond-carte-profond); border-color: var(--accent-doux); }
+.bulle-ar { font-family: var(--f-arabe); direction: rtl; font-size: 1.7rem; line-height: 1.9; color: var(--encre); }
+.bulle-fr { display: block; font-size: 1rem; color: var(--texte-doux); margin-top: 0.2rem; }
+
 /* Note grammaticale */
 .note-grammaire {
   background: var(--fond-carte-profond);
@@ -408,6 +419,7 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
 .retour-exo.visible { display: block; }
 .retour-exo.bon { background: rgba(58,95,62,0.1); color: var(--succes); border: 1px solid var(--succes); }
 .retour-exo.moins { background: rgba(138,44,44,0.08); color: var(--erreur); border: 1px solid var(--erreur); }
+.retour-exo .expl { display: block; margin-top: 0.45rem; padding-top: 0.45rem; border-top: 1px solid currentColor; opacity: 0.92; font-size: 0.9rem; line-height: 1.5; }
 
 /* Barre de progression d'exercices */
 .barre-progres-exo { height: 4px; background: var(--bordure); border-radius: 2px; overflow: hidden; margin: 1rem 0; }
