@@ -40,6 +40,46 @@ const Lectures = [
       'Méditez la tendresse cachée dans ce nom : invoquer son Rabb, c\'est s\'adresser à Celui qui nous façonne avec soin, comme un éducateur attentif à chaque pas.',
   },
   {
+    type: 'Invocation', titre: 'L\'istighfār — demander pardon', ar: 'أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ', tr: 'astaghfiru llāha l-ʿaẓīm',
+    fr: 'Je demande pardon à Allah, l\'Immense.', source: 'Dhikr quotidien',
+    commentaire:
+      'Voici quelques courtes invocations que l\'on récite régulièrement, notamment dans le wird quotidien et la wazīfa. Elles sont brèves, faites de mots que vous connaissez déjà : les apprendre, c\'est nourrir la langue et le cœur en même temps.\n' +
+      'Adab : la composition exacte du wird, son ordre et le nombre des répétitions se reçoivent de son shaykh et de sa ṭarīqa. Ce qui suit n\'est qu\'une ouverture, pour goûter et mémoriser ; référez-vous à votre guide pour la pratique réglée.\n' +
+      'أَسْتَغْفِرُ se construit sur la racine غ-ف-ر (le pardon, déjà vue dans al-Ghafūr). On commence souvent le dhikr par l\'istighfār : on déblaie le cœur avant d\'y faire entrer la lumière. Beaucoup le répètent matin et soir.',
+  },
+  {
+    type: 'Invocation', titre: 'La ṣalāt sur le Prophète ﷺ', ar: 'اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ', tr: 'allāhumma ṣalli ʿalā sayyidinā Muḥammad',
+    fr: 'Ô Allah, prie sur notre maître Muhammad.', source: 'Dhikr quotidien',
+    commentaire:
+      'اللَّهُمَّ (allāhumma) est la forme d\'appel : « Ô Allah ». صَلِّ est l\'impératif du verbe ṣallā, le même que dans fa-ṣalli li-rabbika (al-Kawthar). عَلَىٰ (sur) vous est familier, et سَيِّدِنَا signifie « notre maître ».\n' +
+      'Envoyer la ṣalāt sur le Prophète ﷺ est un acte que le croyant multiplie ; on l\'accroît particulièrement le vendredi. C\'est une pierre angulaire du wird naqshbandī comme de la prière de tout musulman.\n' +
+      'On l\'allonge souvent : … وَعَلَىٰ آلِهِ وَصَحْبِهِ وَسَلِّمْ (« … et sur sa famille et ses compagnons, et accorde-leur le salut »). Commencez par la forme courte, puis ajoutez la suite quand elle vous sera aisée.',
+  },
+  {
+    type: 'Invocation', titre: 'La parole de l\'Unicité', ar: 'لَا إِلَـٰهَ إِلَّا اللَّهُ', tr: 'lā ilāha illā llāh',
+    fr: 'Il n\'est de divinité sinon Allah.', source: 'Le dhikr par excellence',
+    commentaire:
+      'C\'est la parole la plus dense de l\'islam, et le cœur du dhikr dans la voie naqshbandī. لَا (non) nie ; إِلَّا (sauf, déjà vu) excepte : on écarte toute fausse divinité, puis on n\'affirme que Lui.\n' +
+      'Les maîtres décrivent un mouvement intérieur : avec لَا إِلَـٰهَ on ôte du cœur tout ce qui n\'est pas Lui ; avec إِلَّا اللَّهُ on y installe Sa seule présence. La langue accompagne ce que le cœur accomplit.\n' +
+      'Beaucoup la répètent en silence ou à voix basse, le regard intérieur tourné vers le cœur. Une seule phrase, et tout le tawḥīd y tient.',
+  },
+  {
+    type: 'Invocation', titre: 'Tasbīḥ, taḥmīd, takbīr', ar: 'سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَـٰهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ', tr: 'subḥāna llāh · wa-l-ḥamdu li-llāh · wa-lā ilāha illā llāh · wa-llāhu akbar',
+    fr: 'Gloire à Allah, louange à Allah, il n\'est de divinité sinon Allah, et Allah est le plus grand.', source: 'al-bāqiyāt aṣ-ṣāliḥāt',
+    commentaire:
+      'Quatre formules enfilées par le وَ de liaison, qu\'on appelle les bāqiyāt aṣ-ṣāliḥāt, « les bonnes œuvres qui demeurent ». سُبْحَانَ اللَّهِ déclare Allah pur de tout défaut ; الْحَمْدُ لِلَّهِ Lui rend la louange (déjà vu) ; puis l\'Unicité ; puis اللَّهُ أَكْبَرُ, « Allah est plus grand » que tout.\n' +
+      'On les récite souvent après chaque prière obligatoire, généralement trente-trois fois pour les premières. Elles tiennent dans la main, sur les phalanges ou le chapelet (subḥa).\n' +
+      'Remarquez comme vous lisez maintenant une longue suite sans peine : article, annexion, négation, liaison — toute votre grammaire est là, au service du dhikr.',
+  },
+  {
+    type: 'Invocation', titre: 'La ḥawqala — il n\'est de force qu\'en Allah', ar: 'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ', tr: 'lā ḥawla wa-lā quwwata illā bi-llāh',
+    fr: 'Il n\'est de puissance ni de force qu\'en Allah.', source: 'Dhikr de la remise confiante',
+    commentaire:
+      'On l\'appelle la ḥawqala. لَا … وَلَا … nie deux fois : ni ḥawl (le pouvoir de changer les choses), ni quwwa (la force), إِلَّا بِاللَّهِ « sinon par Allah ». La préposition collée بِـ dit le moyen : c\'est par Lui, non par soi.\n' +
+      'On la dit dans l\'épreuve, la fatigue, ou devant une tâche qui dépasse ses forces : elle remet l\'affaire à Celui qui détient toute capacité. Un trésor du Paradis, selon le ḥadīth.\n' +
+      'Spirituellement, elle éteint la prétention du « moi » : ce n\'est pas ma force, c\'est la Sienne. Le serviteur s\'efface, et trouve le repos dans cet effacement.',
+  },
+  {
     type: 'Verset', titre: 'La basmala', ar: 'بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ', tr: 'bismi llāhi r-raḥmāni r-raḥīm',
     fr: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux.', source: 'Ouverture de presque toute sourate',
     commentaire:
