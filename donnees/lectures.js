@@ -43,24 +43,24 @@ const Lectures = [
     type: 'Invocation', titre: 'L\'istighfār — demander pardon', ar: 'أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ', tr: 'astaghfiru llāha l-ʿaẓīm',
     fr: 'Je demande pardon à Allah, l\'Immense.', source: 'Dhikr quotidien',
     commentaire:
-      'Voici quelques courtes invocations que l\'on récite régulièrement, notamment dans le wird quotidien et la wazīfa. Elles sont brèves, faites de mots que vous connaissez déjà : les apprendre, c\'est nourrir la langue et le cœur en même temps.\n' +
-      'Adab : la composition exacte du wird, son ordre et le nombre des répétitions se reçoivent de son shaykh et de sa ṭarīqa. Ce qui suit n\'est qu\'une ouverture, pour goûter et mémoriser ; référez-vous à votre guide pour la pratique réglée.\n' +
-      'أَسْتَغْفِرُ se construit sur la racine غ-ف-ر (le pardon, déjà vue dans al-Ghafūr). On commence souvent le dhikr par l\'istighfār : on déblaie le cœur avant d\'y faire entrer la lumière. Beaucoup le répètent matin et soir.',
+      'Voici quelques courtes invocations que l\'on récite régulièrement, seul ou à la suite de la prière. Elles sont brèves, faites de mots que vous connaissez déjà : les apprendre, c\'est nourrir la langue et le cœur en même temps.\n' +
+      'Ce n\'est ici qu\'une ouverture, pour goûter et mémoriser quelques formules ; un recueil plus complet pourra venir plus tard.\n' +
+      'أَسْتَغْفِرُ se construit sur la racine غ-ف-ر (le pardon, déjà vue dans al-Ghafūr). On commence souvent le dhikr par l\'istighfār : on déblaie le cœur avant d\'y faire entrer la lumière. On le répète volontiers trois fois, matin et soir.',
   },
   {
     type: 'Invocation', titre: 'La ṣalāt sur le Prophète ﷺ', ar: 'اللَّهُمَّ صَلِّ عَلَىٰ سَيِّدِنَا مُحَمَّدٍ', tr: 'allāhumma ṣalli ʿalā sayyidinā Muḥammad',
     fr: 'Ô Allah, prie sur notre maître Muhammad.', source: 'Dhikr quotidien',
     commentaire:
       'اللَّهُمَّ (allāhumma) est la forme d\'appel : « Ô Allah ». صَلِّ est l\'impératif du verbe ṣallā, le même que dans fa-ṣalli li-rabbika (al-Kawthar). عَلَىٰ (sur) vous est familier, et سَيِّدِنَا signifie « notre maître ».\n' +
-      'Envoyer la ṣalāt sur le Prophète ﷺ est un acte que le croyant multiplie ; on l\'accroît particulièrement le vendredi. C\'est une pierre angulaire du wird naqshbandī comme de la prière de tout musulman.\n' +
+      'Envoyer la ṣalāt sur le Prophète ﷺ est un acte que le croyant multiplie ; on l\'accroît particulièrement le vendredi. C\'est une pierre angulaire de la prière et du dhikr de tout musulman.\n' +
       'On l\'allonge souvent : … وَعَلَىٰ آلِهِ وَصَحْبِهِ وَسَلِّمْ (« … et sur sa famille et ses compagnons, et accorde-leur le salut »). Commencez par la forme courte, puis ajoutez la suite quand elle vous sera aisée.',
   },
   {
     type: 'Invocation', titre: 'La parole de l\'Unicité', ar: 'لَا إِلَـٰهَ إِلَّا اللَّهُ', tr: 'lā ilāha illā llāh',
     fr: 'Il n\'est de divinité sinon Allah.', source: 'Le dhikr par excellence',
     commentaire:
-      'C\'est la parole la plus dense de l\'islam, et le cœur du dhikr dans la voie naqshbandī. لَا (non) nie ; إِلَّا (sauf, déjà vu) excepte : on écarte toute fausse divinité, puis on n\'affirme que Lui.\n' +
-      'Les maîtres décrivent un mouvement intérieur : avec لَا إِلَـٰهَ on ôte du cœur tout ce qui n\'est pas Lui ; avec إِلَّا اللَّهُ on y installe Sa seule présence. La langue accompagne ce que le cœur accomplit.\n' +
+      'C\'est la parole la plus dense de l\'islam, et le cœur du dhikr. لَا (non) nie ; إِلَّا (sauf, déjà vu) excepte : on écarte toute fausse divinité, puis on n\'affirme que Lui.\n' +
+      'On décrit souvent un mouvement intérieur : avec لَا إِلَـٰهَ on ôte du cœur tout ce qui n\'est pas Lui ; avec إِلَّا اللَّهُ on y installe Sa seule présence. La langue accompagne ce que le cœur accomplit.\n' +
       'Beaucoup la répètent en silence ou à voix basse, le regard intérieur tourné vers le cœur. Une seule phrase, et tout le tawḥīd y tient.',
   },
   {
