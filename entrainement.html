@@ -27,6 +27,7 @@
   <script src="js/stockage.js"></script>
   <script src="js/speech.js"></script>
   <script src="js/exercices.js"></script>
+  <script src="js/jeu.js"></script>
   <script src="js/app.js"></script>
   <script src="donnees/versets.js"></script>
   <script src="donnees/lecons.js"></script>
@@ -93,9 +94,11 @@
         if (reussi){ bonnes++; serie++; meilleureSerie=Math.max(meilleureSerie,serie);
           const bonus = Math.min((serie-1)*2, 10);
           const gagne = 10 + bonus; points += gagne;
-          document.getElementById('pts').textContent = points;
+          Jeu.compteAnime(document.getElementById('pts'), points, '', '', 450);
           annonce('+'+gagne+(bonus?' · série '+serie:''), true);
-        } else { serie=0; annonce('Réponse notée', false); }
+          if (serie % 5 === 0){ Jeu.son('serie'); Jeu.confettis({ y: window.innerHeight*0.35, nombre: 70 }); }
+          else { Jeu.son('bon'); }
+        } else { serie=0; Jeu.son('moins'); annonce('Réponse notée', false); }
         const suite = document.createElement('button');
         suite.className='btn btn-bloc'; suite.style.marginTop='1rem';
         suite.textContent = (i===N-1)?'Voir mon score':'Question suivante';
@@ -139,6 +142,7 @@
       (function compte(t){ const p = Math.min(1, (t - t0) / 700); const v = Math.round(cible * (0.5 - Math.cos(p * Math.PI) / 2));
         el.textContent = '+' + v + ' points'; if (p < 1) requestAnimationFrame(compte); })(t0);
       setTimeout(() => { const b = document.getElementById('bilan-barre'); if (b) b.style.width = Math.round(apres.dansNiveau / apres.pourNiveau * 100) + '%'; }, 120);
+      if (nbEtoiles >= 2) { Jeu.son('fin'); Jeu.confettis({ nombre: 120, y: window.innerHeight * 0.3 }); }
       return;
     }
 
