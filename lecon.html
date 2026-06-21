@@ -17,6 +17,7 @@
   <script src="js/speech.js"></script>
   <script src="js/clavier-arabe.js"></script>
   <script src="js/exercices.js"></script>
+  <script src="js/jeu.js"></script>
   <script src="js/app.js"></script>
   <script src="donnees/versets.js"></script>
   <script src="donnees/lecons.js"></script>
@@ -218,6 +219,7 @@
     const exercices = lecon.exercices.concat(genererSupplementaires(lecon));
     const total = exercices.length;
     let repondus = 0, reussis = 0, idx = 0;
+    let sessionPoints = 0, combo = 0, meilleurCombo = 0, xpAttribue = false;
     const motsRates = new Set();
 
     function enregistrer(reussi, cles) {
@@ -229,17 +231,69 @@
       });
     }
 
-    /* ---- VUE EXERCICES : un par un ---- */
+    /* ---- VUE EXERCICES : un par un, façon jeu ---- */
     vueExo.innerHTML = `
       <div class="exo-tete">
         <button class="btn-fantome petit" id="retour-cours">‹ Revoir le cours</button>
-        <span class="exo-compteur" id="exo-compteur"></span>
+        <div class="exo-jauges">
+          <span class="exo-combo" id="exo-combo" hidden>🔥&nbsp;<b id="exo-combo-n">0</b></span>
+          <span class="exo-pts"><b id="exo-pts">0</b> pts</span>
+          <button class="exo-son" id="exo-son" type="button" aria-label="Activer ou couper le son">🔊</button>
+        </div>
       </div>
+      <span class="exo-compteur" id="exo-compteur"></span>
       <div class="barre-progres-exo"><span id="exo-barre" style="width:0"></span></div>
       <div id="exo-slot"></div>`;
 
+    // Bouton son
+    const btnSon = document.getElementById('exo-son');
+    function majSon() { btnSon.textContent = Jeu.sonActif() ? '🔊' : '🔇'; btnSon.classList.toggle('muet', !Jeu.sonActif()); }
+    majSon();
+    btnSon.onclick = () => { Jeu.basculerSon(); majSon(); if (Jeu.sonActif()) Jeu.son('bon'); };
+
+    // Barre de retour « Continuer », créée une fois et fixée en bas
+    const barreRetour = document.createElement('div');
+    barreRetour.className = 'barre-retour';
+    barreRetour.innerHTML = `<div class="barre-retour-in">
+      <div class="br-icone" id="br-icone"></div>
+      <div class="br-txt"><b id="br-titre"></b><span class="br-sous" id="br-sous"></span></div>
+      <button class="btn br-continuer" id="br-continuer" type="button">Continuer</button></div>`;
+    document.body.appendChild(barreRetour);
+    const brIcone = document.getElementById('br-icone');
+    const brTitre = document.getElementById('br-titre');
+    const brSous = document.getElementById('br-sous');
+    const brContinuer = document.getElementById('br-continuer');
+    const encouragements = ['Très bien !', 'Excellent !', 'Parfait !', 'Bravo !', 'Mā shāʾa Llāh !', 'Continuez ainsi !'];
+
+    function cacherRetour() { barreRetour.classList.remove('montre', 'bon', 'moins'); document.body.classList.remove('retour-ouvert'); }
+    function montrerBarre(reussi, sous, dernier) {
+      barreRetour.classList.remove('bon', 'moins');
+      barreRetour.classList.add('montre', reussi ? 'bon' : 'moins');
+      document.body.classList.add('retour-ouvert');
+      brIcone.textContent = reussi ? '✓' : '✕';
+      brTitre.textContent = reussi ? encouragements[Math.floor(Math.random() * encouragements.length)] : 'Pas tout à fait';
+      brSous.textContent = sous || '';
+      brContinuer.textContent = dernier ? 'Terminer la leçon' : 'Continuer';
+      brContinuer.focus();
+    }
+    brContinuer.onclick = () => {
+      cacherRetour();
+      idx++;
+      document.getElementById('exo-barre').style.width = Math.round((idx / total) * 100) + '%';
+      afficherExo();
+    };
+
+    function majCombo() {
+      const c = document.getElementById('exo-combo');
+      if (combo >= 2) {
+        c.hidden = false; document.getElementById('exo-combo-n').textContent = combo;
+        c.classList.remove('pulse'); void c.offsetWidth; c.classList.add('pulse');
+      } else { c.hidden = true; }
+    }
+
     function afficherExo() {
       const slot = document.getElementById('exo-slot');
+      cacherRetour();
       if (idx >= total) { montrer('bilan'); return; }
       slot.innerHTML = '';
       document.getElementById('exo-compteur').textContent = 'Exercice ' + (idx + 1) + ' / ' + total;
@@ -253,18 +307,27 @@
 
       let repondu = false;
       Exercices.rendre(exercices[idx], idx, slot, (reussi, cles) => {
-        if (!repondu) { repondu = true; enregistrer(reussi, cles); }
-        nav.innerHTML = '';
-        const suivant = document.createElement('button');
-        suivant.className = 'btn btn-bloc';
-        suivant.textContent = (idx === total - 1) ? 'Terminer la leçon' : 'Exercice suivant';
-        suivant.onclick = () => {
-          idx++;
-          document.getElementById('exo-barre').style.width = Math.round((idx / total) * 100) + '%';
-          afficherExo();
-        };
-        nav.appendChild(suivant);
-        suivant.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        if (!repondu) {
+          repondu = true;
+          enregistrer(reussi, cles);
+          const dernier = (idx === total - 1);
+          if (reussi) {
+            combo++; meilleurCombo = Math.max(meilleurCombo, combo);
+            const bonus = Math.min((combo - 1) * 2, 10);
+            const gagne = 10 + bonus;
+            sessionPoints += gagne;
+            Jeu.compteAnime(document.getElementById('exo-pts'), sessionPoints, '', '', 450);
+            majCombo();
+            if (combo % 5 === 0) { Jeu.son('serie'); Jeu.confettis({ y: window.innerHeight * 0.35, nombre: 70 }); }
+            else { Jeu.son('bon'); }
+            montrerBarre(true, '+' + gagne + (bonus ? ' points · série ' + combo : ' points'), dernier);
+          } else {
+            combo = 0; majCombo();
+            Jeu.son('moins');
+            montrerBarre(false, 'Regardez la correction ci-dessus, puis continuez.', dernier);
+          }
+          passer.style.display = 'none';
+        }
       }, id);
       slot.appendChild(nav);
     }
@@ -318,14 +381,58 @@
       const seuil = Math.ceil(total * 0.8);
       const acquis = reussis >= seuil;
       if (acquis) Stockage.enregistrerScoreLecon(id, reussis, total);
-      scoreEl.innerHTML = acquis
-        ? `<div class="bilan-score bon"><div class="grand">${reussis} / ${total}</div><p>Leçon acquise, bārak Allāhu fīk. Vos mots rejoignent la révision.</p></div>`
-        : `<div class="bilan-score"><div class="grand">${reussis} / ${total}</div><p>Encore ${seuil - reussis} réussite${(seuil-reussis)>1?'s':''} pour valider la leçon. Vous pouvez refaire les exercices.</p></div>`;
+
+      // Récompense en points (XP), une seule fois, à la complétion réelle de la série
+      let info = Stockage.niveau();
+      let monteNiveau = false;
+      if (repondus >= total && !xpAttribue) {
+        const avant = Stockage.niveau().niveau;
+        info = Stockage.ajouterPartie(sessionPoints, meilleurCombo);
+        monteNiveau = info.niveau > avant;
+        xpAttribue = true;
+      }
+
+      const taux = total ? reussis / total : 0;
+      const nbEtoiles = taux >= 0.9 ? 3 : (taux >= 0.6 ? 2 : 1);
+      const etoilesHtml = '★★★'.split('').map((c, i) => i < nbEtoiles ? '★' : '<span class="vide">☆</span>').join('');
+      const phrase = acquis
+        ? (nbEtoiles === 3 ? 'Sans faute ou presque, mā shāʾa Llāh.' : 'Leçon acquise, bārak Allāhu fīk. Vos mots rejoignent la révision.')
+        : `Encore ${seuil - reussis} réussite${(seuil - reussis) > 1 ? 's' : ''} pour valider la leçon. Reprenez les exercices, tout doucement.`;
+
+      scoreEl.innerHTML = `<div class="bilan-jeu apparait">
+        <div class="jeu-etoiles">${etoilesHtml}</div>
+        <div class="grand-pts" id="bilan-grand">0 / ${total}</div>
+        <p class="${acquis ? 'bilan-ok' : 'muet'}">${phrase}</p>
+        <p class="muet petit">+<span id="bilan-xp">0</span> points${meilleurCombo >= 2 ? ' · meilleure série ' + meilleurCombo : ''}</p>
+        ${monteNiveau
+          ? `<p style="color:var(--accent);font-weight:600;font-size:1.1rem">Vous passez au niveau ${info.niveau} !</p>`
+          : `<p class="muet petit">Niveau ${info.niveau} · ${info.dansNiveau}/${info.pourNiveau} points vers le suivant</p>`}
+      </div>`;
+
+      const elScore = document.getElementById('bilan-grand');
+      if (Jeu.reduit()) { elScore.textContent = reussis + ' / ' + total; }
+      else {
+        const t0 = performance.now();
+        (function pas(t) {
+          const p = Math.min(1, (t - t0) / 700);
+          const v = Math.round(reussis * (0.5 - Math.cos(p * Math.PI) / 2));
+          elScore.textContent = v + ' / ' + total;
+          if (p < 1) requestAnimationFrame(pas);
+        })(t0);
+      }
+      Jeu.compteAnime(document.getElementById('bilan-xp'), sessionPoints, '', '', 800);
+      if (acquis) { Jeu.son('fin'); Jeu.confettis({ nombre: 130, y: window.innerHeight * 0.3 }); }
     }
-    document.getElementById('refaire').onclick = () => { idx = 0; repondus = 0; reussis = 0; montrer('exo'); };
+    document.getElementById('refaire').onclick = () => {
+      idx = 0; repondus = 0; reussis = 0; sessionPoints = 0; combo = 0; meilleurCombo = 0; xpAttribue = false;
+      document.getElementById('exo-pts').textContent = '0';
+      document.getElementById('exo-combo').hidden = true;
+      montrer('exo');
+    };
 
     /* ---- Aiguillage des vues ---- */
     function montrer(quoi) {
+      if (quoi !== 'exo') cacherRetour();
       vueCours.style.display = quoi === 'cours' ? 'block' : 'none';
       vueExo.style.display = quoi === 'exo' ? 'block' : 'none';
       vueBilan.style.display = quoi === 'bilan' ? 'block' : 'none';

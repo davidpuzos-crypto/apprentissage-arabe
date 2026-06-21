@@ -50,6 +50,15 @@ mouvement réduit.
 L'entraînement récompense par des points, un bonus de série, des niveaux, et
 un écran de fin avec étoiles selon la réussite et un total animé.
 
+Le déroulé des exercices d'une leçon est lui aussi vivant, dans l'esprit des
+applications de langue : en-tête avec points et compteur de série « 🔥 », une
+barre « Continuer » qui glisse depuis le bas à chaque réponse, de discrets
+sons générés (bonne réponse, série, fin — sans aucun fichier audio, via la
+Web Audio API), des confettis sur les séries et à la réussite de la leçon, et
+un bilan animé (étoiles, points gagnés, niveau). Un bouton 🔊 coupe ou rétablit
+le son ; toutes les animations se taisent si le système demande un mouvement
+réduit.
+
 ## Usage mobile
 
 L'interface est pensée pour le téléphone : la navigation se replie derrière

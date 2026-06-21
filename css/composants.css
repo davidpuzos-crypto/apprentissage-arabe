@@ -625,3 +625,53 @@ html[data-theme="sombre"] .onglet.actif { color: var(--sur-accent); }
 .bilan-score p { margin-top: 0.6rem; margin-bottom: 0; color: var(--texte-doux); }
 .bilan-score.bon { border-color: var(--succes); }
 .bilan-score.bon .grand { color: var(--succes); }
+
+/* =========================================================================
+   Couche ludique des exercices (jeu) — en-tête, barre « Continuer »,
+   confettis, écran de fin animé. S'inspire des applis de langue, en gardant
+   la sobriété du manuscrit.
+   ========================================================================= */
+.confettis-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 9999; }
+
+/* En-tête de la série d'exercices : points + série + son */
+.exo-jauges { display: inline-flex; align-items: center; gap: 0.7rem; margin-left: auto; }
+.exo-pts { font-family: var(--f-ui); font-weight: 600; color: var(--or-profond); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.exo-pts b { font-size: 1.15rem; }
+.exo-combo { display: inline-flex; align-items: center; gap: 0.25rem; font-family: var(--f-ui); font-weight: 700;
+  color: var(--erreur); background: rgba(138, 44, 44, 0.09); border-radius: 999px; padding: 0.12rem 0.6rem; font-size: 0.85rem; }
+.exo-combo b { font-variant-numeric: tabular-nums; }
+.exo-combo.pulse { animation: comboPop 0.36s ease; }
+@keyframes comboPop { 0% { transform: scale(1); } 45% { transform: scale(1.28); } 100% { transform: scale(1); } }
+.exo-son { background: none; border: none; cursor: pointer; font-size: 1.1rem; line-height: 1; opacity: 0.75; padding: 0.15rem 0.25rem; }
+.exo-son:hover { opacity: 1; }
+.exo-son.muet { opacity: 0.4; }
+
+/* Barre de retour façon « Continuer », glissant depuis le bas */
+.barre-retour { position: fixed; left: 0; right: 0; bottom: 0; z-index: 200;
+  transform: translateY(115%); transition: transform 0.32s cubic-bezier(.2, .8, .2, 1);
+  background: var(--fond-carte); border-top: 2px solid var(--bordure);
+  box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.14); padding-bottom: env(safe-area-inset-bottom, 0); }
+.barre-retour.montre { transform: translateY(0); }
+.barre-retour.bon { background: rgba(58, 95, 62, 0.12); border-top-color: var(--succes); }
+.barre-retour.moins { background: rgba(138, 44, 44, 0.10); border-top-color: var(--erreur); }
+.barre-retour-in { max-width: 680px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1.1rem; }
+.br-icone { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 1.35rem; font-weight: 700; flex: 0 0 auto; color: #fff; }
+.barre-retour.bon .br-icone { background: var(--succes); }
+.barre-retour.moins .br-icone { background: var(--erreur); }
+.br-txt { flex: 1; display: flex; flex-direction: column; line-height: 1.3; min-width: 0; }
+.br-txt b { font-family: var(--f-ui); }
+.barre-retour.bon .br-txt b { color: var(--succes); }
+.barre-retour.moins .br-txt b { color: var(--erreur); }
+.br-sous { font-size: 0.82rem; opacity: 0.85; }
+.br-continuer { white-space: nowrap; }
+body.retour-ouvert #exo-slot { padding-bottom: 110px; }
+
+/* Écran de fin de leçon, ludique */
+.bilan-jeu { text-align: center; }
+.bilan-jeu .grand-pts { font-family: var(--f-titre); font-size: 2.5rem; font-weight: 600; color: var(--or-profond); font-variant-numeric: tabular-nums; margin: 0.2rem 0; }
+.bilan-jeu .bilan-ok { color: var(--succes); font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  .barre-retour { transition: none; }
+  .exo-combo.pulse { animation: none; }
+}
