@@ -57,6 +57,7 @@ const App = (function () {
       { href: 'lecture.html', txt: 'Lecture', cle: 'lecture' },
       { href: 'vocabulaire.html', txt: 'Vocabulaire', cle: 'vocabulaire' },
       { href: 'entrainement.html', txt: 'Entraînement', cle: 'entrainement' },
+      { href: 'jeu-rapide.html', txt: 'Défi', cle: 'defi' },
       { href: 'revision.html', txt: 'Révision', cle: 'revision' },
       { href: 'progression.html', txt: 'Progression', cle: 'progression' },
     ];

@@ -13,28 +13,31 @@
   <div id="barre"></div>
   <main class="contenu">
 
-    <header class="centre">
-      <p class="cycle-romain">Institut Naqshbandi · Apprentissage coranique</p>
-      <h1>L'arabe du Coran, pas à pas</h1>
-      <p class="muet" style="max-width:520px;margin:0.5rem auto 0;">
-        Trente leçons pour passer du déchiffrage des premières lettres
-        à la lecture comprise de sourates courtes. Quinze à vingt-cinq minutes par jour suffisent.
-      </p>
-    </header>
+    <section class="accueil-hero">
+      <div class="accueil-salut">
+        <p class="cycle-romain">Institut Naqshbandi · Apprentissage coranique</p>
+        <h1 style="margin:0.1rem 0;">As-salāmu ʿalaykum</h1>
+        <p class="muet petit" id="sous-titre" style="margin:0;"></p>
+      </div>
+      <div class="pastille-serie" id="pastille-serie" title="Jours de pratique consécutifs">🔥&nbsp;<span id="serie-n">0</span></div>
+    </section>
 
-    <hr class="filet">
+    <a class="carte-reprendre" id="reprendre" href="#">
+      <div class="cr-rond" id="cr-rond">I</div>
+      <div class="cr-txt">
+        <div class="cr-sur" id="cr-sur">Reprendre</div>
+        <div class="cr-titre" id="cr-titre">Leçon I</div>
+        <div class="cr-barre"><span id="cr-barre" style="width:0"></span></div>
+      </div>
+      <div class="cr-fleche">›</div>
+    </a>
 
-    <section class="stats-accueil" id="stats"></section>
+    <section class="stats-accueil" id="stats" style="margin-top:1.4rem;"></section>
 
-    <div class="actions-accueil">
-      <a class="btn" id="reprendre" href="#">Reprendre où j'en étais</a>
-      <a class="btn btn-secondaire" id="lecture" href="lecture.html">Ma lecture du jour</a>
-    </div>
-    <div class="actions-accueil">
-      <a class="btn btn-secondaire" id="reviser" href="revision.html">Faire ma révision du jour</a>
-      <a class="btn btn-secondaire" id="entrainer" href="entrainement.html">M'entraîner (points)</a>
-      <a class="btn btn-secondaire" href="vocabulaire.html">Vocabulaire fréquent</a>
-    </div>
+    <section style="margin-top:1.6rem;">
+      <div class="titre-section">Que voulez-vous faire ?</div>
+      <div class="tuiles" id="tuiles"></div>
+    </section>
 
     <hr class="filet">
 
@@ -72,50 +75,70 @@
   <script>
     App.init('accueil');
 
-    // Statistiques
-    const motsMaitrises = Stockage.motsMaitrises().length;
-    const motsVus = Stockage.motsADecouverts();
-    const serie = Stockage.serieActuelle();
+    /* ---- Données de progression ---- */
     const terminees = Stockage.etat.leconsTerminees.length;
+    const motsMaitrises = Stockage.motsMaitrises().length;
+    const serie = Stockage.serieActuelle();
+    const courante = Stockage.etat.leconCourante;
+    const nv = Stockage.niveau();
+    const xp = Stockage.jeu().xp;
+    const dus = Repetition.nbADue(Stockage.etat.revisions) + Stockage.phrasesADue().length;
+    const etapeLecture = Stockage.lecture().etape || 0;
+
+    /* ---- Salutation contextuelle ---- */
+    document.getElementById('sous-titre').textContent =
+      terminees === 0 ? 'Bienvenue. Votre premier pas commence ici.'
+      : (dus > 0 ? dus + ' élément' + (dus > 1 ? 's' : '') + ' à réviser aujourd\'hui.'
+               : 'Belle régularité. Continuez à votre rythme.');
+
+    /* ---- Pastille de série ---- */
+    document.getElementById('serie-n').textContent = serie;
+    if (serie === 0) document.getElementById('pastille-serie').classList.add('eteinte');
+
+    /* ---- Carte « reprendre » ---- */
+    const lecCourante = (typeof Lecons !== 'undefined') ? Lecons[courante] : null;
+    const rep = document.getElementById('reprendre');
+    rep.href = 'lecon.html?id=' + courante;
+    document.getElementById('cr-rond').textContent = App.romain(courante);
+    document.getElementById('cr-sur').textContent = terminees === 0 ? 'Commencer' : 'Reprendre';
+    document.getElementById('cr-titre').textContent =
+      'Leçon ' + App.romain(courante) + (lecCourante ? ' — ' + lecCourante.titre : '');
+    setTimeout(() => { document.getElementById('cr-barre').style.width = Math.round(terminees / 30 * 100) + '%'; }, 120);
+
+    /* ---- Statistiques (compteurs animés) ---- */
     document.getElementById('stats').innerHTML = `
       <div class="stat"><div class="valeur" data-cible="${terminees}" data-suffixe="/30">0/30</div><div class="label">Leçons acquises</div></div>
       <div class="stat"><div class="valeur" data-cible="${motsMaitrises}">0</div><div class="label">Mots maîtrisés</div></div>
-      <div class="stat"><div class="valeur" data-cible="${serie}">0</div><div class="label">Jours de suite</div></div>`;
-    // Compteurs animés (effet « application »)
+      <div class="stat"><div class="valeur" data-cible="${nv.niveau}" data-prefixe="Nv ">Nv 0</div><div class="label">${xp} points</div></div>`;
     document.querySelectorAll('#stats .valeur').forEach((el) => {
-      const cible = +el.dataset.cible || 0, suf = el.dataset.suffixe || '';
-      if (cible === 0) { el.textContent = '0' + suf; return; }
+      const cible = +el.dataset.cible || 0, suf = el.dataset.suffixe || '', pre = el.dataset.prefixe || '';
+      if (cible === 0) { el.textContent = pre + '0' + suf; return; }
       const t0 = performance.now();
       (function anime(t) {
         const p = Math.min(1, (t - t0) / 650);
         const v = Math.round(cible * (0.5 - Math.cos(p * Math.PI) / 2));
-        el.textContent = v + suf;
+        el.textContent = pre + v + suf;
         if (p < 1) requestAnimationFrame(anime);
       })(t0);
     });
 
-    // Bouton reprendre
-    const courante = Stockage.etat.leconCourante;
-    document.getElementById('reprendre').href = 'lecon.html?id=' + courante;
-    document.getElementById('reprendre').textContent =
-      terminees === 0 ? 'Commencer la leçon I' : 'Reprendre la leçon ' + App.romain(courante);
+    /* ---- Tuiles d'action ---- */
+    const tuiles = [
+      { href: 'lecture.html?i=' + etapeLecture, emoji: '📖', titre: 'Lecture du jour', sous: 'Étape ' + (etapeLecture + 1) },
+      { href: 'revision.html', emoji: '🔁', titre: 'Révision', sous: dus > 0 ? 'à revoir maintenant' : 'réviser librement', badge: dus > 0 ? dus : null, forte: dus > 0 },
+      { href: 'jeu-rapide.html', emoji: '⚡', titre: 'Défi éclair', sous: 'contre la montre' },
+      { href: 'entrainement.html', emoji: '🎯', titre: 'Entraînement', sous: xp > 0 ? 'niveau ' + nv.niveau + ' · ' + xp + ' pts' : 'gagner des points' },
+      { href: 'vocabulaire.html', emoji: '📇', titre: 'Vocabulaire', sous: 'mots fréquents' },
+    ];
+    document.getElementById('tuiles').innerHTML = tuiles.map((t) => `
+      <a class="tuile${t.forte ? ' tuile-forte' : ''}" href="${t.href}">
+        ${t.badge ? `<span class="t-badge">${t.badge}</span>` : ''}
+        <span class="t-emoji">${t.emoji}</span>
+        <span class="t-titre">${t.titre}</span>
+        <span class="t-sous">${t.sous}</span>
+      </a>`).join('');
 
-    // Révision : indique le nombre d'éléments dus (mots + phrases)
-    const dus = Repetition.nbADue(Stockage.etat.revisions) + Stockage.phrasesADue().length;
-    if (dus > 0) document.getElementById('reviser').textContent =
-      'Faire ma révision du jour (' + dus + ')';
-
-    // Lecture du jour : indique l'étape atteinte
-    const etapeLecture = Stockage.lecture().etape || 0;
-    document.getElementById('lecture').href = 'lecture.html?i=' + Math.min(etapeLecture, 12);
-
-    // Entraînement : affiche le niveau et les points cumulés
-    const nv = Stockage.niveau();
-    const xp = Stockage.jeu().xp;
-    document.getElementById('entrainer').textContent =
-      xp > 0 ? ('M\'entraîner · niveau ' + nv.niveau + ' (' + xp + ' pts)') : 'M\'entraîner (points)';
-
-    // Construction des cycles et de la grille
+    /* ---- Grille des cycles et leçons ---- */
     const titresCycles = [
       'Le système d\'écriture',
       'Premiers mots et structures',
