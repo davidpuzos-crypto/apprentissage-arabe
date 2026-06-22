@@ -202,3 +202,49 @@ Reprenez les sourates apprises dans un Coran annoté, écoutez de bons
 récitateurs, entretenez le vocabulaire par la salle de révision, et abordez
 peu à peu des sourates plus longues. La méthode reste la même : douceur,
 régularité, imprégnation.
+
+## Comptes et synchronisation (Firebase)
+
+Le projet intègre une authentification optionnelle via **Firebase** (e-mail/mot
+de passe et Google) et **Firestore** (profil utilisateur).
+
+### Mise en route
+
+1. Copiez le modèle et renseignez vos clés (console Firebase → Paramètres du
+   projet → Vos applications → Web) :
+
+   ```
+   cp js/firebase-config.example.js js/firebase-config.js
+   ```
+
+   `js/firebase-config.js` est **ignoré par git** (voir `.gitignore`) : vos
+   valeurs ne sont pas committées.
+2. Dans la console Firebase, activez **Authentication** → méthodes
+   « E-mail/mot de passe » et « Google », et ajoutez votre domaine dans
+   **Authorized domains**.
+3. Publiez les règles de sécurité **`firestore.rules`** (Firestore → Règles).
+4. Servez le site en **http(s)** (Firebase Hosting, GitHub Pages, ou un serveur
+   local) : l'authentification Google et les modules Firebase ne fonctionnent
+   pas en ouvrant le fichier en `file://`.
+
+### À propos des clés
+
+La configuration **web** de Firebase n'est **pas un secret** : elle identifie
+le projet côté navigateur et y est forcément visible. La sécurité réelle repose
+sur les **règles Firestore** (`firestore.rules`), les **domaines autorisés** et
+la **restriction de la clé d'API** (Google Cloud Console → Identifiants →
+restrictions par référent HTTP). Le `.env`/`.gitignore` évite seulement de
+publier les clés dans le dépôt ; il ne les rend pas privées une fois le site en
+ligne.
+
+> Déploiement depuis le dépôt : comme `js/firebase-config.js` n'est pas
+> versionné, pensez à le déposer sur l'hébergeur (ou à l'injecter au déploiement).
+> Si vous acceptez que cette config publique soit dans le dépôt, vous pouvez
+> aussi committer le fichier — c'est une pratique courante et sûre dès lors que
+> les règles et les restrictions de clé sont en place.
+
+La page **Compte** (`connexion.html`) gère la connexion/inscription ; une fois
+connecté, l'utilisateur est redirigé vers son espace (l'accueil), qui affiche
+son profil et un bouton de déconnexion. La progression reste pour l'instant
+stockée localement (localStorage) ; la synchronisation vers Firestore pourra
+être ajoutée ensuite.
