@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="clair">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Défi éclair · Institut Naqshbandi</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/composants.css">
+  <link rel="stylesheet" href="css/theme-sombre.css">
+</head>
+<body>
+  <div id="barre"></div>
+  <main class="contenu">
+    <header class="centre">
+      <p class="cycle-romain">Révision express</p>
+      <h1>Défi éclair</h1>
+      <p class="muet" style="max-width:560px;margin:0.4rem auto 0;">
+        Un mot français s'affiche : touchez le bon mot arabe parmi la liste. Il
+        se prononce, disparaît, et laisse place au suivant. Le tout contre la
+        montre, sur les mots que vous avez déjà travaillés.
+      </p>
+    </header>
+    <hr class="filet">
+    <section id="jeu"></section>
+  </main>
+
+  <script src="js/repetition.js"></script>
+  <script src="js/stockage.js"></script>
+  <script src="js/speech.js"></script>
+  <script src="js/jeu.js"></script>
+  <script src="js/app.js"></script>
+  <script src="donnees/versets.js"></script>
+  <script src="donnees/lecons.js"></script>
+  <script src="donnees/frequent.js"></script>
+  <script src="donnees/vocabulaire.js"></script>
+  <script>
+    App.init('defi');
+    App.verifierAudio();
+    const zone = document.getElementById('jeu');
+
+    const OBJECTIF = 15;   // bonnes réponses pour finir la manche
+    const COLONNE_MAX = 6; // mots affichés à l'écran
+
+    // Réserve : uniquement les mots DÉJÀ TRAVAILLÉS (présents dans le suivi).
+    const travailles = Object.keys(Stockage.etat.vocabulaire)
+      .map((cle) => Vocabulaire.parCle(cle))
+      .filter((m) => m && m.ar && m.tr && m.fr);
+    // Dédoublonnage par sens français pour éviter les ambiguïtés à l'écran.
+    const pool = travailles;
+
+    function melanger(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+    if (pool.length < 4) {
+      zone.innerHTML = `<div class="carte centre apparait">
+        <h2>Pas encore assez de mots travaillés</h2>
+        <p class="muet">Le défi se joue sur les mots que vous avez déjà rencontrés. Travaillez quelques mots dans les leçons, l'entraînement ou le vocabulaire, puis revenez relever le défi.</p>
+        <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
+          <a class="btn" href="entrainement.html">M'entraîner</a>
+          <a class="btn btn-secondaire" href="vocabulaire.html">Vocabulaire fréquent</a>
+          <a class="btn btn-secondaire" href="index.html">Accueil</a>
+        </div></div>`;
+      throw new Error('pas assez de mots');
+    }
+
+    const COLONNE = Math.min(COLONNE_MAX, pool.length);
+
+    // État de la partie
+    let affiches = [];        // mots actuellement à l'écran
+    let cible = null;         // mot à trouver (objet)
+    let erreurCible = false;  // une erreur a-t-elle été faite sur la cible en cours ?
+    let score = 0, erreurs = 0, combo = 0, meilleurCombo = 0;
+    let debut = 0, minuterie = null, fini = false;
+
+    // Échafaudage de l'écran de jeu
+    zone.innerHTML = `
+      <div class="assoc-hud">
+        <div class="item"><span class="v" id="hud-temps">0:00</span><span class="l">Temps</span></div>
+        <div class="item"><span class="v" id="hud-score">0</span><span class="l">Trouvés</span></div>
+        <div class="item serie"><span class="v" id="hud-serie">0</span><span class="l">Série</span></div>
+      </div>
+      <div class="barre-progres-exo"><span id="hud-barre" style="width:0"></span></div>
+      <div class="assoc-cible"><div class="quoi">Trouvez ce mot</div><div class="mot-fr" id="cible-fr">…</div></div>
+      <div class="assoc-grille" id="grille"></div>`;
+    const grille = document.getElementById('grille');
+
+    function autreSens(setSens) {
+      // Renvoie un mot du pool dont le sens n'est pas déjà à l'écran.
+      const dispo = pool.filter((m) => !setSens.has(m.fr));
+      const src = dispo.length ? dispo : pool;
+      return src[Math.floor(Math.random() * src.length)];
+    }
+
+    function init() {
+      const setSens = new Set();
+      affiches = [];
+      for (const m of melanger(pool)) {
+        if (affiches.length >= COLONNE) break;
+        if (setSens.has(m.fr)) continue;
+        setSens.add(m.fr); affiches.push(m);
+      }
+      rendreGrille(true);
+      choisirCible();
+      debut = performance.now();
+      minuterie = setInterval(majTemps, 200);
+    }
+
+    function rendreGrille(entree) {
+      grille.innerHTML = '';
+      affiches.forEach((mot, i) => {
+        const b = document.createElement('button');
+        b.className = 'assoc-mot' + (entree ? ' entrer' : '');
+        b.type = 'button';
+        b.textContent = mot.ar;
+        b.dataset.i = i;
+        b.onclick = () => cliquer(i, b);
+        grille.appendChild(b);
+      });
+    }
+
+    function choisirCible() {
+      // Cible : un mot affiché dont le sens est unique à l'écran.
+      const compte = {};
+      affiches.forEach((m) => { compte[m.fr] = (compte[m.fr] || 0) + 1; });
+      const uniques = affiches.filter((m) => compte[m.fr] === 1);
+      const src = uniques.length ? uniques : affiches;
+      let prochaine = src[Math.floor(Math.random() * src.length)];
+      cible = prochaine;
+      erreurCible = false;
+      const el = document.getElementById('cible-fr');
+      el.textContent = cible.fr;
+      el.classList.remove('change'); void el.offsetWidth; el.classList.add('change');
+    }
+
+    function majTemps() {
+      const s = Math.floor((performance.now() - debut) / 1000);
+      const mm = Math.floor(s / 60), ss = s % 60;
+      document.getElementById('hud-temps').textContent = mm + ':' + String(ss).padStart(2, '0');
+    }
+
+    function cliquer(i, bouton) {
+      if (fini) return;
+      const mot = affiches[i];
+      const bon = mot.fr === cible.fr;
+      if (bon) {
+        bouton.classList.add('juste');
+        Parole.prononcer(mot.ar, { rate: 0.85 });
+        Stockage.enregistrerMot(cible.cle, !erreurCible); // alimente la révision espacée
+        score++; combo++; meilleurCombo = Math.max(meilleurCombo, combo);
+        document.getElementById('hud-score').textContent = score;
+        document.getElementById('hud-serie').textContent = combo;
+        document.getElementById('hud-barre').style.width = Math.round(score / OBJECTIF * 100) + '%';
+        if (combo % 5 === 0) { Jeu.son('serie'); Jeu.confettis({ y: window.innerHeight * 0.4, nombre: 60 }); }
+        else { Jeu.son('bon'); }
+
+        if (score >= OBJECTIF) { bouton.classList.add('partir'); setTimeout(terminer, 260); return; }
+
+        // Remplace le mot trouvé par un nouveau (sens absent de l'écran), puis nouvelle cible.
+        bouton.classList.add('partir');
+        setTimeout(() => {
+          const setSens = new Set(affiches.filter((_, k) => k !== i).map((m) => m.fr));
+          affiches[i] = autreSens(setSens);
+          const nb = document.createElement('button');
+          nb.className = 'assoc-mot entrer'; nb.type = 'button';
+          nb.textContent = affiches[i].ar; nb.dataset.i = i;
+          nb.onclick = () => cliquer(i, nb);
+          bouton.replaceWith(nb);
+          choisirCible();
+        }, 300);
+      } else {
+        if (!erreurCible) { erreurs++; erreurCible = true; }
+        combo = 0;
+        document.getElementById('hud-serie').textContent = 0;
+        Jeu.son('moins');
+        bouton.classList.remove('faux'); void bouton.offsetWidth; bouton.classList.add('faux');
+      }
+    }
+
+    function terminer() {
+      fini = true;
+      clearInterval(minuterie);
+      const s = Math.floor((performance.now() - debut) / 1000);
+      const mm = Math.floor(s / 60), ss = s % 60;
+      const tempsTxt = mm + ':' + String(ss).padStart(2, '0');
+      const tentatives = score + erreurs;
+      const precision = tentatives ? Math.round(score / tentatives * 100) : 100;
+      const nbEtoiles = precision >= 90 ? 3 : (precision >= 70 ? 2 : 1);
+      const etoilesHtml = '★★★'.split('').map((c, k) => k < nbEtoiles ? '★' : '<span class="vide">☆</span>').join('');
+
+      // Points : 10 par bonne réponse + bonus de vitesse (manche rapide récompensée).
+      const bonusVitesse = Math.max(0, 120 - s) * 2;
+      const points = score * 10 + bonusVitesse;
+      const avant = Stockage.niveau().niveau;
+      const apres = Stockage.ajouterPartie(points, meilleurCombo);
+      const monteNiveau = apres.niveau > avant;
+      const mot = nbEtoiles === 3 ? 'Excellent, mā shāʾa Llāh.' : (nbEtoiles === 2 ? 'Bien joué, continuez ainsi.' : 'C\'est un début ; la vitesse viendra.');
+
+      zone.innerHTML = `<div class="carte centre apparait">
+        <h2>Défi terminé</h2>
+        <div class="jeu-etoiles">${etoilesHtml}</div>
+        <div class="assoc-hud" style="margin-top:0.6rem">
+          <div class="item"><span class="v">${tempsTxt}</span><span class="l">Temps</span></div>
+          <div class="item"><span class="v">${score}</span><span class="l">Trouvés</span></div>
+          <div class="item"><span class="v">${precision}%</span><span class="l">Précision</span></div>
+        </div>
+        <p class="jeu-bilan-pts" id="bilan-pts">+0 points</p>
+        <p class="muet petit">meilleure série : ${meilleurCombo} · ${erreurs} erreur${erreurs > 1 ? 's' : ''}</p>
+        <p class="muet petit">${mot}</p>
+        ${monteNiveau ? `<p style="color:var(--accent);font-weight:600;font-size:1.1rem">Vous passez au niveau ${apres.niveau} !</p>` : `<p class="muet petit">Niveau ${apres.niveau} · ${apres.dansNiveau}/${apres.pourNiveau} points vers le suivant</p>`}
+        <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.1rem">
+          <button class="btn" onclick="location.reload()">Rejouer</button>
+          <a class="btn btn-secondaire" href="revision.html">Salle de révision</a>
+          <a class="btn btn-secondaire" href="index.html">Accueil</a>
+        </div>
+      </div>`;
+      Jeu.compteAnime(document.getElementById('bilan-pts'), points, '+', ' points', 800);
+      Jeu.son('fin');
+      if (nbEtoiles >= 2) Jeu.confettis({ nombre: 130, y: window.innerHeight * 0.3 });
+    }
+
+    init();
+  </script>
+</body>
+</html>

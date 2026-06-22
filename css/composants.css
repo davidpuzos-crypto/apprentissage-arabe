@@ -652,9 +652,10 @@ html[data-theme="sombre"] .onglet.actif { color: var(--sur-accent); }
   background: var(--fond-carte); border-top: 2px solid var(--bordure);
   box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.14); padding-bottom: env(safe-area-inset-bottom, 0); }
 .barre-retour.montre { transform: translateY(0); }
-.barre-retour.bon { background: rgba(58, 95, 62, 0.12); border-top-color: var(--succes); }
-.barre-retour.moins { background: rgba(138, 44, 44, 0.10); border-top-color: var(--erreur); }
-.barre-retour-in { max-width: 680px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1.1rem; }
+.barre-retour.bon { background-color: var(--fond-carte); background-image: linear-gradient(0deg, rgba(58, 95, 62, 0.14), rgba(58, 95, 62, 0.14)); border-top-color: var(--succes); }
+.barre-retour.moins { background-color: var(--fond-carte); background-image: linear-gradient(0deg, rgba(138, 44, 44, 0.12), rgba(138, 44, 44, 0.12)); border-top-color: var(--erreur); }
+.barre-retour-in { max-width: 680px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1.1rem; max-height: 45vh; overflow-y: auto; }
+.br-gain { font-family: var(--f-ui); font-weight: 700; color: var(--or-profond); white-space: nowrap; }
 .br-icone { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 1.35rem; font-weight: 700; flex: 0 0 auto; color: #fff; }
 .barre-retour.bon .br-icone { background: var(--succes); }
 .barre-retour.moins .br-icone { background: var(--erreur); }
@@ -664,7 +665,10 @@ html[data-theme="sombre"] .onglet.actif { color: var(--sur-accent); }
 .barre-retour.moins .br-txt b { color: var(--erreur); }
 .br-sous { font-size: 0.82rem; opacity: 0.85; }
 .br-continuer { white-space: nowrap; }
-body.retour-ouvert #exo-slot { padding-bottom: 110px; }
+body.retour-ouvert #exo-slot { padding-bottom: 150px; }
+/* Quand le clavier arabe est ouvert, on réserve de la place pour pouvoir
+   faire défiler le champ de saisie au-dessus de lui. */
+body.clavier-ouvert { padding-bottom: 55vh; }
 
 /* Écran de fin de leçon, ludique */
 .bilan-jeu { text-align: center; }
@@ -674,4 +678,72 @@ body.retour-ouvert #exo-slot { padding-bottom: 110px; }
 @media (prefers-reduced-motion: reduce) {
   .barre-retour { transition: none; }
   .exo-combo.pulse { animation: none; }
+}
+
+/* =========================================================================
+   Accueil « application » — héros, carte reprendre, tuiles d'action
+   ========================================================================= */
+.accueil-hero { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+.pastille-serie { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(138, 44, 44, 0.08); color: var(--erreur);
+  border-radius: 999px; padding: 0.45rem 0.95rem; font-family: var(--f-ui); font-weight: 700; white-space: nowrap; }
+.pastille-serie.eteinte { background: var(--fond-carte-profond); color: var(--texte-doux); }
+
+.carte-reprendre { display: flex; align-items: center; gap: 1.1rem; text-decoration: none; color: inherit;
+  background: linear-gradient(135deg, var(--fond-carte), var(--fond-carte-profond));
+  border: 1px solid var(--bordure); border-left: 4px solid var(--accent); border-radius: 16px;
+  padding: 1.1rem 1.2rem; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06); transition: transform var(--transition), box-shadow var(--transition); }
+.carte-reprendre:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12); }
+.carte-reprendre .cr-rond { width: 54px; height: 54px; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent); color: #fff; font-family: var(--f-titre); font-size: 1.5rem; font-weight: 700; }
+.carte-reprendre .cr-txt { flex: 1; min-width: 0; }
+.carte-reprendre .cr-sur { font-family: var(--f-ui); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+.carte-reprendre .cr-titre { font-family: var(--f-titre); font-size: 1.2rem; margin: 0.1rem 0; }
+.carte-reprendre .cr-barre { height: 6px; background: var(--bordure); border-radius: 3px; overflow: hidden; margin-top: 0.5rem; }
+.carte-reprendre .cr-barre > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--vert-doux)); border-radius: 3px; transition: width 0.6s cubic-bezier(.2,.8,.2,1); }
+.carte-reprendre .cr-fleche { font-size: 1.5rem; color: var(--accent); flex: 0 0 auto; }
+
+.tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+.tuile { position: relative; display: flex; flex-direction: column; gap: 0.25rem; text-decoration: none; color: inherit;
+  background: var(--fond-carte); border: 1px solid var(--bordure); border-radius: 14px; padding: 1rem;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition); }
+.tuile:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09); }
+.tuile .t-emoji { font-size: 1.6rem; line-height: 1; }
+.tuile .t-titre { font-family: var(--f-titre); font-size: 1.05rem; }
+.tuile .t-sous { font-size: 0.8rem; color: var(--texte-doux); }
+.tuile .t-badge { position: absolute; top: 0.7rem; right: 0.7rem; min-width: 1.4rem; height: 1.4rem; padding: 0 0.4rem;
+  display: inline-flex; align-items: center; justify-content: center; border-radius: 999px;
+  background: var(--accent); color: #fff; font-family: var(--f-ui); font-size: 0.75rem; font-weight: 700; }
+.tuile.tuile-forte { border-color: var(--accent); background: linear-gradient(135deg, var(--fond-carte), var(--fond-carte-profond)); }
+
+/* =========================================================================
+   Défi éclair — jeu d'association mot français → mot arabe
+   ========================================================================= */
+.assoc-hud { display: flex; align-items: stretch; justify-content: center; gap: 0.7rem; margin: 0.6rem 0 1.4rem; }
+.assoc-hud .item { flex: 1; max-width: 130px; text-align: center; background: var(--fond-carte); border: 1px solid var(--bordure); border-radius: 12px; padding: 0.55rem 0.4rem; }
+.assoc-hud .v { display: block; font-family: var(--f-titre); font-size: 1.5rem; font-weight: 600; color: var(--or-profond); font-variant-numeric: tabular-nums; }
+.assoc-hud .l { font-family: var(--f-ui); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--texte-doux); }
+.assoc-hud .item.serie .v { color: var(--erreur); }
+
+.assoc-cible { text-align: center; margin: 0.6rem 0 1.3rem; }
+.assoc-cible .quoi { font-family: var(--f-ui); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texte-doux); }
+.assoc-cible .mot-fr { font-family: var(--f-titre); font-size: 2rem; margin-top: 0.2rem; transition: opacity 0.15s; }
+.assoc-cible .mot-fr.change { animation: ciblePop 0.3s ease; }
+@keyframes ciblePop { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: none; } }
+
+.assoc-grille { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; max-width: 520px; margin: 0 auto; }
+@media (min-width: 560px) { .assoc-grille { grid-template-columns: repeat(3, 1fr); } }
+.assoc-mot { font-family: var(--f-arabe); direction: rtl; font-size: 2rem; line-height: 1.2; padding: 1.1rem 0.6rem;
+  background: var(--fond-carte); border: 1.5px solid var(--bordure); border-radius: 14px; cursor: pointer; color: inherit;
+  transition: transform 0.12s ease, border-color 0.15s, background 0.15s; }
+.assoc-mot:hover { border-color: var(--accent); transform: translateY(-2px); }
+.assoc-mot.juste { border-color: var(--succes); background: rgba(58, 95, 62, 0.14); color: var(--succes); }
+.assoc-mot.faux { border-color: var(--erreur); background: rgba(138, 44, 44, 0.08); animation: secousse 0.4s ease; }
+.assoc-mot.partir { animation: assocPartir 0.34s ease forwards; pointer-events: none; }
+.assoc-mot.entrer { animation: assocEntrer 0.3s ease; }
+@keyframes assocPartir { to { opacity: 0; transform: scale(0.55); } }
+@keyframes assocEntrer { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .assoc-mot.faux, .assoc-mot.entrer { animation: none; }
+  .assoc-mot.partir { animation: none; opacity: 0; }
+  .assoc-cible .mot-fr.change { animation: none; }
 }

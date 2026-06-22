@@ -51,8 +51,9 @@ L'entraînement récompense par des points, un bonus de série, des niveaux, et
 un écran de fin avec étoiles selon la réussite et un total animé.
 
 Le déroulé des exercices d'une leçon est lui aussi vivant, dans l'esprit des
-applications de langue : en-tête avec points et compteur de série « 🔥 », une
-barre « Continuer » qui glisse depuis le bas à chaque réponse, de discrets
+applications de langue : en-tête avec points et compteur de série « ✦ », une
+barre « Continuer » qui glisse depuis le bas à chaque réponse (sur fond opaque,
+elle reprend la correction et l'explication pour qu'elles restent lisibles), de discrets
 sons générés (bonne réponse, série, fin — sans aucun fichier audio, via la
 Web Audio API), des confettis sur les séries et à la réussite de la leçon, et
 un bilan animé (étoiles, points gagnés, niveau). Un bouton 🔊 coupe ou rétablit
