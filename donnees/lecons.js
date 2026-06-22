@@ -1623,7 +1623,7 @@ const Lecons = {
       { titre: 'Les beaux noms et le dhikr',
         corps: 'Le Coran enseigne : « À Allah appartiennent les plus beaux noms, invoquez-Le par eux » (al-Aʿrāf, 180). La tradition en compte un grand nombre, souvent évoqué par le chiffre de quatre-vingt-dix-neuf.\n' +
           'Chaque nom ouvre une porte vers une qualité divine : ar-Raḥmān vers la miséricorde, al-ʿAlīm vers le savoir, al-Ḥakīm vers la sagesse. Les connaître, c\'est apprendre à lire les bienfaits et les épreuves à la lumière de Celui qui les dispose.\n' +
-          'Dans la voie naqshbandi comme dans tout cheminement, l\'évocation des noms, le dhikr, polit le cœur et le rapproche de son Seigneur. Que cette leçon de vocabulaire soit aussi, si vous le souhaitez, une invitation à l\'invocation.' },
+          'Dans la voie spirituelle comme dans tout cheminement, l\'évocation des noms, le dhikr, polit le cœur et le rapproche de son Seigneur. Que cette leçon de vocabulaire soit aussi, si vous le souhaitez, une invitation à l\'invocation.' },
       { titre: 'Le schème faʿʿāl : du métier au Nom divin',
         corps: 'Beaucoup de noms suivent le schème faʿʿāl, où la deuxième consonne est redoublée. Il exprime l\'intensité ou le métier : خَبَّاز (boulanger, de khubz), صَيَّاد (pêcheur, chasseur), بَنَّاء (bâtisseur).\n' +
           'Appliqué à Allah, ce même schème dit une qualité portée à son comble : الغَفَّار (Celui qui pardonne sans cesse, de la racine غ-ف-ر), الرَّزَّاق (Celui qui pourvoit en abondance, de رزق), الوَهَّاب (le Donateur inlassable).\n' +
