@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="clair">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion · Apprendre l'arabe coranique</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/composants.css">
+  <link rel="stylesheet" href="css/theme-sombre.css">
+</head>
+<body>
+  <div id="barre"></div>
+  <main class="contenu">
+    <header class="centre">
+      <p class="cycle-romain">Votre espace personnel</p>
+      <h1 id="titre-page">Se connecter</h1>
+      <p class="muet" style="max-width:520px;margin:0.4rem auto 0;">
+        Créez un compte pour retrouver votre progression et apprendre à votre rythme.
+      </p>
+    </header>
+    <hr class="filet">
+
+    <section class="carte form-auth" id="boite">
+      <div class="auth-onglets" role="tablist">
+        <button id="ong-connexion" class="actif" type="button">Se connecter</button>
+        <button id="ong-inscription" type="button">Créer un compte</button>
+      </div>
+
+      <button class="btn btn-secondaire btn-google" id="btn-google" type="button">
+        <span aria-hidden="true" style="font-weight:700;color:#4285F4">G</span>
+        Continuer avec Google
+      </button>
+
+      <div class="auth-sep">ou</div>
+
+      <form id="form-auth" novalidate>
+        <div id="bloc-nom" hidden>
+          <label for="nom">Prénom (facultatif)</label>
+          <input type="text" id="nom" autocomplete="given-name" placeholder="Votre prénom">
+        </div>
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" autocomplete="email" required placeholder="vous@exemple.com">
+        <label for="mdp">Mot de passe</label>
+        <input type="password" id="mdp" autocomplete="current-password" required placeholder="Au moins 6 caractères">
+        <button class="btn btn-bloc" id="btn-valider" type="submit" style="margin-top:1.1rem;">Se connecter</button>
+      </form>
+
+      <div class="auth-msg" id="msg" hidden></div>
+    </section>
+  </main>
+
+  <script src="js/repetition.js"></script>
+  <script src="js/stockage.js"></script>
+  <script src="js/app.js"></script>
+  <script>App.init('compte');</script>
+  <script src="js/firebase-config.js"></script>
+  <script type="module">
+    import {
+      estConfigure, messageConfig, surUtilisateur,
+      inscrire, connecter, connecterGoogle, traduireErreur,
+    } from './js/auth.js';
+
+    const $ = (id) => document.getElementById(id);
+    const msg = $('msg');
+    let mode = 'connexion'; // ou 'inscription'
+
+    function afficherMsg(texte, type) {
+      msg.hidden = false;
+      msg.className = 'auth-msg ' + (type || 'err');
+      msg.textContent = texte;
+    }
+    function cacherMsg() { msg.hidden = true; }
+
+    // Déjà connecté → espace personnel.
+    surUtilisateur((u) => { if (u) location.replace('index.html'); });
+
+    if (!estConfigure()) {
+      afficherMsg(messageConfig(), 'err');
+      $('form-auth').querySelectorAll('input,button').forEach((el) => (el.disabled = true));
+      $('btn-google').disabled = true;
+    }
+
+    function basculer(nouveau) {
+      mode = nouveau;
+      const conn = mode === 'connexion';
+      $('ong-connexion').classList.toggle('actif', conn);
+      $('ong-inscription').classList.toggle('actif', !conn);
+      $('titre-page').textContent = conn ? 'Se connecter' : 'Créer un compte';
+      $('bloc-nom').hidden = conn;
+      $('btn-valider').textContent = conn ? 'Se connecter' : 'Créer mon compte';
+      $('mdp').autocomplete = conn ? 'current-password' : 'new-password';
+      cacherMsg();
+    }
+    $('ong-connexion').onclick = () => basculer('connexion');
+    $('ong-inscription').onclick = () => basculer('inscription');
+
+    async function apresConnexion() {
+      afficherMsg('Connexion réussie. Redirection…', 'ok');
+      location.replace('index.html');
+    }
+
+    $('form-auth').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      cacherMsg();
+      const email = $('email').value.trim();
+      const mdp = $('mdp').value;
+      const nom = $('nom').value.trim();
+      if (!email || !mdp) { afficherMsg('Renseignez votre e-mail et votre mot de passe.'); return; }
+      $('btn-valider').disabled = true;
+      try {
+        if (mode === 'inscription') await inscrire(email, mdp, nom);
+        else await connecter(email, mdp);
+        await apresConnexion();
+      } catch (err) {
+        afficherMsg(traduireErreur(err));
+        $('btn-valider').disabled = false;
+      }
+    });
+
+    $('btn-google').addEventListener('click', async () => {
+      cacherMsg();
+      $('btn-google').disabled = true;
+      try { await connecterGoogle(); await apresConnexion(); }
+      catch (err) { afficherMsg(traduireErreur(err)); $('btn-google').disabled = false; }
+    });
+  </script>
+</body>
+</html>

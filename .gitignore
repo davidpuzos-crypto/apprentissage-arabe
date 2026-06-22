@@ -1,0 +1,18 @@
+# Variables d'environnement et configuration sensible
+.env
+.env.local
+.env.*.local
+
+# Configuration Firebase locale (clés du projet) — NON versionnée.
+# Copier js/firebase-config.example.js vers js/firebase-config.js et y mettre
+# vos valeurs. (La config web Firebase n'est pas secrète, mais on évite de la
+# committer telle quelle, conformément à la demande.)
+js/firebase-config.js
+
+# Dépendances éventuelles
+node_modules/
+
+# Système / éditeurs
+.DS_Store
+Thumbs.db
+*.log

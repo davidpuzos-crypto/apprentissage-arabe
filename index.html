@@ -13,10 +13,12 @@
   <div id="barre"></div>
   <main class="contenu">
 
+    <div id="bandeau-compte" class="bandeau-compte" hidden></div>
+
     <section class="accueil-hero">
       <div class="accueil-salut">
         <p class="cycle-romain">Apprendre l'arabe coranique</p>
-        <h1 style="margin:0.1rem 0;">As-salāmu ʿalaykum</h1>
+        <h1 style="margin:0.1rem 0;" id="salut-titre">As-salāmu ʿalaykum</h1>
         <p class="muet petit" id="sous-titre" style="margin:0;"></p>
       </div>
       <div class="pastille-serie" id="pastille-serie" title="Jours de pratique consécutifs">✦&nbsp;<span id="serie-n">0</span>&nbsp;j</div>
@@ -169,6 +171,28 @@
       }
       bloc.appendChild(grille);
       conteneurCycles.appendChild(bloc);
+    }
+  </script>
+
+  <script src="js/firebase-config.js"></script>
+  <script type="module">
+    import { estConfigure, surUtilisateur, deconnecter } from './js/auth.js';
+    const bandeau = document.getElementById('bandeau-compte');
+    if (estConfigure()) {
+      surUtilisateur((u) => {
+        bandeau.hidden = false;
+        if (u) {
+          const nom = u.displayName || (u.email ? u.email.split('@')[0] : 'vous');
+          document.getElementById('salut-titre').textContent = 'As-salāmu ʿalaykum, ' + nom;
+          bandeau.innerHTML = '<span class="compte-chip">✦ Connecté : <b></b></span>' +
+            '<button class="btn-fantome petit" id="btn-deconnexion" type="button">Se déconnecter</button>';
+          bandeau.querySelector('b').textContent = u.email || nom; // textContent : sûr
+          document.getElementById('btn-deconnexion').onclick = async () => { await deconnecter(); location.reload(); };
+        } else {
+          bandeau.innerHTML = '<span class="compte-chip muet">Vous apprenez en invité — votre progression reste sur cet appareil.</span>' +
+            '<a class="btn-fantome petit" href="connexion.html">Se connecter / Créer un compte</a>';
+        }
+      });
     }
   </script>
 </body>

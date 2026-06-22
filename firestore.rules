@@ -1,0 +1,25 @@
+rules_version = '2';
+// Règles de sécurité Firestore — À PUBLIER dans la console Firebase
+// (Firestore Database → Règles) ou via `firebase deploy --only firestore:rules`.
+//
+// Principe : un utilisateur authentifié n'accède QU'À ses propres données.
+// C'est ici (et non dans le code client) que se joue la vraie sécurité.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Profil de l'utilisateur : lecture/écriture réservées au propriétaire.
+    match /utilisateurs/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+
+      // Sous-collections personnelles (progression, révisions, etc.).
+      match /{document=**} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
+    }
+
+    // Tout le reste est refusé par défaut.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
