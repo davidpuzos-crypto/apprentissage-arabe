@@ -1,4 +1,4 @@
-# Institut Naqshbandi · Apprentissage coranique
+# Apprendre l'arabe coranique
 
 Une application web autonome pour apprendre l'arabe coranique depuis zéro,
 dans l'esprit d'un manuel élégant et exigeant. Trente leçons mènent du

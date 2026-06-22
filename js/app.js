@@ -66,7 +66,7 @@ const App = (function () {
     const vis = Stockage.phonetique() === 'visible';
     return `
       <div class="barre">
-        <a href="index.html" class="marque">Institut Naqshbandi</a>
+        <a href="index.html" class="marque">Apprendre l'arabe coranique</a>
         <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" onclick="App.basculerMenu(this)">☰</button>
         <nav>
           ${nav}
