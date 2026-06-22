@@ -25,29 +25,45 @@ const Stockage = (function () {
   };
 
   let etat = charger();
+  const ecouteurs = []; // notifiés après chaque sauvegarde (ex. synchro cloud)
+
+  // Fusion défensive d'un objet de données avec le schéma par défaut.
+  function fusionnerDefaut(donnees) {
+    donnees = donnees || {};
+    return Object.assign(structuredClone(defaut), donnees, {
+      pratique: Object.assign({}, defaut.pratique, donnees.pratique || {}),
+      preferences: Object.assign({}, defaut.preferences, donnees.preferences || {}),
+      lecture: Object.assign({}, defaut.lecture, donnees.lecture || {}),
+      phrases: donnees.phrases || {},
+      jeu: Object.assign({}, defaut.jeu, donnees.jeu || {}),
+    });
+  }
 
   function charger() {
     try {
       const brut = localStorage.getItem(CLE);
       if (!brut) return structuredClone(defaut);
-      const donnees = JSON.parse(brut);
-      // Fusion défensive pour gérer les évolutions de schéma
-      return Object.assign(structuredClone(defaut), donnees, {
-        pratique: Object.assign({}, defaut.pratique, donnees.pratique || {}),
-        preferences: Object.assign({}, defaut.preferences, donnees.preferences || {}),
-        lecture: Object.assign({}, defaut.lecture, donnees.lecture || {}),
-        phrases: donnees.phrases || {},
-        jeu: Object.assign({}, defaut.jeu, donnees.jeu || {}),
-      });
+      return fusionnerDefaut(JSON.parse(brut));
     } catch (e) {
       console.warn('Lecture du stockage impossible, réinitialisation.', e);
       return structuredClone(defaut);
     }
   }
 
-  function sauver() {
+  function sauver(silencieux) {
     try { localStorage.setItem(CLE, JSON.stringify(etat)); }
     catch (e) { console.warn('Écriture du stockage impossible.', e); }
+    if (!silencieux) ecouteurs.forEach((f) => { try { f(etat); } catch (e) {} });
+  }
+
+  // S'abonner aux sauvegardes (le module de synchro pousse alors vers le cloud).
+  function surSauvegarde(cb) { if (typeof cb === 'function') ecouteurs.push(cb); }
+
+  // Remplacer l'état courant (ex. après fusion avec le cloud). N'émet pas
+  // l'événement de sauvegarde, pour éviter une boucle de renvoi au cloud.
+  function appliquerEtat(donnees) {
+    etat = fusionnerDefaut(donnees);
+    sauver(true);
   }
 
   /* ---- Progression des leçons ---- */
@@ -190,5 +206,9 @@ const Stockage = (function () {
     lecture, avancerLecture, enregistrerPhrase, phrasesADue,
     jeu, niveau, ajouterPartie,
     reinitialiser, exporter, sauver,
+    surSauvegarde, appliquerEtat,
   };
 })();
+
+// Accès explicite depuis les modules ES (synchro cloud).
+try { window.Stockage = Stockage; } catch (e) {}

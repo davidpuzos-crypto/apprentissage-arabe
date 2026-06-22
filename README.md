@@ -126,7 +126,12 @@ navigateurs disposant d'une voix arabe installée.
 ## Progression et persistance
 
 Toute la progression est enregistrée localement dans le navigateur, via
-`localStorage`. Rien n'est envoyé sur Internet. Sont mémorisés :
+`localStorage` (l'application fonctionne donc hors-ligne). Lorsque l'utilisateur
+est **connecté** (voir « Comptes et synchronisation »), cette progression est en
+plus **synchronisée avec Firestore** : à la connexion, l'état local et l'état du
+cloud sont fusionnés sans perte (on garde toujours la progression la plus
+avancée), puis chaque changement est renvoyé au cloud. On retrouve ainsi son
+avancement sur tous ses appareils. Sont mémorisés :
 
 - la leçon en cours et les leçons acquises,
 - les scores par leçon,
