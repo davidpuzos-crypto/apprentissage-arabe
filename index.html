@@ -125,9 +125,7 @@
     /* ---- Tuiles d'action ---- */
     const tuiles = [
       { href: 'lecture.html?i=' + etapeLecture, emoji: '📖', titre: 'Lecture du jour', sous: 'Étape ' + (etapeLecture + 1) },
-      { href: 'revision.html', emoji: '🔁', titre: 'Révision', sous: dus > 0 ? 'à revoir maintenant' : 'réviser librement', badge: dus > 0 ? dus : null, forte: dus > 0 },
-      { href: 'jeu-rapide.html', emoji: '⚡', titre: 'Défi éclair', sous: 'contre la montre' },
-      { href: 'entrainement.html', emoji: '🎯', titre: 'Entraînement', sous: xp > 0 ? 'niveau ' + nv.niveau + ' · ' + xp + ' pts' : 'gagner des points' },
+      { href: 'revision.html', emoji: '🧩', titre: 'Réviser', sous: dus > 0 ? dus + ' à revoir · session, défi, cartes' : 'session, défi, cartes', badge: dus > 0 ? dus : null, forte: true },
       { href: 'vocabulaire.html', emoji: '📇', titre: 'Vocabulaire', sous: 'mots fréquents' },
     ];
     document.getElementById('tuiles').innerHTML = tuiles.map((t) => `

@@ -56,9 +56,7 @@ const App = (function () {
       { href: 'index.html', txt: 'Accueil', cle: 'accueil' },
       { href: 'lecture.html', txt: 'Lecture', cle: 'lecture' },
       { href: 'vocabulaire.html', txt: 'Vocabulaire', cle: 'vocabulaire' },
-      { href: 'entrainement.html', txt: 'Entraînement', cle: 'entrainement' },
-      { href: 'jeu-rapide.html', txt: 'Défi', cle: 'defi' },
-      { href: 'revision.html', txt: 'Révision', cle: 'revision' },
+      { href: 'revision.html', txt: 'Réviser', cle: 'revision' },
       { href: 'progression.html', txt: 'Progression', cle: 'progression' },
     ];
     const nav = liens.map((l) =>

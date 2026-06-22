@@ -20,8 +20,9 @@ arabe-coranique/
 ├── lecon.html          template de leçon, paramétré par ?id=1 … ?id=30
 ├── lecture.html        lecture du jour (programme progressif commenté)
 ├── vocabulaire.html    vocabulaire coranique fréquent (dès le premier jour)
-├── entrainement.html   entraînement libre avec points et niveaux
-├── revision.html       salle de révision (mots et phrases, répétition espacée)
+├── revision.html       hub « Réviser » : session d'exercices variés, défi, cartes
+├── jeu-rapide.html     défi éclair (mot français → mot arabe, chrono et score)
+├── entrainement.html   ancien entraînement libre (conservé, accessible en direct)
 ├── progression.html    statistiques détaillées
 ├── css/                base, composants, thème sombre
 ├── js/                 moteur (stockage, répétition, exercices, voix, clavier)

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salle de révision · Arabe coranique</title>
+  <title>Réviser · Institut Naqshbandi</title>
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/composants.css">
   <link rel="stylesheet" href="css/theme-sombre.css">
@@ -12,19 +12,16 @@
   <div id="barre"></div>
   <main class="contenu">
     <header class="centre">
-      <p class="cycle-romain">Répétition espacée</p>
-      <h1>Salle de révision</h1>
-      <p class="muet" style="max-width:520px;margin:0.4rem auto 0;">
-        Les mots rencontrés reviennent ici au bon moment, à un jour, trois jours,
-        puis une semaine d'écart, pour s'ancrer sans effort.
+      <p class="cycle-romain">Entretenir et ancrer</p>
+      <h1>Réviser</h1>
+      <p class="muet" style="max-width:560px;margin:0.4rem auto 0;">
+        Lancez une session : des exercices variés s'enchaînent — vocabulaire
+        et grammaire — pour revoir ce que vous avez déjà étudié. Au menu aussi,
+        le défi contre la montre et les cartes de répétition espacée.
       </p>
-      <div class="actions-accueil" style="margin-top:1rem;">
-        <a class="btn btn-secondaire" href="jeu-rapide.html">⚡ Réviser en jeu : Défi éclair</a>
-      </div>
     </header>
-
     <hr class="filet">
-    <section id="zone-revision"></section>
+    <section id="zone"></section>
   </main>
 
   <script src="js/repetition.js"></script>
@@ -32,6 +29,7 @@
   <script src="js/speech.js"></script>
   <script src="js/exercices.js"></script>
   <script src="js/clavier-arabe.js"></script>
+  <script src="js/jeu.js"></script>
   <script src="js/app.js"></script>
   <script src="donnees/versets.js"></script>
   <script src="donnees/lecons.js"></script>
@@ -39,126 +37,287 @@
   <script src="donnees/vocabulaire.js"></script>
   <script>
     App.init('revision');
-    const zone = document.getElementById('zone-revision');
+    App.verifierAudio();
+    const zone = document.getElementById('zone');
     const lexique = Vocabulaire.indexParCle();
 
-    // Index des phrases clefs (à partir du champ memoriser de chaque leçon).
+    function melange(a){a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]];}return a;}
+
+    /* ============ Données de révision ============ */
+    // Phrases clefs (champ memoriser de chaque leçon)
     const phrasesIndex = {};
-    Object.keys(Lecons).forEach((id) => {
-      const m = Lecons[id].memoriser;
-      if (m) phrasesIndex[m.cle || ('phrase-' + id)] = m;
-    });
+    Object.keys(Lecons).forEach((id) => { const m = Lecons[id].memoriser; if (m) phrasesIndex[m.cle || ('phrase-' + id)] = m; });
 
-    function melange(a) { a = a.slice(); for (let k = a.length - 1; k > 0; k--) { const j = Math.floor(Math.random() * (k + 1)); [a[k], a[j]] = [a[j], a[k]]; } return a; }
+    // Vocabulaire déjà travaillé (sinon, tout le lexique en repli)
+    const vocTravaille = Object.keys(Stockage.etat.vocabulaire).map((c) => lexique[c]).filter((m) => m && m.ar && m.tr && m.fr);
+    const vocPool = vocTravaille.length >= 4 ? vocTravaille : Vocabulaire.tous().filter((m) => m.ar && m.tr && m.fr);
 
-    // Éléments arrivés à échéance (répétition espacée)
-    const dus = Repetition.motsADue(Stockage.etat.revisions)
-      .filter((cle) => lexique[cle])
-      .map((cle) => ({ cle, type: 'mot', ...lexique[cle] }));
-    Stockage.phrasesADue().forEach((cle) => {
-      if (phrasesIndex[cle]) dus.push({ cle, type: 'phrase', ...phrasesIndex[cle] });
-    });
+    // Éléments dus (répétition espacée) : mots + phrases
+    const dus = Repetition.motsADue(Stockage.etat.revisions).filter((c) => lexique[c]).map((c) => ({ cle: c, type: 'mot', ...lexique[c] }));
+    Stockage.phrasesADue().forEach((c) => { if (phrasesIndex[c]) dus.push({ cle: c, type: 'phrase', ...phrasesIndex[c] }); });
 
-    // Tout ce que l'on peut réviser : mots déjà rencontrés (sinon tout le
-    // vocabulaire fréquent, pour qu'un nouvel arrivant puisse réviser aussi),
-    // plus les phrases inscrites.
+    // Pour les cartes : tout ce qui est révisable
     const rencontres = Object.keys(Stockage.etat.vocabulaire).filter((c) => lexique[c]);
     const baseMots = (rencontres.length ? rencontres : Object.keys(lexique));
-    const tous = baseMots.map((cle) => ({ cle, type: 'mot', ...lexique[cle] }));
-    Object.keys(Stockage.etat.phrases).forEach((cle) => {
-      if (phrasesIndex[cle]) tous.push({ cle, type: 'phrase', ...phrasesIndex[cle] });
-    });
+    const tousCartes = baseMots.map((c) => ({ cle: c, type: 'mot', ...lexique[c] }));
+    Object.keys(Stockage.etat.phrases).forEach((c) => { if (phrasesIndex[c]) tousCartes.push({ cle: c, type: 'phrase', ...phrasesIndex[c] }); });
 
-    // Menu de révision : on peut toujours réviser quelque chose.
-    const menu = document.createElement('div');
-    menu.className = 'carte centre';
-    let html = '';
-    if (dus.length) {
-      html += `<h3>${dus.length} élément${dus.length > 1 ? 's' : ''} à revoir aujourd'hui</h3>
+    /* ============ Menu (hub) ============ */
+    function menu() {
+      zone.innerHTML = `
+        <div class="tuiles" style="margin-top:0.4rem;">
+          <a class="tuile tuile-forte" id="m-session" href="#"><span class="t-emoji">🧩</span><span class="t-titre">Session de révision</span><span class="t-sous">exercices variés, vocabulaire et grammaire</span></a>
+          <a class="tuile" id="m-defi" href="jeu-rapide.html"><span class="t-emoji">⚡</span><span class="t-titre">Défi éclair</span><span class="t-sous">contre la montre, sur les mots connus</span></a>
+          <a class="tuile" id="m-cartes" href="#">${dus.length ? `<span class="t-badge">${dus.length}</span>` : ''}<span class="t-emoji">🃏</span><span class="t-titre">Cartes de révision</span><span class="t-sous">${dus.length ? dus.length + ' à revoir aujourd\'hui' : 'répétition espacée'}</span></a>
+        </div>
+        <div class="carte" style="margin-top:1.4rem;">
+          <h3 style="margin-top:0;">Lancer une session</h3>
+          <p class="muet petit">Un enchaînement d'exercices tirés de ce que vous avez déjà vu : reconnaissance de sens, phrases à compléter, mots à écrire au clavier arabe, lecture, racines… On revoit en jouant.</p>
+          <div style="display:flex;gap:0.7rem;flex-wrap:wrap;margin-top:0.6rem;">
+            <button class="btn" id="s-courte">Session courte (10)</button>
+            <button class="btn btn-secondaire" id="s-longue">Session longue (18)</button>
+          </div>
+        </div>`;
+      document.getElementById('m-session').onclick = (e) => { e.preventDefault(); lancerExercices(construireFile(12)); };
+      document.getElementById('m-cartes').onclick = (e) => { e.preventDefault(); menuCartes(); };
+      document.getElementById('s-courte').onclick = () => lancerExercices(construireFile(10));
+      document.getElementById('s-longue').onclick = () => lancerExercices(construireFile(18));
+    }
+
+    /* ============ Générateurs d'exercices ============ */
+    function autres(mot, champ, n) {
+      const vus = new Set([mot[champ]]); const res = [];
+      for (const m of melange(vocPool)) { if (res.length >= n) break; if (!vus.has(m[champ])) { vus.add(m[champ]); res.push(m); } }
+      return res;
+    }
+    function questionVoc() {
+      const mot = vocPool[Math.floor(Math.random() * vocPool.length)];
+      const t = Math.floor(Math.random() * 4);
+      if (t === 0) { const d = autres(mot, 'fr', 3); const o = melange([{ texte: mot.fr, ok: true }, ...d.map((x) => ({ texte: x.fr }))]);
+        return { type: 'qcm', consigne: 'Que signifie ce mot ?', enonceAr: mot.ar, options: o.map((x) => ({ texte: x.texte })), bonne: o.findIndex((x) => x.ok), cles: [mot.cle] }; }
+      if (t === 1) { const d = autres(mot, 'ar', 3); const o = melange([{ ar: mot.ar, ok: true }, ...d.map((x) => ({ ar: x.ar }))]);
+        return { type: 'qcm', consigne: 'Quel mot correspond à : « ' + mot.fr + ' » ?', options: o.map((x) => ({ ar: x.ar })), bonne: o.findIndex((x) => x.ok), cles: [mot.cle] }; }
+      if (t === 2) { const d = autres(mot, 'tr', 2); const o = melange([{ tr: mot.tr, ok: true }, ...d.map((x) => ({ tr: x.tr }))]);
+        return { type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription.', motAr: mot.ar, options: o.map((x) => x.tr), bonne: o.findIndex((x) => x.ok), cles: [mot.cle] }; }
+      return { type: 'saisie', consigne: 'Écrivez ce mot en arabe : « ' + mot.fr + ' » (' + mot.tr + ')', reponse: mot.ar, cles: [mot.cle] };
+    }
+    function exosRediges() {
+      // Exercices rédigés (grammaire incluse) des leçons déjà étudiées.
+      const acquises = Stockage.etat.leconsTerminees || [];
+      const max = Math.max(Stockage.etat.leconCourante || 1, acquises.length ? Math.max(...acquises) : 1);
+      const out = [];
+      for (let id = 1; id <= max; id++) {
+        const l = Lecons[id];
+        if (!l || !l.exercices) continue;
+        l.exercices.forEach((e) => { if (e.type !== 'oral') out.push(e); });
+      }
+      return out;
+    }
+    function construireFile(n) {
+      const gram = exosRediges();
+      const file = [];
+      const nGram = Math.min(gram.length, Math.round(n * 0.55));
+      melange(gram).slice(0, nGram).forEach((e) => file.push(e));
+      while (file.length < n && vocPool.length >= 4) file.push(questionVoc());
+      const reste = melange(gram);
+      let k = 0;
+      while (file.length < n && reste.length) { file.push(reste[k % reste.length]); k++; }
+      return melange(file).slice(0, n);
+    }
+
+    /* ============ Runner d'exercices (façon leçon, avec jeu) ============ */
+    function barreRetourEl() {
+      let b = document.getElementById('barre-retour');
+      if (b) return b;
+      b = document.createElement('div'); b.id = 'barre-retour'; b.className = 'barre-retour';
+      b.innerHTML = `<div class="barre-retour-in">
+        <div class="br-icone" id="br-icone"></div>
+        <div class="br-txt"><b id="br-titre"></b><span class="br-sous" id="br-sous"></span></div>
+        <button class="btn br-continuer" id="br-continuer" type="button">Continuer</button></div>`;
+      document.body.appendChild(b);
+      return b;
+    }
+
+    function lancerExercices(file) {
+      if (!file.length) { menu(); return; }
+      const total = file.length;
+      let idx = 0, reussis = 0, points = 0, combo = 0, meilleurCombo = 0;
+      const encouragements = ['Très bien !', 'Excellent !', 'Parfait !', 'Bravo !', 'Mā shāʾa Llāh !', 'Continuez ainsi !'];
+
+      zone.innerHTML = `
+        <div class="exo-tete">
+          <button class="btn-fantome petit" id="quitter">‹ Retour au menu</button>
+          <div class="exo-jauges">
+            <span class="exo-combo" id="exo-combo" hidden>✦&nbsp;série&nbsp;<b id="exo-combo-n">0</b></span>
+            <span class="exo-pts"><b id="exo-pts">0</b> pts</span>
+            <button class="exo-son" id="exo-son" type="button" aria-label="Activer ou couper le son">🔊</button>
+          </div>
+        </div>
+        <span class="exo-compteur" id="exo-compteur"></span>
+        <div class="barre-progres-exo"><span id="exo-barre" style="width:0"></span></div>
+        <div id="exo-slot"></div>`;
+      const slot = document.getElementById('exo-slot');
+      document.getElementById('quitter').onclick = () => { cacher(); menu(); };
+
+      const btnSon = document.getElementById('exo-son');
+      const majSon = () => { btnSon.textContent = Jeu.sonActif() ? '🔊' : '🔇'; btnSon.classList.toggle('muet', !Jeu.sonActif()); };
+      majSon();
+      btnSon.onclick = () => { Jeu.basculerSon(); majSon(); if (Jeu.sonActif()) Jeu.son('bon'); };
+
+      const bar = barreRetourEl();
+      const brIcone = document.getElementById('br-icone');
+      const brTitre = document.getElementById('br-titre');
+      const brSous = document.getElementById('br-sous');
+      const brContinuer = document.getElementById('br-continuer');
+      function cacher() { bar.classList.remove('montre', 'bon', 'moins'); document.body.classList.remove('retour-ouvert'); }
+      function majCombo() {
+        const c = document.getElementById('exo-combo');
+        if (combo >= 2) { c.hidden = false; document.getElementById('exo-combo-n').textContent = combo; c.classList.remove('pulse'); void c.offsetWidth; c.classList.add('pulse'); }
+        else c.hidden = true;
+      }
+      function montrerBarre(reussi, gain, detailHtml, dernier) {
+        bar.classList.remove('bon', 'moins');
+        bar.classList.add('montre', reussi ? 'bon' : 'moins');
+        document.body.classList.add('retour-ouvert');
+        brIcone.textContent = reussi ? '✓' : '✕';
+        const enc = reussi ? encouragements[Math.floor(Math.random() * encouragements.length)] : 'Pas tout à fait';
+        brTitre.innerHTML = enc + (gain ? ' <span class="br-gain">' + gain + '</span>' : '');
+        brSous.innerHTML = detailHtml || (reussi ? '' : 'La bonne réponse est mise en évidence ci-dessus.');
+        brContinuer.textContent = dernier ? 'Voir mon bilan' : 'Continuer';
+        brContinuer.focus();
+      }
+      brContinuer.onclick = () => { cacher(); idx++; document.getElementById('exo-barre').style.width = Math.round(idx / total * 100) + '%'; afficher(); };
+
+      function afficher() {
+        cacher();
+        if (idx >= total) return terminer();
+        slot.innerHTML = '';
+        document.getElementById('exo-compteur').textContent = 'Exercice ' + (idx + 1) + ' / ' + total;
+        document.getElementById('exo-barre').style.width = Math.round(idx / total * 100) + '%';
+        const nav = document.createElement('div'); nav.className = 'exo-nav';
+        const passer = document.createElement('button'); passer.className = 'btn-fantome petit'; passer.textContent = 'Passer';
+        passer.onclick = () => { idx++; afficher(); };
+        nav.appendChild(passer);
+
+        let repondu = false;
+        Exercices.rendre(file[idx], idx, slot, (reussi, cles) => {
+          if (repondu) return; repondu = true;
+          if (reussi) reussis++;
+          (cles || []).forEach((c) => Stockage.enregistrerMot(c, reussi));
+          const dernier = (idx === total - 1);
+          let detail = '';
+          const rEl = slot.querySelector('.retour-exo.visible');
+          if (rEl) { const ex = rEl.querySelector('.expl'); detail = ex ? ex.innerHTML : (rEl.textContent || '').trim(); rEl.style.display = 'none'; }
+          if (reussi) {
+            combo++; meilleurCombo = Math.max(meilleurCombo, combo);
+            const bonus = Math.min((combo - 1) * 2, 10); const gagne = 10 + bonus; points += gagne;
+            Jeu.compteAnime(document.getElementById('exo-pts'), points, '', '', 450);
+            majCombo();
+            if (combo % 5 === 0) { Jeu.son('serie'); Jeu.confettis({ y: window.innerHeight * 0.35, nombre: 70 }); } else Jeu.son('bon');
+            montrerBarre(true, '+' + gagne + ' pts' + (bonus ? ' · série ' + combo : ''), detail, dernier);
+          } else {
+            combo = 0; majCombo(); Jeu.son('moins');
+            montrerBarre(false, '', detail, dernier);
+          }
+          passer.style.display = 'none';
+        }, 6);
+        slot.appendChild(nav);
+      }
+
+      function terminer() {
+        cacher();
+        Stockage.marquerPratiqueDuJour();
+        const taux = total ? reussis / total : 0;
+        const nbEtoiles = taux >= 0.9 ? 3 : (taux >= 0.6 ? 2 : 1);
+        const etoiles = '★★★'.split('').map((c, k) => k < nbEtoiles ? '★' : '<span class="vide">☆</span>').join('');
+        const avant = Stockage.niveau().niveau;
+        const apres = Stockage.ajouterPartie(points, meilleurCombo);
+        const monte = apres.niveau > avant;
+        const phrase = nbEtoiles === 3 ? 'Excellent, mā shāʾa Llāh.' : (nbEtoiles === 2 ? 'Bien joué, continuez ainsi.' : 'C\'est en révisant souvent que tout s\'ancre.');
+        zone.innerHTML = `<div class="carte centre apparait bilan-jeu">
+          <h2>Session terminée</h2>
+          <div class="jeu-etoiles">${etoiles}</div>
+          <div class="grand-pts" id="bilan-grand">0 / ${total}</div>
+          <p class="muet petit">+<span id="bilan-xp">0</span> points${meilleurCombo >= 2 ? ' · meilleure série ' + meilleurCombo : ''}</p>
+          <p class="muet petit">${phrase}</p>
+          ${monte ? `<p style="color:var(--accent);font-weight:600;font-size:1.1rem">Vous passez au niveau ${apres.niveau} !</p>` : `<p class="muet petit">Niveau ${apres.niveau} · ${apres.dansNiveau}/${apres.pourNiveau} points vers le suivant</p>`}
+          <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.1rem">
+            <button class="btn" id="rejouer">Nouvelle session</button>
+            <a class="btn btn-secondaire" href="index.html">Accueil</a>
+          </div></div>`;
+        const elS = document.getElementById('bilan-grand');
+        if (Jeu.reduit()) elS.textContent = reussis + ' / ' + total;
+        else { const t0 = performance.now(); (function pas(t){ const p = Math.min(1, (t - t0) / 700); elS.textContent = Math.round(reussis * (0.5 - Math.cos(p * Math.PI) / 2)) + ' / ' + total; if (p < 1) requestAnimationFrame(pas); })(t0); }
+        Jeu.compteAnime(document.getElementById('bilan-xp'), points, '', '', 800);
+        Jeu.son('fin');
+        if (nbEtoiles >= 2) Jeu.confettis({ nombre: 130, y: window.innerHeight * 0.3 });
+        document.getElementById('rejouer').onclick = () => menu();
+      }
+
+      afficher();
+    }
+
+    /* ============ Cartes de révision (répétition espacée) ============ */
+    function menuCartes() {
+      const m = document.createElement('div'); m.className = 'carte centre';
+      let html = '<button class="btn-fantome petit" id="retour-menu" style="float:left">‹ Menu</button><div style="clear:both"></div>';
+      if (dus.length) html += `<h3>${dus.length} élément${dus.length > 1 ? 's' : ''} à revoir aujourd'hui</h3>
         <p class="muet petit">La répétition espacée les a ramenés au bon moment.</p>
         <button class="btn" id="btn-dus">Commencer ma révision du jour</button>`;
-    } else {
-      html += `<h3>Vous êtes à jour</h3>
-        <p class="muet petit">Aucun mot n'est arrivé à échéance pour aujourd'hui.
-        Vous pouvez tout de même réviser librement, autant que vous voulez.</p>`;
+      else html += `<h3>Vous êtes à jour</h3><p class="muet petit">Aucune carte n'est due aujourd'hui. Vous pouvez réviser librement.</p>`;
+      html += `<div style="margin-top:1rem"><button class="btn ${dus.length ? 'btn-secondaire' : ''}" id="btn-tous">Réviser librement (${tousCartes.length})</button></div>`;
+      m.innerHTML = html; zone.innerHTML = ''; zone.appendChild(m);
+      document.getElementById('retour-menu').onclick = menu;
+      if (dus.length) document.getElementById('btn-dus').onclick = () => { zone.innerHTML = ''; cartes(dus); };
+      document.getElementById('btn-tous').onclick = () => { zone.innerHTML = ''; cartes(melange(tousCartes).slice(0, 20)); };
     }
-    html += `<div style="margin-top:1rem"><button class="btn ${dus.length ? 'btn-secondaire' : ''}" id="btn-tous">Réviser librement (${tous.length} mot${tous.length > 1 ? 's' : ''})</button></div>`;
-    menu.innerHTML = html;
-    zone.appendChild(menu);
 
-    if (dus.length) document.getElementById('btn-dus').onclick = () => { zone.innerHTML = ''; lancerSession(dus); };
-    document.getElementById('btn-tous').onclick = () => {
-      zone.innerHTML = '';
-      lancerSession(melange(tous).slice(0, 20)); // séance courte de 20 cartes
-    };
-
-    function lancerSession(items) {
+    function cartes(items) {
       let i = 0, reussis = 0;
-      const carte = document.createElement('div');
-      carte.className = 'carte';
-      zone.appendChild(carte);
-      const progres = document.createElement('p');
-      progres.className = 'muet petit centre';
-      zone.insertBefore(progres, carte);
-
+      const progres = document.createElement('p'); progres.className = 'muet petit centre'; zone.appendChild(progres);
+      const carte = document.createElement('div'); carte.className = 'carte'; zone.appendChild(carte);
       function montrer() {
-        if (i >= items.length) return terminer();
+        if (i >= items.length) return finir();
         progres.textContent = 'Carte ' + (i + 1) + ' sur ' + items.length;
-        const mot = items[i];
-        carte.innerHTML = '';
+        const mot = items[i]; carte.innerHTML = '';
         const flash = document.createElement('div'); flash.className = 'carte-flash';
         flash.innerHTML = `<div class="ar">${mot.ar}</div>
-          <p class="muet petit">${mot.type === 'phrase' ? 'Vous souvenez vous de cette phrase et de son sens ?' : 'Vous souvenez vous du sens de ce mot ?'}</p>
+          <p class="muet petit">${mot.type === 'phrase' ? 'Vous souvenez-vous de cette phrase et de son sens ?' : 'Vous souvenez-vous du sens de ce mot ?'}</p>
           <div class="reponse"><p class="translit">${mot.tr}</p><p style="font-size:1.2rem">${mot.fr}</p></div>`;
         carte.appendChild(flash);
-
         const reponse = flash.querySelector('.reponse');
-        const actions = document.createElement('div');
-        actions.style.cssText = 'display:flex;gap:0.8rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;';
-        const btnVoir = document.createElement('button');
-        btnVoir.className = 'btn btn-secondaire'; btnVoir.textContent = 'Afficher la réponse';
+        const actions = document.createElement('div'); actions.style.cssText = 'display:flex;gap:0.8rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;';
+        const btnVoir = document.createElement('button'); btnVoir.className = 'btn btn-secondaire'; btnVoir.textContent = 'Afficher la réponse';
         btnVoir.onclick = () => {
           reponse.classList.add('visible');
           Parole.prononcer(mot.ar, { rate: mot.type === 'phrase' ? 0.7 : 0.8 });
           actions.innerHTML = '';
-          const ko = document.createElement('button');
-          ko.className = 'btn btn-secondaire'; ko.textContent = 'À revoir';
-          ko.onclick = () => juger(false);
-          const ok = document.createElement('button');
-          ok.className = 'btn'; ok.textContent = 'Je le savais';
-          ok.onclick = () => juger(true);
+          const ko = document.createElement('button'); ko.className = 'btn btn-secondaire'; ko.textContent = 'À revoir'; ko.onclick = () => juger(false);
+          const ok = document.createElement('button'); ok.className = 'btn'; ok.textContent = 'Je le savais'; ok.onclick = () => juger(true);
           actions.appendChild(ko); actions.appendChild(ok);
         };
-        actions.appendChild(btnVoir);
-        carte.appendChild(actions);
+        actions.appendChild(btnVoir); carte.appendChild(actions);
       }
-
       function juger(reussi) {
         const it = items[i];
-        if (it.type === 'phrase') Stockage.enregistrerPhrase(it.cle, reussi);
-        else Stockage.enregistrerMot(it.cle, reussi);
-        if (reussi) reussis++;
-        i++;
-        montrer();
+        if (it.type === 'phrase') Stockage.enregistrerPhrase(it.cle, reussi); else Stockage.enregistrerMot(it.cle, reussi);
+        if (reussi) reussis++; i++; montrer();
       }
-
-      function terminer() {
+      function finir() {
         progres.textContent = '';
-        carte.innerHTML = `<div class="carte-flash">
-          <h3>Révision terminée</h3>
-          <p class="muet">Vous avez revu ${items.length} élément${items.length>1?'s':''},
-          dont ${reussis} retrouvé${reussis>1?'s':''} de mémoire.</p>
+        carte.innerHTML = `<div class="carte-flash"><h3>Révision terminée</h3>
+          <p class="muet">Vous avez revu ${items.length} élément${items.length > 1 ? 's' : ''}, dont ${reussis} retrouvé${reussis > 1 ? 's' : ''} de mémoire.</p>
           <p class="muet petit">Les mots hésitants reviendront bientôt, les autres s'espaceront.</p>
           <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:0.5rem">
-            <button class="btn" onclick="location.reload()">Réviser encore</button>
-            <a class="btn btn-secondaire" href="index.html">Accueil</a>
-          </div></div>`;
-        Stockage.marquerPratiqueDuJour();
-        Stockage.sauver();
+            <button class="btn" id="c-encore">Réviser encore</button>
+            <a class="btn btn-secondaire" href="index.html">Accueil</a></div></div>`;
+        Stockage.marquerPratiqueDuJour(); Stockage.sauver();
+        document.getElementById('c-encore').onclick = menuCartes;
       }
-
       montrer();
     }
+
+    menu();
   </script>
 </body>
 </html>
