@@ -236,7 +236,7 @@
       <div class="exo-tete">
         <button class="btn-fantome petit" id="retour-cours">‹ Revoir le cours</button>
         <div class="exo-jauges">
-          <span class="exo-combo" id="exo-combo" hidden>🔥&nbsp;<b id="exo-combo-n">0</b></span>
+          <span class="exo-combo" id="exo-combo" hidden>✦&nbsp;série&nbsp;<b id="exo-combo-n">0</b></span>
           <span class="exo-pts"><b id="exo-pts">0</b> pts</span>
           <button class="exo-son" id="exo-son" type="button" aria-label="Activer ou couper le son">🔊</button>
         </div>
@@ -266,13 +266,14 @@
     const encouragements = ['Très bien !', 'Excellent !', 'Parfait !', 'Bravo !', 'Mā shāʾa Llāh !', 'Continuez ainsi !'];
 
     function cacherRetour() { barreRetour.classList.remove('montre', 'bon', 'moins'); document.body.classList.remove('retour-ouvert'); }
-    function montrerBarre(reussi, sous, dernier) {
+    function montrerBarre(reussi, gain, detailHtml, dernier) {
       barreRetour.classList.remove('bon', 'moins');
       barreRetour.classList.add('montre', reussi ? 'bon' : 'moins');
       document.body.classList.add('retour-ouvert');
       brIcone.textContent = reussi ? '✓' : '✕';
-      brTitre.textContent = reussi ? encouragements[Math.floor(Math.random() * encouragements.length)] : 'Pas tout à fait';
-      brSous.textContent = sous || '';
+      const enc = reussi ? encouragements[Math.floor(Math.random() * encouragements.length)] : 'Pas tout à fait';
+      brTitre.innerHTML = enc + (gain ? ' <span class="br-gain">' + gain + '</span>' : '');
+      brSous.innerHTML = detailHtml || (reussi ? '' : 'La bonne réponse est mise en évidence ci-dessus.');
       brContinuer.textContent = dernier ? 'Terminer la leçon' : 'Continuer';
       brContinuer.focus();
     }
@@ -311,6 +312,15 @@
           repondu = true;
           enregistrer(reussi, cles);
           const dernier = (idx === total - 1);
+          // Récupère la correction détaillée et la déplace dans la barre (fond
+          // opaque, toujours lisible), pour qu'elle ne reste pas masquée dessous.
+          let detail = '';
+          const rEl = slot.querySelector('.retour-exo.visible');
+          if (rEl) {
+            const expl = rEl.querySelector('.expl');
+            detail = expl ? expl.innerHTML : (rEl.textContent || '').trim();
+            rEl.style.display = 'none';
+          }
           if (reussi) {
             combo++; meilleurCombo = Math.max(meilleurCombo, combo);
             const bonus = Math.min((combo - 1) * 2, 10);
@@ -320,11 +330,11 @@
             majCombo();
             if (combo % 5 === 0) { Jeu.son('serie'); Jeu.confettis({ y: window.innerHeight * 0.35, nombre: 70 }); }
             else { Jeu.son('bon'); }
-            montrerBarre(true, '+' + gagne + (bonus ? ' points · série ' + combo : ' points'), dernier);
+            montrerBarre(true, '+' + gagne + ' pts' + (bonus ? ' · série ' + combo : ''), detail, dernier);
           } else {
             combo = 0; majCombo();
             Jeu.son('moins');
-            montrerBarre(false, 'Regardez la correction ci-dessus, puis continuez.', dernier);
+            montrerBarre(false, '', detail, dernier);
           }
           passer.style.display = 'none';
         }

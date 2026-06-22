@@ -111,14 +111,28 @@ const ClavierArabe = (function () {
     construire();
     cibleActive = champ;
     conteneur.classList.add('ouvert');
-    // Sur mobile, le clavier fixe peut masquer le champ : on le ramène en vue.
-    setTimeout(() => {
-      try { champ.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) { champ.scrollIntoView(); }
-    }, 60);
+    document.body.classList.add('clavier-ouvert');
+    // Sur mobile, le clavier fixe peut masquer le champ : on le remonte
+    // explicitement juste au-dessus du clavier pour qu'il reste visible.
+    setTimeout(() => positionner(champ), 90);
+  }
+
+  // Fait défiler la page pour que le champ se tienne au-dessus du clavier.
+  function positionner(champ) {
+    if (!conteneur) return;
+    const kbH = conteneur.offsetHeight || 280;
+    const rect = champ.getBoundingClientRect();
+    const basVisible = window.innerHeight - kbH - 18; // bord bas de la zone visible
+    if (rect.bottom > basVisible || rect.top < 8) {
+      const cible = window.scrollY + rect.top - Math.max(12, basVisible - rect.height - 8);
+      try { window.scrollTo({ top: Math.max(0, cible), behavior: 'smooth' }); }
+      catch (e) { window.scrollTo(0, Math.max(0, cible)); }
+    }
   }
 
   function fermer() {
     if (conteneur) conteneur.classList.remove('ouvert');
+    document.body.classList.remove('clavier-ouvert');
   }
 
   // Branche automatiquement le clavier sur un champ de saisie.

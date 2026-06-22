@@ -652,9 +652,10 @@ html[data-theme="sombre"] .onglet.actif { color: var(--sur-accent); }
   background: var(--fond-carte); border-top: 2px solid var(--bordure);
   box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.14); padding-bottom: env(safe-area-inset-bottom, 0); }
 .barre-retour.montre { transform: translateY(0); }
-.barre-retour.bon { background: rgba(58, 95, 62, 0.12); border-top-color: var(--succes); }
-.barre-retour.moins { background: rgba(138, 44, 44, 0.10); border-top-color: var(--erreur); }
-.barre-retour-in { max-width: 680px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1.1rem; }
+.barre-retour.bon { background-color: var(--fond-carte); background-image: linear-gradient(0deg, rgba(58, 95, 62, 0.14), rgba(58, 95, 62, 0.14)); border-top-color: var(--succes); }
+.barre-retour.moins { background-color: var(--fond-carte); background-image: linear-gradient(0deg, rgba(138, 44, 44, 0.12), rgba(138, 44, 44, 0.12)); border-top-color: var(--erreur); }
+.barre-retour-in { max-width: 680px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1.1rem; max-height: 45vh; overflow-y: auto; }
+.br-gain { font-family: var(--f-ui); font-weight: 700; color: var(--or-profond); white-space: nowrap; }
 .br-icone { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 1.35rem; font-weight: 700; flex: 0 0 auto; color: #fff; }
 .barre-retour.bon .br-icone { background: var(--succes); }
 .barre-retour.moins .br-icone { background: var(--erreur); }
@@ -664,7 +665,10 @@ html[data-theme="sombre"] .onglet.actif { color: var(--sur-accent); }
 .barre-retour.moins .br-txt b { color: var(--erreur); }
 .br-sous { font-size: 0.82rem; opacity: 0.85; }
 .br-continuer { white-space: nowrap; }
-body.retour-ouvert #exo-slot { padding-bottom: 110px; }
+body.retour-ouvert #exo-slot { padding-bottom: 150px; }
+/* Quand le clavier arabe est ouvert, on réserve de la place pour pouvoir
+   faire défiler le champ de saisie au-dessus de lui. */
+body.clavier-ouvert { padding-bottom: 55vh; }
 
 /* Écran de fin de leçon, ludique */
 .bilan-jeu { text-align: center; }
