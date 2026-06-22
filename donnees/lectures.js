@@ -21,7 +21,7 @@ const Lectures = [
   {
     type: 'Mot', titre: 'Le Tout Miséricordieux', ar: 'الرَّحْمَـٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux',
     commentaire:
-      'ar-Raḥmān vient de la racine ر-ح-م, qui désigne aussi le sein maternel, raḥim. La miséricorde divine y est comparée, en plus immense encore, à la tendresse d\'une mère.\n' +
+      'ar-Raḥmān vient de la racine ر-ح-م, qui désigne aussi la matrice maternelle, le raḥim (l\'utérus). La miséricorde divine y est comparée, en plus immense encore, à la tendresse d\'une mère pour l\'enfant qu\'elle porte.\n' +
       'ar-Raḥmān dit une miséricorde débordante qui embrasse toute la création, croyants et non-croyants. Son frère ar-Raḥīm, que nous verrons, dit une miséricorde continue et particulière.\n' +
       'Méditez ce point : avant de Se nommer Juge ou Puissant dans l\'ouverture du Livre, Allah Se nomme par la miséricorde. C\'est le climat dans lequel tout le Coran se lit.',
   },
