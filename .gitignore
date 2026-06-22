@@ -1,13 +1,11 @@
-# Variables d'environnement et configuration sensible
+# Variables d'environnement
 .env
 .env.local
 .env.*.local
 
-# Configuration Firebase locale (clés du projet) — NON versionnée.
-# Copier js/firebase-config.example.js vers js/firebase-config.js et y mettre
-# vos valeurs. (La config web Firebase n'est pas secrète, mais on évite de la
-# committer telle quelle, conformément à la demande.)
-js/firebase-config.js
+# Note : js/firebase-config.js EST versionné. La configuration web Firebase
+# n'est pas un secret ; la sécurité repose sur les règles Firestore
+# (firestore.rules) et la restriction de la clé d'API (domaines autorisés).
 
 # Dépendances éventuelles
 node_modules/

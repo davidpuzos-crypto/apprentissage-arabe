@@ -59,6 +59,7 @@ async function assurerProfil(user) {
 
 export function estConfigure() { return pret; }
 export function messageConfig() { return messageErreurConfig; }
+export { auth, db };
 
 export function surUtilisateur(cb) {
   if (!pret) { cb(null); return () => {}; }
