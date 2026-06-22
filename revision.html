@@ -64,6 +64,7 @@
 
     /* ============ Menu (hub) ============ */
     function menu() {
+      if (window.FondParallax) FondParallax.afficher();
       zone.innerHTML = `
         <div class="tuiles" style="margin-top:0.4rem;">
           <a class="tuile tuile-forte" id="m-session" href="#"><span class="t-emoji">🧩</span><span class="t-titre">Session de révision</span><span class="t-sous">exercices variés, vocabulaire et grammaire</span></a>
@@ -140,6 +141,7 @@
 
     function lancerExercices(file) {
       if (!file.length) { menu(); return; }
+      if (window.FondParallax) FondParallax.masquer(); // fond retiré en mode exercice
       const total = file.length;
       let idx = 0, reussis = 0, points = 0, combo = 0, meilleurCombo = 0;
       const encouragements = ['Très bien !', 'Excellent !', 'Parfait !', 'Bravo !', 'Mā shāʾa Llāh !', 'Continuez ainsi !'];
@@ -259,6 +261,7 @@
 
     /* ============ Cartes de révision (répétition espacée) ============ */
     function menuCartes() {
+      if (window.FondParallax) FondParallax.afficher();
       const m = document.createElement('div'); m.className = 'carte centre';
       let html = '<button class="btn-fantome petit" id="retour-menu" style="float:left">‹ Menu</button><div style="clear:both"></div>';
       if (dus.length) html += `<h3>${dus.length} élément${dus.length > 1 ? 's' : ''} à revoir aujourd'hui</h3>
@@ -322,5 +325,6 @@
   <!-- Synchronisation de la progression (Firebase, si connecté) -->
   <script src="js/firebase-config.js"></script>
   <script type="module" src="js/sync.js"></script>
+  <script src="js/fond-parallax.js"></script>
 </body>
 </html>

@@ -775,3 +775,35 @@ body.clavier-ouvert { padding-bottom: 55vh; }
   background: var(--fond-carte); border: 1px solid var(--bordure); border-radius: 12px; padding: 0.55rem 0.9rem; margin-bottom: 1rem; }
 .compte-chip { font-family: var(--f-ui); font-size: 0.88rem; }
 .compte-chip b { font-weight: 600; }
+
+/* =========================================================================
+   Bandeau de navigation — vert profond + or (pages de travail)
+   ========================================================================= */
+#barre { background: linear-gradient(180deg, #123a2c, #0f2e23); border-bottom: 1px solid rgba(168, 133, 58, 0.5); }
+.barre .marque { color: #f1ead7; }
+.barre .marque::before { color: #d8b25a; }
+.barre nav a { color: rgba(241, 234, 215, 0.82); }
+.barre nav a:hover { color: #e7c879; }
+.barre nav a.actif { color: #f6ecca; font-weight: 500; }
+.barre nav a.actif::after { background: #d8b25a; }
+.bascule-mini { color: rgba(241, 234, 215, 0.82); border-color: rgba(241, 234, 215, 0.3); }
+.bascule-mini:hover, .bascule-mini.actif { color: #123a2c; background: #e7c879; border-color: #e7c879; }
+.bascule-theme { color: rgba(241, 234, 215, 0.85); border-color: rgba(241, 234, 215, 0.32); }
+.bascule-theme:hover { color: #e7c879; border-color: #e7c879; }
+.burger { color: rgba(241, 234, 215, 0.85); border-color: rgba(241, 234, 215, 0.32); }
+.burger:hover { color: #e7c879; border-color: #e7c879; }
+@media (max-width: 760px) {
+  .barre nav a { border-top: 1px solid rgba(241, 234, 215, 0.16); }
+  .barre nav a.actif { background: rgba(231, 200, 121, 0.16); }
+  .reglages { border-top: 1px solid rgba(241, 234, 215, 0.16); }
+}
+
+/* =========================================================================
+   Fond parallax de lettres arabes (très léger) — pages calmes uniquement.
+   Masqué pendant les exercices via la classe .cache (JS : FondParallax).
+   ========================================================================= */
+#fond-parallax {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: -1; pointer-events: none; opacity: 1; transition: opacity 0.45s ease;
+}
+#fond-parallax.cache { opacity: 0; }

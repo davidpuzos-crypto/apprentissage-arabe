@@ -443,6 +443,7 @@
     /* ---- Aiguillage des vues ---- */
     function montrer(quoi) {
       if (quoi !== 'exo') cacherRetour();
+      if (window.FondParallax) { quoi === 'exo' ? FondParallax.masquer() : FondParallax.afficher(); }
       vueCours.style.display = quoi === 'cours' ? 'block' : 'none';
       vueExo.style.display = quoi === 'exo' ? 'block' : 'none';
       vueBilan.style.display = quoi === 'bilan' ? 'block' : 'none';
@@ -457,5 +458,6 @@
   <!-- Synchronisation de la progression (Firebase, si connecté) -->
   <script src="js/firebase-config.js"></script>
   <script type="module" src="js/sync.js"></script>
+  <script src="js/fond-parallax.js"></script>
 </body>
 </html>

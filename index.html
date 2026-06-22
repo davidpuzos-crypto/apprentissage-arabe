@@ -180,15 +180,22 @@
     const bandeau = document.getElementById('bandeau-compte');
     if (estConfigure()) {
       surUtilisateur((u) => {
-        bandeau.hidden = false;
         if (u) {
+          localStorage.removeItem('mode-invite');
+          bandeau.hidden = false;
           const nom = u.displayName || (u.email ? u.email.split('@')[0] : 'vous');
           document.getElementById('salut-titre').textContent = 'As-salāmu ʿalaykum, ' + nom;
           bandeau.innerHTML = '<span class="compte-chip">✦ Connecté : <b></b></span>' +
             '<button class="btn-fantome petit" id="btn-deconnexion" type="button">Se déconnecter</button>';
           bandeau.querySelector('b').textContent = u.email || nom; // textContent : sûr
-          document.getElementById('btn-deconnexion').onclick = async () => { await deconnecter(); location.reload(); };
+          document.getElementById('btn-deconnexion').onclick = async () => {
+            await deconnecter(); localStorage.removeItem('mode-invite'); location.replace('connexion.html');
+          };
+        } else if (!localStorage.getItem('mode-invite')) {
+          // Non connecté et pas en mode invité : la connexion est la première page.
+          location.replace('connexion.html');
         } else {
+          bandeau.hidden = false;
           bandeau.innerHTML = '<span class="compte-chip muet">Vous apprenez en invité — votre progression reste sur cet appareil.</span>' +
             '<a class="btn-fantome petit" href="connexion.html">Se connecter / Créer un compte</a>';
         }
@@ -196,5 +203,6 @@
     }
   </script>
   <script type="module" src="js/sync.js"></script>
+  <script src="js/fond-parallax.js"></script>
 </body>
 </html>
