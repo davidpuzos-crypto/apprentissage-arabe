@@ -1,0 +1,112 @@
+/* =========================================================================
+   connexion.css — page d'accueil / connexion (landing « effet wahou »)
+   Deux panneaux : à gauche une présentation sur fond de manuscrit animé,
+   à droite la carte de connexion. S'appuie sur la palette de base.css.
+   ========================================================================= */
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+}
+
+/* ---- Panneau de présentation (gauche) ---- */
+.auth-art {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: clamp(2rem, 5vw, 4.5rem);
+  color: #f3efe4;
+  background:
+    radial-gradient(circle at 78% 12%, rgba(168, 133, 58, 0.28), transparent 45%),
+    radial-gradient(circle at 12% 88%, rgba(47, 115, 85, 0.45), transparent 50%),
+    linear-gradient(150deg, #0c281e 0%, #123a2c 45%, #1c5440 100%);
+}
+.auth-art::after { /* fin liseré doré à la jointure */
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 3px;
+  background: linear-gradient(180deg, transparent, rgba(168,133,58,0.7), transparent);
+}
+#fond-lettres {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0.5; pointer-events: none;
+}
+.auth-art-contenu { position: relative; z-index: 1; max-width: 30rem; }
+
+.auth-marque {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--f-ui); font-size: 0.82rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(243, 239, 228, 0.82);
+}
+.auth-marque .sceau {
+  width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid rgba(168,133,58,0.7); color: #d8b25a; font-size: 1rem;
+}
+.auth-art h1 {
+  font-family: var(--f-titre); font-weight: 600; line-height: 1.05;
+  font-size: clamp(2.3rem, 4.5vw, 3.6rem); margin: 0.2rem 0;
+}
+.auth-art h1 .surligne { color: #e7c879; }
+.auth-baseline { font-size: 1.12rem; color: rgba(243, 239, 228, 0.9); line-height: 1.5; max-width: 26rem; }
+
+.auth-atouts { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin: 0.4rem 0 0; padding: 0; }
+.auth-atouts li { display: flex; align-items: center; gap: 0.7rem; font-family: var(--f-ui); font-size: 0.95rem; color: rgba(243,239,228,0.92); }
+.auth-atouts .coche {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 0.8rem;
+  background: rgba(168,133,58,0.18); color: #e7c879; border: 1px solid rgba(168,133,58,0.5);
+}
+
+.auth-bismala {
+  margin-top: 0.6rem; font-family: var(--f-arabe); direction: rtl;
+  font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1;
+  background: linear-gradient(100deg, #b9943f 10%, #f2d98a 35%, #b9943f 60%);
+  background-size: 220% auto; -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: lustre 6s linear infinite;
+}
+@keyframes lustre { to { background-position: 220% center; } }
+
+/* ---- Panneau de connexion (droite) ---- */
+.auth-panneau {
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(1.6rem, 4vw, 3rem); background: var(--fond);
+}
+.auth-carte {
+  width: 100%; max-width: 410px;
+  background: var(--fond-carte); border: 1px solid var(--bordure);
+  border-radius: 18px; padding: clamp(1.4rem, 3vw, 2.1rem);
+  box-shadow: 0 10px 40px rgba(18, 40, 30, 0.10);
+}
+.auth-carte h2 { font-family: var(--f-titre); font-size: 1.7rem; text-align: center; margin-bottom: 0.2rem; }
+.auth-carte .accroche { text-align: center; color: var(--texte-doux); font-family: var(--f-ui); font-size: 0.88rem; margin-bottom: 1.2rem; }
+
+/* Bouton thème flottant */
+.auth-theme {
+  position: fixed; top: 1rem; right: 1rem; z-index: 5;
+  width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+  background: var(--fond-carte); border: 1px solid var(--bordure);
+  color: var(--accent); display: grid; place-items: center; font-size: 1.05rem;
+  box-shadow: 0 2px 10px rgba(18,40,30,0.12);
+}
+.auth-theme:hover { background: var(--fond-carte-profond); }
+@media (max-width: 860px) { .auth-theme { top: 0.7rem; right: 0.7rem; } }
+
+/* ---- Entrées animées ---- */
+.monte { opacity: 0; transform: translateY(14px); animation: monteFondu 0.7s cubic-bezier(.2,.8,.2,1) forwards; }
+@keyframes monteFondu { to { opacity: 1; transform: none; } }
+
+/* ---- Responsive ---- */
+@media (max-width: 860px) {
+  .auth-page { grid-template-columns: 1fr; }
+  .auth-art { min-height: 42vh; justify-content: flex-end; gap: 1rem; padding: 2rem 1.5rem 2.2rem; }
+  .auth-art::after { display: none; }
+  .auth-atouts { display: none; } /* on allège sur mobile */
+  .auth-panneau { padding: 1.6rem 1.2rem 3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-bismala { animation: none; }
+  .monte { opacity: 1; transform: none; animation: none; }
+}
