@@ -437,6 +437,68 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
 .retour-exo.moins { background: rgba(138,44,44,0.08); color: var(--erreur); border: 1px solid var(--erreur); }
 .retour-exo .expl { display: block; margin-top: 0.45rem; padding-top: 0.45rem; border-top: 1px solid currentColor; opacity: 0.92; font-size: 0.9rem; line-height: 1.5; }
 
+/* Texte à trous libre (saisie d'un mot) */
+.phrase-libre {
+  font-family: var(--f-arabe); direction: rtl; font-size: 2rem; line-height: 2.4;
+  text-align: center; margin: 0.6rem 0 1rem;
+}
+.champ-trou {
+  font-family: var(--f-arabe); direction: rtl; font-size: 1.8rem; text-align: center;
+  min-width: 130px; max-width: 60%; padding: 0.15rem 0.5rem; margin: 0 0.3rem;
+  border: none; border-bottom: 2px solid var(--accent); background: var(--fond-carte-profond);
+  color: var(--encre); border-radius: 6px 6px 0 0;
+}
+.champ-trou:focus { outline: none; border-bottom-color: var(--or-profond); }
+.correction-libre .ar { font-family: var(--f-arabe); direction: rtl; font-size: 2.2rem; }
+
+/* Sélection contextuelle (grammaire en contexte) */
+.contexte-sujet {
+  font-family: var(--f-ui); font-size: 0.9rem; color: var(--texte-doux);
+  text-align: center; margin-bottom: 0.6rem;
+}
+.contexte-sujet b { font-family: var(--f-arabe); font-size: 1.4rem; color: var(--encre); }
+.phrase-contexte {
+  font-family: var(--f-arabe); direction: rtl; font-size: 2rem; line-height: 2.4;
+  text-align: center; margin: 0.4rem 0 1.1rem; display: flex; flex-wrap: wrap;
+  justify-content: center; align-items: center; gap: 0.4rem;
+}
+.trou-inline {
+  display: inline-block; min-width: 70px; padding: 0 0.4rem;
+  border-bottom: 2px solid var(--accent); color: var(--accent);
+}
+.trou-inline.juste { color: var(--succes); border-bottom-color: var(--succes); }
+.trou-inline.faux { color: var(--erreur); border-bottom-color: var(--erreur); }
+.choix-contexte { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 0.6rem; }
+.option-contexte { flex-direction: column; align-items: center; gap: 0.2rem; text-align: center; }
+.option-contexte .gloss { font-family: var(--f-ui); font-size: 0.78rem; color: var(--texte-doux); }
+
+/* Compréhension / dialogue */
+.dialogue-q { margin: 0.4rem 0 0.8rem; }
+.dialogue-q .bulle-ar {
+  font-family: var(--f-arabe); direction: rtl; font-size: 1.9rem; line-height: 1.9;
+  background: var(--fond-carte-profond); border: 1px solid var(--accent-doux);
+  border-radius: 14px; border-bottom-left-radius: 3px; padding: 0.7rem 1rem; display: inline-block;
+}
+.dialogue-q .phonetique { display: block; margin-top: 0.3rem; }
+
+/* Aide à la traduction (discrète) */
+.exo-aide { margin-top: 1rem; }
+.exo-aide-bouton {
+  background: none; border: 1px dashed var(--bordure); border-radius: var(--rayon);
+  color: var(--texte-doux); font-family: var(--f-ui); font-size: 0.82rem;
+  padding: 0.35rem 0.8rem; cursor: pointer; transition: all var(--transition);
+}
+.exo-aide-bouton:hover { border-color: var(--accent); color: var(--accent); }
+.exo-aide-bouton .aa-ic { font-size: 0.9rem; }
+.exo-aide-contenu { display: none; margin-top: 0.6rem; padding: 0.6rem 0.9rem;
+  background: var(--fond-carte-profond); border: 1px solid var(--bordure); border-radius: var(--rayon); }
+.exo-aide.ouverte .exo-aide-contenu { display: block; animation: fondu var(--transition); }
+.exo-aide-ligne { display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 0.25rem 0; border-bottom: 1px solid var(--bordure); }
+.exo-aide-ligne:last-child { border-bottom: none; }
+.exo-aide-ligne .aa-ar { font-family: var(--f-arabe); direction: rtl; font-size: 1.5rem; color: var(--encre); }
+.exo-aide-ligne .aa-fr { font-family: var(--f-ui); font-size: 0.9rem; color: var(--texte-doux); text-align: right; }
+
 /* Barre de progression d'exercices */
 .barre-progres-exo { height: 6px; background: var(--bordure); border-radius: 3px; overflow: hidden; margin: 1rem 0; box-shadow: inset 0 1px 2px rgba(0,0,0,0.08); }
 .barre-progres-exo > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--vert-doux)); border-radius: 3px; transition: width 0.45s cubic-bezier(.2,.8,.2,1); }

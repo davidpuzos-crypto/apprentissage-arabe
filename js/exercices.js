@@ -1,6 +1,12 @@
 /* =========================================================================
    exercices.js — générateurs et rendu des exercices interactifs
-   Types : qcm, appariement, glisser, trous, saisie, oral, racine, decomposition
+   Types : qcm, appariement, glisser, trous, saisie, oral, racine,
+           decomposition, phonetique,
+           texteLibre (saisie d'un mot manquant au clavier),
+           contexte (sélection grammaticale selon le sujet de la phrase),
+           dialogue (compréhension d'une question/réplique : choix ou saisie).
+   Aide : tout exercice peut porter `aides:[{ar,fr}]` ; un bouton discret
+          « Aide : voir la traduction » est alors injecté automatiquement.
    Interface : Exercices.rendre(exo, index, conteneur, surReponse, idLecon)
    surReponse(reussi, cles) est appelé une seule fois, à la validation.
    ========================================================================= */
@@ -87,6 +93,7 @@ const Exercices = (function () {
         const s = el('span', 'ar-opt'); s.textContent = opt.ar; b.appendChild(s);
       }
       if (opt.texte) b.appendChild(document.createTextNode(opt.texte));
+      if (opt.aide) b.title = opt.aide; // survol discret : aide à la traduction
       b.addEventListener('click', () => {
         if (repondu) return;
         repondu = true;
@@ -581,8 +588,232 @@ const Exercices = (function () {
     const retour = ajouterRetour(carte);
   }
 
+  /* ====================================================================
+     Aide à la traduction (discrète, générique)
+     Toute consigne d'exercice peut porter un champ `aides:[{ar,fr}]`.
+     On affiche alors un petit bouton « Aide au vocabulaire » qui dévoile,
+     à la demande, la traduction française des mots employés. Ainsi
+     l'apprenant n'est jamais bloqué et découvre du vocabulaire en contexte.
+     Injecté automatiquement par `rendre`, sans toucher aux types.
+     ==================================================================== */
+  function construireAide(aides, idLecon) {
+    const box = el('div', 'exo-aide');
+    const b = el('button', 'exo-aide-bouton');
+    b.type = 'button';
+    b.setAttribute('aria-expanded', 'false');
+    b.innerHTML = '<span class="aa-ic">💡</span> Aide&nbsp;: voir la traduction';
+    const contenu = el('div', 'exo-aide-contenu');
+    aides.forEach((a) => {
+      const ligne = el('div', 'exo-aide-ligne');
+      const ar = el('span', 'aa-ar');
+      ar.textContent = a.ar;
+      ar.appendChild(boutonAudio(a.ar, idLecon));
+      const fr = el('span', 'aa-fr', a.fr);
+      ligne.appendChild(ar);
+      ligne.appendChild(fr);
+      contenu.appendChild(ligne);
+    });
+    b.addEventListener('click', () => {
+      const ouverte = box.classList.toggle('ouverte');
+      b.setAttribute('aria-expanded', ouverte ? 'true' : 'false');
+    });
+    box.appendChild(b);
+    box.appendChild(contenu);
+    return box;
+  }
+
+  /* ====================================================================
+     10. Texte à trous libre (saisie au clavier d'un mot manquant)
+     { type:'texteLibre', consigne, avant?, apres?, reponse:'mot arabe',
+       indice?, traduction?, aides?, cles? }
+     L'apprenant écrit lui-même le mot manquant, il ne choisit pas.
+     ==================================================================== */
+  function texteLibre(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    if (exo.traduction) carte.appendChild(el('p', 'muet centre', exo.traduction));
+
+    const phrase = el('div', 'phrase-libre');
+    if (exo.avant) phrase.appendChild(document.createTextNode(exo.avant + ' '));
+    const champ = document.createElement('input');
+    champ.type = 'text';
+    champ.className = 'champ-trou';
+    champ.dir = 'rtl';
+    champ.setAttribute('aria-label', 'Mot à écrire');
+    if (exo.indice) champ.placeholder = exo.indice;
+    ClavierArabe.attacher(champ);
+    phrase.appendChild(champ);
+    if (exo.apres) phrase.appendChild(document.createTextNode(' ' + exo.apres));
+    carte.appendChild(phrase);
+
+    const btn = el('button', 'btn btn-petit', 'Vérifier');
+    btn.type = 'button';
+    let valide = false;
+    btn.addEventListener('click', () => {
+      if (valide) return;
+      valide = true;
+      const score = Parole.similarite(exo.reponse, champ.value);
+      const reussi = score >= 80;
+      champ.disabled = true;
+      ClavierArabe.fermer();
+      const corr = el('div', 'a-memoriser');
+      corr.style.marginTop = '0.8rem';
+      corr.innerHTML = '<div class="ar">' + exo.reponse + '</div>';
+      carte.insertBefore(corr, retour);
+      montrerRetour(retour, reussi,
+        'Bien écrit (' + score + '% de correspondance).',
+        'Le mot attendu est affiché ci-dessus (' + score + '% de correspondance). Comparez, puis réessayez à tête reposée.');
+      btn.disabled = true;
+      surReponse(reussi, exo.cles);
+    });
+    carte.appendChild(btn);
+    const retour = ajouterRetour(carte);
+  }
+
+  /* ====================================================================
+     11. Sélection contextuelle (article, préfixe, conjugaison, accord…)
+     { type:'contexte', consigne, sujet?, avant?, apres?,
+       options:[{ar, fr?}], bonne, traduction?, aides?, cles? }
+     On choisit la bonne forme grammaticale selon le contexte de la phrase.
+     Le bon choix vient se placer dans le trou de la phrase.
+     ==================================================================== */
+  function contexte(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    if (exo.traduction) carte.appendChild(el('p', 'muet centre', exo.traduction));
+    if (exo.sujet) {
+      const s = el('div', 'contexte-sujet');
+      s.innerHTML = 'Sujet de la phrase&nbsp;: <b>' + exo.sujet + '</b>';
+      carte.appendChild(s);
+    }
+
+    const phrase = el('div', 'phrase-contexte');
+    if (exo.avant) { const a = el('span'); a.textContent = exo.avant; phrase.appendChild(a); }
+    const blanc = el('span', 'trou-inline'); blanc.textContent = '…';
+    phrase.appendChild(blanc);
+    if (exo.apres) { const a = el('span'); a.textContent = exo.apres; phrase.appendChild(a); }
+    carte.appendChild(phrase);
+
+    const valeur = (o) => (typeof o === 'string' ? o : o.ar);
+    const liste = el('div', 'choix-contexte');
+    let repondu = false;
+    exo.options.forEach((opt, i) => {
+      const b = el('button', 'option option-contexte');
+      b.type = 'button';
+      const s = el('span', 'ar-opt'); s.textContent = valeur(opt); b.appendChild(s);
+      if (opt.fr) { const g = el('span', 'gloss'); g.textContent = opt.fr; b.appendChild(g); }
+      b.addEventListener('click', () => {
+        if (repondu) return;
+        repondu = true;
+        const reussi = i === exo.bonne;
+        blanc.textContent = valeur(exo.options[exo.bonne]);
+        blanc.classList.add(reussi ? 'juste' : 'faux');
+        Array.from(liste.children).forEach((c) => c.classList.add('fige'));
+        b.classList.add(reussi ? 'juste' : 'faux');
+        if (!reussi) liste.children[exo.bonne].classList.add('juste');
+        Parole.prononcer(valeur(exo.options[exo.bonne]), { rate: Parole.rateSelonLecon(idLecon) });
+        montrerRetour(retour, reussi,
+          'Bon choix : l\'accord est respecté.',
+          'La forme correcte vient se placer dans la phrase. Observez l\'accord.');
+        surReponse(reussi, exo.cles);
+      });
+      liste.appendChild(b);
+    });
+    carte.appendChild(liste);
+    const retour = ajouterRetour(carte);
+  }
+
+  /* ====================================================================
+     12. Compréhension de question / réplique de dialogue
+     { type:'dialogue', consigne, contexte?, questionAr, questionTr?,
+       mode:'choix'|'saisie',
+       options:[{ar, fr?}], bonne,   // si mode 'choix'
+       reponse:'arabe attendu',      // si mode 'saisie'
+       indice?, aides?, cles? }
+     On affiche une question/réplique en arabe ; l'apprenant trouve la
+     réponse logique, par choix ou en l'écrivant.
+     ==================================================================== */
+  function dialogue(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    if (exo.contexte) carte.appendChild(el('p', 'muet petit centre', exo.contexte));
+
+    const q = el('div', 'dialogue-q');
+    const ar = el('div', 'bulle-ar');
+    ar.textContent = exo.questionAr;
+    ar.appendChild(boutonAudio(exo.questionAr, idLecon));
+    q.appendChild(ar);
+    if (exo.questionTr) {
+      q.insertAdjacentHTML('beforeend',
+        (typeof App !== 'undefined') ? App.phon(exo.questionTr)
+          : '<span class="translit">' + exo.questionTr + '</span>');
+    }
+    carte.appendChild(q);
+
+    const consigneRep = el('p', 'muet petit centre', 'Quelle réponse convient ?');
+    carte.appendChild(consigneRep);
+
+    if (exo.mode === 'saisie') {
+      const champ = document.createElement('input');
+      champ.type = 'text';
+      champ.className = 'zone-saisie';
+      champ.dir = 'rtl';
+      champ.setAttribute('aria-label', 'Votre réponse en arabe');
+      if (exo.indice) champ.placeholder = exo.indice;
+      ClavierArabe.attacher(champ);
+      const btn = el('button', 'btn btn-petit', 'Vérifier');
+      btn.type = 'button';
+      let valide = false;
+      btn.addEventListener('click', () => {
+        if (valide) return;
+        valide = true;
+        const score = Parole.similarite(exo.reponse, champ.value);
+        const reussi = score >= 75;
+        champ.disabled = true;
+        ClavierArabe.fermer();
+        const corr = el('div', 'a-memoriser');
+        corr.style.marginTop = '0.8rem';
+        corr.innerHTML = '<div class="ar">' + exo.reponse + '</div>';
+        carte.insertBefore(corr, retour);
+        montrerRetour(retour, reussi,
+          'Réponse cohérente (' + score + '% de correspondance).',
+          'Une réponse possible est affichée ci-dessus (' + score + '% de correspondance).');
+        btn.disabled = true;
+        surReponse(reussi, exo.cles);
+      });
+      carte.appendChild(champ);
+      carte.appendChild(btn);
+      const retour = ajouterRetour(carte);
+      return;
+    }
+
+    const valeur = (o) => (typeof o === 'string' ? o : o.ar);
+    const liste = el('div', 'options-qcm');
+    let repondu = false;
+    exo.options.forEach((opt, i) => {
+      const b = el('button', 'option');
+      b.type = 'button';
+      const s = el('span', 'ar-opt'); s.textContent = valeur(opt); b.appendChild(s);
+      if (opt.fr) b.title = opt.fr; // survol discret : la traduction de la réponse
+      b.addEventListener('click', () => {
+        if (repondu) return;
+        repondu = true;
+        const reussi = i === exo.bonne;
+        Array.from(liste.children).forEach((c) => c.classList.add('fige'));
+        b.classList.add(reussi ? 'juste' : 'faux');
+        b.classList.add(reussi ? 'anim-pop' : 'anim-secousse');
+        if (!reussi) liste.children[exo.bonne].classList.add('juste');
+        Parole.prononcer(valeur(exo.options[exo.bonne]), { rate: Parole.rateSelonLecon(idLecon) });
+        montrerRetour(retour, reussi,
+          'Réponse logique. L\'échange se tient.',
+          'La réponse attendue est mise en évidence. Relisez la question.');
+        surReponse(reussi, exo.cles);
+      });
+      liste.appendChild(b);
+    });
+    carte.appendChild(liste);
+    const retour = ajouterRetour(carte);
+  }
+
   /* ---- Aiguillage ---- */
-  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique };
+  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, texteLibre, contexte, dialogue };
 
   function rendre(exo, index, conteneur, surReponse, idLecon) {
     const fn = types[exo.type];
@@ -606,6 +837,16 @@ const Exercices = (function () {
       surReponse(reussi, cles);
     };
     fn(exo, index, conteneur, wrap, idLecon);
+    // Aide à la traduction (discrète) : disponible pour tout type d'exercice
+    // qui déclare un champ `aides`. On la place juste avant le bloc de retour.
+    if (exo.aides && exo.aides.length) {
+      const carte = conteneur.children[avant];
+      if (carte) {
+        const aide = construireAide(exo.aides, idLecon);
+        const r = carte.querySelector('.retour-exo');
+        if (r) carte.insertBefore(aide, r); else carte.appendChild(aide);
+      }
+    }
   }
 
   return { rendre, melanger };
