@@ -9,6 +9,7 @@ import {
   getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence,
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
   signInWithPopup, GoogleAuthProvider, signOut, updateProfile,
+  EmailAuthProvider, linkWithCredential,
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 import {
   getFirestore, doc, setDoc, serverTimestamp,
@@ -89,6 +90,24 @@ export async function deconnecter() {
   if (pret) await signOut(auth);
 }
 
+// L'utilisateur courant possède-t-il déjà un mot de passe (fournisseur e-mail) ?
+export function aMotDePasse() {
+  return !!(auth && auth.currentUser &&
+    auth.currentUser.providerData.some((p) => p.providerId === 'password'));
+}
+
+// Associe un mot de passe au compte courant (ex. après une connexion Google),
+// pour permettre aussi la connexion par e-mail. Lie l'identifiant à l'utilisateur.
+export async function definirMotDePasse(motDePasse) {
+  if (!auth || !auth.currentUser) throw new Error('Aucun utilisateur connecté.');
+  const email = auth.currentUser.email;
+  if (!email) throw new Error('Ce compte n’a pas d’adresse e-mail.');
+  const cred = EmailAuthProvider.credential(email, motDePasse);
+  await linkWithCredential(auth.currentUser, cred);
+  await assurerProfil(auth.currentUser);
+  return auth.currentUser;
+}
+
 // Traduit les codes d'erreur Firebase en messages clairs en français.
 export function traduireErreur(e) {
   const code = (e && e.code) || '';
@@ -103,6 +122,9 @@ export function traduireErreur(e) {
     'auth/too-many-requests': 'Trop de tentatives. Réessayez plus tard.',
     'auth/popup-closed-by-user': 'Fenêtre Google fermée avant la connexion.',
     'auth/popup-blocked': 'La fenêtre Google a été bloquée par le navigateur.',
+    'auth/provider-already-linked': 'Un mot de passe est déjà défini pour ce compte.',
+    'auth/credential-already-in-use': 'Ces identifiants sont déjà utilisés par un autre compte.',
+    'auth/requires-recent-login': 'Reconnectez-vous pour définir un mot de passe.',
     'auth/unauthorized-domain': 'Ce domaine n’est pas autorisé dans Firebase (Authentication → Settings → Authorized domains).',
     'auth/network-request-failed': 'Problème de réseau. Vérifiez votre connexion.',
   };
@@ -113,5 +135,6 @@ export function traduireErreur(e) {
 window.Auth = {
   estConfigure, messageConfig, surUtilisateur,
   inscrire, connecter, connecterGoogle, deconnecter, traduireErreur,
+  aMotDePasse, definirMotDePasse,
 };
 window.dispatchEvent(new Event('auth-pret'));
