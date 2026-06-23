@@ -896,8 +896,73 @@ const Exercices = (function () {
     const retour = ajouterRetour(carte);
   }
 
+  /* ====================================================================
+     14. Lecture d'un passage (jalon de fin de cycle)
+     { type:'lecture', consigne, titre?, reference?,
+       segments:[{ ar, tr?, fr? }], cles? }
+     On lit un vrai passage, partie par partie, avec l'audio : chaque
+     segment a son bouton d'écoute, et « Tout écouter » enchaîne la lecture
+     en surlignant la partie en cours. On valide quand on a lu le passage.
+     ==================================================================== */
+  function lecture(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    if (exo.titre) carte.appendChild(el('p', 'muet centre', exo.titre));
+
+    const passage = el('div', 'passage');
+    const lignes = [];
+    exo.segments.forEach((seg) => {
+      const ligne = el('div', 'passage-ligne');
+      const ar = el('div', 'ar');
+      ar.appendChild(document.createTextNode(seg.ar));
+      ar.appendChild(boutonAudio(seg.ar, idLecon));
+      ligne.appendChild(ar);
+      if (seg.tr) {
+        const tr = el('p', 'passage-tr');
+        tr.innerHTML = (typeof App !== 'undefined') ? App.phon(seg.tr) : '<span class="translit">' + seg.tr + '</span>';
+        ligne.appendChild(tr);
+      }
+      if (seg.fr) ligne.appendChild(el('p', 'passage-fr', seg.fr));
+      passage.appendChild(ligne);
+      lignes.push(ligne);
+    });
+    carte.appendChild(passage);
+
+    if (exo.reference) carte.appendChild(el('p', 'muet petit centre', exo.reference));
+
+    const actions = el('div', 'passage-actions');
+    const tout = el('button', 'btn btn-secondaire btn-petit', '&#9654;&nbsp;Tout écouter, partie par partie');
+    tout.type = 'button';
+    tout.addEventListener('click', () => {
+      lignes.forEach((l) => l.classList.remove('lit'));
+      Parole.prononcerSuite(exo.segments.map((s) => s.ar), {
+        rate: Parole.rateSelonLecon(idLecon || 6),
+        surSegmentDebut: (i) => {
+          lignes.forEach((l) => l.classList.remove('lit'));
+          if (lignes[i]) lignes[i].classList.add('lit');
+        },
+        surFin: () => lignes.forEach((l) => l.classList.remove('lit')),
+      });
+    });
+    actions.appendChild(tout);
+
+    const valider = el('button', 'btn btn-petit', 'J\'ai lu ce passage');
+    valider.type = 'button';
+    let fait = false;
+    valider.addEventListener('click', () => {
+      if (fait) return;
+      fait = true;
+      valider.disabled = true;
+      montrerRetour(retour, true,
+        'Vous venez de lire un véritable passage du Coran, par vous-même. Le système d\'écriture n\'a plus de secret : place au sens et à la grammaire.');
+      surReponse(true, exo.cles);
+    });
+    actions.appendChild(valider);
+    carte.appendChild(actions);
+    const retour = ajouterRetour(carte);
+  }
+
   /* ---- Aiguillage ---- */
-  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, texteLibre, contexte, dialogue, dictee };
+  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, texteLibre, contexte, dialogue, dictee, lecture };
 
   function rendre(exo, index, conteneur, surReponse, idLecon) {
     const fn = types[exo.type];

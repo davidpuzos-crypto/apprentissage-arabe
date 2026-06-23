@@ -39,6 +39,32 @@ const Parole = (function () {
     return idLecon <= 6 ? 0.7 : (idLecon <= 18 ? 0.8 : 0.9);
   }
 
+  // Lit une suite de segments l'un après l'autre (audio « partie par partie »).
+  // options : rate, surSegmentDebut(i), surFin(). Chaque segment enchaîne au
+  // précédent via onend, avec une petite pause pour bien détacher la lecture.
+  function prononcerSuite(textes, options = {}) {
+    if (!('speechSynthesis' in window)) return false;
+    window.speechSynthesis.cancel();
+    const rate = options.rate != null ? options.rate : 0.7;
+    let i = 0;
+    function direSuivant() {
+      if (i >= textes.length) { if (options.surFin) options.surFin(); return; }
+      const idx = i;
+      const u = new SpeechSynthesisUtterance(textes[idx]);
+      u.lang = 'ar-SA';
+      if (voixArabe) u.voice = voixArabe;
+      u.rate = rate;
+      u.pitch = 1;
+      u.onend = () => { i++; setTimeout(direSuivant, 400); };
+      u.onerror = () => { i++; setTimeout(direSuivant, 400); };
+      if (options.surSegmentDebut) options.surSegmentDebut(idx);
+      window.speechSynthesis.speak(u);
+    }
+    direSuivant();
+    return true;
+  }
+
+
   /* ---- Normalisation du texte arabe ---- */
   function normaliser(texte) {
     if (!texte) return '';
@@ -135,7 +161,7 @@ const Parole = (function () {
   }
 
   return {
-    prononcer, rateSelonLecon, normaliser, levenshtein, similarite,
+    prononcer, prononcerSuite, rateSelonLecon, normaliser, levenshtein, similarite,
     motsReconnus, disponibleReconnaissance, ecouter, meilleureAlternative,
   };
 })();
