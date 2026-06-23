@@ -580,6 +580,17 @@ const Lecons = {
         mode: 'saisie', audio: 'سَمَاء', reponse: 'سماء', cles: ['sama'] },
       { type: 'oral', consigne: 'Récitez le premier verset, lentement et à voix haute.',
         phraseAr: 'قُلْ هُوَ اللَّهُ أَحَدٌ', translit: 'qul huwa llāhu aḥad', cles: ['qul','ahad'] },
+      { type: 'lecture',
+        consigne: 'Épreuve de passage. Vous savez désormais tout déchiffrer. Voici un vrai passage du Coran, que peu de gens connaissent par cœur : à vous de le lire. Écoutez chaque partie, lisez-la à voix haute, puis validez pour entrer dans le Cycle II.',
+        titre: 'Sourate al-Mulk (la Royauté), versets 1 et 2',
+        reference: 'Appuyez sur « Tout écouter » pour entendre la lecture partie par partie, puis lisez vous-même.',
+        segments: [
+          { ar: 'تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ', tr: 'tabāraka lladhī bi-yadihi l-mulk', fr: 'Béni soit Celui qui détient la royauté,' },
+          { ar: 'وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'wa-huwa ʿalā kulli shayʾin qadīr', fr: 'et qui est capable de toute chose ;' },
+          { ar: 'الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ', tr: 'alladhī khalaqa l-mawta wa-l-ḥayāt', fr: 'Celui qui a créé la mort et la vie' },
+          { ar: 'لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا', tr: 'li-yabluwakum ayyukum aḥsanu ʿamalā', fr: 'pour vous éprouver : qui de vous agira le mieux.' },
+          { ar: 'وَهُوَ الْعَزِيزُ الْغَفُورُ', tr: 'wa-huwa l-ʿazīzu l-ghafūr', fr: 'Et c\'est Lui le Puissant, le Pardonneur.' },
+        ] },
     ],
     memoriser: { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ', tr: 'qul huwa llāhu aḥad', fr: 'Dis : Il est Allah, Unique. (al-Ikhlāṣ, 1) — votre premier verset entièrement lu.' },
     recap: [

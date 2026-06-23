@@ -216,7 +216,11 @@
       return sup;
     }
 
-    const exercices = lecon.exercices.concat(genererSupplementaires(lecon));
+    // On place les jalons de lecture (type 'lecture') tout à la fin, après les
+    // exercices générés, pour qu'ils clôturent réellement la leçon (passage de cycle).
+    const tousExos = lecon.exercices.concat(genererSupplementaires(lecon));
+    const exercices = tousExos.filter((e) => e.type !== 'lecture')
+      .concat(tousExos.filter((e) => e.type === 'lecture'));
     const total = exercices.length;
     let repondus = 0, reussis = 0, idx = 0;
     let sessionPoints = 0, combo = 0, meilleurCombo = 0, xpAttribue = false;

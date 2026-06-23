@@ -508,6 +508,18 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
 }
 .btn-ecoute:hover { background: var(--accent); color: var(--sur-accent); }
 
+/* Lecture d'un passage (jalon de fin de cycle) */
+.passage { display: flex; flex-direction: column; gap: 0.5rem; margin: 0.6rem 0 1rem; }
+.passage-ligne {
+  padding: 0.7rem 0.9rem; border: 1px solid var(--bordure); border-radius: var(--rayon);
+  background: var(--fond); transition: background var(--transition), border-color var(--transition);
+}
+.passage-ligne.lit { border-color: var(--accent); background: var(--fond-carte-profond); box-shadow: 0 0 0 2px rgba(58,95,62,0.12); }
+.passage-ligne .ar { font-family: var(--f-arabe); direction: rtl; font-size: 2rem; line-height: 2.1; }
+.passage-tr { margin: 0.2rem 0 0; }
+.passage-fr { margin: 0.15rem 0 0; color: var(--texte-doux); font-size: 0.95rem; }
+.passage-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+
 /* Barre de progression d'exercices */
 .barre-progres-exo { height: 6px; background: var(--bordure); border-radius: 3px; overflow: hidden; margin: 1rem 0; box-shadow: inset 0 1px 2px rgba(0,0,0,0.08); }
 .barre-progres-exo > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--vert-doux)); border-radius: 3px; transition: width 0.45s cubic-bezier(.2,.8,.2,1); }
