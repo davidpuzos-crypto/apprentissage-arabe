@@ -812,8 +812,92 @@ const Exercices = (function () {
     const retour = ajouterRetour(carte);
   }
 
+  /* ====================================================================
+     13. Dictée (son → signe) — cœur du déchiffrage
+     { type:'dictee', consigne, audio:'بَ', mode:'choix'|'saisie',
+       options:[{ar}], bonne,   // si mode 'choix' (défaut)
+       reponse:'بَ',            // si mode 'saisie'
+       cles? }
+     On entend une lettre/syllabe/mot ; le texte reste masqué jusqu'à la
+     réponse. L'apprenant reconnaît le son et choisit (ou écrit) le signe.
+     ==================================================================== */
+  function dictee(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    const zone = el('div', 'zone-dictee');
+    const ecoute = el('button', 'btn-ecoute');
+    ecoute.type = 'button';
+    ecoute.innerHTML = '&#9654;&nbsp;Écouter';
+    ecoute.setAttribute('aria-label', 'Réécouter le son');
+    const dire = () => Parole.prononcer(exo.audio, { rate: Parole.rateSelonLecon(idLecon || 1) });
+    ecoute.addEventListener('click', (e) => { e.preventDefault(); dire(); });
+    zone.appendChild(ecoute);
+    carte.appendChild(zone);
+    setTimeout(dire, 250); // on fait entendre le son d'emblée
+
+    const reveler = () => {
+      const corr = el('div', 'a-memoriser');
+      corr.style.marginTop = '0.8rem';
+      corr.innerHTML = '<div class="ar">' + exo.audio + '</div>';
+      carte.insertBefore(corr, retour);
+    };
+
+    if (exo.mode === 'saisie') {
+      const champ = document.createElement('input');
+      champ.type = 'text';
+      champ.className = 'zone-saisie';
+      champ.dir = 'rtl';
+      champ.setAttribute('aria-label', 'Écrivez ce que vous entendez');
+      ClavierArabe.attacher(champ);
+      const btn = el('button', 'btn btn-petit', 'Vérifier');
+      btn.type = 'button';
+      let valide = false;
+      btn.addEventListener('click', () => {
+        if (valide) return;
+        valide = true;
+        const score = Parole.similarite(exo.reponse || exo.audio, champ.value);
+        const reussi = score >= 80;
+        champ.disabled = true;
+        ClavierArabe.fermer();
+        reveler();
+        montrerRetour(retour, reussi,
+          'Bien entendu et bien écrit (' + score + '% de correspondance).',
+          'Le signe attendu est affiché ci-dessus (' + score + '% de correspondance). Réécoutez, puis réessayez.');
+        btn.disabled = true;
+        surReponse(reussi, exo.cles);
+      });
+      carte.appendChild(champ);
+      carte.appendChild(btn);
+      const retour = ajouterRetour(carte);
+      return;
+    }
+
+    const liste = el('div', 'options-qcm');
+    let repondu = false;
+    exo.options.forEach((opt, i) => {
+      const b = el('button', 'option');
+      b.type = 'button';
+      const s = el('span', 'ar-opt'); s.textContent = (typeof opt === 'string' ? opt : opt.ar); b.appendChild(s);
+      b.addEventListener('click', () => {
+        if (repondu) return;
+        repondu = true;
+        const reussi = i === exo.bonne;
+        Array.from(liste.children).forEach((c) => c.classList.add('fige'));
+        b.classList.add(reussi ? 'juste' : 'faux');
+        b.classList.add(reussi ? 'anim-pop' : 'anim-secousse');
+        if (!reussi) liste.children[exo.bonne].classList.add('juste');
+        montrerRetour(retour, reussi,
+          'Oui, c\'est bien ce son.',
+          'Le bon signe est mis en évidence. Réécoutez pour fixer le lien son ↔ écriture.');
+        surReponse(reussi, exo.cles);
+      });
+      liste.appendChild(b);
+    });
+    carte.appendChild(liste);
+    const retour = ajouterRetour(carte);
+  }
+
   /* ---- Aiguillage ---- */
-  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, texteLibre, contexte, dialogue };
+  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, texteLibre, contexte, dialogue, dictee };
 
   function rendre(exo, index, conteneur, surReponse, idLecon) {
     const fn = types[exo.type];

@@ -499,6 +499,15 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
 .exo-aide-ligne .aa-ar { font-family: var(--f-arabe); direction: rtl; font-size: 1.5rem; color: var(--encre); }
 .exo-aide-ligne .aa-fr { font-family: var(--f-ui); font-size: 0.9rem; color: var(--texte-doux); text-align: right; }
 
+/* Dictée (son → signe) */
+.zone-dictee { text-align: center; margin: 0.6rem 0 1rem; }
+.btn-ecoute {
+  font-family: var(--f-ui); font-size: 1rem; padding: 0.7rem 1.4rem; cursor: pointer;
+  border: 2px solid var(--accent); border-radius: 999px; background: var(--fond-carte);
+  color: var(--or-profond); transition: all var(--transition);
+}
+.btn-ecoute:hover { background: var(--accent); color: var(--sur-accent); }
+
 /* Barre de progression d'exercices */
 .barre-progres-exo { height: 6px; background: var(--bordure); border-radius: 3px; overflow: hidden; margin: 1rem 0; box-shadow: inset 0 1px 2px rgba(0,0,0,0.08); }
 .barre-progres-exo > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--vert-doux)); border-radius: 3px; transition: width 0.45s cubic-bezier(.2,.8,.2,1); }
