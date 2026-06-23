@@ -1,6 +1,12 @@
 /* =========================================================================
    exercices.js — générateurs et rendu des exercices interactifs
-   Types : qcm, appariement, glisser, trous, saisie, oral, racine, decomposition
+   Types : qcm, appariement, glisser, trous, saisie, oral, racine,
+           decomposition, phonetique,
+           texteLibre (saisie d'un mot manquant au clavier),
+           contexte (sélection grammaticale selon le sujet de la phrase),
+           dialogue (compréhension d'une question/réplique : choix ou saisie).
+   Aide : tout exercice peut porter `aides:[{ar,fr}]` ; un bouton discret
+          « Aide : voir la traduction » est alors injecté automatiquement.
    Interface : Exercices.rendre(exo, index, conteneur, surReponse, idLecon)
    surReponse(reussi, cles) est appelé une seule fois, à la validation.
    ========================================================================= */
@@ -117,6 +123,7 @@ const Exercices = (function () {
         const s = el('span', 'ar-opt'); s.textContent = opt.ar; b.appendChild(s);
       }
       if (opt.texte) b.appendChild(document.createTextNode(opt.texte));
+      if (opt.aide) b.title = opt.aide; // survol discret : aide à la traduction
       b.addEventListener('click', () => {
         if (repondu) return;
         repondu = true;
@@ -662,14 +669,153 @@ const Exercices = (function () {
   }
 
   /* ====================================================================
-     11. Compréhension de dialogue / question
-     { type:'dialogue', consigne, echange:[{qui:'A'|'B', ar, fr?}], question?,
-       options:[{ar?, texte?}], bonne, aide?, explication?, cles? }
-     Montre un échange (ou une question) en arabe ; l'utilisateur choisit la
-     réponse logique. La traduction reste disponible via l'aide.
+     Aide à la traduction (discrète, générique)
+     Toute consigne d'exercice peut porter un champ `aides:[{ar,fr}]`.
+     On affiche alors un petit bouton « Aide au vocabulaire » qui dévoile,
+     à la demande, la traduction française des mots employés. Ainsi
+     l'apprenant n'est jamais bloqué et découvre du vocabulaire en contexte.
+     Injecté automatiquement par `rendre`, sans toucher aux types.
+     ==================================================================== */
+  function construireAide(aides, idLecon) {
+    const box = el('div', 'exo-aide');
+    const b = el('button', 'exo-aide-bouton');
+    b.type = 'button';
+    b.setAttribute('aria-expanded', 'false');
+    b.innerHTML = '<span class="aa-ic">💡</span> Aide&nbsp;: voir la traduction';
+    const contenu = el('div', 'exo-aide-contenu');
+    aides.forEach((a) => {
+      const ligne = el('div', 'exo-aide-ligne');
+      const ar = el('span', 'aa-ar');
+      ar.textContent = a.ar;
+      ar.appendChild(boutonAudio(a.ar, idLecon));
+      const fr = el('span', 'aa-fr', a.fr);
+      ligne.appendChild(ar);
+      ligne.appendChild(fr);
+      contenu.appendChild(ligne);
+    });
+    b.addEventListener('click', () => {
+      const ouverte = box.classList.toggle('ouverte');
+      b.setAttribute('aria-expanded', ouverte ? 'true' : 'false');
+    });
+    box.appendChild(b);
+    box.appendChild(contenu);
+    return box;
+  }
+
+  /* ====================================================================
+     10. Texte à trous libre (saisie au clavier d'un mot manquant)
+     { type:'texteLibre', consigne, avant?, apres?, reponse:'mot arabe',
+       indice?, traduction?, aides?, cles? }
+     L'apprenant écrit lui-même le mot manquant, il ne choisit pas.
+     ==================================================================== */
+  function texteLibre(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    if (exo.traduction) carte.appendChild(el('p', 'muet centre', exo.traduction));
+
+    const phrase = el('div', 'phrase-libre');
+    if (exo.avant) phrase.appendChild(document.createTextNode(exo.avant + ' '));
+    const champ = document.createElement('input');
+    champ.type = 'text';
+    champ.className = 'champ-trou';
+    champ.dir = 'rtl';
+    champ.setAttribute('aria-label', 'Mot à écrire');
+    if (exo.indice) champ.placeholder = exo.indice;
+    ClavierArabe.attacher(champ);
+    phrase.appendChild(champ);
+    if (exo.apres) phrase.appendChild(document.createTextNode(' ' + exo.apres));
+    carte.appendChild(phrase);
+
+    const btn = el('button', 'btn btn-petit', 'Vérifier');
+    btn.type = 'button';
+    let valide = false;
+    btn.addEventListener('click', () => {
+      if (valide) return;
+      valide = true;
+      const score = Parole.similarite(exo.reponse, champ.value);
+      const reussi = score >= 80;
+      champ.disabled = true;
+      ClavierArabe.fermer();
+      const corr = el('div', 'a-memoriser');
+      corr.style.marginTop = '0.8rem';
+      corr.innerHTML = '<div class="ar">' + exo.reponse + '</div>';
+      carte.insertBefore(corr, retour);
+      montrerRetour(retour, reussi,
+        'Bien écrit (' + score + '% de correspondance).',
+        'Le mot attendu est affiché ci-dessus (' + score + '% de correspondance). Comparez, puis réessayez à tête reposée.');
+      btn.disabled = true;
+      surReponse(reussi, exo.cles);
+    });
+    carte.appendChild(btn);
+    const retour = ajouterRetour(carte);
+  }
+
+  /* ====================================================================
+     11. Sélection contextuelle (article, préfixe, conjugaison, accord…)
+     { type:'contexte', consigne, sujet?, avant?, apres?,
+       options:[{ar, fr?}], bonne, traduction?, aides?, cles? }
+     On choisit la bonne forme grammaticale selon le contexte de la phrase.
+     Le bon choix vient se placer dans le trou de la phrase.
+     ==================================================================== */
+  function contexte(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    if (exo.traduction) carte.appendChild(el('p', 'muet centre', exo.traduction));
+    if (exo.sujet) {
+      const s = el('div', 'contexte-sujet');
+      s.innerHTML = 'Sujet de la phrase&nbsp;: <b>' + exo.sujet + '</b>';
+      carte.appendChild(s);
+    }
+
+    const phrase = el('div', 'phrase-contexte');
+    if (exo.avant) { const a = el('span'); a.textContent = exo.avant; phrase.appendChild(a); }
+    const blanc = el('span', 'trou-inline'); blanc.textContent = '…';
+    phrase.appendChild(blanc);
+    if (exo.apres) { const a = el('span'); a.textContent = exo.apres; phrase.appendChild(a); }
+    carte.appendChild(phrase);
+
+    const valeur = (o) => (typeof o === 'string' ? o : o.ar);
+    const liste = el('div', 'choix-contexte');
+    let repondu = false;
+    exo.options.forEach((opt, i) => {
+      const b = el('button', 'option option-contexte');
+      b.type = 'button';
+      const s = el('span', 'ar-opt'); s.textContent = valeur(opt); b.appendChild(s);
+      if (opt.fr) { const g = el('span', 'gloss'); g.textContent = opt.fr; b.appendChild(g); }
+      b.addEventListener('click', () => {
+        if (repondu) return;
+        repondu = true;
+        const reussi = i === exo.bonne;
+        blanc.textContent = valeur(exo.options[exo.bonne]);
+        blanc.classList.add(reussi ? 'juste' : 'faux');
+        Array.from(liste.children).forEach((c) => c.classList.add('fige'));
+        b.classList.add(reussi ? 'juste' : 'faux');
+        if (!reussi) liste.children[exo.bonne].classList.add('juste');
+        Parole.prononcer(valeur(exo.options[exo.bonne]), { rate: Parole.rateSelonLecon(idLecon) });
+        montrerRetour(retour, reussi,
+          'Bon choix : l\'accord est respecté.',
+          'La forme correcte vient se placer dans la phrase. Observez l\'accord.');
+        surReponse(reussi, exo.cles);
+      });
+      liste.appendChild(b);
+    });
+    carte.appendChild(liste);
+    const retour = ajouterRetour(carte);
+  }
+
+  /* ====================================================================
+     12. Compréhension de dialogue / question (deux schémas réunis)
+     { type:'dialogue', consigne,
+       echange?:[{qui:'A'|'B', ar, fr?}],         // affiche un échange
+       contexte?, question? | questionAr?, questionTr?,
+       mode?:'choix'|'saisie',
+       options:[{ar?, texte?, fr?}], bonne,         // si choix
+       reponse?:'arabe attendu',                    // si saisie
+       indice?, aide?, aides?, cles? }
+     Montre un échange ou une question en arabe ; on choisit (ou on écrit)
+     la réponse logique. Couvre les deux schémas de dialogue du projet.
      ==================================================================== */
   function dialogue(exo, index, conteneur, surReponse, idLecon) {
     const carte = cadre(exo, index, conteneur);
+    if (exo.contexte) carte.appendChild(el('p', 'muet petit centre', exo.contexte));
     if (exo.echange && exo.echange.length) {
       const conv = el('div', 'dialogue');
       exo.echange.forEach((t) => {
@@ -683,30 +829,80 @@ const Exercices = (function () {
       });
       carte.appendChild(conv);
     }
-    if (exo.question) {
-      const q = el('div', 'enonce-ar');
-      q.appendChild(document.createTextNode(exo.question));
-      q.appendChild(boutonAudio(exo.question, idLecon));
+    const questionTexte = exo.questionAr || exo.question;
+    if (questionTexte) {
+      const q = el('div', 'dialogue-q');
+      const ar = el('div', 'bulle-ar');
+      ar.appendChild(document.createTextNode(questionTexte));
+      ar.appendChild(boutonAudio(questionTexte, idLecon));
+      q.appendChild(ar);
+      if (exo.questionTr) {
+        q.insertAdjacentHTML('beforeend',
+          (typeof App !== 'undefined') ? App.phon(exo.questionTr)
+            : '<span class="translit">' + exo.questionTr + '</span>');
+      }
       carte.appendChild(q);
     }
     ajouterAide(carte, exo.aide);
+    carte.appendChild(el('p', 'muet petit centre', 'Quelle réponse convient ?'));
+
+    if (exo.mode === 'saisie') {
+      const champ = document.createElement('input');
+      champ.type = 'text';
+      champ.className = 'zone-saisie';
+      champ.dir = 'rtl';
+      champ.setAttribute('aria-label', 'Votre réponse en arabe');
+      if (exo.indice) champ.placeholder = exo.indice;
+      ClavierArabe.attacher(champ);
+      const btn = el('button', 'btn btn-petit', 'Vérifier');
+      btn.type = 'button';
+      let valide = false;
+      btn.addEventListener('click', () => {
+        if (valide) return;
+        valide = true;
+        const score = Parole.similarite(exo.reponse, champ.value);
+        const reussi = score >= 75;
+        champ.disabled = true;
+        ClavierArabe.fermer();
+        const corr = el('div', 'a-memoriser');
+        corr.style.marginTop = '0.8rem';
+        corr.innerHTML = '<div class="ar">' + exo.reponse + '</div>';
+        carte.insertBefore(corr, retour);
+        montrerRetour(retour, reussi,
+          'Réponse cohérente (' + score + '% de correspondance).',
+          'Une réponse possible est affichée ci-dessus (' + score + '% de correspondance).');
+        btn.disabled = true;
+        surReponse(reussi, exo.cles);
+      });
+      carte.appendChild(champ);
+      carte.appendChild(btn);
+      const retour = ajouterRetour(carte);
+      return;
+    }
+
+    const valeur = (o) => (o == null ? '' : (typeof o === 'string' ? o : (o.ar || '')));
     const liste = el('div', 'options-qcm');
     let repondu = false;
     exo.options.forEach((opt, i) => {
-      const b = el('button', 'option'); b.type = 'button';
-      if (opt.ar) { const s = el('span', 'ar-opt'); s.textContent = opt.ar; b.appendChild(s); }
-      if (opt.texte) b.appendChild(document.createTextNode(opt.texte));
+      const b = el('button', 'option');
+      b.type = 'button';
+      const ar = valeur(opt);
+      if (ar) { const s = el('span', 'ar-opt'); s.textContent = ar; b.appendChild(s); }
+      if (opt && opt.texte) b.appendChild(document.createTextNode(opt.texte));
+      if (opt && opt.fr) b.title = opt.fr;
       b.addEventListener('click', () => {
-        if (repondu) return; repondu = true;
+        if (repondu) return;
+        repondu = true;
         const reussi = i === exo.bonne;
         Array.from(liste.children).forEach((c) => c.classList.add('fige'));
         b.classList.add(reussi ? 'juste' : 'faux');
         b.classList.add(reussi ? 'anim-pop' : 'anim-secousse');
         if (!reussi) liste.children[exo.bonne].classList.add('juste');
-        if (opt.ar) Parole.prononcer(opt.ar, { rate: Parole.rateSelonLecon(idLecon) });
+        const bonneVal = valeur(exo.options[exo.bonne]);
+        if (bonneVal) Parole.prononcer(bonneVal, { rate: Parole.rateSelonLecon(idLecon) });
         montrerRetour(retour, reussi,
-          'Réponse logique, bien vu.',
-          'La réponse attendue est mise en évidence.');
+          'Réponse logique. L\'échange se tient.',
+          'La réponse attendue est mise en évidence. Relisez la question.');
         surReponse(reussi, exo.cles);
       });
       liste.appendChild(b);
@@ -715,8 +911,157 @@ const Exercices = (function () {
     const retour = ajouterRetour(carte);
   }
 
+  /* ====================================================================
+     13. Dictée (son → signe) — cœur du déchiffrage
+     { type:'dictee', consigne, audio:'بَ', mode:'choix'|'saisie',
+       options:[{ar}], bonne,   // si mode 'choix' (défaut)
+       reponse:'بَ',            // si mode 'saisie'
+       cles? }
+     On entend une lettre/syllabe/mot ; le texte reste masqué jusqu'à la
+     réponse. L'apprenant reconnaît le son et choisit (ou écrit) le signe.
+     ==================================================================== */
+  function dictee(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    const zone = el('div', 'zone-dictee');
+    const ecoute = el('button', 'btn-ecoute');
+    ecoute.type = 'button';
+    ecoute.innerHTML = '&#9654;&nbsp;Écouter';
+    ecoute.setAttribute('aria-label', 'Réécouter le son');
+    const dire = () => Parole.prononcer(exo.audio, { rate: Parole.rateSelonLecon(idLecon || 1) });
+    ecoute.addEventListener('click', (e) => { e.preventDefault(); dire(); });
+    zone.appendChild(ecoute);
+    carte.appendChild(zone);
+    setTimeout(dire, 250); // on fait entendre le son d'emblée
+
+    const reveler = () => {
+      const corr = el('div', 'a-memoriser');
+      corr.style.marginTop = '0.8rem';
+      corr.innerHTML = '<div class="ar">' + exo.audio + '</div>';
+      carte.insertBefore(corr, retour);
+    };
+
+    if (exo.mode === 'saisie') {
+      const champ = document.createElement('input');
+      champ.type = 'text';
+      champ.className = 'zone-saisie';
+      champ.dir = 'rtl';
+      champ.setAttribute('aria-label', 'Écrivez ce que vous entendez');
+      ClavierArabe.attacher(champ);
+      const btn = el('button', 'btn btn-petit', 'Vérifier');
+      btn.type = 'button';
+      let valide = false;
+      btn.addEventListener('click', () => {
+        if (valide) return;
+        valide = true;
+        const score = Parole.similarite(exo.reponse || exo.audio, champ.value);
+        const reussi = score >= 80;
+        champ.disabled = true;
+        ClavierArabe.fermer();
+        reveler();
+        montrerRetour(retour, reussi,
+          'Bien entendu et bien écrit (' + score + '% de correspondance).',
+          'Le signe attendu est affiché ci-dessus (' + score + '% de correspondance). Réécoutez, puis réessayez.');
+        btn.disabled = true;
+        surReponse(reussi, exo.cles);
+      });
+      carte.appendChild(champ);
+      carte.appendChild(btn);
+      const retour = ajouterRetour(carte);
+      return;
+    }
+
+    const liste = el('div', 'options-qcm');
+    let repondu = false;
+    exo.options.forEach((opt, i) => {
+      const b = el('button', 'option');
+      b.type = 'button';
+      const s = el('span', 'ar-opt'); s.textContent = (typeof opt === 'string' ? opt : opt.ar); b.appendChild(s);
+      b.addEventListener('click', () => {
+        if (repondu) return;
+        repondu = true;
+        const reussi = i === exo.bonne;
+        Array.from(liste.children).forEach((c) => c.classList.add('fige'));
+        b.classList.add(reussi ? 'juste' : 'faux');
+        b.classList.add(reussi ? 'anim-pop' : 'anim-secousse');
+        if (!reussi) liste.children[exo.bonne].classList.add('juste');
+        montrerRetour(retour, reussi,
+          'Oui, c\'est bien ce son.',
+          'Le bon signe est mis en évidence. Réécoutez pour fixer le lien son ↔ écriture.');
+        surReponse(reussi, exo.cles);
+      });
+      liste.appendChild(b);
+    });
+    carte.appendChild(liste);
+    const retour = ajouterRetour(carte);
+  }
+
+  /* ====================================================================
+     14. Lecture d'un passage (jalon de fin de cycle)
+     { type:'lecture', consigne, titre?, reference?,
+       segments:[{ ar, tr?, fr? }], cles? }
+     On lit un vrai passage, partie par partie, avec l'audio : chaque
+     segment a son bouton d'écoute, et « Tout écouter » enchaîne la lecture
+     en surlignant la partie en cours. On valide quand on a lu le passage.
+     ==================================================================== */
+  function lecture(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    if (exo.titre) carte.appendChild(el('p', 'muet centre', exo.titre));
+
+    const passage = el('div', 'passage');
+    const lignes = [];
+    exo.segments.forEach((seg) => {
+      const ligne = el('div', 'passage-ligne');
+      const ar = el('div', 'ar');
+      ar.appendChild(document.createTextNode(seg.ar));
+      ar.appendChild(boutonAudio(seg.ar, idLecon));
+      ligne.appendChild(ar);
+      if (seg.tr) {
+        const tr = el('p', 'passage-tr');
+        tr.innerHTML = (typeof App !== 'undefined') ? App.phon(seg.tr) : '<span class="translit">' + seg.tr + '</span>';
+        ligne.appendChild(tr);
+      }
+      if (seg.fr) ligne.appendChild(el('p', 'passage-fr', seg.fr));
+      passage.appendChild(ligne);
+      lignes.push(ligne);
+    });
+    carte.appendChild(passage);
+
+    if (exo.reference) carte.appendChild(el('p', 'muet petit centre', exo.reference));
+
+    const actions = el('div', 'passage-actions');
+    const tout = el('button', 'btn btn-secondaire btn-petit', '&#9654;&nbsp;Tout écouter, partie par partie');
+    tout.type = 'button';
+    tout.addEventListener('click', () => {
+      lignes.forEach((l) => l.classList.remove('lit'));
+      Parole.prononcerSuite(exo.segments.map((s) => s.ar), {
+        rate: Parole.rateSelonLecon(idLecon || 6),
+        surSegmentDebut: (i) => {
+          lignes.forEach((l) => l.classList.remove('lit'));
+          if (lignes[i]) lignes[i].classList.add('lit');
+        },
+        surFin: () => lignes.forEach((l) => l.classList.remove('lit')),
+      });
+    });
+    actions.appendChild(tout);
+
+    const valider = el('button', 'btn btn-petit', 'J\'ai lu ce passage');
+    valider.type = 'button';
+    let fait = false;
+    valider.addEventListener('click', () => {
+      if (fait) return;
+      fait = true;
+      valider.disabled = true;
+      montrerRetour(retour, true,
+        'Vous venez de lire un véritable passage du Coran, par vous-même. Le système d\'écriture n\'a plus de secret : place au sens et à la grammaire.');
+      surReponse(true, exo.cles);
+    });
+    actions.appendChild(valider);
+    carte.appendChild(actions);
+    const retour = ajouterRetour(carte);
+  }
+
   /* ---- Aiguillage ---- */
-  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, trou_libre, dialogue };
+  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, trou_libre, texteLibre, contexte, dialogue, dictee, lecture };
 
   function rendre(exo, index, conteneur, surReponse, idLecon) {
     const fn = types[exo.type];
@@ -740,6 +1085,16 @@ const Exercices = (function () {
       surReponse(reussi, cles);
     };
     fn(exo, index, conteneur, wrap, idLecon);
+    // Aide à la traduction (discrète) : disponible pour tout type d'exercice
+    // qui déclare un champ `aides`. On la place juste avant le bloc de retour.
+    if (exo.aides && exo.aides.length) {
+      const carte = conteneur.children[avant];
+      if (carte) {
+        const aide = construireAide(exo.aides, idLecon);
+        const r = carte.querySelector('.retour-exo');
+        if (r) carte.insertBefore(aide, r); else carte.appendChild(aide);
+      }
+    }
   }
 
   return { rendre, melanger };
