@@ -240,6 +240,10 @@
     let repondus = 0, reussis = 0, idx = 0;
     let sessionPoints = 0, combo = 0, meilleurCombo = 0, xpAttribue = false;
     const motsRates = new Set();
+    // Rattrapage : on repropose en fin de leçon les exercices manqués, jusqu'à
+    // les réussir, pour bien tout ancrer. Une réussite au rattrapage rattrape
+    // aussi le score (on peut donc valider la leçon en corrigeant ses erreurs).
+    let fileCourante = exercices, totalCourant = total, enRattrapage = false, aRevoir = [];
 
     function enregistrer(reussi, cles) {
       repondus++;
@@ -299,7 +303,7 @@
     brContinuer.onclick = () => {
       cacherRetour();
       idx++;
-      document.getElementById('exo-barre').style.width = Math.round((idx / total) * 100) + '%';
+      document.getElementById('exo-barre').style.width = Math.round((idx / totalCourant) * 100) + '%';
       afficherExo();
     };
 
@@ -314,10 +318,11 @@
     function afficherExo() {
       const slot = document.getElementById('exo-slot');
       cacherRetour();
-      if (idx >= total) { montrer('bilan'); return; }
+      if (idx >= totalCourant) { finPasse(); return; }
       slot.innerHTML = '';
-      document.getElementById('exo-compteur').textContent = 'Exercice ' + (idx + 1) + ' / ' + total;
-      document.getElementById('exo-barre').style.width = Math.round((idx / total) * 100) + '%';
+      document.getElementById('exo-compteur').textContent =
+        (enRattrapage ? 'Rattrapage · ' : '') + 'Exercice ' + (idx + 1) + ' / ' + totalCourant;
+      document.getElementById('exo-barre').style.width = Math.round((idx / totalCourant) * 100) + '%';
 
       const nav = document.createElement('div'); nav.className = 'exo-nav';
       const passer = document.createElement('button');
@@ -326,11 +331,21 @@
       nav.appendChild(passer);
 
       let repondu = false;
-      Exercices.rendre(exercices[idx], idx, slot, (reussi, cles) => {
+      Exercices.rendre(fileCourante[idx], idx, slot, (reussi, cles) => {
         if (!repondu) {
           repondu = true;
-          enregistrer(reussi, cles);
-          const dernier = (idx === total - 1);
+          const exoCourant = fileCourante[idx];
+          if (!enRattrapage) {
+            enregistrer(reussi, cles);
+            if (!reussi) aRevoir.push(exoCourant);
+          } else {
+            // En rattrapage : on alimente la répétition espacée, et une réussite
+            // récupère le score (sans dépasser le total) ; sinon on garde l'exo.
+            (cles || []).forEach((cle) => Stockage.enregistrerMot(cle, reussi));
+            if (reussi) reussis = Math.min(total, reussis + 1);
+            else aRevoir.push(exoCourant);
+          }
+          const dernier = (idx === totalCourant - 1) && aRevoir.length === 0;
           // Récupère la correction détaillée et la déplace dans la barre (fond
           // opaque, toujours lisible), pour qu'elle ne reste pas masquée dessous.
           let detail = '';
@@ -359,6 +374,42 @@
         }
       }, id);
       slot.appendChild(nav);
+    }
+
+    // Fin d'une passe : s'il reste des exercices manqués, on les repropose
+    // (rattrapage) ; sinon, on passe au bilan.
+    function finPasse() {
+      if (aRevoir.length) {
+        enRattrapage = true;
+        fileCourante = aRevoir;
+        aRevoir = [];
+        totalCourant = fileCourante.length;
+        idx = 0;
+        montrerIntroRattrapage(totalCourant);
+      } else {
+        montrer('bilan');
+      }
+    }
+
+    function montrerIntroRattrapage(n) {
+      cacherRetour();
+      const slot = document.getElementById('exo-slot');
+      slot.innerHTML = '';
+      document.getElementById('exo-compteur').textContent = 'Rattrapage';
+      document.getElementById('exo-barre').style.width = '0';
+      const c = document.createElement('div'); c.className = 'exercice apparait centre';
+      c.innerHTML = '<span class="exercice-numero">À revoir</span>' +
+        '<h3 style="margin:0.2rem 0 0.4rem;">' + n + ' exercice' + (n > 1 ? 's' : '') + ' à reprendre</h3>' +
+        '<p class="muet">Reprenons ce qui a coincé, pour bien tout maîtriser avant de terminer la leçon. ' +
+        'Réussir ici rattrape aussi votre score.</p>';
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;';
+      const go = document.createElement('button'); go.className = 'btn'; go.textContent = 'Reprendre ces exercices';
+      go.onclick = () => afficherExo();
+      const skip = document.createElement('button'); skip.className = 'btn btn-secondaire'; skip.textContent = 'Passer au bilan';
+      skip.onclick = () => { aRevoir = []; montrer('bilan'); };
+      wrap.appendChild(go); wrap.appendChild(skip);
+      c.appendChild(wrap); slot.appendChild(c);
     }
     document.getElementById('retour-cours').onclick = () => montrer('cours');
 
@@ -454,6 +505,7 @@
     }
     document.getElementById('refaire').onclick = () => {
       idx = 0; repondus = 0; reussis = 0; sessionPoints = 0; combo = 0; meilleurCombo = 0; xpAttribue = false;
+      fileCourante = exercices; totalCourant = total; enRattrapage = false; aRevoir = [];
       document.getElementById('exo-pts').textContent = '0';
       document.getElementById('exo-combo').hidden = true;
       montrer('exo');
