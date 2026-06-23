@@ -890,3 +890,31 @@ body.clavier-ouvert { padding-bottom: 55vh; }
   z-index: -1; pointer-events: none; opacity: 1; transition: opacity 0.45s ease;
 }
 #fond-parallax.cache { opacity: 0; }
+
+/* =========================================================================
+   Aide à la traduction (discrète) + saisie libre dans une phrase
+   ========================================================================= */
+.aide-trad { margin: 0.1rem 0 0.7rem; text-align: center; }
+.aide-bouton {
+  background: none; border: 1px dashed var(--bordure); color: var(--texte-doux);
+  border-radius: 999px; padding: 0.22rem 0.8rem; cursor: pointer;
+  font-family: var(--f-ui); font-size: 0.78rem; transition: all var(--transition);
+}
+.aide-bouton:hover { border-color: var(--accent); color: var(--accent); }
+.aide-contenu {
+  display: none; margin-top: 0.55rem; font-family: var(--f-ui); font-size: 0.86rem;
+  color: var(--texte-doux); line-height: 1.55;
+}
+.aide-trad.ouvert .aide-contenu { display: block; animation: fondu 0.3s ease; }
+.aide-mot { display: inline-flex; gap: 0.35rem; align-items: baseline; margin: 0.15rem 0.55rem; }
+.aide-mot .aide-ar { font-family: var(--f-arabe); direction: rtl; font-size: 1.25rem; color: var(--encre); }
+
+.trou-saisie {
+  font-family: var(--f-arabe); direction: rtl; font-size: 1.7rem; text-align: center;
+  width: 5.5em; max-width: 62vw; vertical-align: middle;
+  border: none; border-bottom: 2px solid var(--accent); border-radius: 6px 6px 0 0;
+  background: rgba(28, 84, 64, 0.05); color: var(--encre); padding: 0.05rem 0.3rem;
+}
+.trou-saisie:focus { outline: none; background: rgba(28, 84, 64, 0.10); }
+.trou-saisie.juste { border-bottom-color: var(--succes); color: var(--succes); background: rgba(58,95,62,0.10); }
+.trou-saisie.faux { border-bottom-color: var(--erreur); color: var(--erreur); background: rgba(138,44,44,0.08); }

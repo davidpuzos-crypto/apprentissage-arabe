@@ -157,17 +157,26 @@ l'ensemble du vocabulaire rencontré (ou, pour un nouvel arrivant, le
 vocabulaire fréquent), par séances courtes. Aucune base de données n'est
 nécessaire : tout est conservé dans le navigateur via localStorage.
 
-## Les huit types d'exercices
+## Les types d'exercices
 
 1. QCM de reconnaissance (lettre, mot, sens)
 2. Appariement mot arabe et traduction
 3. Glisser-déposer pour reconstituer une phrase
-4. Texte à trous
+4. Texte à trous (menu déroulant) — sert aussi à la sélection contextuelle de grammaire (bon article, bon accord, bonne conjugaison, bonne préposition)
 5. Saisie au clavier arabe virtuel intégré
 6. Lecture à voix haute, notée par reconnaissance vocale
 7. Identification de la racine trilitère (à partir du cycle 3)
 8. Décomposition de mot, préfixe, racine, suffixe (à partir du cycle 4)
 9. Lecture phonétique : lire un mot arabe et choisir, dans une liste, sa transcription exacte
+10. Texte à trous **libre** : écrire soi-même le mot manquant au clavier arabe (pas de liste)
+11. Compréhension de **dialogue / question** : lire une réplique ou une question en arabe et choisir la réponse logique
+
+Tous les exercices peuvent porter une **aide à la traduction** discrète (bouton
+« 💡 Traduction ») qui révèle le sens français de la phrase ou glose le
+vocabulaire nouveau, pour ne jamais rester bloqué et aborder plus de mots. Les
+sessions se densifient au-delà du déchiffrage (dès le cycle 2). Toutes les
+réussites alimentent le score, la répétition espacée et la synchronisation
+Firestore.
 
 ## Note sur l'exactitude et l'adab
 

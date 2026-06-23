@@ -213,6 +213,21 @@
         sup.push({ type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription exacte.',
           motAr: mot.ar, options: opts.map((o) => o.tr), bonne: opts.findIndex((o) => o.ok), cles: [mot.cle] });
       });
+      // Densité accrue au-delà du déchiffrage (cycle 2 et plus) :
+      // QCM « choisir le mot arabe » + une saisie libre au clavier.
+      if ((lecon.cycle || 1) >= 2) {
+        mel(voc).slice(0, 2).forEach((mot) => {
+          const d = autresQue(mot, 'ar', 2);
+          if (d.length < 2) return;
+          const opts = mel([{ ar: mot.ar, ok: true }, { ar: d[0].ar }, { ar: d[1].ar }]);
+          sup.push({ type: 'qcm', consigne: 'Quel mot correspond à : « ' + mot.fr + ' » ?',
+            options: opts.map((o) => ({ ar: o.ar })), bonne: opts.findIndex((o) => o.ok), cles: [mot.cle] });
+        });
+        mel(voc).slice(0, 1).forEach((mot) => {
+          sup.push({ type: 'trou_libre', consigne: 'Écrivez ce mot en arabe, au clavier.',
+            segments: [ { reponse: mot.ar } ], traduction: mot.fr, indice: mot.tr, cles: [mot.cle] });
+        });
+      }
       return sup;
     }
 
