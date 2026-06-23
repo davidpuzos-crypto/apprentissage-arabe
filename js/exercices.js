@@ -166,12 +166,14 @@ const Exercices = (function () {
         apparies++;
         Parole.prononcer(exo.paires[+jeton.dataset.i].ar, { rate: Parole.rateSelonLecon(idLecon) });
         if (apparies === exo.paires.length) {
-          const reussi = erreurs <= 1; // une hésitation tolérée
-          montrerRetour(retour, reussi,
-            'Toutes les paires sont reconstituées. Bien vu.',
-            'Les paires sont faites, mais après quelques essais. Revoyez ces mots.');
+          // Reconstituer toutes les paires est une réussite : on l'annonce
+          // clairement (vert), en précisant seulement s'il y a eu des hésitations.
+          const msg = erreurs === 0
+            ? 'Sans faute : toutes les paires reliées du premier coup.'
+            : 'Bravo, toutes les paires sont reliées (après ' + erreurs + ' essai' + (erreurs > 1 ? 's' : '') + ' de trop). Ces mots se préciseront avec la répétition.';
+          montrerRetour(retour, true, msg, msg);
           const cles = exo.paires.map((p) => p.cle).filter(Boolean);
-          surReponse(reussi, cles);
+          surReponse(true, cles);
         }
       } else {
         erreurs++;
@@ -834,11 +836,13 @@ const Exercices = (function () {
     carte.appendChild(zone);
     setTimeout(dire, 250); // on fait entendre le son d'emblée
 
-    const reveler = () => {
+    // On passe l'élément de retour en paramètre : en mode saisie comme en
+    // mode choix, `retour` est local à sa branche (corrige un bug de portée).
+    const reveler = (retourEl) => {
       const corr = el('div', 'a-memoriser');
       corr.style.marginTop = '0.8rem';
       corr.innerHTML = '<div class="ar">' + exo.audio + '</div>';
-      carte.insertBefore(corr, retour);
+      carte.insertBefore(corr, retourEl);
     };
 
     if (exo.mode === 'saisie') {
@@ -858,7 +862,7 @@ const Exercices = (function () {
         const reussi = score >= 80;
         champ.disabled = true;
         ClavierArabe.fermer();
-        reveler();
+        reveler(retour);
         montrerRetour(retour, reussi,
           'Bien entendu et bien écrit (' + score + '% de correspondance).',
           'Le signe attendu est affiché ci-dessus (' + score + '% de correspondance). Réécoutez, puis réessayez.');
