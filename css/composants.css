@@ -37,6 +37,21 @@
   background: var(--or); border-radius: 2px;
 }
 
+/* Compte connecté dans la barre */
+.nav-compte { display: inline-flex; align-items: center; gap: 0.5rem; }
+.nav-compte a { font-size: 0.9rem; color: var(--texte-doux); }
+.nav-compte a:hover { color: var(--accent); }
+.nav-compte .compte-chip { display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--f-ui); font-size: 0.86rem; color: var(--accent); }
+.compte-pastille {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(180deg, var(--vert-doux), var(--accent)); color: var(--sur-accent);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;
+}
+.compte-nom { max-width: 9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.compte-deco { color: var(--texte-doux); }
+.compte-deco:hover { border-color: var(--erreur); color: var(--erreur); }
+@media (max-width: 760px) { .compte-nom { display: none; } }
+
 /* ---- Boutons ---- */
 .btn {
   font-family: var(--f-ui);
@@ -846,7 +861,37 @@ body.clavier-ouvert { padding-bottom: 55vh; }
   font-family: var(--f-ui); font-size: 0.95rem; color: var(--texte-doux); border-bottom: 2px solid transparent; }
 .auth-onglets button.actif { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
 
-.btn-google { display: flex; align-items: center; justify-content: center; gap: 0.6rem; width: 100%; }
+/* Bouton Google — style officiel (fond clair, logo 4 couleurs) */
+.btn-google {
+  display: flex; align-items: center; justify-content: center; gap: 0.7rem; width: 100%;
+  padding: 0.72rem 1.2rem; border-radius: var(--rayon); cursor: pointer;
+  font-family: var(--f-ui); font-size: 0.98rem; font-weight: 500; letter-spacing: 0.01em;
+  background: #ffffff; color: #3c4043; border: 1px solid #dadce0;
+  box-shadow: 0 1px 2px rgba(60,64,67,0.12);
+  transition: box-shadow var(--transition), border-color var(--transition), background var(--transition), transform var(--transition);
+}
+.btn-google:hover:not(:disabled) { box-shadow: 0 2px 8px rgba(60,64,67,0.18); border-color: #c9ccd1; background: #f8faff; transform: translateY(-1px); }
+.btn-google:active:not(:disabled) { transform: translateY(0); }
+.btn-google:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+.btn-google .g-logo { flex-shrink: 0; display: block; }
+/* En thème sombre, le bouton Google reste clair (recommandation de marque),
+   on garde donc un libellé lisible sur fond blanc. */
+[data-theme="sombre"] .btn-google { background: #ffffff; color: #3c4043; }
+
+/* Champ mot de passe avec bouton « voir » (œil) */
+.champ-mdp { position: relative; }
+.champ-mdp input { padding-right: 2.6rem !important; }
+.voir-mdp {
+  position: absolute; top: 50%; right: 0.5rem; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; font-size: 1.05rem; line-height: 1;
+  padding: 0.3rem; opacity: 0.55; transition: opacity var(--transition); color: var(--texte-doux);
+}
+.voir-mdp:hover { opacity: 0.9; }
+.voir-mdp.actif { opacity: 1; color: var(--accent); }
+
+/* Étape « définir un mot de passe après Google » */
+.etape-google { animation: fondu var(--transition); }
+.etape-google h2 { font-family: var(--f-titre); font-size: 1.5rem; text-align: center; }
 .auth-sep { display: flex; align-items: center; gap: 0.8rem; color: var(--texte-doux); font-size: 0.8rem; margin: 1.1rem 0; }
 .auth-sep::before, .auth-sep::after { content: ''; flex: 1; height: 1px; background: var(--bordure); }
 

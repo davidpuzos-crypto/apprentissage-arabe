@@ -58,7 +58,6 @@ const App = (function () {
       { href: 'vocabulaire.html', txt: 'Vocabulaire', cle: 'vocabulaire' },
       { href: 'revision.html', txt: 'Réviser', cle: 'revision' },
       { href: 'progression.html', txt: 'Progression', cle: 'progression' },
-      { href: 'connexion.html', txt: 'Compte', cle: 'compte' },
     ];
     const nav = liens.map((l) =>
       `<a href="${l.href}" class="${l.cle === pageActive ? 'actif' : ''}">${l.txt}</a>`
@@ -72,6 +71,7 @@ const App = (function () {
         <nav>
           ${nav}
           <div class="reglages">
+            <span class="nav-compte" id="nav-compte"><a href="connexion.html" class="${pageActive === 'compte' ? 'actif' : ''}">Compte</a></span>
             <button class="bascule-mini bascule-phonetique ${vis ? 'actif' : ''}" title="Afficher ou masquer la phonétique" onclick="App.basculerPhonetique()">${vis ? 'phonétique visible' : 'phonétique masquée'}</button>
             <button class="bascule-mini bascule-police" title="Changer la police arabe" onclick="App.basculerPolice()">ا ${nomPolice(Stockage.police())}</button>
             <button class="bascule-theme" aria-label="Basculer le thème" onclick="App.basculerTheme()">${sombre ? '☀' : '☾'}</button>
@@ -87,12 +87,54 @@ const App = (function () {
     if (btn) btn.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
   }
 
+  /* ---- Compte connecté dans la barre ---- */
+  function echap(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  function initialeCompte(user) {
+    const s = (user.displayName || user.email || '?').trim();
+    return echap(s.charAt(0).toUpperCase() || '?');
+  }
+  function nomCourtCompte(user) {
+    if (user.displayName) return echap(user.displayName.split(' ')[0]);
+    const e = user.email || 'mon compte';
+    return echap(e.length > 18 ? e.slice(0, 16) + '…' : e);
+  }
+  function majCompte(user) {
+    const slot = document.getElementById('nav-compte');
+    if (!slot) return;
+    if (user) {
+      slot.classList.add('connecte');
+      slot.innerHTML =
+        '<span class="compte-chip" title="' + echap(user.email || '') + '">' +
+        '<span class="compte-pastille">' + initialeCompte(user) + '</span>' +
+        '<span class="compte-nom">' + nomCourtCompte(user) + '</span></span>' +
+        '<button class="bascule-mini compte-deco" type="button" onclick="App.deconnexion()">Déconnexion</button>';
+    } else {
+      slot.classList.remove('connecte');
+      slot.innerHTML = '<a href="connexion.html">Compte</a>';
+    }
+  }
+  async function deconnexion() {
+    try { if (window.Auth && window.Auth.deconnecter) await window.Auth.deconnecter(); } catch (e) {}
+    try { localStorage.removeItem('mode-invite'); } catch (e) {}
+    location.href = 'connexion.html';
+  }
+  function ecouterAuth() {
+    const brancher = () => {
+      if (window.Auth && window.Auth.surUtilisateur) window.Auth.surUtilisateur(majCompte);
+    };
+    if (window.Auth) brancher();
+    else window.addEventListener('auth-pret', brancher, { once: true });
+  }
+
   function init(pageActive) {
     appliquerTheme(Stockage.theme());
     appliquerPolice(Stockage.police());
     appliquerPhonetique(Stockage.phonetique());
     const cible = document.getElementById('barre');
-    if (cible) cible.innerHTML = barre(pageActive);
+    if (cible) { cible.innerHTML = barre(pageActive); ecouterAuth(); }
   }
 
   // Avis audio : prévient si aucune voix arabe n'est disponible.
@@ -151,5 +193,6 @@ const App = (function () {
     init, param, romain, phon, verifierAudio, basculerMenu,
     basculerTheme, basculerPolice, basculerPhonetique,
     appliquerTheme, appliquerPolice, appliquerPhonetique,
+    deconnexion, majCompte,
   };
 })();

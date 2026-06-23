@@ -43,14 +43,20 @@
         <h2 id="titre-page">Bienvenue</h2>
         <p class="accroche">Connectez-vous pour retrouver votre apprentissage.</p>
 
+        <div id="etape-principale">
         <div class="auth-onglets" role="tablist">
           <button id="ong-connexion" class="actif" type="button">Se connecter</button>
           <button id="ong-inscription" type="button">Créer un compte</button>
         </div>
 
-        <button class="btn btn-secondaire btn-google" id="btn-google" type="button">
-          <span aria-hidden="true" style="font-weight:700;color:#4285F4">G</span>
-          Continuer avec Google
+        <button class="btn-google" id="btn-google" type="button">
+          <svg class="g-logo" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false">
+            <path fill="#4285F4" d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/>
+            <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A9 9 0 0 0 9 18z"/>
+            <path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A9 9 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/>
+            <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A9 9 0 0 0 .957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
+          </svg>
+          <span>Continuer avec Google</span>
         </button>
 
         <div class="auth-sep">ou</div>
@@ -63,11 +69,41 @@
           <label for="email">Adresse e-mail</label>
           <input type="email" id="email" autocomplete="email" required placeholder="vous@exemple.com">
           <label for="mdp">Mot de passe</label>
-          <input type="password" id="mdp" autocomplete="current-password" required placeholder="Au moins 6 caractères">
+          <div class="champ-mdp">
+            <input type="password" id="mdp" autocomplete="current-password" required placeholder="Au moins 6 caractères">
+            <button type="button" class="voir-mdp" data-cible="mdp" aria-label="Afficher le mot de passe" title="Afficher ou masquer">👁</button>
+          </div>
+          <div id="bloc-mdp2" hidden>
+            <label for="mdp2">Confirmer le mot de passe</label>
+            <div class="champ-mdp">
+              <input type="password" id="mdp2" autocomplete="new-password" placeholder="Retapez votre mot de passe">
+              <button type="button" class="voir-mdp" data-cible="mdp2" aria-label="Afficher le mot de passe" title="Afficher ou masquer">👁</button>
+            </div>
+          </div>
           <button class="btn btn-bloc" id="btn-valider" type="submit" style="margin-top:1.2rem;">Se connecter</button>
         </form>
+        </div>
 
         <div class="auth-msg" id="msg" hidden></div>
+
+        <div id="etape-google" class="etape-google" hidden>
+          <h2 style="margin-top:0;">Sécurisez votre compte</h2>
+          <p class="accroche">Vous êtes connecté avec Google. Définissez aussi un mot de passe pour pouvoir vous connecter par e-mail.</p>
+          <form id="form-google" class="form-auth" novalidate>
+            <label for="g-mdp">Mot de passe</label>
+            <div class="champ-mdp">
+              <input type="password" id="g-mdp" autocomplete="new-password" placeholder="Au moins 6 caractères">
+              <button type="button" class="voir-mdp" data-cible="g-mdp" aria-label="Afficher le mot de passe" title="Afficher ou masquer">👁</button>
+            </div>
+            <label for="g-mdp2">Confirmer le mot de passe</label>
+            <div class="champ-mdp">
+              <input type="password" id="g-mdp2" autocomplete="new-password" placeholder="Retapez votre mot de passe">
+              <button type="button" class="voir-mdp" data-cible="g-mdp2" aria-label="Afficher le mot de passe" title="Afficher ou masquer">👁</button>
+            </div>
+            <button class="btn btn-bloc" id="g-definir" type="submit" style="margin-top:1.2rem;">Définir le mot de passe</button>
+            <button class="btn-fantome btn-bloc" id="g-plus-tard" type="button" style="margin-top:0.4rem;">Plus tard</button>
+          </form>
+        </div>
 
         <p class="muet petit centre" style="margin-top:1rem;">
           <a href="index.html" style="color:var(--texte-doux)" onclick="localStorage.setItem('mode-invite','1')">Continuer en invité →</a>
@@ -152,17 +188,19 @@
     import {
       estConfigure, messageConfig, surUtilisateur,
       inscrire, connecter, connecterGoogle, traduireErreur,
+      aMotDePasse, definirMotDePasse,
     } from './js/auth.js';
 
     const $ = (id) => document.getElementById(id);
     const msg = $('msg');
     let mode = 'connexion';
+    let bloquerRedirection = false; // pendant l'étape « mot de passe après Google »
 
     function afficherMsg(texte, type) { msg.hidden = false; msg.className = 'auth-msg ' + (type || 'err'); msg.textContent = texte; }
     function cacherMsg() { msg.hidden = true; }
 
-    // Déjà connecté → espace personnel.
-    surUtilisateur((u) => { if (u) location.replace('index.html'); });
+    // Déjà connecté → espace personnel (sauf pendant l'étape mot de passe Google).
+    surUtilisateur((u) => { if (u && !bloquerRedirection) location.replace('index.html'); });
 
     if (!estConfigure()) {
       afficherMsg(messageConfig(), 'err');
@@ -177,8 +215,10 @@
       $('ong-inscription').classList.toggle('actif', !conn);
       $('titre-page').textContent = conn ? 'Bienvenue' : 'Créer un compte';
       $('bloc-nom').hidden = conn;
+      $('bloc-mdp2').hidden = conn; // confirmation seulement à la création de compte
       $('btn-valider').textContent = conn ? 'Se connecter' : 'Créer mon compte';
       $('mdp').autocomplete = conn ? 'current-password' : 'new-password';
+      $('mdp').placeholder = conn ? 'Votre mot de passe' : 'Au moins 6 caractères';
       cacherMsg();
     }
     $('ong-connexion').onclick = () => basculer('connexion');
@@ -191,6 +231,10 @@
       const mdp = $('mdp').value;
       const nom = $('nom').value.trim();
       if (!email || !mdp) { afficherMsg('Renseignez votre e-mail et votre mot de passe.'); return; }
+      if (mode === 'inscription') {
+        if (mdp.length < 6) { afficherMsg('Le mot de passe doit faire au moins 6 caractères.'); return; }
+        if (mdp !== $('mdp2').value) { afficherMsg('Les deux mots de passe ne correspondent pas.'); return; }
+      }
       $('btn-valider').disabled = true;
       try {
         if (mode === 'inscription') await inscrire(email, mdp, nom);
@@ -206,11 +250,64 @@
     $('btn-google').addEventListener('click', async () => {
       cacherMsg();
       $('btn-google').disabled = true;
+      bloquerRedirection = true; // on gère nous-mêmes la suite (étape mot de passe)
       try {
         await connecterGoogle();
-        afficherMsg('Connexion réussie. Redirection…', 'ok');
+        const refuse = localStorage.getItem('mdp-google-skip') === '1';
+        if (!aMotDePasse() && !refuse) {
+          montrerEtapeGoogle();
+        } else {
+          bloquerRedirection = false;
+          location.replace('index.html');
+        }
+      } catch (err) {
+        bloquerRedirection = false;
+        afficherMsg(traduireErreur(err));
+        $('btn-google').disabled = false;
+      }
+    });
+
+    // Affichage / masquage des mots de passe (option « voir »).
+    document.querySelectorAll('.voir-mdp').forEach((b) => {
+      b.addEventListener('click', () => {
+        const champ = $(b.dataset.cible);
+        if (!champ) return;
+        const montre = champ.type === 'password';
+        champ.type = montre ? 'text' : 'password';
+        b.classList.toggle('actif', montre);
+        b.setAttribute('aria-label', montre ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+      });
+    });
+
+    // Étape « définir un mot de passe » après une connexion Google.
+    function montrerEtapeGoogle() {
+      $('etape-principale').hidden = true;
+      $('titre-page').style.display = 'none';
+      const acc = document.querySelector('.auth-carte > .accroche');
+      if (acc) acc.style.display = 'none';
+      $('etape-google').hidden = false;
+      cacherMsg();
+      $('g-mdp').focus();
+    }
+    $('form-google').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      cacherMsg();
+      const m1 = $('g-mdp').value, m2 = $('g-mdp2').value;
+      if (m1.length < 6) { afficherMsg('Le mot de passe doit faire au moins 6 caractères.'); return; }
+      if (m1 !== m2) { afficherMsg('Les deux mots de passe ne correspondent pas.'); return; }
+      $('g-definir').disabled = true;
+      try {
+        await definirMotDePasse(m1);
+        afficherMsg('Mot de passe défini. Redirection…', 'ok');
         location.replace('index.html');
-      } catch (err) { afficherMsg(traduireErreur(err)); $('btn-google').disabled = false; }
+      } catch (err) {
+        afficherMsg(traduireErreur(err));
+        $('g-definir').disabled = false;
+      }
+    });
+    $('g-plus-tard').addEventListener('click', () => {
+      localStorage.setItem('mdp-google-skip', '1');
+      location.replace('index.html');
     });
   </script>
 </body>
