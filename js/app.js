@@ -58,6 +58,7 @@ const App = (function () {
       { href: 'vocabulaire.html', txt: 'Vocabulaire', cle: 'vocabulaire' },
       { href: 'revision.html', txt: 'Réviser', cle: 'revision' },
       { href: 'progression.html', txt: 'Progression', cle: 'progression' },
+      { href: 'sohba.html', txt: 'Sohba ↗', cle: 'sohba' },
     ];
     const nav = liens.map((l) =>
       `<a href="${l.href}" class="${l.cle === pageActive ? 'actif' : ''}">${l.txt}</a>`
