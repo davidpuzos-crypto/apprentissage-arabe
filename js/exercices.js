@@ -70,6 +70,35 @@ const Exercices = (function () {
     return v[n] || String(n);
   }
 
+  /* Aide à la traduction (discrète) : un bouton « Traduction » révèle le sens
+     français. `aide` peut être une chaîne (traduction de la phrase) ou un
+     tableau de gloses [{ar, fr}] pour expliquer mot à mot le vocabulaire neuf.
+     Sert à ne jamais bloquer l'utilisateur et à introduire plus de vocabulaire. */
+  function ajouterAide(carte, aide) {
+    if (!aide) return;
+    const wrap = el('div', 'aide-trad');
+    const btn = el('button', 'aide-bouton'); btn.type = 'button';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span aria-hidden="true">💡</span> Traduction';
+    const contenu = el('div', 'aide-contenu');
+    if (Array.isArray(aide)) {
+      aide.forEach((g) => {
+        const m = el('span', 'aide-mot');
+        const ar = el('span', 'aide-ar'); ar.textContent = g.ar;
+        const fr = el('span', 'aide-fr'); fr.textContent = g.fr;
+        m.appendChild(ar); m.appendChild(fr); contenu.appendChild(m);
+      });
+    } else {
+      contenu.textContent = aide;
+    }
+    btn.addEventListener('click', () => {
+      const ouvert = wrap.classList.toggle('ouvert');
+      btn.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+    });
+    wrap.appendChild(btn); wrap.appendChild(contenu);
+    carte.appendChild(wrap);
+  }
+
   /* ====================================================================
      1. QCM de reconnaissance
      { type:'qcm', consigne, enonceAr?, enonce?, options:[{ar?,texte?}], bonne, explication?, cles? }
@@ -83,6 +112,7 @@ const Exercices = (function () {
       carte.appendChild(e);
     }
     if (exo.enonce) carte.appendChild(el('p', null, exo.enonce));
+    ajouterAide(carte, exo.aide);
 
     const liste = el('div', 'options-qcm');
     let repondu = false;
@@ -277,6 +307,7 @@ const Exercices = (function () {
   function trous(exo, index, conteneur, surReponse, idLecon) {
     const carte = cadre(exo, index, conteneur);
     if (exo.traduction) carte.appendChild(el('p', 'muet centre', exo.traduction));
+    ajouterAide(carte, exo.aide);
     const phrase = el('div', 'texte-trous');
     const selects = [];
     exo.segments.forEach((seg) => {
@@ -591,6 +622,55 @@ const Exercices = (function () {
   }
 
   /* ====================================================================
+     10. Texte à trous LIBRE (saisie au clavier dans une phrase)
+     { type:'trou_libre', consigne, segments:[ 'texte' | {reponse:'mot ar'} ],
+       traduction?, indice?, aide?, cles? }
+     L'utilisateur écrit lui-même le mot manquant (pas de liste).
+     ==================================================================== */
+  function trou_libre(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    if (exo.traduction) carte.appendChild(el('p', 'muet centre', exo.traduction));
+    ajouterAide(carte, exo.aide);
+    const phrase = el('div', 'texte-trous');
+    const champs = [];
+    exo.segments.forEach((seg) => {
+      if (typeof seg === 'string') {
+        phrase.appendChild(document.createTextNode(seg + ' '));
+      } else {
+        const inp = document.createElement('input');
+        inp.type = 'text'; inp.className = 'trou-saisie'; inp.dir = 'rtl';
+        inp.setAttribute('aria-label', 'mot manquant');
+        if (typeof ClavierArabe !== 'undefined') ClavierArabe.attacher(inp);
+        phrase.appendChild(inp);
+        phrase.appendChild(document.createTextNode(' '));
+        champs.push({ inp, reponse: seg.reponse });
+      }
+    });
+    carte.appendChild(phrase);
+    if (exo.indice) carte.appendChild(el('p', 'muet petit centre', 'Indice : ' + exo.indice));
+    const btn = el('button', 'btn btn-petit', 'Vérifier'); btn.type = 'button';
+    let valide = false;
+    btn.addEventListener('click', () => {
+      if (valide) return; valide = true;
+      let bon = true;
+      champs.forEach((c) => {
+        const score = Parole.similarite(c.reponse, c.inp.value);
+        const ok = score >= 80; if (!ok) bon = false;
+        c.inp.classList.add(ok ? 'juste' : 'faux');
+        c.inp.value = c.reponse; c.inp.disabled = true; // affiche la graphie attendue
+      });
+      if (typeof ClavierArabe !== 'undefined') ClavierArabe.fermer();
+      montrerRetour(retour, bon,
+        'Bien écrit, la graphie est juste.',
+        'Voici la graphie attendue : comparez lettre à lettre.');
+      btn.disabled = true;
+      surReponse(bon, exo.cles);
+    });
+    carte.appendChild(btn);
+    const retour = ajouterRetour(carte);
+  }
+
+  /* ====================================================================
      Aide à la traduction (discrète, générique)
      Toute consigne d'exercice peut porter un champ `aides:[{ar,fr}]`.
      On affiche alors un petit bouton « Aide au vocabulaire » qui dévoile,
@@ -724,33 +804,49 @@ const Exercices = (function () {
   }
 
   /* ====================================================================
-     12. Compréhension de question / réplique de dialogue
-     { type:'dialogue', consigne, contexte?, questionAr, questionTr?,
-       mode:'choix'|'saisie',
-       options:[{ar, fr?}], bonne,   // si mode 'choix'
-       reponse:'arabe attendu',      // si mode 'saisie'
-       indice?, aides?, cles? }
-     On affiche une question/réplique en arabe ; l'apprenant trouve la
-     réponse logique, par choix ou en l'écrivant.
+     12. Compréhension de dialogue / question (deux schémas réunis)
+     { type:'dialogue', consigne,
+       echange?:[{qui:'A'|'B', ar, fr?}],         // affiche un échange
+       contexte?, question? | questionAr?, questionTr?,
+       mode?:'choix'|'saisie',
+       options:[{ar?, texte?, fr?}], bonne,         // si choix
+       reponse?:'arabe attendu',                    // si saisie
+       indice?, aide?, aides?, cles? }
+     Montre un échange ou une question en arabe ; on choisit (ou on écrit)
+     la réponse logique. Couvre les deux schémas de dialogue du projet.
      ==================================================================== */
   function dialogue(exo, index, conteneur, surReponse, idLecon) {
     const carte = cadre(exo, index, conteneur);
     if (exo.contexte) carte.appendChild(el('p', 'muet petit centre', exo.contexte));
-
-    const q = el('div', 'dialogue-q');
-    const ar = el('div', 'bulle-ar');
-    ar.textContent = exo.questionAr;
-    ar.appendChild(boutonAudio(exo.questionAr, idLecon));
-    q.appendChild(ar);
-    if (exo.questionTr) {
-      q.insertAdjacentHTML('beforeend',
-        (typeof App !== 'undefined') ? App.phon(exo.questionTr)
-          : '<span class="translit">' + exo.questionTr + '</span>');
+    if (exo.echange && exo.echange.length) {
+      const conv = el('div', 'dialogue');
+      exo.echange.forEach((t) => {
+        const bulle = el('div', 'bulle ' + (t.qui === 'B' ? 'bulle-b' : 'bulle-a'));
+        const ar = el('div', 'bulle-ar');
+        ar.appendChild(document.createTextNode(t.ar));
+        ar.appendChild(boutonAudio(t.ar, idLecon));
+        bulle.appendChild(ar);
+        if (t.fr) bulle.appendChild(el('span', 'bulle-fr', t.fr));
+        conv.appendChild(bulle);
+      });
+      carte.appendChild(conv);
     }
-    carte.appendChild(q);
-
-    const consigneRep = el('p', 'muet petit centre', 'Quelle réponse convient ?');
-    carte.appendChild(consigneRep);
+    const questionTexte = exo.questionAr || exo.question;
+    if (questionTexte) {
+      const q = el('div', 'dialogue-q');
+      const ar = el('div', 'bulle-ar');
+      ar.appendChild(document.createTextNode(questionTexte));
+      ar.appendChild(boutonAudio(questionTexte, idLecon));
+      q.appendChild(ar);
+      if (exo.questionTr) {
+        q.insertAdjacentHTML('beforeend',
+          (typeof App !== 'undefined') ? App.phon(exo.questionTr)
+            : '<span class="translit">' + exo.questionTr + '</span>');
+      }
+      carte.appendChild(q);
+    }
+    ajouterAide(carte, exo.aide);
+    carte.appendChild(el('p', 'muet petit centre', 'Quelle réponse convient ?'));
 
     if (exo.mode === 'saisie') {
       const champ = document.createElement('input');
@@ -786,14 +882,16 @@ const Exercices = (function () {
       return;
     }
 
-    const valeur = (o) => (typeof o === 'string' ? o : o.ar);
+    const valeur = (o) => (o == null ? '' : (typeof o === 'string' ? o : (o.ar || '')));
     const liste = el('div', 'options-qcm');
     let repondu = false;
     exo.options.forEach((opt, i) => {
       const b = el('button', 'option');
       b.type = 'button';
-      const s = el('span', 'ar-opt'); s.textContent = valeur(opt); b.appendChild(s);
-      if (opt.fr) b.title = opt.fr; // survol discret : la traduction de la réponse
+      const ar = valeur(opt);
+      if (ar) { const s = el('span', 'ar-opt'); s.textContent = ar; b.appendChild(s); }
+      if (opt && opt.texte) b.appendChild(document.createTextNode(opt.texte));
+      if (opt && opt.fr) b.title = opt.fr;
       b.addEventListener('click', () => {
         if (repondu) return;
         repondu = true;
@@ -802,7 +900,8 @@ const Exercices = (function () {
         b.classList.add(reussi ? 'juste' : 'faux');
         b.classList.add(reussi ? 'anim-pop' : 'anim-secousse');
         if (!reussi) liste.children[exo.bonne].classList.add('juste');
-        Parole.prononcer(valeur(exo.options[exo.bonne]), { rate: Parole.rateSelonLecon(idLecon) });
+        const bonneVal = valeur(exo.options[exo.bonne]);
+        if (bonneVal) Parole.prononcer(bonneVal, { rate: Parole.rateSelonLecon(idLecon) });
         montrerRetour(retour, reussi,
           'Réponse logique. L\'échange se tient.',
           'La réponse attendue est mise en évidence. Relisez la question.');
@@ -966,7 +1065,7 @@ const Exercices = (function () {
   }
 
   /* ---- Aiguillage ---- */
-  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, texteLibre, contexte, dialogue, dictee, lecture };
+  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, trou_libre, texteLibre, contexte, dialogue, dictee, lecture };
 
   function rendre(exo, index, conteneur, surReponse, idLecon) {
     const fn = types[exo.type];
