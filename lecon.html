@@ -25,7 +25,8 @@
   <script>
     App.init(null);
     App.verifierAudio();
-    const id = parseInt(App.param('id'), 10) || 1;
+    let id = parseInt(App.param('id'), 10);
+    if (!Number.isInteger(id) || id < 0 || id > 30) id = 1; // 0 = introduction
     const racine = document.getElementById('lecon');
 
     if (!Stockage.leconAccessible(id)) {
@@ -43,7 +44,9 @@
       throw new Error('Leçon absente');
     }
 
-    document.title = 'Leçon ' + id + ' · ' + lecon.titre;
+    // Leçon d'introduction (id 0) : contenu consultable, sans exercices ni bilan.
+    const estIntro = !lecon.exercices || lecon.exercices.length === 0;
+    document.title = (estIntro ? '' : 'Leçon ' + id + ' · ') + lecon.titre;
 
     /* ---- Utilitaires de rendu ---- */
     function elt(html) { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstElementChild; }
@@ -64,12 +67,11 @@
     /* ===== Structure en parcours : Cours → Exercices → Bilan ===== */
     const tete = document.createElement('div'); tete.className = 'lecon-tete';
     tete.innerHTML = `
-      <p class="cycle-romain">Cycle ${App.romain(lecon.cycle)} &middot; Leçon ${App.romain(id)}</p>
+      <p class="cycle-romain">${estIntro ? 'Avant de commencer' : 'Cycle ' + App.romain(lecon.cycle) + ' &middot; Leçon ' + App.romain(id)}</p>
       <h1>${lecon.titre}</h1>
       <div class="lecon-onglets" role="tablist">
         <button class="onglet" data-vue="cours">Cours</button>
-        <button class="onglet" data-vue="exo">Exercices</button>
-        <button class="onglet" data-vue="bilan">Bilan</button>
+        ${estIntro ? '' : '<button class="onglet" data-vue="exo">Exercices</button><button class="onglet" data-vue="bilan">Bilan</button>'}
       </div>`;
     racine.appendChild(tete);
 
@@ -176,10 +178,15 @@
     }
 
     /* ---- Bouton de fin de cours : lancer les exercices ---- */
-    const lancer = document.createElement('button');
+    const lancer = document.createElement(estIntro ? 'a' : 'button');
     lancer.className = 'btn btn-bloc'; lancer.style.marginTop = '1.6rem';
-    lancer.textContent = 'Commencer les exercices';
-    lancer.onclick = () => { montrer('exo'); };
+    if (estIntro) {
+      lancer.textContent = 'Commencer la première leçon →';
+      lancer.href = 'lecon.html?id=1';
+    } else {
+      lancer.textContent = 'Commencer les exercices';
+      lancer.onclick = () => { montrer('exo'); pousser({ vue: 'exo', idx: 0 }); };
+    }
     vueCours.appendChild(lancer);
 
     // Exercices supplémentaires générés à partir du vocabulaire de la leçon,
@@ -233,7 +240,7 @@
 
     // On place les jalons de lecture (type 'lecture') tout à la fin, après les
     // exercices générés, pour qu'ils clôturent réellement la leçon (passage de cycle).
-    const tousExos = lecon.exercices.concat(genererSupplementaires(lecon));
+    const tousExos = (lecon.exercices || []).concat(genererSupplementaires(lecon));
     const exercices = tousExos.filter((e) => e.type !== 'lecture')
       .concat(tousExos.filter((e) => e.type === 'lecture'));
     const total = exercices.length;
@@ -244,6 +251,10 @@
     // les réussir, pour bien tout ancrer. Une réussite au rattrapage rattrape
     // aussi le score (on peut donc valider la leçon en corrigeant ses erreurs).
     let fileCourante = exercices, totalCourant = total, enRattrapage = false, aRevoir = [];
+    // Indices déjà comptabilisés (passe principale) : évite de recompter le
+    // score quand on revient sur un exercice via le bouton retour du navigateur.
+    const comptes = new Set();
+    let naviguePopstate = false;
 
     function enregistrer(reussi, cles) {
       repondus++;
@@ -305,6 +316,7 @@
       idx++;
       document.getElementById('exo-barre').style.width = Math.round((idx / totalCourant) * 100) + '%';
       afficherExo();
+      if (!enRattrapage && idx < totalCourant) pousser({ vue: 'exo', idx });
     };
 
     function majCombo() {
@@ -327,51 +339,59 @@
       const nav = document.createElement('div'); nav.className = 'exo-nav';
       const passer = document.createElement('button');
       passer.className = 'btn-fantome petit'; passer.textContent = 'Passer';
-      passer.onclick = () => { idx++; afficherExo(); };
+      passer.onclick = () => { idx++; afficherExo(); if (!enRattrapage && idx < totalCourant) pousser({ vue: 'exo', idx }); };
       nav.appendChild(passer);
 
       let repondu = false;
       Exercices.rendre(fileCourante[idx], idx, slot, (reussi, cles) => {
-        if (!repondu) {
-          repondu = true;
-          const exoCourant = fileCourante[idx];
-          if (!enRattrapage) {
-            enregistrer(reussi, cles);
-            if (!reussi) aRevoir.push(exoCourant);
-          } else {
-            // En rattrapage : on alimente la répétition espacée, et une réussite
-            // récupère le score (sans dépasser le total) ; sinon on garde l'exo.
-            (cles || []).forEach((cle) => Stockage.enregistrerMot(cle, reussi));
-            if (reussi) reussis = Math.min(total, reussis + 1);
-            else aRevoir.push(exoCourant);
-          }
-          const dernier = (idx === totalCourant - 1) && aRevoir.length === 0;
-          // Récupère la correction détaillée et la déplace dans la barre (fond
-          // opaque, toujours lisible), pour qu'elle ne reste pas masquée dessous.
-          let detail = '';
-          const rEl = slot.querySelector('.retour-exo.visible');
-          if (rEl) {
-            const expl = rEl.querySelector('.expl');
-            detail = expl ? expl.innerHTML : (rEl.textContent || '').trim();
-            rEl.style.display = 'none';
-          }
-          if (reussi) {
-            combo++; meilleurCombo = Math.max(meilleurCombo, combo);
-            const bonus = Math.min((combo - 1) * 2, 10);
-            const gagne = 10 + bonus;
-            sessionPoints += gagne;
-            Jeu.compteAnime(document.getElementById('exo-pts'), sessionPoints, '', '', 450);
-            majCombo();
-            if (combo % 5 === 0) { Jeu.son('serie'); Jeu.confettis({ y: window.innerHeight * 0.35, nombre: 70 }); }
-            else { Jeu.son('bon'); }
-            montrerBarre(true, '+' + gagne + ' pts' + (bonus ? ' · série ' + combo : ''), detail, dernier);
-          } else {
-            combo = 0; majCombo();
-            Jeu.son('moins');
-            montrerBarre(false, '', detail, dernier);
-          }
-          passer.style.display = 'none';
+        if (repondu) return;
+        repondu = true;
+        const exoCourant = fileCourante[idx];
+        // Correction détaillée, déplacée dans la barre (toujours lisible).
+        let detail = '';
+        const rEl = slot.querySelector('.retour-exo.visible');
+        if (rEl) {
+          const expl = rEl.querySelector('.expl');
+          detail = expl ? expl.innerHTML : (rEl.textContent || '').trim();
+          rEl.style.display = 'none';
         }
+        // Revisite via le bouton retour : on ne recompte pas, on laisse avancer.
+        const cle = 'p-' + idx;
+        const premiereFois = enRattrapage || !comptes.has(cle);
+        if (!premiereFois) {
+          Jeu.son(reussi ? 'bon' : 'moins');
+          montrerBarre(reussi, '', detail, (idx === totalCourant - 1) && aRevoir.length === 0);
+          passer.style.display = 'none';
+          return;
+        }
+        if (!enRattrapage) {
+          comptes.add(cle);
+          enregistrer(reussi, cles);
+          if (!reussi) aRevoir.push(exoCourant);
+        } else {
+          // En rattrapage : on alimente la répétition espacée, et une réussite
+          // récupère le score (sans dépasser le total) ; sinon on garde l'exo.
+          (cles || []).forEach((c) => Stockage.enregistrerMot(c, reussi));
+          if (reussi) reussis = Math.min(total, reussis + 1);
+          else aRevoir.push(exoCourant);
+        }
+        const dernier = (idx === totalCourant - 1) && aRevoir.length === 0;
+        if (reussi) {
+          combo++; meilleurCombo = Math.max(meilleurCombo, combo);
+          const bonus = Math.min((combo - 1) * 2, 10);
+          const gagne = 10 + bonus;
+          sessionPoints += gagne;
+          Jeu.compteAnime(document.getElementById('exo-pts'), sessionPoints, '', '', 450);
+          majCombo();
+          if (combo % 5 === 0) { Jeu.son('serie'); Jeu.confettis({ y: window.innerHeight * 0.35, nombre: 70 }); }
+          else { Jeu.son('bon'); }
+          montrerBarre(true, '+' + gagne + ' pts' + (bonus ? ' · série ' + combo : ''), detail, dernier);
+        } else {
+          combo = 0; majCombo();
+          Jeu.son('moins');
+          montrerBarre(false, '', detail, dernier);
+        }
+        passer.style.display = 'none';
       }, id);
       slot.appendChild(nav);
     }
@@ -388,6 +408,7 @@
         montrerIntroRattrapage(totalCourant);
       } else {
         montrer('bilan');
+        pousser({ vue: 'bilan' });
       }
     }
 
@@ -407,11 +428,11 @@
       const go = document.createElement('button'); go.className = 'btn'; go.textContent = 'Reprendre ces exercices';
       go.onclick = () => afficherExo();
       const skip = document.createElement('button'); skip.className = 'btn btn-secondaire'; skip.textContent = 'Passer au bilan';
-      skip.onclick = () => { aRevoir = []; montrer('bilan'); };
+      skip.onclick = () => { aRevoir = []; montrer('bilan'); pousser({ vue: 'bilan' }); };
       wrap.appendChild(go); wrap.appendChild(skip);
       c.appendChild(wrap); slot.appendChild(c);
     }
-    document.getElementById('retour-cours').onclick = () => montrer('cours');
+    document.getElementById('retour-cours').onclick = () => { montrer('cours'); pousser({ vue: 'cours' }); };
 
     /* ---- VUE BILAN : score, à mémoriser, récapitulatif, navigation ---- */
     const scoreEl = document.createElement('div'); scoreEl.id = 'bilan-score';
@@ -506,9 +527,11 @@
     document.getElementById('refaire').onclick = () => {
       idx = 0; repondus = 0; reussis = 0; sessionPoints = 0; combo = 0; meilleurCombo = 0; xpAttribue = false;
       fileCourante = exercices; totalCourant = total; enRattrapage = false; aRevoir = [];
+      comptes.clear();
       document.getElementById('exo-pts').textContent = '0';
       document.getElementById('exo-combo').hidden = true;
       montrer('exo');
+      pousser({ vue: 'exo', idx: 0 });
     };
 
     /* ---- Aiguillage des vues ---- */
@@ -523,7 +546,30 @@
       if (quoi === 'bilan') majBilan();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    document.querySelectorAll('.onglet').forEach((o) => { o.onclick = () => montrer(o.dataset.vue); });
+    document.querySelectorAll('.onglet').forEach((o) => { o.onclick = () => { montrer(o.dataset.vue); pousser({ vue: o.dataset.vue, idx }); }; });
+
+    /* ---- Bouton retour du navigateur : revenir d'une étape, pas quitter ---- */
+    function pousser(etat) {
+      if (naviguePopstate) return;
+      try { history.pushState({ lecon: id, ...etat }, ''); } catch (e) {}
+    }
+    try { history.replaceState({ lecon: id, vue: 'cours' }, ''); } catch (e) {}
+    window.addEventListener('popstate', (e) => {
+      const st = e.state;
+      // État hors de notre pile (ou base) : on laisse le navigateur quitter la leçon.
+      if (!st || st.lecon !== id) return;
+      naviguePopstate = true;
+      if (st.vue === 'exo') {
+        if (!enRattrapage && typeof st.idx === 'number') idx = st.idx;
+        montrer('exo');
+      } else if (st.vue === 'bilan') {
+        montrer('bilan');
+      } else {
+        montrer('cours');
+      }
+      naviguePopstate = false;
+    });
+
     montrer('cours');
   </script>
   <!-- Synchronisation de la progression (Firebase, si connecté) -->

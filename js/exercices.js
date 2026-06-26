@@ -174,48 +174,73 @@ const Exercices = (function () {
       colB.appendChild(j);
     });
 
-    function choisir(jeton, cote) {
-      if (jeton.classList.contains('apparie')) return;
+    zone.appendChild(colA); zone.appendChild(colB);
+    carte.appendChild(zone);
+
+    // Consigne tactile, essentielle sur mobile : le geste « toucher un mot,
+    // puis sa correspondance » n'est pas évident. Elle guide à chaque étape,
+    // et la colonne où il faut toucher ensuite est mise en valeur (.guide).
+    const consigneTactile = el('div', 'app-consigne');
+    const TXT_DEFAUT = 'Touchez un mot, puis sa correspondance dans l\'autre colonne.';
+    consigneTactile.textContent = TXT_DEFAUT;
+    carte.appendChild(consigneTactile);
+
+    function majGuide() {
+      colA.classList.toggle('guide', !!selection && selection.cote === 'd');
+      colB.classList.toggle('guide', !!selection && selection.cote === 'g');
       if (!selection) {
-        selection = { jeton, cote };
-        jeton.classList.add('selection');
+        consigneTactile.textContent = TXT_DEFAUT;
+        consigneTactile.classList.remove('actif');
         return;
       }
-      if (selection.jeton === jeton) { jeton.classList.remove('selection'); selection = null; return; }
+      consigneTactile.classList.add('actif');
+      consigneTactile.textContent = selection.cote === 'g'
+        ? 'Bien ! Touchez maintenant sa traduction, dans la colonne de droite.'
+        : 'Bien ! Touchez maintenant le mot arabe correspondant, à gauche.';
+    }
+
+    function choisir(jeton, cote) {
+      if (jeton.classList.contains('apparie')) return;
+      if (!selection) { selection = { jeton, cote }; jeton.classList.add('selection'); majGuide(); return; }
+      if (selection.jeton === jeton) { jeton.classList.remove('selection'); selection = null; majGuide(); return; }
       if (selection.cote === cote) {
         selection.jeton.classList.remove('selection');
         selection = { jeton, cote };
         jeton.classList.add('selection');
+        majGuide();
         return;
       }
-      // Tentative d'appariement
+      // Tentative d'appariement (colonnes opposées)
       if (selection.jeton.dataset.i === jeton.dataset.i) {
         jeton.classList.add('apparie');
         selection.jeton.classList.add('apparie');
         selection.jeton.classList.remove('selection');
         apparies++;
         Parole.prononcer(exo.paires[+jeton.dataset.i].ar, { rate: Parole.rateSelonLecon(idLecon) });
+        selection = null;
         if (apparies === exo.paires.length) {
-          // Reconstituer toutes les paires est une réussite : on l'annonce
-          // clairement (vert), en précisant seulement s'il y a eu des hésitations.
           const msg = erreurs === 0
             ? 'Sans faute : toutes les paires reliées du premier coup.'
             : 'Bravo, toutes les paires sont reliées (après ' + erreurs + ' essai' + (erreurs > 1 ? 's' : '') + ' de trop). Ces mots se préciseront avec la répétition.';
           montrerRetour(retour, true, msg, msg);
+          colA.classList.remove('guide'); colB.classList.remove('guide');
+          consigneTactile.textContent = 'Toutes les paires sont reliées.';
+          consigneTactile.classList.remove('actif');
           const cles = exo.paires.map((p) => p.cle).filter(Boolean);
           surReponse(true, cles);
+          return;
         }
+        majGuide();
       } else {
         erreurs++;
         selection.jeton.classList.remove('selection');
         jeton.classList.add('faux');
         setTimeout(() => jeton.classList.remove('faux'), 500);
+        selection = null;
+        majGuide();
       }
-      selection = null;
     }
 
-    zone.appendChild(colA); zone.appendChild(colB);
-    carte.appendChild(zone);
     const retour = ajouterRetour(carte);
   }
 

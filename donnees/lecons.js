@@ -24,6 +24,70 @@
 
 const Lecons = {
 
+  /* ===================== INTRODUCTION (consultable, sans exercice) ===================== */
+
+  0: {
+    cycle: 1,
+    titre: 'Introduction : avant de commencer',
+    intro: 'As-salāmu ʿalaykum, et bienvenue. Avant la première leçon, posons le décor : ce que vous allez apprendre, et comment.\n' +
+      'Cette page est une simple lecture — aucun exercice, rien à réussir. Vous pourrez y revenir à tout moment.\n' +
+      'Lisez-la tranquillement, puis lancez la leçon 1 quand vous le sentez.',
+    decouverte: [
+      { texte: 'L\'arabe est une langue sémitique, cousine de l\'hébreu et de l\'araméen, parlée par des centaines de millions de personnes — et la langue du Coran. Quelques traits la rendent déroutante au premier regard, puis très logique.' },
+      { texte: 'Elle s\'écrit et se lit de droite à gauche. Son écriture est cursive : à l\'intérieur d\'un mot, les lettres se lient entre elles, comme notre écriture attachée. Et il n\'existe pas de majuscules.' },
+      { texte: 'Son alphabet compte 28 lettres, et seulement 28. Les voici en entier : c\'est tout le terrain à couvrir. Inutile de les mémoriser maintenant — regardez-les comme la carte d\'un voyage. Cliquez sur une lettre pour l\'entendre.' },
+      { lettres: [
+        { ar: 'ا', nom: 'alif', son: 'ā' },
+        { ar: 'ب', nom: 'bāʾ', son: 'b' },
+        { ar: 'ت', nom: 'tāʾ', son: 't' },
+        { ar: 'ث', nom: 'thāʾ', son: 'th (think)' },
+        { ar: 'ج', nom: 'jīm', son: 'j (dj)' },
+        { ar: 'ح', nom: 'ḥāʾ', son: 'ḥ (souffle)' },
+        { ar: 'خ', nom: 'khāʾ', son: 'kh' },
+        { ar: 'د', nom: 'dāl', son: 'd' },
+        { ar: 'ذ', nom: 'dhāl', son: 'dh (this)' },
+        { ar: 'ر', nom: 'rāʾ', son: 'r roulé' },
+        { ar: 'ز', nom: 'zāy', son: 'z' },
+        { ar: 'س', nom: 'sīn', son: 's' },
+        { ar: 'ش', nom: 'shīn', son: 'sh (ch)' },
+        { ar: 'ص', nom: 'ṣād', son: 'ṣ emphatique' },
+        { ar: 'ض', nom: 'ḍād', son: 'ḍ emphatique' },
+        { ar: 'ط', nom: 'ṭāʾ', son: 'ṭ emphatique' },
+        { ar: 'ظ', nom: 'ẓāʾ', son: 'ẓ emphatique' },
+        { ar: 'ع', nom: 'ʿayn', son: 'ʿ (gorge)' },
+        { ar: 'غ', nom: 'ghayn', son: 'gh (r grasseyé)' },
+        { ar: 'ف', nom: 'fāʾ', son: 'f' },
+        { ar: 'ق', nom: 'qāf', son: 'q (k profond)' },
+        { ar: 'ك', nom: 'kāf', son: 'k' },
+        { ar: 'ل', nom: 'lām', son: 'l' },
+        { ar: 'م', nom: 'mīm', son: 'm' },
+        { ar: 'ن', nom: 'nūn', son: 'n' },
+        { ar: 'ه', nom: 'hāʾ', son: 'h' },
+        { ar: 'و', nom: 'wāw', son: 'w / ū' },
+        { ar: 'ي', nom: 'yāʾ', son: 'y / ī' },
+      ]},
+      { texte: 'Une même lettre change légèrement de forme selon sa place dans le mot (début, milieu, fin), mais son squelette reste toujours reconnaissable. Vous l\'apprivoiserez sans effort, leçon après leçon.' },
+      { texte: 'Vous remarquerez bientôt de petits signes au-dessus et au-dessous des lettres : ce sont les voyelles brèves, les ḥarakāt. L\'arabe courant les omet souvent, mais le Coran est toujours entièrement vocalisé. Ce sont elles qui donnent le son — nous les découvrirons dès les premières leçons.' },
+      { texte: 'Enfin, une curiosité à garder en tête pour plus tard. L\'arabe a un seul article défini, الـ (al-, « le / la »). Devant certaines lettres dites « lunaires », on l\'entend nettement (al-qamar, la lune) ; devant d\'autres, dites « solaires », le « l » se fond dans la lettre suivante (ash-shams, le soleil). Rien à maîtriser aujourd\'hui : vous le verrez au cycle II.' },
+    ],
+    approfondissement: [
+      { titre: 'Comment se déroule le parcours',
+        corps: '30 leçons réparties en 5 cycles, du déchiffrage des lettres à la lecture comprise de sourates entières. Chaque leçon suit le même rythme : un cours, des exercices variés, un bilan.\n' +
+          'Le principe est simple : on avance par petites touches, et rien ne se perd. Chaque notion et chaque mot appris est sans cesse remobilisé dans les leçons suivantes, et l\'on construit dessus.\n' +
+          'Quelques minutes par jour, avec régularité, valent mieux qu\'un long effort isolé.' },
+      { titre: 'Une intention',
+        corps: 'Apprendre la langue du Coran est un cheminement autant qu\'un apprentissage. Avancez avec douceur et patience envers vous-même ; la constance fait le reste.\n' +
+          'Qu\'Allah facilite votre chemin et le rende fructueux.' },
+    ],
+    exercices: [],
+    recap: [
+      'L\'arabe se lit de droite à gauche, en écriture cursive, sans majuscules.',
+      '28 lettres composent tout l\'alphabet — c\'est tout le terrain à couvrir.',
+      'De petits signes, les voyelles (ḥarakāt), donnent le son : dès la leçon 1.',
+      'Vous êtes prêt : lancez la première leçon quand vous le voulez.',
+    ],
+  },
+
   /* ===================== CYCLE I — LE SYSTÈME D'ÉCRITURE ===================== */
 
   1: {
