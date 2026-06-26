@@ -151,6 +151,13 @@
       const bloc = document.createElement('div');
       bloc.style.marginTop = '1.6rem';
       bloc.innerHTML = `<p class="cycle-romain">Cycle ${App.romain(c)} &middot; ${titresCycles[c-1]}</p>`;
+      if (c === 1) {
+        const introLien = document.createElement('a');
+        introLien.className = 'lien-intro';
+        introLien.href = 'lecon.html?id=0';
+        introLien.innerHTML = '<span>✦</span> Introduction — l\'alphabet d\'un coup d\'œil, le sens de lecture, et ce qui vous attend';
+        bloc.appendChild(introLien);
+      }
       const grille = document.createElement('div');
       grille.className = 'grille-lecons';
       for (let i = (c-1)*6 + 1; i <= c*6; i++) {
