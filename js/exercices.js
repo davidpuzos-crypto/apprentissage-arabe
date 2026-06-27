@@ -746,11 +746,13 @@ const Exercices = (function () {
     champ.className = 'champ-trou';
     champ.dir = 'rtl';
     champ.setAttribute('aria-label', 'Mot à écrire');
-    if (exo.indice) champ.placeholder = exo.indice;
+    champ.placeholder = '…';
     ClavierArabe.attacher(champ);
     phrase.appendChild(champ);
     if (exo.apres) phrase.appendChild(document.createTextNode(' ' + exo.apres));
     carte.appendChild(phrase);
+    // L'indice s'affiche sous le champ (et non en placeholder, qui débordait).
+    if (exo.indice) carte.appendChild(el('p', 'muet petit centre', 'Indice : ' + exo.indice));
 
     const btn = el('button', 'btn btn-petit', 'Vérifier');
     btn.type = 'button';

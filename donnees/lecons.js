@@ -230,6 +230,12 @@ const Lecons = {
         "Le sukūn indique au contraire qu'aucune voyelle ne suit : la consonne ferme la syllabe.\n" +
         "Tout le déchiffrage tient dans ce geste : repérer la consonne, repérer son signe, et faire le son. Répété, il devient automatique.",
     },
+    approfondissement: [
+      { titre: "Lire un mot, pas à pas",
+        corps: "Devant un mot nouveau, ne cherchez pas à le saisir d'un coup : déchiffrez-le lettre par lettre, de droite à gauche, comme on épelle à voix haute.\n" +
+          "Prenons بَحْر. Tout à droite, ب porte une fatḥa : « ba ». Vient ح surmonté d'un sukūn : aucune voyelle, on ferme la syllabe, « baḥ ». Puis ر : on obtient « baḥr », la mer.\n" +
+          "Au début, faites-le lentement, sans la moindre gêne pour cette lenteur : c'est ainsi que l'œil prend ses repères. La fluidité ne se cherche pas, elle vient d'elle-même, à force de répéter ce petit geste.",
+    }],
     vocabulaire: [
       { ar: 'دَار', tr: 'dār', fr: 'demeure, maison', cle: 'dar' },
       { ar: 'بَاب', tr: 'bāb', fr: 'porte', cle: 'bab' },
@@ -419,6 +425,12 @@ const Lecons = {
         "Les supports de l'allongement sont : ا pour « â », و pour « ū », ي pour « ī ».\n" +
         "Mais و et ي peuvent aussi être de simples consonnes (w, y), comme dans يَوْم. Le contexte tranche.",
     },
+    approfondissement: [
+      { titre: "Comment les lettres se tiennent par la main",
+        corps: "Dans un mot, les lettres se lient comme une écriture attachée : chacune peut prendre quatre formes selon sa place — isolée, au début, au milieu, à la fin —, mais son squelette reste toujours reconnaissable.\n" +
+          "Six lettres font exception et ne s'attachent jamais à celle qui les suit (à leur gauche) : ا د ذ ر ز و. Après l'une d'elles, le mot semble se « rouvrir », et la lettre d'après reprend sa forme de début.\n" +
+          "Ne cherchez pas à mémoriser tous ces tracés aujourd'hui. Reconnaissez le squelette, et lisez : la familiarité fera le reste, un mot après l'autre.",
+    }],
     vocabulaire: [
       { ar: 'كِتَاب', tr: 'kitāb', fr: 'livre', cle: 'kitab' },
       { ar: 'قَلَم', tr: 'qalam', fr: 'plume, calame', cle: 'qalam' },
@@ -508,6 +520,12 @@ const Lecons = {
         "À l'oral, elle se dit « a » quand le mot est isolé, et « at » quand il est suivi d'un autre mot.\n" +
         "Le tanwīn, lui, ajoute un « n » final et signale l'indéfini. Ce sont les dernières briques avant de lire des phrases.",
     },
+    approfondissement: [
+      { titre: "Le tanwīn et les cas : soyez rassuré·e",
+        corps: "Le tanwīn (ـٌ ـٍ ـً) peut intimider, car il touche à la grammaire des « cas ». Pour l'instant, ne retenez que ceci : c'est une terminaison qui ajoute un « n » et marque l'indéfini, « un / une ».\n" +
+          "Ses trois formes répondent au rôle du mot dans la phrase : « -oun » (ـٌ), « -in » (ـٍ), « -an » (ـً). كِتَابٌ, كِتَابٍ, كِتَابًا, cela reste toujours « un livre » : seul le rôle change. Ces rôles, vous les étudierez plus tard, sans aucune hâte.\n" +
+          "Pour la tāʾ marbūṭa, gardez sa règle simple en tête : « a » quand le mot s'arrête, « at » quand il s'enchaîne. صَلَاة se lit « ṣalā » seul, et « ṣalāt » lié au mot suivant.",
+    }],
     vocabulaire: [
       { ar: 'صَلَاة', tr: 'ṣalāt', fr: 'prière', cle: 'salat' },
       { ar: 'رَحْمَة', tr: 'raḥma', fr: 'miséricorde', cle: 'rahma' },
