@@ -281,14 +281,19 @@
 /* Lettres en vitrine */
 .vitrine-lettres { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
 .tuile-lettre {
-  min-width: 90px; padding: 1rem; text-align: center; cursor: pointer;
+  min-width: 96px; max-width: 150px; padding: 1.1rem 1rem 0.95rem; text-align: center; cursor: pointer;
   border: 1px solid var(--bordure); border-radius: var(--rayon); background: var(--fond-carte);
   transition: all var(--transition);
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
 }
 .tuile-lettre:hover { border-color: var(--accent); transform: translateY(-3px); }
-.tuile-lettre .gros { font-family: var(--f-arabe); font-size: 3rem; color: var(--encre); line-height: 1; }
-.tuile-lettre .nom { font-family: var(--f-ui); font-size: 0.85rem; color: var(--texte-doux); margin-top: 0.5rem; }
-.tuile-lettre .son { font-style: italic; color: var(--or-profond); font-size: 0.95rem; }
+/* Le glyphe a sa propre boîte centrée : les jambages (ج ح خ) ne mordent plus sur le nom. */
+.tuile-lettre .gros {
+  font-family: var(--f-arabe); font-size: 2.8rem; color: var(--encre);
+  line-height: 1.25; min-height: 1.5em; display: flex; align-items: center; justify-content: center;
+}
+.tuile-lettre .nom { font-family: var(--f-ui); font-size: 0.85rem; color: var(--texte-doux); line-height: 1.3; }
+.tuile-lettre .son { font-style: italic; color: var(--or-profond); font-size: 0.9rem; line-height: 1.35; }
 
 /* Dialogue (échanges parlés) */
 .dialogue { display: flex; flex-direction: column; gap: 0.7rem; margin: 1rem 0; }
@@ -725,11 +730,28 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
   .clavier-arabe { padding: 0.5rem 0.3rem; }
   .bulle { max-width: 95%; }
   .grille-cartes { grid-template-columns: repeat(2, 1fr); }
+  /* Cycles I-II : vitrine de lettres et découverte plus aérées sur mobile */
+  .vitrine-lettres { gap: 0.55rem; }
+  .tuile-lettre { min-width: 78px; max-width: 120px; padding: 0.9rem 0.6rem 0.8rem; gap: 0.3rem; }
+  .tuile-lettre .gros { font-size: 2.4rem; }
+  .tuile-lettre .nom { font-size: 0.8rem; }
+  .tuile-lettre .son { font-size: 0.82rem; }
+  .ligne-decouverte { gap: 0.3rem 0.8rem; padding: 0.8rem 0; }
+  .ligne-decouverte .ar { font-size: 1.95rem; }
+  .ligne-decouverte .fr { font-size: 1rem; }
+  /* Diapositives de cours */
+  .diapo-corps { padding: 1.3rem 1.05rem; min-height: 38vh; }
+  .diapo-nav { gap: 0.5rem; }
+  .diapo-fleche { padding: 0.55rem 0.85rem; font-size: 0.92rem; }
 }
 
 @media (max-width: 360px) {
   .grille-lecons { grid-template-columns: repeat(4, 1fr); }
   .touche-ar { min-width: 26px; font-size: 1.2rem; }
+  .tuile-lettre { min-width: 66px; padding: 0.8rem 0.45rem 0.7rem; }
+  .tuile-lettre .gros { font-size: 2.1rem; }
+  .vitrine-lettres { gap: 0.4rem; }
+  .diapo-fleche { padding: 0.5rem 0.7rem; font-size: 0.85rem; }
 }
 
 /* =========================================================================
