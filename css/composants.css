@@ -207,6 +207,44 @@
 }
 .titre-section::before { content: ''; width: 18px; height: 1px; background: var(--or); display: inline-block; }
 
+/* ---- Cours en diapositives (slides à faire défiler) ---- */
+.diapo-scene { position: relative; }
+.diapo { display: none; }
+.diapo.active { display: block; animation: diapoEntre 0.35s ease both; }
+@keyframes diapoEntre { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+.diapo-corps {
+  background: var(--fond-carte); border: 1px solid var(--bordure);
+  border-radius: var(--rayon); padding: 1.8rem 1.6rem;
+  min-height: 44vh; display: flex; flex-direction: column; justify-content: center;
+}
+.diapo-corps > p { line-height: 1.7; }
+.diapo-surtitre {
+  font-family: var(--f-ui); font-size: 0.78rem; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--or-profond); font-weight: 600;
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+}
+.diapo-surtitre::before { content: ''; width: 18px; height: 1px; background: var(--or); display: inline-block; }
+.diapo-fin-note { margin-top: 1.4rem; }
+
+/* Navigation du carrousel : flèches + pastilles de progression */
+.diapo-nav { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin-top: 1.2rem; }
+.diapo-fleche {
+  font-family: var(--f-ui); font-size: 1rem; font-weight: 600; min-height: 44px;
+  background: var(--fond-carte); border: 1px solid var(--bordure); color: var(--encre);
+  border-radius: 999px; padding: 0.55rem 1.1rem; cursor: pointer; transition: all var(--transition);
+}
+.diapo-fleche:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.diapo-fleche:disabled { opacity: 0.3; cursor: default; }
+.diapo-fleche-suiv { background: var(--accent); color: var(--sur-accent); border-color: var(--accent); }
+.diapo-fleche-suiv:hover { filter: brightness(1.05); color: var(--sur-accent); border-color: var(--accent); }
+.diapo-points { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; flex: 1; }
+.diapo-point {
+  width: 11px; height: 11px; border-radius: 50%; padding: 0; cursor: pointer;
+  border: 1px solid var(--bordure); background: transparent; transition: all var(--transition);
+}
+.diapo-point.vu { background: var(--accent-doux); border-color: var(--accent-doux); }
+.diapo-point.actif { background: var(--accent); border-color: var(--accent); transform: scale(1.3); }
+
 /* Bloc découverte : ligne arabe / translit / français */
 .ligne-decouverte {
   display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 1.2rem;
@@ -489,6 +527,12 @@ html[data-theme="sombre"] .badge-type { color: #1a1610; }
 }
 .champ-trou:focus { outline: none; border-bottom-color: var(--or-profond); }
 .correction-libre .ar { font-family: var(--f-arabe); direction: rtl; font-size: 2.2rem; }
+/* Placeholders : police d'interface, petits, jamais débordants (bug indice). */
+.champ-trou::placeholder, .zone-saisie::placeholder {
+  font-family: var(--f-ui); font-size: 0.95rem; color: var(--texte-doux);
+  opacity: 0.7; letter-spacing: normal;
+}
+.champ-trou, .zone-saisie { overflow: hidden; text-overflow: ellipsis; }
 
 /* Sélection contextuelle (grammaire en contexte) */
 .contexte-sujet {

@@ -80,89 +80,116 @@
     const vueBilan = document.createElement('div'); vueBilan.className = 'vue';
     racine.appendChild(vueCours); racine.appendChild(vueExo); racine.appendChild(vueBilan);
 
-    /* ---- COURS : introduction ---- */
-    const intro = section('Avant de commencer');
-    const pIntro = document.createElement('div');
-    pIntro.className = 'cartouche';
-    pIntro.innerHTML = lecon.intro.split('\n').map((t) => `<p>${t}</p>`).join('');
-    intro.appendChild(pIntro);
-    vueCours.appendChild(intro);
-
-    /* ---- Découverte ---- */
-    if (lecon.decouverte && lecon.decouverte.length) {
-      const dec = section('Découverte');
-      lecon.decouverte.forEach((bloc) => {
-        if (bloc.texte) dec.appendChild(elt(`<p>${bloc.texte}</p>`));
-        if (bloc.lettres) {
-          const v = document.createElement('div'); v.className = 'vitrine-lettres';
-          bloc.lettres.forEach((l) => {
-            const tuile = document.createElement('div'); tuile.className = 'tuile-lettre';
-            tuile.innerHTML = `<div class="gros">${l.ar}</div><div class="nom">${l.nom}</div><div class="son">${l.son}</div>`;
-            tuile.onclick = () => Parole.prononcer(l.ar, { rate: Parole.rateSelonLecon(id) });
-            v.appendChild(tuile);
-          });
-          dec.appendChild(v);
-        }
-        if (bloc.lignes) {
-          const tab = document.createElement('div');
-          bloc.lignes.forEach((lg) => {
-            const ligne = document.createElement('div'); ligne.className = 'ligne-decouverte';
-            const ar = document.createElement('div'); ar.className = 'ar';
-            ar.textContent = lg.ar; ar.appendChild(audioBtn(lg.ar));
-            ar.style.cursor = 'pointer';
-            ar.onclick = () => Parole.prononcer(lg.ar, { rate: Parole.rateSelonLecon(id) });
-            const infos = document.createElement('div'); infos.className = 'infos';
-            infos.innerHTML = (lg.tr ? App.phon(lg.tr) : '') + `<span class="fr">${lg.fr || ''}</span>` +
-              (lg.note ? `<span class="note">${lg.note}</span>` : '');
-            ligne.appendChild(ar); ligne.appendChild(infos);
-            tab.appendChild(ligne);
-          });
-          dec.appendChild(tab);
-        }
-        if (bloc.dialogue) {
-          if (bloc.titreDialogue) dec.appendChild(elt(`<p class="muet petit" style="margin-top:1rem">${bloc.titreDialogue}</p>`));
-          const conv = document.createElement('div'); conv.className = 'dialogue';
-          bloc.dialogue.forEach((tour) => {
-            const b = document.createElement('div');
-            b.className = 'bulle ' + (tour.qui === 'B' ? 'bulle-b' : 'bulle-a');
-            const ar = document.createElement('div'); ar.className = 'bulle-ar';
-            ar.textContent = tour.ar; ar.appendChild(audioBtn(tour.ar));
-            ar.style.cursor = 'pointer';
-            ar.onclick = () => Parole.prononcer(tour.ar, { rate: Parole.rateSelonLecon(id) });
-            b.appendChild(ar);
-            b.insertAdjacentHTML('beforeend', (tour.tr ? App.phon(tour.tr) : '') + `<span class="bulle-fr">${tour.fr || ''}</span>`);
-            conv.appendChild(b);
-          });
-          dec.appendChild(conv);
-        }
-      });
-      vueCours.appendChild(dec);
+    /* =========================================================================
+       COURS EN DIAPOSITIVES — « une idée à la fois »
+       Le cours est découpé en diapositives que l'on fait défiler. On allège
+       ainsi la mémoire de travail : on lit une idée, on respire, on avance.
+       Les explications, elles, restent généreuses (rien n'est sacrifié).
+       ========================================================================= */
+    const diapos = [];          // chaque entrée : { corps, surtitre }
+    function nouvelleDiapo(surtitre, titre) {
+      const corps = document.createElement('div'); corps.className = 'diapo-corps';
+      if (surtitre) corps.appendChild(elt(`<p class="diapo-surtitre">${surtitre}</p>`));
+      if (titre) corps.appendChild(elt(`<h2 class="diapo-titre">${titre}</h2>`));
+      diapos.push({ corps, surtitre });
+      return corps;
     }
 
-    /* ---- Note grammaticale ---- */
+    // Rend un bloc « lettres » (vitrine) dans un conteneur.
+    function rendreLettres(bloc, cible) {
+      const v = document.createElement('div'); v.className = 'vitrine-lettres';
+      bloc.lettres.forEach((l) => {
+        const tuile = document.createElement('div'); tuile.className = 'tuile-lettre';
+        tuile.innerHTML = `<div class="gros">${l.ar}</div><div class="nom">${l.nom}</div><div class="son">${l.son}</div>`;
+        tuile.onclick = () => Parole.prononcer(l.ar, { rate: Parole.rateSelonLecon(id) });
+        v.appendChild(tuile);
+      });
+      cible.appendChild(v);
+    }
+    // Rend un bloc « lignes » (mot arabe + translittération + sens) .
+    function rendreLignes(bloc, cible) {
+      const tab = document.createElement('div');
+      bloc.lignes.forEach((lg) => {
+        const ligne = document.createElement('div'); ligne.className = 'ligne-decouverte';
+        const ar = document.createElement('div'); ar.className = 'ar';
+        ar.textContent = lg.ar; ar.appendChild(audioBtn(lg.ar));
+        ar.style.cursor = 'pointer';
+        ar.onclick = () => Parole.prononcer(lg.ar, { rate: Parole.rateSelonLecon(id) });
+        const infos = document.createElement('div'); infos.className = 'infos';
+        infos.innerHTML = (lg.tr ? App.phon(lg.tr) : '') + `<span class="fr">${lg.fr || ''}</span>` +
+          (lg.note ? `<span class="note">${lg.note}</span>` : '');
+        ligne.appendChild(ar); ligne.appendChild(infos);
+        tab.appendChild(ligne);
+      });
+      cible.appendChild(tab);
+    }
+    // Rend un bloc « dialogue » (bulles).
+    function rendreDialogue(bloc, cible) {
+      if (bloc.titreDialogue) cible.appendChild(elt(`<p class="muet petit" style="margin-top:1rem">${bloc.titreDialogue}</p>`));
+      const conv = document.createElement('div'); conv.className = 'dialogue';
+      bloc.dialogue.forEach((tour) => {
+        const b = document.createElement('div');
+        b.className = 'bulle ' + (tour.qui === 'B' ? 'bulle-b' : 'bulle-a');
+        const ar = document.createElement('div'); ar.className = 'bulle-ar';
+        ar.textContent = tour.ar; ar.appendChild(audioBtn(tour.ar));
+        ar.style.cursor = 'pointer';
+        ar.onclick = () => Parole.prononcer(tour.ar, { rate: Parole.rateSelonLecon(id) });
+        b.appendChild(ar);
+        b.insertAdjacentHTML('beforeend', (tour.tr ? App.phon(tour.tr) : '') + `<span class="bulle-fr">${tour.fr || ''}</span>`);
+        conv.appendChild(b);
+      });
+      cible.appendChild(conv);
+    }
+
+    /* ---- Diapo 1 : introduction ---- */
+    {
+      const c = nouvelleDiapo('Avant de commencer', null);
+      const carte = document.createElement('div'); carte.className = 'cartouche';
+      carte.innerHTML = lecon.intro.split('\n').map((t) => `<p>${t}</p>`).join('');
+      c.appendChild(carte);
+    }
+
+    /* ---- Découverte : un bloc de contenu = une diapo ----
+       Les blocs de texte simples qui précèdent un contenu (lettres, lignes,
+       dialogue) sont rassemblés en tête de la diapo de ce contenu, pour servir
+       d'introduction. Un texte seul (sans contenu après) devient sa propre diapo. */
+    if (lecon.decouverte && lecon.decouverte.length) {
+      let tampon = [];
+      lecon.decouverte.forEach((bloc) => {
+        const aContenu = bloc.lettres || bloc.lignes || bloc.dialogue;
+        if (bloc.texte && !aContenu) { tampon.push(bloc.texte); return; }
+        const c = nouvelleDiapo('Découverte', null);
+        tampon.forEach((t) => c.appendChild(elt(`<p>${t}</p>`))); tampon = [];
+        if (bloc.texte) c.appendChild(elt(`<p>${bloc.texte}</p>`));
+        if (bloc.lettres) rendreLettres(bloc, c);
+        if (bloc.lignes) rendreLignes(bloc, c);
+        if (bloc.dialogue) rendreDialogue(bloc, c);
+      });
+      if (tampon.length) { const c = nouvelleDiapo('Découverte', null); tampon.forEach((t) => c.appendChild(elt(`<p>${t}</p>`))); }
+    }
+
+    /* ---- Diapo : note grammaticale ---- */
     if (lecon.grammaire) {
-      const g = section('Note grammaticale');
+      const c = nouvelleDiapo('Note grammaticale', null);
       const note = document.createElement('div'); note.className = 'note-grammaire';
       note.innerHTML = `<h3>${lecon.grammaire.titre}</h3>` +
         lecon.grammaire.corps.split('\n').map((t) => `<p>${t}</p>`).join('');
-      g.appendChild(note);
-      vueCours.appendChild(g);
+      c.appendChild(note);
     }
 
-    /* ---- Pour aller plus loin : étymologie et spiritualité ---- */
+    /* ---- Diapos : pour aller plus loin (une par bloc) ---- */
     if (lecon.approfondissement && lecon.approfondissement.length) {
-      const a = section('Pour aller plus loin');
       lecon.approfondissement.forEach((bloc) => {
+        const c = nouvelleDiapo('Pour aller plus loin', null);
         const d = document.createElement('div'); d.className = 'approfondissement';
         d.innerHTML = `<h3>${bloc.titre}</h3>` + bloc.corps.split('\n').map((t) => `<p>${t}</p>`).join('');
-        a.appendChild(d);
+        c.appendChild(d);
       });
-      vueCours.appendChild(a);
     }
 
-    /* ---- Vocabulaire ---- */
+    /* ---- Diapo : vocabulaire ---- */
     if (lecon.vocabulaire && lecon.vocabulaire.length) {
-      const v = section('Vocabulaire de la leçon');
+      const c = nouvelleDiapo('Vocabulaire de la leçon', null);
       const tab = document.createElement('table'); tab.className = 'tableau-voc';
       lecon.vocabulaire.forEach((mot) => {
         const tr = document.createElement('tr');
@@ -173,8 +200,7 @@
         tr.onclick = () => Parole.prononcer(mot.ar, { rate: Parole.rateSelonLecon(id) });
         tab.appendChild(tr);
       });
-      v.appendChild(tab);
-      vueCours.appendChild(v);
+      c.appendChild(tab);
     }
 
     /* ---- Bouton de fin de cours : lancer les exercices ---- */
@@ -187,7 +213,79 @@
       lancer.textContent = 'Commencer les exercices';
       lancer.onclick = () => { montrer('exo'); pousser({ vue: 'exo', idx: 0 }); };
     }
-    vueCours.appendChild(lancer);
+
+    /* ---- Montage du carrousel ---- */
+    const scene = document.createElement('div'); scene.className = 'diapo-scene';
+    const elemsDiapo = diapos.map((d, i) => {
+      const art = document.createElement('article'); art.className = 'diapo'; art.dataset.i = i;
+      art.appendChild(d.corps);
+      // La toute dernière diapo accueille le bouton « Commencer les exercices ».
+      if (i === diapos.length - 1) {
+        const pied = document.createElement('p'); pied.className = 'diapo-fin-note muet petit centre';
+        pied.textContent = estIntro ? 'Vous êtes prêt·e à commencer.' : 'C’est le moment de mettre tout cela en pratique.';
+        d.corps.appendChild(pied);
+        d.corps.appendChild(lancer);
+      }
+      scene.appendChild(art);
+      return art;
+    });
+    vueCours.appendChild(scene);
+
+    // Barre de navigation (flèches + pastilles de progression).
+    const nav = document.createElement('div'); nav.className = 'diapo-nav';
+    const prec = document.createElement('button');
+    prec.className = 'diapo-fleche'; prec.type = 'button'; prec.innerHTML = '‹';
+    prec.setAttribute('aria-label', 'Diapositive précédente');
+    const points = document.createElement('div'); points.className = 'diapo-points';
+    const pastilles = diapos.map((_, i) => {
+      const p = document.createElement('button'); p.className = 'diapo-point'; p.type = 'button';
+      p.setAttribute('aria-label', 'Aller à la diapositive ' + (i + 1));
+      p.onclick = () => aller(i);
+      points.appendChild(p); return p;
+    });
+    const suiv = document.createElement('button');
+    suiv.className = 'diapo-fleche diapo-fleche-suiv'; suiv.type = 'button'; suiv.innerHTML = 'Suivant ›';
+    suiv.setAttribute('aria-label', 'Diapositive suivante');
+    nav.appendChild(prec); nav.appendChild(points); nav.appendChild(suiv);
+    vueCours.appendChild(nav);
+
+    let posDiapo = 0;
+    function aller(n) {
+      posDiapo = Math.max(0, Math.min(diapos.length - 1, n));
+      elemsDiapo.forEach((el, i) => el.classList.toggle('active', i === posDiapo));
+      pastilles.forEach((p, i) => {
+        p.classList.toggle('actif', i === posDiapo);
+        p.classList.toggle('vu', i < posDiapo);
+      });
+      prec.disabled = posDiapo === 0;
+      const dernier = posDiapo === diapos.length - 1;
+      suiv.style.visibility = dernier ? 'hidden' : 'visible';
+      nav.style.display = diapos.length > 1 ? 'flex' : 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    prec.onclick = () => aller(posDiapo - 1);
+    suiv.onclick = () => aller(posDiapo + 1);
+
+    // Clavier : flèches gauche/droite quand le cours est affiché.
+    document.addEventListener('keydown', (e) => {
+      if (vueCours.style.display === 'none') return;
+      if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+      if (e.key === 'ArrowRight') aller(posDiapo + 1);
+      else if (e.key === 'ArrowLeft') aller(posDiapo - 1);
+    });
+    // Tactile : balayage horizontal pour changer de diapo.
+    let xDebut = null, yDebut = null;
+    scene.addEventListener('touchstart', (e) => {
+      xDebut = e.changedTouches[0].clientX; yDebut = e.changedTouches[0].clientY;
+    }, { passive: true });
+    scene.addEventListener('touchend', (e) => {
+      if (xDebut === null) return;
+      const dx = e.changedTouches[0].clientX - xDebut;
+      const dy = e.changedTouches[0].clientY - yDebut;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) aller(posDiapo + (dx < 0 ? 1 : -1));
+      xDebut = null; yDebut = null;
+    }, { passive: true });
+    aller(0);
 
     // Exercices supplémentaires générés à partir du vocabulaire de la leçon,
     // pour densifier l'entraînement. Toujours corrects, car tirés des données.
