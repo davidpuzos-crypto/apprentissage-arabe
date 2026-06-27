@@ -214,17 +214,39 @@
 @keyframes diapoEntre { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
 .diapo-corps {
   background: var(--fond-carte); border: 1px solid var(--bordure);
+  border-top: 3px solid var(--accent);
   border-radius: var(--rayon); padding: 1.8rem 1.6rem;
   min-height: 44vh; display: flex; flex-direction: column; justify-content: center;
 }
 .diapo-corps > p { line-height: 1.7; }
 .diapo-surtitre {
   font-family: var(--f-ui); font-size: 0.78rem; text-transform: uppercase;
-  letter-spacing: 0.12em; color: var(--or-profond); font-weight: 600;
-  margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+  letter-spacing: 0.12em; color: var(--teinte-diapo, var(--or-profond)); font-weight: 600;
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
 }
-.diapo-surtitre::before { content: ''; width: 18px; height: 1px; background: var(--or); display: inline-block; }
+.diapo-ico { font-size: 1.05rem; line-height: 1; filter: none; }
 .diapo-fin-note { margin-top: 1.4rem; }
+
+/* Couleur propre à chaque type de diapositive (liseré + sur-titre) */
+.diapo-intro      { --teinte-diapo: var(--accent);  border-top-color: var(--accent); }
+.diapo-decouverte { --teinte-diapo: #3a78bf;        border-top-color: #4a90d9; }
+.diapo-grammaire  { --teinte-diapo: var(--or-profond); border-top-color: var(--or); }
+.diapo-approf     { --teinte-diapo: #8a5bb5;        border-top-color: #a072c8; }
+.diapo-vocab      { --teinte-diapo: #2e8b57;        border-top-color: #3fae6b; }
+
+/* Signes vocaliques et diacritiques : une couleur par signe, partout */
+.diac { font-weight: 600; }
+.d-fatha  { color: #d6492f; }   /* fatḥa  : « a », trait au-dessus */
+.d-kasra  { color: #2f74c0; }   /* kasra  : « i », trait au-dessous */
+.d-damma  { color: #2e8b57; }   /* ḍamma  : « ou » */
+.d-sukun  { color: #8a9099; }   /* sukūn  : absence de voyelle */
+.d-shadda { color: #c08a16; }   /* shadda : redoublement */
+.d-tanwin { color: #1f9b9b; }   /* tanwīn : « -n » final */
+.d-madda  { color: #c08a16; }   /* madda  : « â » long */
+.d-hamza  { color: #9457bd; }   /* hamza  : coup de glotte */
+
+/* Petite illustration (emoji) devant un mot de vocabulaire */
+.voc-ill { margin-inline-end: 0.4rem; font-size: 1.1rem; }
 
 /* Navigation du carrousel : flèches + pastilles de progression */
 .diapo-nav { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin-top: 1.2rem; }

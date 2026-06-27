@@ -86,13 +86,38 @@
        ainsi la mémoire de travail : on lit une idée, on respire, on avance.
        Les explications, elles, restent généreuses (rien n'est sacrifié).
        ========================================================================= */
-    const diapos = [];          // chaque entrée : { corps, surtitre }
-    function nouvelleDiapo(surtitre, titre) {
-      const corps = document.createElement('div'); corps.className = 'diapo-corps';
-      if (surtitre) corps.appendChild(elt(`<p class="diapo-surtitre">${surtitre}</p>`));
-      if (titre) corps.appendChild(elt(`<h2 class="diapo-titre">${titre}</h2>`));
-      diapos.push({ corps, surtitre });
+    const diapos = [];          // chaque entrée : { corps }
+    // Chaque type de diapo a sa couleur et son icône, pour mieux se repérer.
+    const ICONES = { intro: '✦', decouverte: '👁', grammaire: '✎', approf: '✨', vocab: '📖' };
+    function nouvelleDiapo(surtitre, type) {
+      type = type || 'intro';
+      const corps = document.createElement('div'); corps.className = 'diapo-corps diapo-' + type;
+      if (surtitre) {
+        const s = document.createElement('p'); s.className = 'diapo-surtitre';
+        s.innerHTML = `<span class="diapo-ico">${ICONES[type] || '✦'}</span>${surtitre}`;
+        corps.appendChild(s);
+      }
+      diapos.push({ corps });
       return corps;
+    }
+
+    // Met en couleur les noms des signes (voyelles et diacritiques) partout
+    // dans le cours : chaque signe a sa teinte, ce qui aide l'œil à les
+    // reconnaître d'une leçon à l'autre. Sûr sur du texte (pas de HTML).
+    const TERMES_DIAC = [
+      [/(fat[ḥh]as?)/g, 'd-fatha'],
+      [/(kasras?)/g, 'd-kasra'],
+      [/(ḍammas?|dammas?)/g, 'd-damma'],
+      [/(suk[ūu]ns?)/g, 'd-sukun'],
+      [/(shaddas?)/g, 'd-shadda'],
+      [/(tanw[īi]ns?)/g, 'd-tanwin'],
+      [/(maddas?)/g, 'd-madda'],
+      [/(hamzas?)/g, 'd-hamza'],
+    ];
+    function colorer(s) {
+      if (!s) return s;
+      TERMES_DIAC.forEach(([re, cls]) => { s = s.replace(re, `<span class="diac ${cls}">$1</span>`); });
+      return s;
     }
 
     // Rend un bloc « lettres » (vitrine) dans un conteneur.
@@ -116,8 +141,9 @@
         ar.style.cursor = 'pointer';
         ar.onclick = () => Parole.prononcer(lg.ar, { rate: Parole.rateSelonLecon(id) });
         const infos = document.createElement('div'); infos.className = 'infos';
-        infos.innerHTML = (lg.tr ? App.phon(lg.tr) : '') + `<span class="fr">${lg.fr || ''}</span>` +
-          (lg.note ? `<span class="note">${lg.note}</span>` : '');
+        infos.innerHTML = (lg.tr ? App.phon(lg.tr) : '') +
+          `<span class="fr">${lg.ill ? `<span class="voc-ill">${lg.ill}</span>` : ''}${lg.fr || ''}</span>` +
+          (lg.note ? `<span class="note">${colorer(lg.note)}</span>` : '');
         ligne.appendChild(ar); ligne.appendChild(infos);
         tab.appendChild(ligne);
       });
@@ -143,9 +169,9 @@
 
     /* ---- Diapo 1 : introduction ---- */
     {
-      const c = nouvelleDiapo('Avant de commencer', null);
+      const c = nouvelleDiapo('Avant de commencer', 'intro');
       const carte = document.createElement('div'); carte.className = 'cartouche';
-      carte.innerHTML = lecon.intro.split('\n').map((t) => `<p>${t}</p>`).join('');
+      carte.innerHTML = lecon.intro.split('\n').map((t) => `<p>${colorer(t)}</p>`).join('');
       c.appendChild(carte);
     }
 
@@ -158,44 +184,44 @@
       lecon.decouverte.forEach((bloc) => {
         const aContenu = bloc.lettres || bloc.lignes || bloc.dialogue;
         if (bloc.texte && !aContenu) { tampon.push(bloc.texte); return; }
-        const c = nouvelleDiapo('Découverte', null);
-        tampon.forEach((t) => c.appendChild(elt(`<p>${t}</p>`))); tampon = [];
-        if (bloc.texte) c.appendChild(elt(`<p>${bloc.texte}</p>`));
+        const c = nouvelleDiapo('Découverte', 'decouverte');
+        tampon.forEach((t) => c.appendChild(elt(`<p>${colorer(t)}</p>`))); tampon = [];
+        if (bloc.texte) c.appendChild(elt(`<p>${colorer(bloc.texte)}</p>`));
         if (bloc.lettres) rendreLettres(bloc, c);
         if (bloc.lignes) rendreLignes(bloc, c);
         if (bloc.dialogue) rendreDialogue(bloc, c);
       });
-      if (tampon.length) { const c = nouvelleDiapo('Découverte', null); tampon.forEach((t) => c.appendChild(elt(`<p>${t}</p>`))); }
+      if (tampon.length) { const c = nouvelleDiapo('Découverte', 'decouverte'); tampon.forEach((t) => c.appendChild(elt(`<p>${colorer(t)}</p>`))); }
     }
 
     /* ---- Diapo : note grammaticale ---- */
     if (lecon.grammaire) {
-      const c = nouvelleDiapo('Note grammaticale', null);
+      const c = nouvelleDiapo('Note grammaticale', 'grammaire');
       const note = document.createElement('div'); note.className = 'note-grammaire';
       note.innerHTML = `<h3>${lecon.grammaire.titre}</h3>` +
-        lecon.grammaire.corps.split('\n').map((t) => `<p>${t}</p>`).join('');
+        lecon.grammaire.corps.split('\n').map((t) => `<p>${colorer(t)}</p>`).join('');
       c.appendChild(note);
     }
 
     /* ---- Diapos : pour aller plus loin (une par bloc) ---- */
     if (lecon.approfondissement && lecon.approfondissement.length) {
       lecon.approfondissement.forEach((bloc) => {
-        const c = nouvelleDiapo('Pour aller plus loin', null);
+        const c = nouvelleDiapo('Pour aller plus loin', 'approf');
         const d = document.createElement('div'); d.className = 'approfondissement';
-        d.innerHTML = `<h3>${bloc.titre}</h3>` + bloc.corps.split('\n').map((t) => `<p>${t}</p>`).join('');
+        d.innerHTML = `<h3>${bloc.titre}</h3>` + bloc.corps.split('\n').map((t) => `<p>${colorer(t)}</p>`).join('');
         c.appendChild(d);
       });
     }
 
     /* ---- Diapo : vocabulaire ---- */
     if (lecon.vocabulaire && lecon.vocabulaire.length) {
-      const c = nouvelleDiapo('Vocabulaire de la leçon', null);
+      const c = nouvelleDiapo('Vocabulaire de la leçon', 'vocab');
       const tab = document.createElement('table'); tab.className = 'tableau-voc';
       lecon.vocabulaire.forEach((mot) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `<td class="col-ar">${mot.ar}</td>
           <td class="col-tr">${App.phon(mot.tr)}</td>
-          <td class="col-fr">${mot.fr}</td>
+          <td class="col-fr">${mot.ill ? `<span class="voc-ill">${mot.ill}</span>` : ''}${mot.fr}</td>
           <td class="ic-audio">&#9834;</td>`;
         tr.onclick = () => Parole.prononcer(mot.ar, { rate: Parole.rateSelonLecon(id) });
         tab.appendChild(tr);
