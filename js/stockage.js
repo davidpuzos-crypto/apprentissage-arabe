@@ -72,7 +72,8 @@ const Stockage = (function () {
   function leconAccessible(id) {
     // Navigation libre : toute leçon est accessible, afin que chacun aille
     // au niveau qui lui convient. La progression reste suivie séparément.
-    return id >= 1 && id <= 30;
+    // 0 = leçon d'introduction (consultable, sans exercice).
+    return id >= 0 && id <= 30;
   }
 
   function enregistrerScoreLecon(id, reussis, total) {

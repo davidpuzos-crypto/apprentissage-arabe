@@ -12,11 +12,12 @@
   <div id="barre"></div>
   <main class="contenu">
     <header class="centre">
-      <p class="cycle-romain">Réviser tout son vocabulaire</p>
+      <p class="cycle-romain">Réviser son vocabulaire</p>
       <h1>Entraînement</h1>
       <p class="muet" style="max-width:560px;margin:0.4rem auto 0;">
-        Des questions tirées de tout votre vocabulaire, pour entretenir vos
-        acquis et gagner des points. Chaque bonne réponse vous fait progresser.
+        Des questions tirées du vocabulaire que vous avez déjà rencontré, pour
+        entretenir vos acquis et gagner des points. Chaque bonne réponse vous
+        fait progresser.
       </p>
     </header>
     <hr class="filet">
@@ -39,8 +40,21 @@
     const zone = document.getElementById('jeu');
     const N = 12; // questions par partie
 
-    // Réserve de mots : tout le vocabulaire connu (leçons + fréquent).
-    const pool = Vocabulaire.tous().filter((m) => m.ar && m.tr && m.fr);
+    // Réserve de mots : uniquement le vocabulaire DÉJÀ rencontré, pour ne jamais
+    // être interrogé sur des mots pas encore vus.
+    const lexique = Vocabulaire.indexParCle();
+    const pool = Object.keys(Stockage.etat.vocabulaire)
+      .map((c) => lexique[c]).filter((m) => m && m.ar && m.tr && m.fr);
+    if (pool.length < 4) {
+      zone.innerHTML = `<div class="carte centre apparait">
+        <h2>Pas encore assez de mots à entraîner</h2>
+        <p class="muet">L'entraînement porte sur les mots que vous avez déjà rencontrés dans les leçons. Étudiez quelques leçons, puis revenez : vos mots vous attendront ici.</p>
+        <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1rem">
+          <a class="btn" href="lecon.html?id=${Math.max(1, Stockage.etat.leconCourante || 1)}">Aller à ma leçon</a>
+          <a class="btn btn-secondaire" href="index.html">Accueil</a>
+        </div></div>`;
+      throw new Error('pas assez de mots vus');
+    }
 
     function melanger(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
     function autres(mot, champ, n){

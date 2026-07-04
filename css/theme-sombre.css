@@ -52,3 +52,16 @@ html[data-theme="sombre"] .a-memoriser .ar,
 html[data-theme="sombre"] .ligne-decouverte .ar,
 html[data-theme="sombre"] .lecture-ar,
 html[data-theme="sombre"] .tuile-lettre .gros { color: var(--encre); }
+
+/* Signes vocaliques : teintes éclaircies pour rester lisibles sur fond sombre */
+html[data-theme="sombre"] .d-fatha  { color: #f08f7a; }
+html[data-theme="sombre"] .d-kasra  { color: #7db4ec; }
+html[data-theme="sombre"] .d-damma  { color: #7fd3a3; }
+html[data-theme="sombre"] .d-sukun  { color: #b3bac3; }
+html[data-theme="sombre"] .d-shadda,
+html[data-theme="sombre"] .d-madda  { color: #e3c373; }
+html[data-theme="sombre"] .d-tanwin { color: #62c9c9; }
+html[data-theme="sombre"] .d-hamza  { color: #c79ce6; }
+html[data-theme="sombre"] .diapo-decouverte { --teinte-diapo: #7db4ec; }
+html[data-theme="sombre"] .diapo-approf     { --teinte-diapo: #c79ce6; }
+html[data-theme="sombre"] .diapo-vocab      { --teinte-diapo: #7fd3a3; }

@@ -50,7 +50,9 @@
 
     // Vocabulaire déjà travaillé (sinon, tout le lexique en repli)
     const vocTravaille = Object.keys(Stockage.etat.vocabulaire).map((c) => lexique[c]).filter((m) => m && m.ar && m.tr && m.fr);
-    const vocPool = vocTravaille.length >= 4 ? vocTravaille : Vocabulaire.tous().filter((m) => m.ar && m.tr && m.fr);
+    // On ne révise QUE le vocabulaire déjà rencontré : aucun repli sur tout le
+    // corpus, sinon des mots jamais vus apparaîtraient.
+    const vocPool = vocTravaille;
 
     // Éléments dus (répétition espacée) : mots + phrases
     const dus = Repetition.motsADue(Stockage.etat.revisions).filter((c) => lexique[c]).map((c) => ({ cle: c, type: 'mot', ...lexique[c] }));
@@ -58,8 +60,8 @@
 
     // Pour les cartes : tout ce qui est révisable
     const rencontres = Object.keys(Stockage.etat.vocabulaire).filter((c) => lexique[c]);
-    const baseMots = (rencontres.length ? rencontres : Object.keys(lexique));
-    const tousCartes = baseMots.map((c) => ({ cle: c, type: 'mot', ...lexique[c] }));
+    // Uniquement les mots réellement rencontrés (jamais tout le lexique).
+    const tousCartes = rencontres.map((c) => ({ cle: c, type: 'mot', ...lexique[c] }));
     Object.keys(Stockage.etat.phrases).forEach((c) => { if (phrasesIndex[c]) tousCartes.push({ cle: c, type: 'phrase', ...phrasesIndex[c] }); });
 
     /* ============ Menu (hub) ============ */
@@ -71,18 +73,29 @@
           <a class="tuile" id="m-defi" href="jeu-rapide.html"><span class="t-emoji">⚡</span><span class="t-titre">Défi éclair</span><span class="t-sous">contre la montre, sur les mots connus</span></a>
           <a class="tuile" id="m-cartes" href="#">${dus.length ? `<span class="t-badge">${dus.length}</span>` : ''}<span class="t-emoji">🃏</span><span class="t-titre">Cartes de révision</span><span class="t-sous">${dus.length ? dus.length + ' à revoir aujourd\'hui' : 'répétition espacée'}</span></a>
         </div>
-        <div class="carte" style="margin-top:1.4rem;">
+        <div class="carte" id="carte-session" style="margin-top:1.4rem;"></div>`;
+      // Une session n'est possible que si l'on a terminé des leçons (exercices
+      // rédigés) ou rencontré assez de vocabulaire. Sinon, on oriente l'élève.
+      const peutSession = exosRediges().length > 0 || vocPool.length >= 4;
+      const carteSession = document.getElementById('carte-session');
+      if (peutSession) {
+        carteSession.innerHTML = `
           <h3 style="margin-top:0;">Lancer une session</h3>
-          <p class="muet petit">Un enchaînement d'exercices tirés de ce que vous avez déjà vu : reconnaissance de sens, phrases à compléter, mots à écrire au clavier arabe, lecture, racines… On revoit en jouant.</p>
+          <p class="muet petit">Un enchaînement d'exercices tirés de ce que vous avez déjà étudié : reconnaissance de sens, phrases à compléter, mots à écrire au clavier arabe, lecture… On revoit en jouant.</p>
           <div style="display:flex;gap:0.7rem;flex-wrap:wrap;margin-top:0.6rem;">
             <button class="btn" id="s-courte">Session courte (10)</button>
             <button class="btn btn-secondaire" id="s-longue">Session longue (18)</button>
-          </div>
-        </div>`;
-      document.getElementById('m-session').onclick = (e) => { e.preventDefault(); lancerExercices(construireFile(12)); };
+          </div>`;
+        document.getElementById('s-courte').onclick = () => lancerExercices(construireFile(10));
+        document.getElementById('s-longue').onclick = () => lancerExercices(construireFile(18));
+      } else {
+        carteSession.innerHTML = `
+          <h3 style="margin-top:0;">Rien à réviser pour l'instant</h3>
+          <p class="muet petit">La révision ne porte que sur les leçons que vous avez réellement terminées. Terminez au moins une leçon, puis revenez : vos mots et vos notions vous attendront ici.</p>
+          <div style="margin-top:0.6rem;"><a class="btn" href="lecon.html?id=${Math.max(1, Stockage.etat.leconCourante || 1)}">Aller à ma leçon</a></div>`;
+      }
+      document.getElementById('m-session').onclick = (e) => { e.preventDefault(); if (peutSession) lancerExercices(construireFile(12)); else carteSession.scrollIntoView({ behavior: 'smooth' }); };
       document.getElementById('m-cartes').onclick = (e) => { e.preventDefault(); menuCartes(); };
-      document.getElementById('s-courte').onclick = () => lancerExercices(construireFile(10));
-      document.getElementById('s-longue').onclick = () => lancerExercices(construireFile(18));
     }
 
     /* ============ Générateurs d'exercices ============ */
@@ -103,15 +116,16 @@
       return { type: 'saisie', consigne: 'Écrivez ce mot en arabe : « ' + mot.fr + ' » (' + mot.tr + ')', reponse: mot.ar, cles: [mot.cle] };
     }
     function exosRediges() {
-      // Exercices rédigés (grammaire incluse) des leçons déjà étudiées.
-      const acquises = Stockage.etat.leconsTerminees || [];
-      const max = Math.max(Stockage.etat.leconCourante || 1, acquises.length ? Math.max(...acquises) : 1);
+      // Uniquement les exercices des leçons RÉELLEMENT terminées (>= 80 %).
+      // On n'inclut ni la leçon en cours ni les suivantes : ainsi la révision
+      // ne propose jamais une notion ou un mot que l'on n'a pas encore vu.
+      const acquises = (Stockage.etat.leconsTerminees || []).slice().sort((a, b) => a - b);
       const out = [];
-      for (let id = 1; id <= max; id++) {
+      acquises.forEach((id) => {
         const l = Lecons[id];
-        if (!l || !l.exercices) continue;
-        l.exercices.forEach((e) => { if (e.type !== 'oral') out.push(e); });
-      }
+        if (!l || !l.exercices) return;
+        l.exercices.forEach((e) => { if (e.type !== 'oral' && e.type !== 'lecture') out.push(e); });
+      });
       return out;
     }
     function construireFile(n) {
@@ -267,12 +281,13 @@
       if (dus.length) html += `<h3>${dus.length} élément${dus.length > 1 ? 's' : ''} à revoir aujourd'hui</h3>
         <p class="muet petit">La répétition espacée les a ramenés au bon moment.</p>
         <button class="btn" id="btn-dus">Commencer ma révision du jour</button>`;
-      else html += `<h3>Vous êtes à jour</h3><p class="muet petit">Aucune carte n'est due aujourd'hui. Vous pouvez réviser librement.</p>`;
-      html += `<div style="margin-top:1rem"><button class="btn ${dus.length ? 'btn-secondaire' : ''}" id="btn-tous">Réviser librement (${tousCartes.length})</button></div>`;
+      else if (tousCartes.length) html += `<h3>Vous êtes à jour</h3><p class="muet petit">Aucune carte n'est due aujourd'hui. Vous pouvez réviser librement.</p>`;
+      else html += `<h3>Aucune carte pour l'instant</h3><p class="muet petit">Les cartes naissent des mots rencontrés dans les leçons. Terminez une leçon pour commencer à en collectionner.</p>`;
+      if (tousCartes.length) html += `<div style="margin-top:1rem"><button class="btn ${dus.length ? 'btn-secondaire' : ''}" id="btn-tous">Réviser librement (${tousCartes.length})</button></div>`;
       m.innerHTML = html; zone.innerHTML = ''; zone.appendChild(m);
       document.getElementById('retour-menu').onclick = menu;
       if (dus.length) document.getElementById('btn-dus').onclick = () => { zone.innerHTML = ''; cartes(dus); };
-      document.getElementById('btn-tous').onclick = () => { zone.innerHTML = ''; cartes(melange(tousCartes).slice(0, 20)); };
+      if (tousCartes.length) document.getElementById('btn-tous').onclick = () => { zone.innerHTML = ''; cartes(melange(tousCartes).slice(0, 20)); };
     }
 
     function cartes(items) {
