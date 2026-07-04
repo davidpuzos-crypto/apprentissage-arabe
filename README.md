@@ -99,6 +99,25 @@ madda / alif maqṣūra, le schème intensif faʿʿāl des noms divins), un
 vocabulaire concret du quotidien attesté dans le Coran, des salutations
 usuelles, et des proverbes coraniques vérifiés mot pour mot.
 
+## Une méthode qui avance doucement (leçons 1 à 12)
+
+Les douze premières leçons suivent une progression resserrée, pensée pour ne
+jamais aller trop vite :
+
+- **peu de nouveautés à la fois** : les lettres sont présentées par petites
+  familles (2 à 4), chacune suivie d'un temps d'observation ;
+- **rappel systématique** : chaque leçon s'ouvre par un exercice sur la leçon
+  précédente, pour vérifier l'acquis avant d'avancer ;
+- **exercices en escalier** : reconnaissance → discrimination (paires proches,
+  points, emphatiques) → lecture (transcription) → écriture (saisie, texte à
+  trous libre) → vocabulaire → oral ;
+- **des batteries fournies** : 9 à 14 exercices rédigés par leçon, complétés
+  par des questions générées depuis le vocabulaire — de quoi s'assurer que
+  c'est maîtrisé avant la leçon suivante, le seuil d'acquisition restant à
+  80 % de réussite ;
+- **rythme libre** : les leçons denses invitent explicitement à s'étaler sur
+  deux jours ; rien ne presse.
+
 ## Entraînement et points
 
 La page « Entraînement » génère des questions tirées de tout le vocabulaire
