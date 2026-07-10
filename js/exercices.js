@@ -1027,6 +1027,56 @@ const Exercices = (function () {
   }
 
   /* ====================================================================
+     13 bis. Écoute et sens — l'inverse de la dictée
+     { type:'ecoute', consigne, audio:'mot arabe', options:[{texte}], bonne,
+       cles?, explication? }
+     On entend l'arabe (sans le voir), on choisit le SENS français. Après la
+     réponse, le mot arabe est révélé : l'oreille précède l'œil.
+     ==================================================================== */
+  function ecoute(exo, index, conteneur, surReponse, idLecon) {
+    const carte = cadre(exo, index, conteneur);
+    const zone = el('div', 'zone-dictee');
+    const btnE = el('button', 'btn-ecoute');
+    btnE.type = 'button';
+    btnE.innerHTML = '&#9654;&nbsp;Écouter';
+    btnE.setAttribute('aria-label', 'Réécouter le mot');
+    const dire = () => Parole.prononcer(exo.audio, { rate: Parole.rateSelonLecon(idLecon || 1) });
+    btnE.addEventListener('click', (e) => { e.preventDefault(); dire(); });
+    zone.appendChild(btnE);
+    carte.appendChild(zone);
+    setTimeout(dire, 250);
+
+    const liste = el('div', 'options-qcm');
+    let repondu = false;
+    exo.options.forEach((opt, i) => {
+      const b = el('button', 'option');
+      b.type = 'button';
+      b.appendChild(document.createTextNode(typeof opt === 'string' ? opt : (opt.texte || '')));
+      b.addEventListener('click', () => {
+        if (repondu) return;
+        repondu = true;
+        const reussi = i === exo.bonne;
+        Array.from(liste.children).forEach((c) => c.classList.add('fige'));
+        b.classList.add(reussi ? 'juste' : 'faux');
+        b.classList.add(reussi ? 'anim-pop' : 'anim-secousse');
+        if (!reussi) liste.children[exo.bonne].classList.add('juste');
+        // Révèle le mot arabe entendu : l'oreille d'abord, l'œil ensuite.
+        const corr = el('div', 'a-memoriser');
+        corr.style.marginTop = '0.8rem';
+        corr.innerHTML = '<div class="ar">' + exo.audio + '</div>';
+        carte.insertBefore(corr, retour);
+        montrerRetour(retour, reussi,
+          'Bien entendu : le sens est le bon.',
+          'Réécoutez le mot en regardant sa graphie, maintenant révélée.');
+        surReponse(reussi, exo.cles);
+      });
+      liste.appendChild(b);
+    });
+    carte.appendChild(liste);
+    const retour = ajouterRetour(carte);
+  }
+
+  /* ====================================================================
      14. Lecture d'un passage (jalon de fin de cycle)
      { type:'lecture', consigne, titre?, reference?,
        segments:[{ ar, tr?, fr? }], cles? }
@@ -1092,7 +1142,7 @@ const Exercices = (function () {
   }
 
   /* ---- Aiguillage ---- */
-  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, trou_libre, texteLibre, contexte, dialogue, dictee, lecture };
+  const types = { qcm, appariement, glisser, trous, saisie, oral, racine, decomposition, phonetique, trou_libre, texteLibre, contexte, dialogue, dictee, ecoute, lecture };
 
   function rendre(exo, index, conteneur, surReponse, idLecon) {
     const fn = types[exo.type];
