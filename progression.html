@@ -73,12 +73,13 @@
       return svg;
     }
 
-    const titresCycles = ['Écriture', 'Premiers mots', 'Verbe et annexion', 'Grammaire', 'Lectures'];
+    const titresCycles = ['Les lettres', 'Lire à voix haute', 'La phrase', 'Le verbe', 'Lecture autonome'];
+    const plagesCycles = [[1, 8], [9, 13], [14, 19], [20, 25], [26, 30]];
     const parCycle = titresCycles.map((t, c) => {
-      const debut = c * 6 + 1;
+      const [debut, fin] = plagesCycles[c];
       let n = 0;
-      for (let i = debut; i < debut + 6; i++) if (Stockage.leconTerminee(i)) n++;
-      return { label: t, valeur: n, max: 6 };
+      for (let i = debut; i <= fin; i++) if (Stockage.leconTerminee(i)) n++;
+      return { label: t, valeur: n, max: fin - debut + 1 };
     });
     document.getElementById('graphique-cycles').innerHTML = barresSVG(parCycle);
 

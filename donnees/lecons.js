@@ -11,7 +11,7 @@
        { lettres: [{ ar, nom, son }] }                  // vitrine de lettres
        { lignes:  [{ ar, tr, fr, note? }] }             // tableau arabe/translit/fr
      ],
-     grammaire: { titre, corps } | absent avant la leçon 7,
+     grammaire: { titre, corps } | présente dans la plupart des leçons,
      vocabulaire: [{ ar, tr, fr, cle }],                // cle = identifiant SRS
      exercices: [ … objets typés, voir exercices.js ],  // >= 5
      memoriser: { ar, tr, fr },
@@ -68,7 +68,7 @@ const Lecons = {
       ]},
       { texte: 'Une même lettre change légèrement de forme selon sa place dans le mot (début, milieu, fin), mais son squelette reste toujours reconnaissable. Vous l\'apprivoiserez sans effort, leçon après leçon.' },
       { texte: 'Vous remarquerez bientôt de petits signes au-dessus et au-dessous des lettres : ce sont les voyelles brèves, les ḥarakāt. L\'arabe courant les omet souvent, mais le Coran est toujours entièrement vocalisé. Ce sont elles qui donnent le son — nous les découvrirons dès les premières leçons.' },
-      { texte: 'Enfin, une curiosité à garder en tête pour plus tard. L\'arabe a un seul article défini, الـ (al-, « le / la »). Devant certaines lettres dites « lunaires », on l\'entend nettement (al-qamar, la lune) ; devant d\'autres, dites « solaires », le « l » se fond dans la lettre suivante (ash-shams, le soleil). Rien à maîtriser aujourd\'hui : vous le verrez au cycle II.' },
+      { texte: 'Enfin, une curiosité à garder en tête pour plus tard. L\'arabe a un seul article défini, الـ (al-, « le / la »). Devant certaines lettres dites « lunaires », on l\'entend nettement (al-qamar, la lune) ; devant d\'autres, dites « solaires », le « l » se fond dans la lettre suivante (ash-shams, le soleil). Rien à maîtriser aujourd\'hui : vous le verrez au cycle III.' },
     ],
     approfondissement: [
       { titre: 'Comment se déroule le parcours',
@@ -88,51 +88,42 @@ const Lecons = {
     ],
   },
 
-  /* ===================== CYCLE I — LE SYSTÈME D'ÉCRITURE ===================== */
+  /* ===================== CYCLE I — LES LETTRES, UNE À UNE ===================== */
 
   1: {
     cycle: 1,
-    titre: "Premières lettres et premier son : la fatḥa",
+    titre: "Les quatre premières lettres et le premier son : la fatḥa",
     intro: "Bienvenue. Vous tenez là le tout premier pas vers la lecture du Coran dans sa langue.\n" +
       "L'arabe s'écrit et se lit de droite à gauche. Une lettre, seule, est une consonne muette : c'est un petit signe, une voyelle, qui lui donne son souffle et son son.\n" +
-      "Aujourd'hui, sept lettres et une première voyelle, la fatḥa, le son « a ». Dès cette leçon, vous lirez de vrais sons : بَ se lit « ba ». Écoutez, répétez, observez les points.",
+      "Aujourd'hui, quatre lettres seulement — pas une de plus — et une première voyelle, la fatḥa, le son « a ». Dès cette leçon, vous lirez de vrais sons : بَ se lit « ba ». Écoutez, répétez, observez les points.",
     decouverte: [
-      { texte: "Voici les sept premières lettres. Cliquez sur chacune pour l'entendre. Pour l'instant, retenez surtout leur forme et leur son de consonne." },
+      { texte: "Voici vos quatre premières lettres : un trait droit, puis trois sœurs de même forme. Cliquez sur chacune pour l'entendre. Pour l'instant, retenez leur silhouette et leur son." },
       { lettres: [
         { ar: 'ا', nom: 'alif', son: 'support, souvent un â long' },
         { ar: 'ب', nom: 'bāʾ', son: 'b' },
         { ar: 'ت', nom: 'tāʾ', son: 't' },
         { ar: 'ث', nom: 'thāʾ', son: 'th anglais (think)' },
       ]},
-      { texte: 'Prenez un instant : fermez les yeux et redites les quatre noms. Puis passez à la seconde famille, trois lettres au même squelette arrondi.' },
-      { lettres: [
-        { ar: 'ج', nom: 'jīm', son: 'dj' },
-        { ar: 'ح', nom: 'ḥāʾ', son: 'h très expiré' },
-        { ar: 'خ', nom: 'khāʾ', son: 'kh (jota espagnole)' },
-      ]},
+      { texte: "Attention aux points, c'est le cœur de la lecture arabe : ب porte un point dessous, ت deux points dessus, ث trois points dessus. Même squelette, trois lettres différentes. Fermez les yeux, redites les quatre noms." },
       { texte: "Une consonne seule ne se prononce pas vraiment. Posez sur elle la fatḥa, un petit trait au-dessus, et elle prend le son « a ». Lisez cette première ligne à voix haute :" },
       { lignes: [
         { ar: 'بَ', tr: 'ba', fr: 'le b animé par la fatḥa' },
         { ar: 'تَ', tr: 'ta', fr: 'le t animé par la fatḥa' },
         { ar: 'ثَ', tr: 'tha', fr: 'le th animé par la fatḥa' },
-        { ar: 'جَ', tr: 'ja', fr: 'le j (dj)' },
-        { ar: 'حَ', tr: 'ḥa', fr: 'le ḥ de gorge' },
-        { ar: 'خَ', tr: 'kha', fr: 'le kh raclé' },
       ]},
-      { texte: "Quand un alif ا suit une lettre portant la fatḥa, le « a » s'allonge en « â » : بَا se lit « bā », تَا se lit « tā ». Allongez bien la voix." },
+      { texte: "Quand un alif ا suit une lettre portant la fatḥa, le « a » s'allonge en « â » : بَا se lit « bā », تَا se lit « tā ». Allongez bien la voix, environ deux fois plus longtemps." },
       { lignes: [
         { ar: 'بَا', tr: 'bā', fr: 'bââ (a allongé)' },
         { ar: 'تَا', tr: 'tā', fr: 'tââ' },
-        { ar: 'حَا', tr: 'ḥā', fr: 'ḥââ' },
+        { ar: 'ثَا', tr: 'thā', fr: 'thââ' },
       ]},
-      { texte: "Attention aux points, c'est le cœur de la lecture arabe : ب porte un point dessous, ت deux points dessus, ث trois points dessus. Même squelette, trois lettres différentes." },
-      { texte: "De même, ح et خ ont la même forme : seul le point au-dessus du خ les sépare. Le ح est un souffle de gorge, le خ un raclement plus rugueux." },
+      { texte: "C'est tout pour aujourd'hui — et c'est déjà beaucoup : vous savez lire six syllabes arabes. Relisez-les à voix haute, de droite à gauche, jusqu'à ce qu'elles coulent sans effort." },
     ],
     approfondissement: [
       { titre: "La voyelle, souffle qui anime la lettre",
         corps: "Une consonne sans voyelle est comme un corps sans souffle : présente, mais muette. La voyelle, la ḥaraka, vient l'animer, la mettre en mouvement. Le mot ḥaraka signifie d'ailleurs « mouvement ».\n" +
           "C'est pourquoi nous apprenons, dès la première leçon, à poser un son sur chaque lettre : lire l'arabe, ce n'est pas reconnaître des dessins, c'est faire respirer des consonnes.\n" +
-          "Ne vous pressez pas. Mieux vaut trois lettres parfaitement sues que sept survolées. La suite repose entièrement sur ce socle." },
+          "Ne vous pressez pas. Mieux vaut quatre lettres parfaitement sues que dix survolées. La suite repose entièrement sur ce socle." },
       { titre: "Le secret de l'alif et du point",
         corps: "Dans la tradition des lettres, l'alif ا occupe une place à part : droit, unique, sans courbe, il est souvent vu comme la trace de l'Unicité.\n" +
           "Le point, la nuqṭa, est plus subtil. Un seul point déplacé change la lettre, et donc le sens : voilà pourquoi la lecture demande une attention du regard autant que de l'oreille.\n" +
@@ -140,106 +131,183 @@ const Lecons = {
     ],
     exercices: [
       { type: 'qcm', consigne: 'Commençons simplement : laquelle est l\'alif, le trait vertical ?',
-        options: [{ ar: 'ا' }, { ar: 'ب' }, { ar: 'ح' }], bonne: 0,
+        options: [{ ar: 'ا' }, { ar: 'ب' }, { ar: 'ث' }], bonne: 0,
         explication: 'L\'alif ا est la première lettre : un simple trait droit.' },
       { type: 'qcm', consigne: 'Laquelle est le bāʾ, la lettre du son « b » ?',
         options: [{ ar: 'ب' }, { ar: 'ت' }, { ar: 'ث' }], bonne: 0,
         explication: 'Le ب porte un point DESSOUS. Même coupe que ت et ث : seuls les points changent.' },
       { type: 'qcm', consigne: 'Quelle lettre produit le son « th » anglais, comme dans think ?',
-        options: [{ ar: 'ت' }, { ar: 'ث' }, { ar: 'ج' }], bonne: 1,
+        options: [{ ar: 'ت' }, { ar: 'ث' }, { ar: 'ب' }], bonne: 1,
         explication: 'Le ث (thāʾ) porte trois points et se prononce comme le th de think.' },
-      { type: 'qcm', consigne: 'Laquelle de ces lettres est le khāʾ, ce son rugueux de gorge ?',
-        options: [{ ar: 'ح' }, { ar: 'خ' }, { ar: 'ب' }], bonne: 1,
-        explication: 'Le خ porte un point au-dessus ; le ح, sans point, est un simple souffle.' },
       { type: 'qcm', consigne: 'Combien de points porte la lettre ت, et où ?',
         options: [{ texte: 'Un point dessous' }, { texte: 'Deux points dessus' }, { texte: 'Trois points dessus' }], bonne: 1,
         explication: 'ت porte deux points au-dessus. Un point dessous donnerait ب, trois points dessus ث.' },
-      { type: 'qcm', consigne: 'Parmi ces trois lettres de même forme, laquelle est le bāʾ (un point dessous) ?',
-        options: [{ ar: 'ت' }, { ar: 'ب' }, { ar: 'ث' }], bonne: 1,
-        explication: 'Le ب porte un seul point, en dessous de la ligne.' },
-      { type: 'qcm', consigne: 'À quoi sert la fatḥa, ce petit trait au-dessus d’une lettre ?',
+      { type: 'qcm', consigne: 'À quoi sert la fatḥa, ce petit trait au-dessus d\'une lettre ?',
         options: [{ texte: 'Elle donne le son « a »' }, { texte: 'Elle double la lettre' }, { texte: 'Elle supprime le son' }], bonne: 0,
         explication: 'La fatḥa anime la consonne du son « a » : بَ = « ba ».' },
       { type: 'appariement', consigne: 'Reliez chaque lettre à son nom.',
-        paires: [ { ar: 'ا', fr: 'alif' }, { ar: 'ب', fr: 'bāʾ' }, { ar: 'ت', fr: 'tāʾ' }, { ar: 'ج', fr: 'jīm' } ] },
-      { type: 'appariement', consigne: 'Reliez chaque lettre à son nom.',
-        paires: [ { ar: 'ث', fr: 'thāʾ' }, { ar: 'ح', fr: 'ḥāʾ' }, { ar: 'خ', fr: 'khāʾ' } ] },
+        paires: [ { ar: 'ا', fr: 'alif' }, { ar: 'ب', fr: 'bāʾ' }, { ar: 'ت', fr: 'tāʾ' }, { ar: 'ث', fr: 'thāʾ' } ] },
       { type: 'phonetique', consigne: 'Lisez cette syllabe et choisissez sa transcription.',
         motAr: 'بَ', options: ['ba', 'ta', 'tha'], bonne: 0 },
       { type: 'phonetique', consigne: 'Lisez cette syllabe et choisissez sa transcription.',
-        motAr: 'حَ', options: ['ḥa', 'kha', 'ja'], bonne: 0 },
-      { type: 'phonetique', consigne: 'Lisez cette syllabe et choisissez sa transcription.',
-        motAr: 'خَ', options: ['kha', 'ḥa', 'ja'], bonne: 0 },
-      { type: 'phonetique', consigne: 'L’alif allonge le son. Quelle est la transcription ?',
-        motAr: 'تَا', options: ['tā', 'ta', 'ti'], bonne: 0 },
+        motAr: 'ثَ', options: ['tha', 'ta', 'ba'], bonne: 0 },
+      { type: 'phonetique', consigne: 'L\'alif allonge le son. Quelle est la transcription ?',
+        motAr: 'تَا', options: ['tā', 'ta', 'thā'], bonne: 0 },
       { type: 'dictee', consigne: 'Écoutez, puis choisissez le signe que vous entendez.',
         audio: 'تَا', options: [{ ar: 'تَا' }, { ar: 'بَا' }, { ar: 'ثَا' }], bonne: 0 },
-      { type: 'dictee', consigne: 'Écoutez, puis choisissez le signe que vous entendez.',
-        audio: 'جَا', options: [{ ar: 'جَا' }, { ar: 'حَا' }, { ar: 'خَا' }], bonne: 0 },
-      { type: 'dictee', consigne: 'Écoutez bien le souffle de gorge, puis choisissez.',
-        audio: 'حَا', options: [{ ar: 'حَا' }, { ar: 'خَا' }, { ar: 'جَا' }], bonne: 0 },
-      { type: 'contexte', consigne: 'Pour lire le son « ja », quelle lettre faut-il, avec une fatḥa ?',
-        avant: '', apres: '', options: [{ ar: 'جَ' }, { ar: 'حَ' }, { ar: 'خَ' }], bonne: 0,
-        traduction: 'On cherche le son « ja ».' },
-      { type: 'saisie', consigne: 'À l’aide du clavier, écrivez la lettre bāʾ (le son « b »).',
-        indice: 'C’est la lettre au point unique, en dessous.', reponse: 'ب' },
-      { type: 'saisie', consigne: 'Écrivez la lettre ḥāʾ (le souffle de gorge, sans point).',
-        indice: 'Même forme que le khāʾ, mais sans point.', reponse: 'ح' },
+      { type: 'dictee', consigne: 'Un son bref ou un son long ? Écoutez bien la durée.',
+        audio: 'بَا', options: [{ ar: 'بَا' }, { ar: 'بَ' }], bonne: 0,
+        explication: 'Le son dure : c\'est bā, avec l\'alif d\'allongement.' },
+      { type: 'saisie', consigne: 'À l\'aide du clavier, écrivez la lettre bāʾ (le son « b »).',
+        indice: 'C\'est la lettre au point unique, en dessous.', reponse: 'ب' },
+      { type: 'saisie', consigne: 'Écrivez la lettre thāʾ (le « th » de think).',
+        indice: 'Trois points au-dessus.', reponse: 'ث' },
       { type: 'dictee', consigne: 'Écoutez, puis écrivez au clavier le signe entendu.',
         mode: 'saisie', audio: 'بَا', reponse: 'با' },
       { type: 'oral', consigne: 'Lisez à voix haute ces trois syllabes allongées.',
         phraseAr: 'بَا تَا ثَا', translit: 'bā, tā, thā' },
     ],
-    memoriser: { ar: 'بَ تَ ثَ جَ حَ خَ', tr: 'ba ta tha ja ḥa kha', fr: 'Les premières lettres, animées par la fatḥa : le son « a ».' },
+    memoriser: { ar: 'بَ تَ ثَ', tr: 'ba ta tha', fr: 'Vos premières lettres, animées par la fatḥa : le son « a ».' },
     recap: [
-      'L’arabe se lit de droite à gauche.',
+      'L\'arabe se lit de droite à gauche.',
       'Une consonne seule est muette ; la fatḥa lui donne le son « a » : بَ = « ba ».',
       'Un alif après une fatḥa allonge le son : بَا = « bā ».',
       'ب ت ث partagent la même forme et ne diffèrent que par les points.',
-      'ح est un souffle de gorge, خ un raclement marqué d’un point.',
-      'Pas encore de mots : on apprend d’abord à faire des sons. Les mots viendront dès qu’ils seront lisibles.',
+      'Quatre lettres bien sues valent mieux que dix survolées : la suite s\'appuie dessus.',
     ],
   },
 
   2: {
     cycle: 1,
-    titre: "Les trois voyelles brèves, le sukūn et les premiers mots",
-    intro: "Vous savez faire le son « a ». Voici les deux autres voyelles brèves, et un signe qui marque l'absence de voyelle, le sukūn.\n" +
-      "Avec elles et six nouvelles lettres, vous lirez aujourd'hui vos tout premiers vrais mots, entièrement décodables.\n" +
-      "C'est par la répétition de ces sons que la lecture devient fluide. Prenez votre temps, lisez à voix haute.",
+    titre: "Les lettres se donnent la main — et votre premier mot",
+    intro: "Trois lettres nouvelles aujourd'hui, une deuxième voyelle, et une découverte : l'écriture arabe est attachée, comme notre écriture cursive.\n" +
+      "Les lettres d'un mot se tiennent par la main et changent un peu de forme selon leur place — début, milieu, fin. Le squelette, lui, reste toujours reconnaissable.\n" +
+      "Et à la fin de cette leçon, vous lirez votre tout premier mot arabe : بَاب, la porte.",
     decouverte: [
-      { texte: "Six nouvelles lettres, aux sons familiers pour une oreille française." },
+      { texte: "Voici la deuxième famille : trois lettres au même squelette arrondi, comme une coupe. Cliquez pour les entendre." },
+      { lettres: [
+        { ar: 'ج', nom: 'jīm', son: 'dj' },
+        { ar: 'ح', nom: 'ḥāʾ', son: 'h très expiré' },
+        { ar: 'خ', nom: 'khāʾ', son: 'kh (jota espagnole)' },
+      ]},
+      { texte: "ح et خ ont la même forme : seul le point au-dessus du خ les sépare. Le ح est un souffle de gorge, le خ un raclement plus rugueux. Le ج, lui, porte son point à l'intérieur." },
+      { texte: "Deuxième voyelle : la kasra, un petit trait SOUS la lettre. Elle donne le son « i » : بِ se lit « bi ». Comparez les deux voyelles :" },
+      { lignes: [
+        { ar: 'بَ ← بِ', tr: 'ba → bi', fr: 'fatḥa dessus : « a » ; kasra dessous : « i »' },
+        { ar: 'جَ ← جِ', tr: 'ja → ji', fr: 'le jīm sous ses deux voyelles' },
+        { ar: 'حَ ← حِ', tr: 'ḥa → ḥi', fr: 'le souffle de gorge, en « a » puis en « i »' },
+      ]},
+      { texte: "Maintenant, la grande découverte du jour. Dans un mot, les lettres se lient entre elles et prennent une forme de début, de milieu ou de fin. Regardez le bāʾ sous ses quatre visages :" },
+      { lignes: [
+        { ar: 'ب', tr: 'bāʾ isolée', fr: 'seule, comme dans l\'alphabet' },
+        { ar: 'بـ', tr: 'bāʾ au début', fr: 'elle tend la main vers la gauche' },
+        { ar: 'ـبـ', tr: 'bāʾ au milieu', fr: 'tenue des deux côtés' },
+        { ar: 'ـب', tr: 'bāʾ à la fin', fr: 'elle reçoit la main et se repose' },
+      ]},
+      { texte: "Le point ne bouge jamais : c'est lui qui vous dit « c'est un bāʾ ». Inutile de mémoriser des tableaux — reconnaissez le squelette et le point, la familiarité fera le reste." },
+      { texte: "Vous en savez assez pour lire un vrai mot. Assemblez بَ + ا + ب : le premier bāʾ ouvre le mot, l'alif allonge, le second bāʾ le ferme. Lisez, de droite à gauche :" },
+      { lignes: [
+        { ar: 'بَاب', tr: 'bāb', fr: 'une porte', ill: '🚪', note: 'le même ب ouvre et ferme le mot, sous deux formes' },
+      ]},
+      { texte: "Votre premier mot arabe. Une porte — il fallait bien commencer par là pour entrer." },
+    ],
+    grammaire: {
+      titre: "Une lettre, quatre visages",
+      corps: "À l'intérieur d'un mot, chaque lettre peut prendre quatre formes : isolée, initiale, médiane, finale. Le squelette et les points restent constants : بـ ـبـ ـب sont un seul et même bāʾ.\n" +
+        "C'est une écriture attachée, comme la nôtre : personne n'apprend « quatre alphabets », on apprend à reconnaître chaque lettre dans le mouvement du mot.\n" +
+        "À chaque leçon, vous verrez les nouvelles lettres se lier. Lisez beaucoup : l'œil s'habitue plus vite qu'on ne le croit.",
+    },
+    approfondissement: [
+      { titre: "Pourquoi commencer si doucement",
+        corps: "Quatre lettres hier, trois aujourd'hui : ce rythme est voulu. Les études sur l'apprentissage de la lecture convergent : mieux vaut peu d'éléments, profondément ancrés et sans cesse réactivés, qu'un alphabet avalé d'un bloc et confondu ensuite.\n" +
+          "Chaque leçon reprendra les lettres des précédentes dans ses mots et ses exercices : rien de ce que vous apprenez ne sera laissé en jachère.\n" +
+          "Si une leçon vous semble facile, tant mieux : c'est le signe que le socle prend. La difficulté viendra à son heure, portée par des fondations solides." },
+    ],
+    vocabulaire: [
+      { ar: 'بَاب', tr: 'bāb', fr: 'porte', cle: 'bab', ill: '🚪' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Rappel de la leçon 1 : quelle lettre porte trois points ?',
+        options: [{ ar: 'ث' }, { ar: 'ت' }, { ar: 'ب' }], bonne: 0,
+        explication: 'ث (thāʾ) porte trois points ; ت en porte deux, ب un seul dessous. On garde l\'acquis avant d\'avancer.' },
+      { type: 'appariement', consigne: 'Les nouvelles lettres : reliez chacune à son nom.',
+        paires: [ { ar: 'ج', fr: 'jīm' }, { ar: 'ح', fr: 'ḥāʾ' }, { ar: 'خ', fr: 'khāʾ' } ] },
+      { type: 'qcm', consigne: 'Laquelle de ces lettres est le khāʾ, ce son rugueux de gorge ?',
+        options: [{ ar: 'ح' }, { ar: 'خ' }, { ar: 'ج' }], bonne: 1,
+        explication: 'Le خ porte un point au-dessus ; le ح, sans point, est un simple souffle.' },
+      { type: 'qcm', consigne: 'Quel signe donne le son « i » ?',
+        options: [{ texte: 'la fatḥa (trait au-dessus)' }, { texte: 'la kasra (trait au-dessous)' }], bonne: 1,
+        explication: 'La kasra se place sous la lettre et donne le son « i » : بِ = « bi ».' },
+      { type: 'phonetique', consigne: 'Lisez cette syllabe et choisissez sa transcription.',
+        motAr: 'جِ', options: ['ji', 'ja', 'kha'], bonne: 0 },
+      { type: 'phonetique', consigne: 'Lisez cette syllabe et choisissez sa transcription.',
+        motAr: 'حَ', options: ['ḥa', 'kha', 'ja'], bonne: 0 },
+      { type: 'dictee', consigne: 'Écoutez bien le souffle de gorge, puis choisissez.',
+        audio: 'حَا', options: [{ ar: 'حَا' }, { ar: 'خَا' }, { ar: 'جَا' }], bonne: 0 },
+      { type: 'dictee', consigne: '« a » ou « i » ? Écoutez la voyelle posée sur le jīm.',
+        audio: 'جِ', options: [{ ar: 'جِ' }, { ar: 'جَ' }], bonne: 0,
+        explication: 'Le son « i » vient de la kasra, le petit trait sous la lettre.' },
+      { type: 'qcm', consigne: 'La forme ـبـ (tenue des deux côtés) est celle de quelle lettre ?',
+        options: [{ ar: 'ب (bāʾ)' }, { ar: 'ت (tāʾ)' }, { ar: 'ث (thāʾ)' }], bonne: 0,
+        explication: 'Un point DESSOUS : c\'est le bāʾ, en position médiane. Le point ne ment jamais.' },
+      { type: 'qcm', consigne: 'Quelle forme prend le bāʾ au DÉBUT d\'un mot ?',
+        options: [{ ar: 'بـ' }, { ar: 'ـب' }, { ar: 'ب' }], bonne: 0,
+        explication: 'Au début, la lettre tend la main vers la gauche : بـ, comme dans بَاب.' },
+      { type: 'phonetique', consigne: 'Votre premier mot : lisez-le et choisissez sa transcription.',
+        motAr: 'بَاب', options: ['bāb', 'bab', 'thāb'], bonne: 0, cles: ['bab'] },
+      { type: 'glisser', consigne: 'Assemblez votre premier mot : « bāb » (la porte), de droite à gauche.',
+        ordre: ['بَ', 'ا', 'ب'], traduction: 'bāb — une porte', cles: ['bab'],
+        explication: 'Le premier ب s\'attache à l\'alif ; l\'alif, lui, ne s\'attache jamais à gauche, et le dernier ب reste entier.' },
+      { type: 'dictee', consigne: 'Écoutez ce mot entier — les points font la différence.',
+        audio: 'بَاب', options: [{ ar: 'بَاب' }, { ar: 'بَات' }, { ar: 'بَاث' }], bonne: 0, cles: ['bab'],
+        explication: 'bāb, la porte : un b à chaque bout. Les options ne diffèrent que par les points de la dernière lettre.' },
+      { type: 'texteLibre', consigne: 'Écrivez votre premier mot : « porte ».',
+        reponse: 'باب', indice: 'bāb : ب + ا + ب', traduction: 'une porte', cles: ['bab'] },
+      { type: 'oral', consigne: 'Lisez à voix haute : deux syllabes, puis votre premier mot.',
+        phraseAr: 'حَا خَا بَاب', translit: 'ḥā, khā, bāb', cles: ['bab'] },
+    ],
+    memoriser: { ar: 'بَاب', tr: 'bāb', fr: 'Une porte. Votre tout premier mot arabe — l\'entrée du chemin.' },
+    recap: [
+      'Trois lettres nouvelles : ج (dj), ح (souffle de gorge), خ (raclement) — sept lettres en tout.',
+      'La kasra, sous la lettre, donne le son « i » : بِ = « bi ».',
+      'Les lettres s\'attachent et changent de forme : بـ ـبـ ـب restent un seul bāʾ.',
+      'Vous lisez votre premier mot : بَاب, la porte.',
+    ],
+  },
+
+  3: {
+    cycle: 1,
+    titre: "La ḍamma, le sukūn et les premiers mots à syllabes",
+    intro: "Quatre lettres faciles aujourd'hui — elles ressemblent à des lettres que vous connaissez et vont par paires.\n" +
+      "Avec elles, la troisième et dernière voyelle brève, la ḍamma (« ou »), et un signe qui marque l'absence de voyelle : le sukūn.\n" +
+      "À la fin de la leçon, vous lirez دَار (une demeure) et بَحْر (une mer) : de vrais mots du Coran, entièrement décodés par vous.",
+    decouverte: [
+      { texte: "Première paire : le dāl et le dhāl, même profil penché." },
       { lettres: [
         { ar: 'د', nom: 'dāl', son: 'd' },
         { ar: 'ذ', nom: 'dhāl', son: 'th anglais (this)' },
       ]},
-      { texte: 'د et ذ ont la même forme : le point au-dessus du ذ le transforme en « th » sonore, comme dans l\'anglais this. Dites plusieurs fois : da… dha… en sentant la langue toucher les dents pour le second.' },
-      { texte: 'Deuxième paire : le rāʾ roulé et le zāy.' },
+      { texte: "د et ذ ont la même forme : le point au-dessus du ذ le transforme en « th » sonore, comme dans l'anglais this. Dites plusieurs fois : da… dha… en sentant la langue toucher les dents pour le second." },
+      { texte: "Deuxième paire : le rāʾ roulé et le zāy." },
       { lettres: [
         { ar: 'ر', nom: 'rāʾ', son: 'r roulé' },
         { ar: 'ز', nom: 'zāy', son: 'z' },
       ]},
-      { texte: 'ر et ز se ressemblent aussi : le ز porte un point. Le ر est un r roulé, proche du r espagnol ou italien.' },
-      { texte: 'Troisième paire : les trois dents du sīn, avec ou sans points.' },
-      { lettres: [
-        { ar: 'س', nom: 'sīn', son: 's' },
-        { ar: 'ش', nom: 'shīn', son: 'ch' },
-      ]},
-      { texte: "La kasra est un petit trait sous la lettre : elle donne le son « i ». La ḍamma est une petite boucle au-dessus : elle donne le son « ou ». Avec la fatḥa, voici les trois voyelles brèves :" },
+      { texte: "ر et ز se ressemblent aussi : le ز porte un point. Le ر est un r roulé, proche du r espagnol ou italien." },
+      { texte: "La ḍamma est une petite boucle au-dessus de la lettre : elle donne le son « ou ». Vous avez désormais les trois voyelles brèves au complet :" },
       { lignes: [
-        { ar: 'بَ', tr: 'ba', fr: 'fatḥa : son « a »' },
-        { ar: 'بِ', tr: 'bi', fr: 'kasra : son « i »' },
-        { ar: 'بُ', tr: 'bu', fr: 'ḍamma : son « ou »' },
+        { ar: 'دَ', tr: 'da', fr: 'fatḥa : son « a »' },
+        { ar: 'دِ', tr: 'di', fr: 'kasra : son « i »' },
+        { ar: 'دُ', tr: 'du', fr: 'ḍamma : son « ou »' },
       ]},
-      { texte: "Le sukūn est un petit rond au-dessus de la lettre : il indique qu'aucune voyelle ne suit. La consonne ferme alors la syllabe : دَرْ se lit « dar »." },
+      { texte: "Le sukūn est un petit rond au-dessus de la lettre : il indique qu'aucune voyelle ne suit. La consonne ferme alors la syllabe : بَحْ se lit « baḥ », d'un seul souffle." },
       { texte: "Vous avez maintenant tout pour lire de vrais mots. Lisez-les lentement, de droite à gauche :" },
       { lignes: [
         { ar: 'دَار', tr: 'dār', fr: 'une demeure, une maison', ill: '🏠' },
-        { ar: 'بَاب', tr: 'bāb', fr: 'une porte', ill: '🚪' },
         { ar: 'بَحْر', tr: 'baḥr', fr: 'une mer', ill: '🌊', note: 'le sukūn ferme la première syllabe : baḥ-r' },
-        { ar: 'دَرَسَ', tr: 'darasa', fr: 'il a étudié', note: 'trois fatḥa : da-ra-sa' },
+        { ar: 'بَاب', tr: 'bāb', fr: 'une porte (leçon 2 — toujours là)', ill: '🚪' },
       ]},
-      { texte: "Surveillez les points qui distinguent les nouvelles lettres : د/ذ (un point au-dessus pour ذ), ر/ز (un point pour ز), س/ش (trois points pour ش)." },
+      { texte: "Un détail d'écriture à remarquer : les quatre lettres du jour (د ذ ر ز), comme l'alif, ne s'attachent jamais à la lettre qui les SUIT. Après elles, le mot semble se rouvrir : regardez دَار, l'alif et le rāʾ restent détachés." },
     ],
     grammaire: {
       titre: "Lire, c'est assembler une consonne et une voyelle",
@@ -255,52 +323,38 @@ const Lecons = {
     }],
     vocabulaire: [
       { ar: 'دَار', tr: 'dār', fr: 'demeure, maison', cle: 'dar', ill: '🏠' },
-      { ar: 'بَاب', tr: 'bāb', fr: 'porte', cle: 'bab', ill: '🚪' },
       { ar: 'بَحْر', tr: 'baḥr', fr: 'mer', cle: 'bahr', ill: '🌊' },
-      { ar: 'جَسَد', tr: 'jasad', fr: 'corps', cle: 'jasad', ill: '🧍' },
     ],
     exercices: [
-      { type: 'qcm', consigne: 'Rappel de la leçon précédente : quelle lettre porte trois points ?',
-        options: [{ ar: 'ث' }, { ar: 'ت' }, { ar: 'ب' }], bonne: 0,
-        explication: 'ث (thāʾ) porte trois points ; ت en porte deux, ب un seul dessous. On garde l\'acquis avant d\'avancer.' },
+      { type: 'qcm', consigne: 'Rappel de la leçon 2 : quel signe donne le son « i » ?',
+        options: [{ texte: 'la kasra, sous la lettre' }, { texte: 'la fatḥa, sur la lettre' }], bonne: 0,
+        explication: 'La kasra, petit trait sous la lettre : بِ = « bi ». La fatḥa au-dessus donne « a ».' },
       { type: 'appariement', consigne: 'Les nouvelles lettres : reliez chacune à son nom.',
         paires: [ { ar: 'د', fr: 'dāl' }, { ar: 'ذ', fr: 'dhāl' }, { ar: 'ر', fr: 'rāʾ' }, { ar: 'ز', fr: 'zāy' } ] },
-      { type: 'qcm', consigne: 'Quelle lettre se prononce « ch », comme dans chat ?',
-        options: [{ ar: 'س' }, { ar: 'ش' }, { ar: 'ز' }], bonne: 1,
-        explication: 'ش (shīn) porte trois points et donne le son « ch ».' },
-      { type: 'qcm', consigne: 'Quel signe donne le son « i » ?',
-        options: [{ texte: 'la fatḥa (trait au-dessus)' }, { texte: 'la kasra (trait au-dessous)' }, { texte: 'la ḍamma (boucle au-dessus)' }], bonne: 1,
-        explication: 'La kasra se place sous la lettre et donne le son « i ».' },
-      { type: 'qcm', consigne: 'Que marque le sukūn (petit rond) sur une lettre ?',
-        options: [{ texte: 'le son « ou »' }, { texte: 'l’absence de voyelle' }, { texte: 'un redoublement' }], bonne: 1,
-        explication: 'Le sukūn indique qu’aucune voyelle ne suit : la consonne ferme la syllabe.' },
-      { type: 'qcm', consigne: 'Qu’est-ce qui distingue ز de ر ?',
+      { type: 'qcm', consigne: 'Qu\'est-ce qui distingue ز de ر ?',
         options: [{ texte: 'Le ز a un point au-dessus' }, { texte: 'Le ز est plus grand' }, { texte: 'Rien, ce sont les mêmes' }], bonne: 0,
         explication: 'Le point au-dessus transforme le r roulé ر en z (ز).' },
+      { type: 'qcm', consigne: 'Quel signe donne le son « ou » ?',
+        options: [{ texte: 'la ḍamma (boucle au-dessus)' }, { texte: 'la kasra (trait au-dessous)' }, { texte: 'la fatḥa (trait au-dessus)' }], bonne: 0,
+        explication: 'La ḍamma, petite boucle au-dessus : دُ = « dou ».' },
+      { type: 'qcm', consigne: 'Que marque le sukūn (petit rond) sur une lettre ?',
+        options: [{ texte: 'le son « ou »' }, { texte: 'l\'absence de voyelle' }, { texte: 'un redoublement' }], bonne: 1,
+        explication: 'Le sukūn indique qu\'aucune voyelle ne suit : la consonne ferme la syllabe.' },
       { type: 'phonetique', consigne: 'Lisez cette syllabe et choisissez sa transcription.',
         motAr: 'دِ', options: ['di', 'da', 'dou'], bonne: 0 },
       { type: 'phonetique', consigne: 'Lisez cette syllabe et choisissez sa transcription.',
-        motAr: 'سُ', options: ['sou', 'si', 'sa'], bonne: 0 },
-      { type: 'phonetique', consigne: 'Lisez ce mot entier et choisissez sa transcription.',
-        motAr: 'دَار', options: ['dār', 'dīr', 'dūr'], bonne: 0, cles: ['dar'] },
+        motAr: 'ذُ', options: ['dhou', 'dou', 'zou'], bonne: 0 },
       { type: 'dictee', consigne: 'Écoutez, puis choisissez la voyelle entendue sur le « d ».',
         audio: 'دُ', options: [{ ar: 'دُ' }, { ar: 'دِ' }, { ar: 'دَ' }], bonne: 0 },
-      { type: 'dictee', consigne: 'Écoutez, puis choisissez la lettre entendue.',
-        audio: 'شَا', options: [{ ar: 'شَا' }, { ar: 'سَا' }, { ar: 'زَا' }], bonne: 0 },
-      { type: 'contexte', consigne: 'Pour lire « dou », quelle voyelle poser sur le د ?',
-        avant: '', apres: '', options: [{ ar: 'دُ' }, { ar: 'دِ' }, { ar: 'دَ' }], bonne: 0,
-        traduction: 'On cherche le son « dou ».' },
       { type: 'contexte', consigne: 'Pour fermer la syllabe « bar » (sans voyelle finale), quel signe sur le ر ?',
         avant: 'بَ', apres: '', options: [{ ar: 'رْ' }, { ar: 'رَ' }, { ar: 'رُ' }], bonne: 0,
         traduction: 'On veut lire « bar », le r ferme la syllabe.' },
-      { type: 'appariement', consigne: 'Reliez chaque syllabe à sa lecture.',
-        paires: [ { ar: 'سَ', fr: 'sa' }, { ar: 'سِ', fr: 'si' }, { ar: 'سُ', fr: 'sou' }, { ar: 'سْ', fr: 's (sans voyelle)' } ] },
-      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
-        paires: [ { ar: 'دَار', fr: 'demeure', cle: 'dar' }, { ar: 'بَاب', fr: 'porte', cle: 'bab' }, { ar: 'بَحْر', fr: 'mer', cle: 'bahr' }, { ar: 'جَسَد', fr: 'corps', cle: 'jasad' } ] },
-      { type: 'glisser', consigne: 'Remettez les morceaux dans l’ordre pour écrire « dār » (demeure), de droite à gauche.',
+      { type: 'phonetique', consigne: 'Lisez ce mot entier et choisissez sa transcription.',
+        motAr: 'دَار', options: ['dār', 'dīr', 'dūr'], bonne: 0, cles: ['dar'] },
+      { type: 'glisser', consigne: 'Remettez les morceaux dans l\'ordre pour écrire « dār » (demeure), de droite à gauche.',
         ordre: ['دَ', 'ا', 'ر'], traduction: 'dār — une demeure', cles: ['dar'] },
-      { type: 'texteLibre', consigne: 'Écrivez le mot « porte ».',
-        reponse: 'باب', indice: 'bāb', traduction: 'une porte', cles: ['bab'] },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'دَار', fr: 'demeure', cle: 'dar' }, { ar: 'بَاب', fr: 'porte', cle: 'bab' }, { ar: 'بَحْر', fr: 'mer', cle: 'bahr' } ] },
       { type: 'saisie', consigne: 'Écrivez le mot « mer ».',
         indice: 'baḥr : ب + fatḥa, ح + sukūn, ر.', reponse: 'بحر', cles: ['bahr'] },
       { type: 'dictee', consigne: 'Écoutez le mot, puis écrivez-le au clavier.',
@@ -311,275 +365,554 @@ const Lecons = {
       { type: 'ecoute', consigne: 'Sans rien lire : écoutez ce mot et choisissez son SENS.',
         audio: 'دَار', options: [{ texte: 'demeure, maison' }, { texte: 'porte' }, { texte: 'mer' }], bonne: 0, cles: ['dar'],
         explication: 'dār, la demeure — votre premier mot compris à l\'oreille seule, comme on entend le Coran avant de le lire.' },
-      { type: 'oral', consigne: 'Lisez ces deux mots à voix haute.',
-        phraseAr: 'دَار بَاب', translit: 'dār, bāb', cles: ['dar','bab'] },
+      { type: 'oral', consigne: 'Lisez ces trois mots à voix haute.',
+        phraseAr: 'دَار بَاب بَحْر', translit: 'dār, bāb, baḥr', cles: ['dar','bab','bahr'] },
     ],
-    memoriser: { ar: 'دَار', tr: 'dār', fr: 'Une demeure, une maison. Votre premier mot arabe entièrement lu.' },
+    memoriser: { ar: 'دَار', tr: 'dār', fr: 'Une demeure, une maison. Le Coran parle de la demeure dernière : الدَّار الْآخِرَة.' },
     recap: [
-      'Trois voyelles brèves : fatḥa (a), kasra (i), ḍamma (ou).',
-      'Le sukūn (petit rond) marque l’absence de voyelle.',
-      'Vous lisez vos premiers mots : دَار (demeure), بَاب (porte), بَحْر (mer).',
-      'د/ذ, ر/ز, س/ش se distinguent par un point ou trois points.',
+      'Les trois voyelles brèves sont au complet : fatḥa (a), kasra (i), ḍamma (ou).',
+      'Le sukūn (petit rond) marque l\'absence de voyelle et ferme la syllabe.',
+      'Vous lisez de vrais mots : دَار (demeure), بَحْر (mer).',
+      'د ذ ر ز et l\'alif ne s\'attachent jamais à la lettre qui les suit.',
     ],
   },
 
-  3: {
+  4: {
     cycle: 1,
-    titre: "Emphatiques, gutturales et la shadda",
-    intro: "Voici le cœur de la difficulté pour une oreille française, mais aussi la saveur de l'arabe : les emphatiques et les gutturales.\n" +
-      "Vous découvrez aussi la shadda, qui double une consonne. Avec elle, vous lirez des mots aussi importants que رَبّ (Seigneur).\n" +
-      "Écoutez beaucoup, exagérez d'abord les sons, puis revenez au naturel.",
+    titre: "Siffler et murmurer : sīn, shīn, mīm, nūn",
+    intro: "Quatre lettres aux sons parfaitement familiers aujourd'hui : s, ch, m, n. Aucun son nouveau pour votre bouche — toute l'attention ira aux formes.\n" +
+      "Avec elles, vous doublez d'un coup votre réserve de mots lisibles : le soleil, une étoile, le corps…\n" +
+      "C'est aussi la leçon de l'entraînement : beaucoup de lecture à voix haute, pour transformer le déchiffrage en réflexe.",
     decouverte: [
-      { texte: "Les quatre emphatiques : des consonnes prononcées avec le fond de la bouche, plus graves et plus pleines. Comparez chacune à sa version simple déjà connue." },
+      { texte: "Première paire : les trois dents du sīn, avec ou sans points." },
+      { lettres: [
+        { ar: 'س', nom: 'sīn', son: 's' },
+        { ar: 'ش', nom: 'shīn', son: 'ch' },
+      ]},
+      { texte: "Deuxième paire : deux sons doux que le français connaît bien." },
+      { lettres: [
+        { ar: 'م', nom: 'mīm', son: 'm' },
+        { ar: 'ن', nom: 'nūn', son: 'n' },
+      ]},
+      { texte: "Le nūn ressemble au bāʾ mais sa coupe est plus profonde et son point est AU-DESSUS. En position liée, on le reconnaît à ce point : نـ ـنـ ـن. Le mīm, lui, garde sa petite tête ronde partout : مـ ـمـ ـم." },
+      { texte: "Faites des gammes. Lisez chaque syllabe à voix haute, en variant les voyelles :" },
+      { lignes: [
+        { ar: 'سَ سِ سُ', tr: 'sa si su', fr: 'le sīn sous ses trois voyelles' },
+        { ar: 'شَ شِ شُ', tr: 'sha shi shu', fr: 'le shīn (ch)' },
+        { ar: 'مَ مِ مُ', tr: 'ma mi mu', fr: 'le mīm' },
+        { ar: 'نَ نِ نُ', tr: 'na ni nu', fr: 'le nūn' },
+      ]},
+      { texte: "Et maintenant, les mots. Chacun n'utilise que des lettres que vous connaissez — déchiffrez-les vous-même avant de lire la transcription :" },
+      { lignes: [
+        { ar: 'شَمْس', tr: 'shams', fr: 'un soleil', ill: '☀️', note: 'sukūn sur le م : sham-s' },
+        { ar: 'نَجْم', tr: 'najm', fr: 'une étoile', ill: '⭐', note: 'sukūn sur le ج : naj-m' },
+        { ar: 'جَسَد', tr: 'jasad', fr: 'un corps', ill: '🧍' },
+        { ar: 'نَاس', tr: 'nās', fr: 'des gens', ill: '👥', note: 'vous le retrouverez dans la sourate an-Nās' },
+        { ar: 'دَرَسَ', tr: 'darasa', fr: 'il a étudié', note: 'trois fatḥa : da-ra-sa — c\'est ce que vous faites !' },
+      ]},
+    ],
+    grammaire: {
+      titre: "La syllabe fermée, cœur du rythme arabe",
+      corps: "Un mot arabe se découpe en syllabes : ouvertes (consonne + voyelle : دَ، سَ) ou fermées par un sukūn (شَمْ، نَجْ).\n" +
+        "Entendre ce rythme aide énormément : شَمْس, c'est « sham » puis un « s » qui claque ; نَجْم, « naj » puis « m ».\n" +
+        "Quand un mot résiste, découpez-le en syllabes à voix haute : c'est la clé de lecture la plus sûre qui soit.",
+    },
+    approfondissement: [
+      { titre: "Le soleil et l'étoile, déjà coraniques",
+        corps: "Les mots d'aujourd'hui ne sont pas choisis au hasard : شَمْس (le soleil) et نَجْم (l'étoile) donnent chacun leur nom à une sourate du Coran — la 91e et la 53e.\n" +
+          "Le Coran jure par le soleil et son éclat, par l'étoile quand elle décline : ces mots simples portent des serments majestueux.\n" +
+          "Dès la leçon 14, vous saurez dire LE soleil (الشَّمْس) et L'étoile — et vous entendrez alors pourquoi ces deux mots-là sont célèbres chez les grammairiens.",
+    }],
+    vocabulaire: [
+      { ar: 'شَمْس', tr: 'shams', fr: 'soleil', cle: 'shams', ill: '☀️' },
+      { ar: 'نَجْم', tr: 'najm', fr: 'étoile', cle: 'najm', ill: '⭐' },
+      { ar: 'جَسَد', tr: 'jasad', fr: 'corps', cle: 'jasad', ill: '🧍' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Rappel de la leçon 3 : que fait le sukūn (petit rond) ?',
+        options: [{ texte: 'il ferme la syllabe, sans voyelle' }, { texte: 'il donne le son « ou »' }], bonne: 0,
+        explication: 'Aucune voyelle ne suit : بَحْ = « baḥ ». Le sukūn est partout dans les mots du jour.' },
+      { type: 'appariement', consigne: 'Les nouvelles lettres : reliez chacune à son nom.',
+        paires: [ { ar: 'س', fr: 'sīn' }, { ar: 'ش', fr: 'shīn' }, { ar: 'م', fr: 'mīm' }, { ar: 'ن', fr: 'nūn' } ] },
+      { type: 'qcm', consigne: 'Quelle lettre se prononce « ch », comme dans chat ?',
+        options: [{ ar: 'س' }, { ar: 'ش' }, { ar: 'ز' }], bonne: 1,
+        explication: 'ش (shīn) porte trois points et donne le son « ch ».' },
+      { type: 'qcm', consigne: 'La forme ـنـ (au milieu d\'un mot) est celle de quelle lettre ?',
+        options: [{ ar: 'ن (nūn)' }, { ar: 'ب (bāʾ)' }, { ar: 'م (mīm)' }], bonne: 0,
+        explication: 'Un point AU-DESSUS d\'une petite coupe : c\'est le nūn. Le bāʾ a son point dessous.' },
+      { type: 'phonetique', consigne: 'Lisez cette syllabe et choisissez sa transcription.',
+        motAr: 'سُ', options: ['sou', 'si', 'sa'], bonne: 0 },
+      { type: 'phonetique', consigne: 'Lisez ce mot entier — découpez-le en syllabes.',
+        motAr: 'شَمْس', options: ['shams', 'shamas', 'sams'], bonne: 0, cles: ['shams'] },
+      { type: 'dictee', consigne: 'Écoutez, puis choisissez la lettre entendue.',
+        audio: 'شَا', options: [{ ar: 'شَا' }, { ar: 'سَا' }, { ar: 'زَا' }], bonne: 0 },
+      { type: 'contexte', consigne: 'Pour lire le son « cha », quelle lettre faut-il, avec une fatḥa ?',
+        avant: '', apres: '', options: [{ ar: 'شَ' }, { ar: 'سَ' }, { ar: 'جَ' }], bonne: 0,
+        traduction: 'On cherche le son « cha ».' },
+      { type: 'glisser', consigne: 'Assemblez « najm » (une étoile), de droite à gauche.',
+        ordre: ['نَ', 'جْ', 'م'], traduction: 'najm — une étoile', cles: ['najm'],
+        explication: 'na-j(sukūn)-m : la première syllabe se ferme sur le jīm.' },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'شَمْس', fr: 'soleil', cle: 'shams' }, { ar: 'نَجْم', fr: 'étoile', cle: 'najm' }, { ar: 'جَسَد', fr: 'corps', cle: 'jasad' }, { ar: 'بَحْر', fr: 'mer', cle: 'bahr' } ] },
+      { type: 'texteLibre', consigne: 'Écrivez le mot « étoile ».',
+        reponse: 'نجم', indice: 'najm : ن + ج + م', traduction: 'une étoile', cles: ['najm'] },
+      { type: 'saisie', consigne: 'Écrivez le mot « soleil ».',
+        indice: 'shams : ش + م (sukūn) + س.', reponse: 'شمس', cles: ['shams'] },
+      { type: 'dictee', consigne: 'Écoutez le mot, puis écrivez-le au clavier.',
+        mode: 'saisie', audio: 'شَمْس', reponse: 'شمس', cles: ['shams'] },
+      { type: 'ecoute', consigne: 'L\'oreille seule : écoutez ce mot et choisissez son sens.',
+        audio: 'نَجْم', options: [{ texte: 'étoile' }, { texte: 'soleil' }, { texte: 'corps' }], bonne: 0, cles: ['najm'],
+        explication: 'najm, l\'étoile — elle donne son nom à la 53e sourate du Coran.' },
+      { type: 'oral', consigne: 'Lisez ces mots à voix haute, en marquant bien les syllabes.',
+        phraseAr: 'شَمْس نَجْم نَاس', translit: 'shams, najm, nās', cles: ['shams','najm'] },
+    ],
+    memoriser: { ar: 'شَمْس', tr: 'shams', fr: 'Un soleil. La sourate 91 s\'ouvre par un serment : « Par le soleil et son éclat ».' },
+    recap: [
+      'Quatre lettres familières : س (s), ش (ch), م (m), ن (n) — quinze lettres en tout.',
+      'Un mot se découpe en syllabes ouvertes (سَ) ou fermées par un sukūn (شَمْ).',
+      'Vous lisez شَمْس (soleil), نَجْم (étoile), جَسَد (corps), نَاس (gens).',
+      'Le nūn se reconnaît à son point au-dessus ; le bāʾ au point dessous.',
+    ],
+  },
+
+  5: {
+    cycle: 1,
+    titre: "Le calame, le livre, la paix : fāʾ, qāf, kāf, lām",
+    intro: "Quatre lettres encore, dont deux qu'il faudra bien distinguer : le ق profond et le ك ordinaire — car cette nuance change le sens des mots.\n" +
+      "Avec le lām vient une jolie règle d'écriture : lié à l'alif, il forme la ligature لا, qu'on lit « lā ».\n" +
+      "Et surtout, la moisson de mots est superbe aujourd'hui : كِتَاب (livre), قَلَم (calame), سَلَام (paix), مَلِك (roi), قَلْب (cœur).",
+    decouverte: [
+      { texte: "Le fāʾ et le qāf se ressemblent : une boucle avec un point pour ف, deux points et une coupe plus profonde pour ق." },
+      { lettres: [
+        { ar: 'ف', nom: 'fāʾ', son: 'f' },
+        { ar: 'ق', nom: 'qāf', son: 'k profond (gorge)' },
+      ]},
+      { texte: "Puis le kāf et le lām, deux grandes lettres élancées." },
+      { lettres: [
+        { ar: 'ك', nom: 'kāf', son: 'k' },
+        { ar: 'ل', nom: 'lām', son: 'l' },
+      ]},
+      { texte: "Le ق est un k prononcé très en arrière, presque dans la gorge ; le ك est notre k ordinaire. La nuance change le mot : قَلْب (le cœur) et كَلْب (le chien). Écoutez-les l'un après l'autre, plusieurs fois." },
+      { texte: "Quand un lām ل est suivi d'un alif ا, les deux fusionnent obligatoirement en une ligature : لا. On la lit « lā » — c'est d'ailleurs, à elle seule, le mot « non »." },
+      { texte: "Place aux mots. Tous se déchiffrent avec ce que vous savez — prenez le temps de les lire vous-même :" },
+      { lignes: [
+        { ar: 'قَلَم', tr: 'qalam', fr: 'un calame, une plume', ill: '🖋️', note: 'le qāf, un k profond' },
+        { ar: 'كِتَاب', tr: 'kitāb', fr: 'un livre', ill: '📖', note: 'le ا allonge : ki-tāb' },
+        { ar: 'سَلَام', tr: 'salām', fr: 'paix', ill: '🕊️', note: 'la ligature لا au cœur du mot' },
+        { ar: 'مَلِك', tr: 'malik', fr: 'un roi', ill: '👑' },
+        { ar: 'قَلْب', tr: 'qalb', fr: 'un cœur', ill: '🫀', note: 'qal-b — et non kalb, le chien !' },
+        { ar: 'كَتَبَ', tr: 'kataba', fr: 'il a écrit', ill: '✍️', note: 'trois fatḥa : ka-ta-ba' },
+      ]},
+      { texte: "Remarquez كَتَبَ (il a écrit) et كِتَاب (un livre) : les mêmes trois lettres ك ت ب, habillées différemment. Ce n'est pas un hasard — vous découvrirez ce secret au Cycle IV." },
+    ],
+    grammaire: {
+      titre: "qāf profond, kāf clair : le sens en dépend",
+      corps: "Le ق se prononce au fond de la gorge, le ك à l'avant : cette différence n'est pas un accent, elle distingue des mots — قَلْب (cœur) et كَلْب (chien).\n" +
+        "Exercez le contraste à voix haute, en exagérant d'abord : qa… ka… qalb… kalb…\n" +
+        "Et retenez la ligature : ل + ا s'écrivent toujours لا, jamais séparés. On la voit dans سَلَام et dans لَا (non).",
+    },
+    approfondissement: [
+      { titre: "Le calame et le Livre",
+        corps: "Les mots d'aujourd'hui sont au cœur de la révélation. Le calame, الْقَلَم, donne son nom à la 68e sourate, qui s'ouvre par un serment : « Par le calame et ce qu'ils écrivent ».\n" +
+          "Quant à كِتَاب, le livre, c'est le nom même que le Coran se donne : al-kitāb, le Livre par excellence. Et سَلَام, la paix, est à la racine des mots islām et muslim — la paix par la remise confiante à Allah.\n" +
+          "En cinq leçons, vous voilà en train de lire les mots les plus nobles de la langue. Savourez-le.",
+    }],
+    vocabulaire: [
+      { ar: 'قَلَم', tr: 'qalam', fr: 'calame, plume', cle: 'qalam', ill: '🖋️' },
+      { ar: 'كِتَاب', tr: 'kitāb', fr: 'livre', cle: 'kitab', ill: '📖' },
+      { ar: 'سَلَام', tr: 'salām', fr: 'paix', cle: 'salam', ill: '🕊️' },
+      { ar: 'مَلِك', tr: 'malik', fr: 'roi', cle: 'malik', ill: '👑' },
+      { ar: 'قَلْب', tr: 'qalb', fr: 'cœur', cle: 'qalb', ill: '🫀' },
+      { ar: 'كَتَبَ', tr: 'kataba', fr: 'il a écrit', cle: 'kataba', ill: '✍️' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Rappel de la leçon 4 : quelle lettre se prononce « ch » ?',
+        options: [{ ar: 'ش' }, { ar: 'س' }, { ar: 'ن' }], bonne: 0,
+        explication: 'ش (shīn), les trois dents aux trois points.' },
+      { type: 'appariement', consigne: 'Les nouvelles lettres : reliez chacune à son nom.',
+        paires: [ { ar: 'ف', fr: 'fāʾ' }, { ar: 'ق', fr: 'qāf' }, { ar: 'ك', fr: 'kāf' }, { ar: 'ل', fr: 'lām' } ] },
+      { type: 'qcm', consigne: 'Quelle lettre est un « k » profond, prononcé dans la gorge ?',
+        options: [{ ar: 'ك' }, { ar: 'ق' }, { ar: 'ف' }], bonne: 1,
+        explication: 'ق (qāf) se prononce très en arrière, contrairement au ك ordinaire.' },
+      { type: 'qcm', consigne: 'Que devient le lām ل suivi d\'un alif ا ?',
+        options: [{ texte: 'ils fusionnent en لا' }, { texte: 'le lām disparaît' }, { texte: 'rien ne change' }], bonne: 0,
+        explication: 'Le lām + alif fusionnent obligatoirement en la ligature لا, comme dans سَلَام.' },
+      { type: 'phonetique', consigne: 'Soignez le point d\'articulation : quelle transcription pour قَلْب ?',
+        motAr: 'قَلْب', options: ['qalb (cœur)', 'kalb (chien)'], bonne: 0, cles: ['qalb'] },
+      { type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription.',
+        motAr: 'كِتَاب', options: ['kitāb', 'katab', 'kutub'], bonne: 0, cles: ['kitab'] },
+      { type: 'dictee', consigne: 'Écoutez : k ordinaire ou q profond ?',
+        audio: 'قَا', options: [{ ar: 'قَا' }, { ar: 'كَا' }], bonne: 0 },
+      { type: 'glisser', consigne: 'Remettez les morceaux dans l\'ordre pour écrire « kitāb » (livre).',
+        ordre: ['كِ', 'تَا', 'ب'], traduction: 'kitāb — un livre', cles: ['kitab'] },
+      { type: 'glisser', consigne: 'Reconstituez « salām » (paix).',
+        ordre: ['سَ', 'لَا', 'م'], traduction: 'salām — la paix', cles: ['salam'],
+        explication: 'On écrit سَلَام et on lit « salām ». À l\'oral, on entend souvent « salāmun » : c\'est le même mot, avec une terminaison que vous découvrirez en leçon 10.' },
+      { type: 'texteLibre', consigne: 'Écrivez le mot « roi ».',
+        reponse: 'ملك', indice: 'malik', traduction: 'un roi', cles: ['malik'] },
+      { type: 'saisie', consigne: 'Écrivez le verbe « il a écrit ».',
+        indice: 'kataba : trois lettres, trois fatḥa (ك ت ب).', reponse: 'كتب', cles: ['kataba'] },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'كِتَاب', fr: 'livre', cle: 'kitab' }, { ar: 'مَلِك', fr: 'roi', cle: 'malik' }, { ar: 'قَلْب', fr: 'cœur', cle: 'qalb' }, { ar: 'قَلَم', fr: 'plume', cle: 'qalam' } ] },
+      { type: 'dictee', consigne: 'Écoutez le mot, puis écrivez-le au clavier.',
+        mode: 'saisie', audio: 'قَلَم', reponse: 'قلم', cles: ['qalam'] },
+      { type: 'ecoute', consigne: 'L\'oreille seule : écoutez et choisissez le sens.',
+        audio: 'قَلْب', options: [{ texte: 'cœur' }, { texte: 'chien' }, { texte: 'livre' }], bonne: 0, cles: ['qalb'],
+        explication: 'qalb, avec son qāf profond : le cœur. Avec un k ordinaire, kalb serait le chien — l\'oreille protège le sens.' },
+      { type: 'oral', consigne: 'Lisez ces mots à voix haute, en soignant le qāf.',
+        phraseAr: 'قَلَم كِتَاب سَلَام', translit: 'qalam, kitāb, salām', cles: ['qalam','kitab','salam'] },
+    ],
+    memoriser: { ar: 'كِتَاب', tr: 'kitāb', fr: 'Un livre. Le Coran est al-kitāb, le Livre par excellence.' },
+    recap: [
+      'Quatre lettres : ف (f), ق (k profond), ك (k), ل (l) — dix-neuf lettres en tout.',
+      'ق ≠ ك, et cela change le sens : قَلْب (cœur) ≠ كَلْب (chien).',
+      'Le lām + alif fusionnent toujours en la ligature لا.',
+      'Vous lisez كِتَاب, قَلَم, سَلَام, مَلِك, قَلْب, كَتَبَ.',
+    ],
+  },
+
+  6: {
+    cycle: 1,
+    titre: "Les lettres pleines : ṣād, ḍād, ṭāʾ, ẓāʾ",
+    intro: "Voici les quatre emphatiques : des consonnes prononcées bouche pleine, avec le fond de la langue, plus graves et plus amples que leurs sœurs simples.\n" +
+      "Chacune a sa jumelle légère que vous connaissez déjà : ص répond à س, ط à ت, ض à د, ظ à ذ. Tout le travail du jour est dans ce face-à-face.\n" +
+      "En prime, deux mots magnifiques : صَبْر (la patience) et صِرَاط (le chemin) — que vous retrouverez dans la Fātiḥa.",
+    decouverte: [
+      { texte: "Les quatre emphatiques. Écoutez chacune, puis sa version simple, et sentez la différence de « volume » dans la bouche." },
       { lettres: [
         { ar: 'ص', nom: 'ṣād', son: 's emphatique' },
         { ar: 'ض', nom: 'ḍād', son: 'd emphatique' },
         { ar: 'ط', nom: 'ṭāʾ', son: 't emphatique' },
         { ar: 'ظ', nom: 'ẓāʾ', son: 'dh emphatique' },
       ]},
-      { texte: "Les deux gutturales. Le ع n'a pas d'équivalent français : un son produit en serrant le fond de la gorge. Le غ ressemble à un r grasseyé parisien." },
+      { texte: "Le geste, concrètement : creusez la langue comme une cuillère, reculez-la légèrement, arrondissez un peu les lèvres — la voyelle qui suit s'assombrit (« sa » tire vers « soâ »). Comparez à voix haute : سَ… صَ… تَ… طَ…" },
+      { texte: "Une emphatique change le mot, exactement comme le point d'une lettre. Comparez ces paires :" },
+      { lignes: [
+        { ar: 'تَاب ← طَاب', tr: 'tāba → ṭāba', fr: 'il s\'est repenti → il fut bon', note: 'ت simple ↔ ط emphatique' },
+        { ar: 'دَرْس ← ضَرْس', tr: 'dars → ḍirs', fr: 'une leçon → une molaire', note: 'د simple ↔ ض emphatique' },
+      ]},
+      { texte: "Et les mots du jour, à déchiffrer vous-même :" },
+      { lignes: [
+        { ar: 'صَبْر', tr: 'ṣabr', fr: 'patience', ill: '⏳', note: 'ṣab-r : sukūn sur le ب' },
+        { ar: 'صِرَاط', tr: 'ṣirāṭ', fr: 'chemin, voie', ill: '🛤️', note: 'deux emphatiques l\'encadrent' },
+      ]},
+      { texte: "Le ض est si particulier que les Arabes appellent leur langue « la langue du ḍād » (لُغَة الضَّاد) : aucune autre langue ne posséderait exactement ce son. Ne le brusquez pas — écoutez-le souvent, il viendra." },
+    ],
+    grammaire: {
+      titre: "Les emphatiques : quatre lettres, une même couleur",
+      corps: "ص ض ط ظ se prononcent bouche pleine, langue creusée et reculée : elles donnent à l'arabe sa profondeur.\n" +
+        "Chacune a sa jumelle claire : س/ص، د/ض، ت/ط، ذ/ظ. La voyelle qui suit une emphatique s'assombrit — c'est le meilleur indice pour l'oreille.\n" +
+        "Ces nuances ne sont pas des détails d'accent : elles distinguent des mots, et comptent dans la récitation du Coran.",
+    },
+    approfondissement: [
+      { titre: "ṣabr et ṣirāṭ : deux compagnons de route",
+        corps: "صَبْر, la patience, est l'une des vertus les plus louées du Coran : « Allah est avec les patients ». C'est aussi la vertu de l'apprenant — la vôtre, leçon après leçon.\n" +
+          "صِرَاط, le chemin, vous attend au cœur de la Fātiḥa : اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ, « guide-nous sur le chemin droit ». Quand vous lirez cette sourate en entier, ce mot sera un vieil ami.\n" +
+          "Apprendre les emphatiques, c'est précisément cela : préparer sa bouche à réciter juste.",
+    }],
+    vocabulaire: [
+      { ar: 'صَبْر', tr: 'ṣabr', fr: 'patience', cle: 'sabr', ill: '⏳' },
+      { ar: 'صِرَاط', tr: 'ṣirāṭ', fr: 'chemin, voie', cle: 'sirat', ill: '🛤️' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Rappel de la leçon 5 : قَلْب signifie…',
+        options: [{ texte: 'cœur (qāf profond)' }, { texte: 'chien (kāf ordinaire)' }], bonne: 0, cles: ['qalb'],
+        explication: 'qalb, le cœur. kalb, avec un k clair, serait le chien.' },
+      { type: 'qcm', consigne: 'Laquelle est une lettre emphatique (bouche pleine) ?',
+        options: [{ ar: 'س' }, { ar: 'ص' }, { ar: 'ر' }], bonne: 1,
+        explication: 'ص (ṣād) est le s emphatique, prononcé bouche pleine.' },
+      { type: 'appariement', consigne: 'Reliez chaque emphatique à sa jumelle simple.',
+        paires: [ { ar: 'ص', fr: 'emphatique de س' }, { ar: 'ط', fr: 'emphatique de ت' }, { ar: 'ض', fr: 'emphatique de د' }, { ar: 'ظ', fr: 'emphatique de ذ' } ] },
+      { type: 'phonetique', consigne: 'Écoutez et choisissez la transcription exacte.',
+        motAr: 'صَ', options: ['ṣa (emphatique)', 'sa (simple)'], bonne: 0 },
+      { type: 'dictee', consigne: 'Écoutez : entendez-vous une lettre simple ou emphatique ?',
+        audio: 'طَا', options: [{ ar: 'طَا' }, { ar: 'تَا' }], bonne: 0 },
+      { type: 'dictee', consigne: 'Simple ou emphatique ? La voyelle vous renseigne : sombre = emphatique.',
+        audio: 'صَا', options: [{ ar: 'صَا' }, { ar: 'سَا' }], bonne: 0,
+        explication: 'Le « â » s\'assombrit après le ṣād : c\'est la signature des emphatiques.' },
+      { type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription.',
+        motAr: 'صِرَاط', options: ['ṣirāṭ', 'sirāt', 'ṣirat'], bonne: 0, cles: ['sirat'] },
+      { type: 'contexte', consigne: 'Pour lire « ṭāba » (il fut bon), quelle première lettre ?',
+        avant: '', apres: 'ابَ', options: [{ ar: 'طَ' }, { ar: 'تَ' }], bonne: 0,
+        traduction: 'ṭāba — avec le t emphatique. tāba (ت) serait « il s\'est repenti ».' },
+      { type: 'glisser', consigne: 'Assemblez « ṣabr » (la patience).',
+        ordre: ['صَ', 'بْ', 'ر'], traduction: 'ṣabr — la patience', cles: ['sabr'] },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'صَبْر', fr: 'patience', cle: 'sabr' }, { ar: 'صِرَاط', fr: 'chemin', cle: 'sirat' }, { ar: 'قَلْب', fr: 'cœur', cle: 'qalb' }, { ar: 'سَلَام', fr: 'paix', cle: 'salam' } ] },
+      { type: 'texteLibre', consigne: 'Écrivez le mot « patience » (avec le s emphatique).',
+        reponse: 'صبر', indice: 'ṣabr : ص + ب + ر', traduction: 'la patience', cles: ['sabr'] },
+      { type: 'dictee', consigne: 'Écoutez le mot, puis écrivez-le au clavier.',
+        mode: 'saisie', audio: 'صَبْر', reponse: 'صبر', cles: ['sabr'] },
+      { type: 'ecoute', consigne: 'L\'oreille seule : écoutez et choisissez le sens.',
+        audio: 'صِرَاط', options: [{ texte: 'chemin, voie' }, { texte: 'patience' }, { texte: 'cœur' }], bonne: 0, cles: ['sirat'],
+        explication: 'ṣirāṭ : le chemin. Vous le redirez dans la Fātiḥa — aṣ-ṣirāṭ al-mustaqīm, le chemin droit.' },
+      { type: 'oral', consigne: 'Lisez ces deux mots en creusant bien les emphatiques.',
+        phraseAr: 'صَبْر صِرَاط', translit: 'ṣabr, ṣirāṭ', cles: ['sabr','sirat'] },
+    ],
+    memoriser: { ar: 'صِرَاط', tr: 'ṣirāṭ', fr: 'Le chemin, la voie. Celui de la Fātiḥa : le chemin droit.' },
+    recap: [
+      'Quatre emphatiques : ص ض ط ظ, graves et bouche pleine — vingt-trois lettres en tout.',
+      'Chacune a sa jumelle simple : س/ص، ت/ط، د/ض، ذ/ظ.',
+      'Une emphatique change le mot : تَاب (il s\'est repenti) ≠ طَاب (il fut bon).',
+      'Vous lisez صَبْر (patience) et صِرَاط (chemin) — deux mots-clés du Coran.',
+    ],
+  },
+
+  7: {
+    cycle: 1,
+    titre: "hāʾ, wāw, yāʾ — et les voyelles longues",
+    intro: "Trois lettres aujourd'hui, mais quelles lettres : deux d'entre elles, و et ي, jouent double rôle — consonnes (w, y) et voyelles longues (ū, ī).\n" +
+      "C'est la dernière grande clé de la lecture : après cette leçon, presque tous les mots du Coran s'ouvriront à vous.\n" +
+      "La moisson du jour le prouve : نُور (lumière), يَوْم (jour), دِين (religion), قُلْ (dis !), مُسْلِم (musulman).",
+    decouverte: [
+      { texte: "Les trois lettres du jour : le h léger et les deux semi-voyelles." },
+      { lettres: [
+        { ar: 'ه', nom: 'hāʾ', son: 'h léger' },
+        { ar: 'و', nom: 'wāw', son: 'w / ū' },
+        { ar: 'ي', nom: 'yāʾ', son: 'y / ī' },
+      ]},
+      { texte: "Attention à ne pas confondre le ه (h léger, comme un soupir anglais : home) et le ح appris à la leçon 2 (souffle fort venu de la gorge). Dites : ha… ḥa… en alternance." },
+      { texte: "Voici la règle des voyelles longues, qui complète l'alif de la leçon 1 : un و après une ḍamma allonge en « ū », un ي après une kasra allonge en « ī ». Trois lettres d'allongement, trois voyelles longues :" },
+      { lignes: [
+        { ar: 'بَا', tr: 'bā', fr: 'fatḥa + alif = â long (leçon 1)' },
+        { ar: 'بُو', tr: 'bū', fr: 'ḍamma + wāw = ū long' },
+        { ar: 'بِي', tr: 'bī', fr: 'kasra + yāʾ = ī long' },
+      ]},
+      { texte: "Mais و et ي peuvent aussi être de simples consonnes (w, y), quand elles portent leur propre voyelle : وَ = « wa », يَ = « ya ». Le contexte tranche — et l'oreille, très vite, n'hésite plus." },
+      { texte: "Les mots du jour. Déchiffrez chaque mot en repérant d'abord : voyelle longue ou consonne ?" },
+      { lignes: [
+        { ar: 'نُور', tr: 'nūr', fr: 'lumière', ill: '💡', note: 'le و note ici le son ū' },
+        { ar: 'دِين', tr: 'dīn', fr: 'religion, jugement', note: 'le ي note ici le son ī' },
+        { ar: 'يَوْم', tr: 'yawm', fr: 'un jour', ill: '☀️', note: 'ici ي et و sont des consonnes : yaw-m' },
+        { ar: 'قُلْ', tr: 'qul', fr: 'dis !', ill: '🗣️', note: 'l\'ordre qui ouvre plusieurs sourates' },
+        { ar: 'مُسْلِم', tr: 'muslim', fr: 'musulman, soumis (à Allah)', note: 'mus-lim : deux syllabes' },
+      ]},
+    ],
+    grammaire: {
+      titre: "Voyelle longue ou voyelle brève ?",
+      corps: "La voyelle longue dure environ deux fois plus que la brève, et cela change le sens : la durée est une information, pas une décoration.\n" +
+        "Les supports de l'allongement sont : ا pour « â », و pour « ū », ي pour « ī » — chacun prolongeant la voyelle brève qui lui correspond.\n" +
+        "Quand و ou ي portent une voyelle, ce sont des consonnes (w, y) : يَوْم = yawm. Quand ils suivent leur voyelle sœur, ils allongent : نُور = nūr.",
+    },
+    approfondissement: [
+      { titre: "qul : le plus petit des grands mots",
+        corps: "قُلْ, « dis ! », trois lettres à peine — et l'un des mots les plus solennels du Coran : il ouvre les sourates al-Ikhlāṣ, al-Falaq et an-Nās, que vous lirez bientôt en entier.\n" +
+          "C'est un ordre adressé au Prophète ﷺ : dis, proclame, transmets. Chaque fois qu'une sourate commence par قُلْ, la parole qui suit est un message à porter.\n" +
+          "Vous savez désormais le lire. À la leçon 13, vous le réciterez en tête de votre première sourate complète.",
+    }],
+    vocabulaire: [
+      { ar: 'نُور', tr: 'nūr', fr: 'lumière', cle: 'nur', ill: '💡' },
+      { ar: 'دِين', tr: 'dīn', fr: 'religion, jugement', cle: 'din' },
+      { ar: 'يَوْم', tr: 'yawm', fr: 'jour', cle: 'yawm', ill: '☀️' },
+      { ar: 'قُلْ', tr: 'qul', fr: 'dis !', cle: 'qul', ill: '🗣️' },
+      { ar: 'مُسْلِم', tr: 'muslim', fr: 'musulman, soumis', cle: 'muslim' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Rappel de la leçon 6 : laquelle est l\'emphatique de س ?',
+        options: [{ ar: 'ص' }, { ar: 'ض' }, { ar: 'ط' }], bonne: 0,
+        explication: 'ص (ṣād), le s bouche pleine — comme dans صَبْر et صِرَاط.' },
+      { type: 'appariement', consigne: 'Les nouvelles lettres : reliez chacune à son nom.',
+        paires: [ { ar: 'ه', fr: 'hāʾ' }, { ar: 'و', fr: 'wāw' }, { ar: 'ي', fr: 'yāʾ' } ] },
+      { type: 'qcm', consigne: 'Dans le mot نُور (lumière), le و note :',
+        options: [{ texte: 'le son w' }, { texte: 'le son long ū' }, { texte: 'le son a' }], bonne: 1, cles: ['nur'],
+        explication: 'و sert ici de voyelle longue ū : il suit la ḍamma. Il peut aussi être la consonne w.' },
+      { type: 'qcm', consigne: 'Dans يَوْم (jour), le ي est :',
+        options: [{ texte: 'une consonne : le son y' }, { texte: 'une voyelle longue ī' }], bonne: 0, cles: ['yawm'],
+        explication: 'Il porte sa propre fatḥa : c\'est la consonne y — yawm.' },
+      { type: 'dictee', consigne: 'h léger ou souffle de gorge ? Écoutez bien.',
+        audio: 'هَا', options: [{ ar: 'هَا' }, { ar: 'حَا' }], bonne: 0,
+        explication: 'hā : le h léger de ه. Le ح de la leçon 2 est un souffle bien plus appuyé.' },
+      { type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription.',
+        motAr: 'دِين', options: ['dīn', 'dayn', 'dun'], bonne: 0, cles: ['din'] },
+      { type: 'contexte', consigne: 'Pour lire le son long « ū » dans « nūr », quelle lettre support après le ن + ḍamma ?',
+        avant: 'نُ', apres: 'ر', options: [{ ar: 'و' }, { ar: 'ي' }, { ar: 'ا' }], bonne: 0,
+        traduction: 'nūr — la lumière', cles: ['nur'] },
+      { type: 'dictee', consigne: 'Écoutez le mot, puis choisissez son écriture.',
+        audio: 'نُور', options: [{ ar: 'نُور' }, { ar: 'نَار' }, { ar: 'نِير' }], bonne: 0, cles: ['nur'] },
+      { type: 'qcm', consigne: 'Que signifie قُلْ ?',
+        options: [{ texte: 'il a dit' }, { texte: 'dis !' }, { texte: 'la parole' }], bonne: 1, cles: ['qul'],
+        explication: 'قُلْ, « dis ! », ouvre plusieurs sourates du Coran.' },
+      { type: 'texteLibre', consigne: 'Écrivez le mot « jour ».',
+        reponse: 'يوم', indice: 'yawm', traduction: 'un jour', cles: ['yawm'] },
+      { type: 'saisie', consigne: 'Écrivez le mot « lumière ».',
+        indice: 'nūr : ن + ḍamma, و d\'allongement, ر.', reponse: 'نور', cles: ['nur'] },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'نُور', fr: 'lumière', cle: 'nur' }, { ar: 'يَوْم', fr: 'jour', cle: 'yawm' }, { ar: 'دِين', fr: 'religion', cle: 'din' }, { ar: 'مُسْلِم', fr: 'musulman', cle: 'muslim' } ] },
+      { type: 'dictee', consigne: 'Écoutez le mot, puis écrivez-le au clavier.',
+        mode: 'saisie', audio: 'يَوْم', reponse: 'يوم', cles: ['yawm'] },
+      { type: 'ecoute', consigne: 'L\'oreille seule : écoutez et choisissez le sens.',
+        audio: 'نُور', options: [{ texte: 'lumière' }, { texte: 'jour' }, { texte: 'religion' }], bonne: 0, cles: ['nur'],
+        explication: 'nūr : le wāw y chante la voyelle longue « ū ». La lumière — un mot que le Coran aime.' },
+      { type: 'oral', consigne: 'Lisez ces mots à voix haute, en allongeant bien les longues.',
+        phraseAr: 'نُور دِين يَوْم', translit: 'nūr, dīn, yawm', cles: ['nur','din','yawm'] },
+    ],
+    memoriser: { ar: 'قُلْ', tr: 'qul', fr: 'Dis ! L\'ordre qui ouvre al-Ikhlāṣ, al-Falaq et an-Nās — bientôt vos sourates.' },
+    recap: [
+      'Trois lettres : ه (h léger), و (w/ū), ي (y/ī) — vingt-six lettres en tout.',
+      'Voyelles longues : ا (â), و (ū), ي (ī) ; deux fois plus longues que les brèves.',
+      'و et ي sont consonnes quand ils portent une voyelle : يَوْم = yawm.',
+      'Vous lisez نُور, دِين, يَوْم, قُلْ, مُسْلِم.',
+    ],
+  },
+
+  8: {
+    cycle: 1,
+    titre: "ʿayn, ghayn, la shadda — et le Nom d'Allah",
+    intro: "Les deux dernières lettres de l'alphabet sont les plus profondes : le ع, venu du fond de la gorge, et le غ, son frère grasseyé. Nous les avons gardées pour la fin, afin de leur donner tout le temps qu'elles méritent.\n" +
+      "Avec elles, un signe précieux : la shadda, qui double une consonne. Elle vous manquait pour lire رَبّ (Seigneur) — et le plus beau des mots : اللَّه.\n" +
+      "Au terme de cette leçon, l'alphabet est complet : 28 lettres sur 28. Prenez la mesure du chemin parcouru.",
+    decouverte: [
+      { texte: "Les deux dernières lettres. Le ع n'a pas d'équivalent français : un son produit en serrant le fond de la gorge. Le غ ressemble à un r grasseyé parisien." },
       { lettres: [
         { ar: 'ع', nom: 'ʿayn', son: 'son de gorge serrée' },
         { ar: 'غ', nom: 'ghayn', son: 'r grasseyé' },
       ]},
+      { texte: "Le geste pour le ع : serrez doucement le fond de la gorge, comme au tout début d'un bâillement retenu, et faites vibrer la voix. Écoutez-le beaucoup ; exagérez d'abord, le naturel viendra." },
       { texte: "La shadda est un petit signe en forme de « w » au-dessus d'une lettre : elle double la consonne, qu'on prononce alors avec appui. رَبّ se lit « rabb », avec un b appuyé." },
       { lignes: [
-        { ar: 'رَبّ', tr: 'rabb', fr: 'un seigneur, un maître', note: 'la shadda double leب' },
-        { ar: 'حُبّ', tr: 'ḥubb', fr: 'amour', note: 'ḍamma + shadda' },
-        { ar: 'حَجّ', tr: 'ḥajj', fr: 'le pèlerinage', note: 'shadda sur le ج' },
-        { ar: 'عَبَدَ', tr: 'ʿabada', fr: 'il a adoré', note: 'soignez le ع de gorge' },
-        { ar: 'سَجَدَ', tr: 'sajada', fr: 'il s’est prosterné' },
+        { ar: 'رَبّ', tr: 'rabb', fr: 'un seigneur, un maître', note: 'la shadda double le ب' },
+        { ar: 'حُبّ', tr: 'ḥubb', fr: 'amour', ill: '❤️', note: 'ḍamma + shadda' },
+        { ar: 'حَجّ', tr: 'ḥajj', fr: 'le pèlerinage', ill: '🕋', note: 'shadda sur le ج' },
+        { ar: 'عَبْد', tr: 'ʿabd', fr: 'serviteur', ill: '🙇', note: 'soignez le ع de gorge' },
       ]},
-      { texte: "Le geste, concrètement. Pour une emphatique : creusez la langue comme une cuillère, reculez-la légèrement, arrondissez un peu les lèvres — la voyelle qui suit s'assombrit (« sa » tire vers « soâ »). Pour le ع : serrez doucement le fond de la gorge, comme au tout début d'un bâillement retenu, et faites vibrer la voix." },
-      { texte: "Une emphatique « assombrit » la voyelle voisine. Et changer une simple en emphatique change le mot : comparez à voix haute سَيْف (épée) et صَيْف (été)." },
+      { texte: "Et maintenant, le mot vers lequel tout convergeait. Assemblez : ا + ل + ل + ه, une shadda sur le second lām, et un petit trait vertical au-dessus — un alif miniature, qui allonge le son en « â ». Lisez :" },
+      { lignes: [
+        { ar: 'اللَّه', tr: 'allāh', fr: 'Allah', note: 'al-lâh : la shadda appuie le l, le petit alif suscrit allonge le â' },
+      ]},
+      { texte: "Vous venez de lire le Nom d'Allah, de vos propres yeux, lettre à lettre. C'était le but secret de ces huit leçons. L'alphabet est complet : les 28 lettres vous appartiennent." },
+      { lettres: [
+        { ar: 'ا', nom: 'alif', son: 'ā' },
+        { ar: 'ب', nom: 'bāʾ', son: 'b' },
+        { ar: 'ت', nom: 'tāʾ', son: 't' },
+        { ar: 'ث', nom: 'thāʾ', son: 'th (think)' },
+        { ar: 'ج', nom: 'jīm', son: 'j (dj)' },
+        { ar: 'ح', nom: 'ḥāʾ', son: 'ḥ (souffle)' },
+        { ar: 'خ', nom: 'khāʾ', son: 'kh' },
+        { ar: 'د', nom: 'dāl', son: 'd' },
+        { ar: 'ذ', nom: 'dhāl', son: 'dh (this)' },
+        { ar: 'ر', nom: 'rāʾ', son: 'r roulé' },
+        { ar: 'ز', nom: 'zāy', son: 'z' },
+        { ar: 'س', nom: 'sīn', son: 's' },
+        { ar: 'ش', nom: 'shīn', son: 'sh (ch)' },
+        { ar: 'ص', nom: 'ṣād', son: 'ṣ emphatique' },
+        { ar: 'ض', nom: 'ḍād', son: 'ḍ emphatique' },
+        { ar: 'ط', nom: 'ṭāʾ', son: 'ṭ emphatique' },
+        { ar: 'ظ', nom: 'ẓāʾ', son: 'ẓ emphatique' },
+        { ar: 'ع', nom: 'ʿayn', son: 'ʿ (gorge)' },
+        { ar: 'غ', nom: 'ghayn', son: 'gh (r grasseyé)' },
+        { ar: 'ف', nom: 'fāʾ', son: 'f' },
+        { ar: 'ق', nom: 'qāf', son: 'q (k profond)' },
+        { ar: 'ك', nom: 'kāf', son: 'k' },
+        { ar: 'ل', nom: 'lām', son: 'l' },
+        { ar: 'م', nom: 'mīm', son: 'm' },
+        { ar: 'ن', nom: 'nūn', son: 'n' },
+        { ar: 'ه', nom: 'hāʾ', son: 'h' },
+        { ar: 'و', nom: 'wāw', son: 'w / ū' },
+        { ar: 'ي', nom: 'yāʾ', son: 'y / ī' },
+      ]},
     ],
     grammaire: {
       titre: "La shadda : une consonne doublée",
       corps: "La shadda redouble la consonne sur laquelle elle se pose : on prononce le son deux fois, en appuyant. رَبّ se dit « rab-b ».\n" +
-        "Les emphatiques (ص ض ط ظ) se prononcent bouche pleine, langue plate : elles donnent à l'arabe sa profondeur.\n" +
-        "Ces nuances ne sont pas des détails d'accent : elles distinguent des mots, et comptent dans la récitation du Coran.",
+        "Dans اللَّه, la shadda appuie le lām, et le petit alif suscrit (le trait vertical) note un « â » long : al-lāh.\n" +
+        "Vous croiserez souvent ce petit alif dans l'orthographe du Coran ; la leçon 13 y reviendra tranquillement.",
     },
     approfondissement: [
       { titre: "ʿayn : la lettre, l'œil et la source",
         corps: "Le mot ʿayn (عَيْن) qui nomme cette lettre signifie aussi, en arabe, l'œil, la source d'eau, et l'essence d'une chose. Une même racine pour le regard, la source vive et le cœur des choses.\n" +
           "Ce son qui vient du fond de la gorge n'existe pas en français ; il demande un effort, presque un dépouillement. Beaucoup de mots majeurs en sont issus : ʿilm (le savoir), ʿabd (le serviteur).\n" +
           "Prendre le temps de bien former le ʿayn, c'est honorer ces mots dès leur première lettre." },
-    ],
+      { titre: "Huit leçons, un alphabet",
+        corps: "Faites une pause et mesurez : il y a huit leçons, l'arabe était pour vous un rideau de signes. Aujourd'hui, vous connaissez les 28 lettres, les trois voyelles brèves et longues, le sukūn, la shadda — et vous lisez le Nom d'Allah.\n" +
+          "Il reste quelques signes à apprendre au Cycle II (le tanwīn, la hamza, la tāʾ marbūṭa), puis plus rien ne vous sera illisible.\n" +
+          "Avant de continuer, offrez-vous une révision : relisez à voix haute les mots des leçons passées. Ce qui coule sans effort est acquis ; ce qui accroche mérite un détour.",
+    }],
     vocabulaire: [
+      { ar: 'اللَّه', tr: 'allāh', fr: 'Allah', cle: 'allah' },
       { ar: 'رَبّ', tr: 'rabb', fr: 'seigneur, maître', cle: 'rabb' },
+      { ar: 'عَبْد', tr: 'ʿabd', fr: 'serviteur', cle: 'abd', ill: '🙇' },
       { ar: 'حُبّ', tr: 'ḥubb', fr: 'amour', cle: 'hubb', ill: '❤️' },
       { ar: 'حَجّ', tr: 'ḥajj', fr: 'pèlerinage', cle: 'hajj', ill: '🕋' },
-      { ar: 'عَبْد', tr: 'ʿabd', fr: 'serviteur', cle: 'abd', ill: '🙇' },
-      { ar: 'صَبْر', tr: 'ṣabr', fr: 'patience', cle: 'sabr', ill: '⏳' },
     ],
     exercices: [
-      { type: 'qcm', consigne: 'Laquelle est une lettre emphatique (bouche pleine) ?',
-        options: [{ ar: 'س' }, { ar: 'ص' }, { ar: 'ر' }], bonne: 1,
-        explication: 'ص (ṣād) est le s emphatique, prononcé bouche pleine.' },
+      { type: 'qcm', consigne: 'Rappel de la leçon 7 : dans نُور, le و joue quel rôle ?',
+        options: [{ texte: 'voyelle longue ū' }, { texte: 'consonne w' }], bonne: 0, cles: ['nur'],
+        explication: 'Après la ḍamma, le wāw allonge : nūr.' },
       { type: 'qcm', consigne: 'Le son du ع se produit :',
         options: [{ texte: 'avec les lèvres' }, { texte: 'au fond de la gorge' }, { texte: 'contre les dents' }], bonne: 1,
-        explication: 'Le ʿayn est une constriction du fond de la gorge, propre à l’arabe.' },
+        explication: 'Le ʿayn est une constriction du fond de la gorge, propre à l\'arabe.' },
       { type: 'qcm', consigne: 'Que fait la shadda ( ّ ) posée sur une lettre ?',
         options: [{ texte: 'Elle allonge la voyelle' }, { texte: 'Elle double la consonne' }, { texte: 'Elle supprime la voyelle' }], bonne: 1,
         explication: 'La shadda redouble la consonne, comme le double b de رَبّ (rabb).' },
-      { type: 'appariement', consigne: 'Reliez chaque emphatique à sa version simple correspondante.',
-        paires: [ { ar: 'ص', fr: 'emphatique de س' }, { ar: 'ط', fr: 'emphatique de ت' }, { ar: 'ض', fr: 'emphatique de د' }, { ar: 'ظ', fr: 'emphatique de ذ' } ] },
-      { type: 'phonetique', consigne: 'Écoutez et choisissez la transcription exacte.',
-        motAr: 'صَ', options: ['ṣa (emphatique)', 'sa (simple)'], bonne: 0 },
-      { type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription.',
-        motAr: 'رَبّ', options: ['rabb', 'rab', 'rabba'], bonne: 0, cles: ['rabb'] },
-      { type: 'dictee', consigne: 'Écoutez : entendez-vous une lettre simple ou emphatique ?',
-        audio: 'طَا', options: [{ ar: 'طَا' }, { ar: 'تَا' }], bonne: 0 },
       { type: 'dictee', consigne: 'Écoutez le son de gorge, puis choisissez la lettre.',
         audio: 'عَا', options: [{ ar: 'عَا' }, { ar: 'غَا' }, { ar: 'حَا' }], bonne: 0 },
-      { type: 'contexte', consigne: 'Pour lire « ḥajj » (avec un j appuyé), faut-il une shadda sur le ج ?',
+      { type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription.',
+        motAr: 'رَبّ', options: ['rabb', 'rab', 'rabba'], bonne: 0, cles: ['rabb'] },
+      { type: 'contexte', consigne: 'Pour lire « ḥajj » (avec un j appuyé), quel signe sur le ج ?',
         avant: 'حَ', apres: '', options: [{ ar: 'جّ' }, { ar: 'جْ' }, { ar: 'جَ' }], bonne: 0,
-        traduction: 'On veut lire « ḥajj », le pèlerinage.' },
+        traduction: 'On veut lire « ḥajj », le pèlerinage.', cles: ['hajj'] },
       { type: 'qcm', consigne: 'Le mot رَبّ signifie :',
         options: [{ texte: 'demeure' }, { texte: 'seigneur' }, { texte: 'mer' }], bonne: 1, cles: ['rabb'],
-        explication: 'رَبّ, « seigneur », est l’un des mots les plus fréquents du Coran.' },
+        explication: 'رَبّ, « seigneur », est l\'un des mots les plus fréquents du Coran.' },
       { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
-        paires: [ { ar: 'رَبّ', fr: 'seigneur', cle: 'rabb' }, { ar: 'حُبّ', fr: 'amour', cle: 'hubb' }, { ar: 'حَجّ', fr: 'pèlerinage', cle: 'hajj' }, { ar: 'صَبْر', fr: 'patience', cle: 'sabr' } ] },
-      { type: 'texteLibre', consigne: 'Écrivez le mot « seigneur » (avec une shadda sur le b).',
-        reponse: 'رب', indice: 'rabb', traduction: 'un seigneur', cles: ['rabb'] },
-      { type: 'glisser', consigne: 'Remettez dans l’ordre pour écrire « ʿabada » (il a adoré).',
-        ordre: ['عَ', 'بَ', 'دَ'], traduction: 'ʿabada — il a adoré', cles: ['abd'] },
+        paires: [ { ar: 'رَبّ', fr: 'seigneur', cle: 'rabb' }, { ar: 'حُبّ', fr: 'amour', cle: 'hubb' }, { ar: 'حَجّ', fr: 'pèlerinage', cle: 'hajj' }, { ar: 'عَبْد', fr: 'serviteur', cle: 'abd' } ] },
+      { type: 'glisser', consigne: 'Assemblez le Nom d\'Allah, de droite à gauche.',
+        ordre: ['ا', 'للَّ', 'ه'], traduction: 'allāh', cles: ['allah'],
+        explication: 'Alif, double lām porté par la shadda et son petit alif suscrit, hāʾ final : اللَّه.' },
       { type: 'saisie', consigne: 'Écrivez la lettre ʿayn (le son de gorge serrée).',
         indice: 'Aucun équivalent en français.', reponse: 'ع' },
       { type: 'dictee', consigne: 'Écoutez le mot, puis écrivez-le.',
         mode: 'saisie', audio: 'حُبّ', reponse: 'حب', cles: ['hubb'] },
       { type: 'ecoute', consigne: 'L\'oreille seule : écoutez et choisissez le sens.',
-        audio: 'رَبّ', options: [{ texte: 'seigneur, maître' }, { texte: 'amour' }, { texte: 'patience' }], bonne: 0, cles: ['rabb'],
+        audio: 'رَبّ', options: [{ texte: 'seigneur, maître' }, { texte: 'amour' }, { texte: 'serviteur' }], bonne: 0, cles: ['rabb'],
         explication: 'rabb, avec son b appuyé par la shadda : le Seigneur qui nourrit et élève.' },
-      { type: 'oral', consigne: 'Prononcez ce mot en soignant le ع et le redoublement.',
+      { type: 'appariement', consigne: 'Grande révision : reliez ces lettres venues de tout l\'alphabet à leur nom.',
+        paires: [ { ar: 'ض', fr: 'ḍād' }, { ar: 'غ', fr: 'ghayn' }, { ar: 'ذ', fr: 'dhāl' }, { ar: 'ه', fr: 'hāʾ' }, { ar: 'ق', fr: 'qāf' } ] },
+      { type: 'oral', consigne: 'Prononcez ce mot en soignant le ع et le sukūn.',
         phraseAr: 'عَبْد', translit: 'ʿabd', cles: ['abd'] },
+      { type: 'oral', consigne: 'Lisez, lentement et du fond du cœur.',
+        phraseAr: 'اللَّه', translit: 'allāh', cles: ['allah'] },
     ],
-    memoriser: { ar: 'رَبّ', tr: 'rabb', fr: 'Seigneur, Maître. Celui qui nourrit et élève toute chose.' },
+    memoriser: { ar: 'اللَّه', tr: 'allāh', fr: 'Le Nom d\'Allah. Le premier but de ces huit leçons : le lire de vos propres yeux.' },
     recap: [
-      'Quatre emphatiques : ص ض ط ظ, graves et bouche pleine.',
-      'Deux gutturales : ع (gorge serrée) et غ (r grasseyé).',
+      'L\'alphabet est complet : 28 lettres sur 28.',
+      'ع vient du fond de la gorge ; غ est son frère grasseyé.',
       'La shadda double la consonne : رَبّ = « rabb ».',
-      'Une emphatique distingue des mots : سَيْف (épée) ↔ صَيْف (été).',
+      'Vous lisez اللَّه — et رَبّ, عَبْد, حُبّ, حَجّ.',
     ],
   },
 
-  4: {
-    cycle: 1,
-    titre: "L'alphabet complet, les voyelles longues et la liaison",
-    intro: "Avec les neuf lettres d'aujourd'hui, vous aurez vu l'alphabet en entier : 28 lettres.\n" +
-      "Deux d'entre elles, و et ي, jouent double rôle : consonnes (w, y) mais aussi voyelles longues (ū, ī). Vous pourrez alors lire une foule de mots.\n" +
-      "Vous verrez aussi comment les lettres se lient entre elles dans un mot.",
-    decouverte: [
-      { texte: 'Premier groupe : les deux « k » et le fāʾ.' },
-      { lettres: [
-        { ar: 'ف', nom: 'fāʾ', son: 'f' },
-        { ar: 'ق', nom: 'qāf', son: 'k profond (gorge)' },
-        { ar: 'ك', nom: 'kāf', son: 'k' },
-      ]},
-      { texte: 'Le ق est un k prononcé très en arrière, presque dans la gorge ; le ك est notre k ordinaire. Écoutez-les l\'un après l\'autre, plusieurs fois.' },
-      { texte: 'Deuxième groupe : trois sons familiers du français.' },
-      { lettres: [
-        { ar: 'ل', nom: 'lām', son: 'l' },
-        { ar: 'م', nom: 'mīm', son: 'm' },
-        { ar: 'ن', nom: 'nūn', son: 'n' },
-      ]},
-      { texte: 'Troisième groupe : le h léger et les deux semi-voyelles.' },
-      { lettres: [
-        { ar: 'ه', nom: 'hāʾ', son: 'h léger' },
-        { ar: 'و', nom: 'wāw', son: 'w / ū' },
-        { ar: 'ي', nom: 'yāʾ', son: 'y / ī' },
-      ]},
-      { texte: "Le ق est un k prononcé très en arrière, presque dans la gorge ; le ك est notre k ordinaire. La nuance change le mot : قَلْب (le cœur) et كَلْب (le chien)." },
-      { texte: "Voyelles longues : un و après une ḍamma allonge en « ū », un ي après une kasra allonge en « ī » (comme l'alif allonge le « â »). Lisez :" },
-      { lignes: [
-        { ar: 'نُور', tr: 'nūr', fr: 'lumière', note: 'le و note ici le son ū' },
-        { ar: 'كِتَاب', tr: 'kitāb', fr: 'un livre', note: 'le ا allonge : ki-tāb' },
-        { ar: 'قَلَم', tr: 'qalam', fr: 'un calame, une plume', note: 'le qāf, un k profond' },
-        { ar: 'يَوْم', tr: 'yawm', fr: 'un jour', note: 'ici و est la consonne w' },
-      ]},
-      { texte: "Les lettres se lient dans un mot et changent un peu de forme selon leur place. Le nūn par exemple : isolé ن, au début نـ, au milieu ـنـ, à la fin ـن. Le squelette reste reconnaissable." },
-    ],
-    grammaire: {
-      titre: "Voyelle longue ou voyelle brève ?",
-      corps: "La voyelle longue dure environ deux fois plus que la brève, et cela change le sens : كَتَبَ (kataba, il a écrit) et كَاتِب (kātib, celui qui écrit) ne diffèrent que par l'allongement.\n" +
-        "Les supports de l'allongement sont : ا pour « â », و pour « ū », ي pour « ī ».\n" +
-        "Mais و et ي peuvent aussi être de simples consonnes (w, y), comme dans يَوْم. Le contexte tranche.",
-    },
-    approfondissement: [
-      { titre: "Comment les lettres se tiennent par la main",
-        corps: "Dans un mot, les lettres se lient comme une écriture attachée : chacune peut prendre quatre formes selon sa place — isolée, au début, au milieu, à la fin —, mais son squelette reste toujours reconnaissable.\n" +
-          "Six lettres font exception et ne s'attachent jamais à celle qui les suit (à leur gauche) : ا د ذ ر ز و. Après l'une d'elles, le mot semble se « rouvrir », et la lettre d'après reprend sa forme de début.\n" +
-          "Ne cherchez pas à mémoriser tous ces tracés aujourd'hui. Reconnaissez le squelette, et lisez : la familiarité fera le reste, un mot après l'autre.",
-    }],
-    vocabulaire: [
-      { ar: 'كِتَاب', tr: 'kitāb', fr: 'livre', cle: 'kitab', ill: '📖' },
-      { ar: 'قَلَم', tr: 'qalam', fr: 'plume, calame', cle: 'qalam', ill: '🖋️' },
-      { ar: 'نُور', tr: 'nūr', fr: 'lumière', cle: 'nur', ill: '💡' },
-      { ar: 'مَلِك', tr: 'malik', fr: 'roi', cle: 'malik', ill: '👑' },
-      { ar: 'يَوْم', tr: 'yawm', fr: 'jour', cle: 'yawm', ill: '☀️' },
-      { ar: 'سَلَام', tr: 'salām', fr: 'paix', cle: 'salam', ill: '🕊️' },
-      { ar: 'قُلْ', tr: 'qul', fr: 'dis !', cle: 'qul', ill: '🗣️' },
-      { ar: 'مُسْلِم', tr: 'muslim', fr: 'musulman, soumis', cle: 'muslim' },
-      { ar: 'كَتَبَ', tr: 'kataba', fr: 'il a écrit', cle: 'kataba', ill: '✍️' },
-    ],
-    exercices: [
-      { type: 'qcm', consigne: 'Rappel de la leçon précédente : lequel est le s emphatique ?',
-        options: [{ ar: 'ص' }, { ar: 'س' }, { ar: 'ش' }], bonne: 0,
-        explication: 'ص (ṣād), la boucle pleine : le s prononcé bouche pleine.' },
-      { type: 'appariement', consigne: 'Les nouvelles lettres : reliez chacune à son nom.',
-        paires: [ { ar: 'ف', fr: 'fāʾ' }, { ar: 'ق', fr: 'qāf' }, { ar: 'ل', fr: 'lām' }, { ar: 'م', fr: 'mīm' } ] },
-      { type: 'qcm', consigne: 'Quelle lettre est un « k » profond, prononcé dans la gorge ?',
-        options: [{ ar: 'ك' }, { ar: 'ق' }, { ar: 'ف' }], bonne: 1,
-        explication: 'ق (qāf) se prononce très en arrière, contrairement au ك ordinaire.' },
-      { type: 'qcm', consigne: 'Dans le mot نُور (lumière), le و note :',
-        options: [{ texte: 'le son w' }, { texte: 'le son long ū' }, { texte: 'le son a' }], bonne: 1, cles: ['nur'],
-        explication: 'و sert ici de voyelle longue ū. Il peut aussi être la consonne w.' },
-      { type: 'phonetique', consigne: 'Soignez le point d’articulation : quelle transcription pour قَلْب ?',
-        motAr: 'قَلْب', options: ['qalb (cœur)', 'kalb (chien)'], bonne: 0 },
-      { type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription.',
-        motAr: 'كِتَاب', options: ['kitāb', 'katab', 'kutub'], bonne: 0, cles: ['kitab'] },
-      { type: 'dictee', consigne: 'Écoutez : k ordinaire ou q profond ?',
-        audio: 'قَا', options: [{ ar: 'قَا' }, { ar: 'كَا' }], bonne: 0 },
-      { type: 'dictee', consigne: 'Écoutez le mot, puis choisissez son écriture.',
-        audio: 'نُور', options: [{ ar: 'نُور' }, { ar: 'نَار' }, { ar: 'نِير' }], bonne: 0, cles: ['nur'] },
-      { type: 'contexte', consigne: 'Pour lire le son long « ū » dans « nūr », quelle lettre support après le ن + ḍamma ?',
-        avant: 'نُ', apres: 'ر', options: [{ ar: 'و' }, { ar: 'ي' }, { ar: 'ا' }], bonne: 0,
-        traduction: 'nūr — la lumière', cles: ['nur'] },
-      { type: 'qcm', consigne: 'La forme ـنـ (au milieu d’un mot) est celle de quelle lettre ?',
-        options: [{ ar: 'ن (nūn)' }, { ar: 'م (mīm)' }, { ar: 'ل (lām)' }], bonne: 0,
-        explication: 'C’est le nūn en position médiane : le squelette reste reconnaissable.' },
-      { type: 'glisser', consigne: 'Remettez les morceaux dans l’ordre pour écrire « kitāb » (livre).',
-        ordre: ['كِ', 'تَا', 'ب'], traduction: 'kitāb — un livre', cles: ['kitab'] },
-      { type: 'glisser', consigne: 'Reconstituez « salām » (paix).',
-        ordre: ['سَ', 'لَا', 'م'], traduction: 'salām — la paix', cles: ['salam'],
-        explication: 'On écrit سَلَام et on lit « salām ». À l\'oral, on entend souvent « salāmun » : c\'est le même mot, avec la terminaison de cas (le tanwīn « -oun », marque de l\'indéfini « une paix »). Vous verrez ce signe en leçon 5.' },
-      { type: 'texteLibre', consigne: 'Écrivez le mot « jour ».',
-        reponse: 'يوم', indice: 'yawm', traduction: 'un jour', cles: ['yawm'] },
-      { type: 'texteLibre', consigne: 'Écrivez le mot « roi ».',
-        reponse: 'ملك', indice: 'malik', traduction: 'un roi', cles: ['malik'] },
-      { type: 'saisie', consigne: 'Écrivez le verbe « il a écrit ».',
-        indice: 'kataba : trois lettres, trois fatḥa (ك ت ب).', reponse: 'كتب', cles: ['kataba'] },
-      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
-        paires: [ { ar: 'كِتَاب', fr: 'livre', cle: 'kitab' }, { ar: 'مَلِك', fr: 'roi', cle: 'malik' }, { ar: 'يَوْم', fr: 'jour', cle: 'yawm' }, { ar: 'قَلَم', fr: 'plume', cle: 'qalam' } ] },
-      { type: 'dictee', consigne: 'Écoutez le mot, puis écrivez-le au clavier.',
-        mode: 'saisie', audio: 'قَلَم', reponse: 'قلم', cles: ['qalam'] },
-      { type: 'ecoute', consigne: 'L\'oreille seule : écoutez et choisissez le sens.',
-        audio: 'نُور', options: [{ texte: 'lumière' }, { texte: 'livre' }, { texte: 'roi' }], bonne: 0, cles: ['nur'],
-        explication: 'nūr : le wāw y chante la voyelle longue « ū ». La lumière — un mot que le Coran aime.' },
-      { type: 'qcm', consigne: 'Que signifie قُلْ ?',
-        options: [{ texte: 'il a dit' }, { texte: 'dis !' }, { texte: 'la parole' }], bonne: 1, cles: ['qul'],
-        explication: 'قُلْ, « dis ! », ouvre plusieurs sourates du Coran.' },
-      { type: 'oral', consigne: 'Lisez ces mots à voix haute.',
-        phraseAr: 'كِتَاب نُور سَلَام', translit: 'kitāb, nūr, salām', cles: ['kitab','nur','salam'] },
-    ],
-    memoriser: { ar: 'كِتَاب', tr: 'kitāb', fr: 'Un livre (le Coran est al-kitāb, le Livre par excellence).' },
-    recap: [
-      'L’alphabet arabe est complet : 28 lettres.',
-      'ق est un k profond, ك un k ordinaire : قَلْب (cœur) ≠ كَلْب (chien).',
-      'Voyelles longues : ا (â), و (ū), ي (ī) ; و et ي sont aussi consonnes (w, y).',
-      'Les lettres se lient et changent de forme selon leur place.',
-    ],
-  },
+  /* ===================== CYCLE II — LIRE LE CORAN À VOIX HAUTE ===================== */
 
-  5: {
-    cycle: 1,
-    titre: "La tāʾ marbūṭa, le tanwīn et la ligature lām-alif",
-    intro: "Trois signes de plus, et vous lirez presque tout. La tāʾ marbūṭa marque souvent le féminin ; le tanwīn ajoute un son « n » à la fin ; la ligature لا fond le lām et l'alif.\n" +
-      "Vous pourrez alors lire des mots essentiels comme صَلَاة (la prière) ou رَحْمَة (la miséricorde).\n" +
-      "Continuez à lire à voix haute : c'est l'oreille, autant que l'œil, qui apprend.",
+  9: {
+    cycle: 2,
+    titre: "La tāʾ marbūṭa : la lettre du féminin",
+    intro: "L'alphabet est complet ; il reste quelques signes à apprivoiser, un par leçon — sans hâte. Le premier est une lettre « nouée » : la tāʾ marbūṭa ة.\n" +
+      "Elle ne vit qu'en fin de mot, se lit « a » quand on s'arrête dessus, « at » quand on enchaîne, et marque le plus souvent le féminin.\n" +
+      "Elle vous ouvre des mots essentiels : صَلَاة (la prière), رَحْمَة (la miséricorde), جَنَّة (le jardin).",
     decouverte: [
-      { texte: "La tāʾ marbūṭa ة est un ت « noué », en fin de mot. Elle se dit « a » à la pause, et « at » quand le mot est lié au suivant. Elle marque le plus souvent le féminin." },
+      { texte: "La tāʾ marbūṭa ة est un ت « noué » : regardez-la comme un ه surmonté des deux points du ت. On ne la trouve qu'en fin de mot." },
       { lignes: [
-        { ar: 'صَلَاة', tr: 'ṣalāt', fr: 'la prière' },
-        { ar: 'رَحْمَة', tr: 'raḥma', fr: 'miséricorde' },
-        { ar: 'جَنَّة', tr: 'janna', fr: 'jardin, paradis', note: 'shadda sur le ن' },
-        { ar: 'كَلِمَة', tr: 'kalima', fr: 'parole, mot' },
+        { ar: 'صَلَاة', tr: 'ṣalāt', fr: 'la prière', ill: '🤲' },
+        { ar: 'رَحْمَة', tr: 'raḥma', fr: 'miséricorde', ill: '💗' },
+        { ar: 'جَنَّة', tr: 'janna', fr: 'jardin, paradis', ill: '🌳', note: 'shadda sur le ن — leçon 8 !' },
+        { ar: 'كَلِمَة', tr: 'kalima', fr: 'parole, mot', ill: '💬' },
       ]},
-      { texte: "Le tanwīn est une voyelle doublée en fin de mot, qui se prononce avec un « n » : ـٌ (oun), ـٍ (in), ـً (an). Il marque souvent l'indéfini, « un / une ». Ainsi سَلَام (salām) devient سَلَامٌ (salāmun), « une paix » : c'est le même mot, le tanwīn ne fait qu'ajouter la terminaison « -oun »." },
-      { lignes: [
-        { ar: 'سَلَامٌ', tr: 'salāmun', fr: 'une paix', note: 'tanwīn ḍamma : « oun »' },
-        { ar: 'كِتَابًا', tr: 'kitāban', fr: 'un livre (cas direct)', note: 'tanwīn fatḥa : « an »' },
-      ]},
-      { texte: "Le même mot sous ses trois tanwīn — بَدْر, la pleine lune. Une règle d'écriture à remarquer : après le son « an », on ajoute un alif." },
-      { lignes: [
-        { ar: 'بَدْرٌ', tr: 'badrun', fr: 'une pleine lune (son « oun »)', ill: '🌕', note: 'tanwīn ḍamma ـٌ' },
-        { ar: 'بَدْرًا', tr: 'badran', fr: 'une pleine lune (son « an »)', note: 'tanwīn fatḥa ـً + alif ajouté' },
-        { ar: 'بَدْرٍ', tr: 'badrin', fr: 'une pleine lune (son « in »)', note: 'tanwīn kasra ـٍ' },
-      ]},
-      { texte: "Ces trois finales sont les « cas » déjà croisés : elles disent le rôle du mot dans la phrase. Aujourd'hui, sachez seulement les LIRE — leur sens précis viendra en son temps, sans effort." },
-      { texte: "Quand un lām ل est suivi d'un alif ا, les deux fusionnent obligatoirement en une ligature : لا. On la voit dans لَا (non) et dans سَلَام (paix)." },
+      { texte: "Sa lecture suit une règle simple : à la pause (quand le mot est isolé ou termine la phrase), on dit « a » — ṣalā(h), raḥma. Quand le mot s'enchaîne au suivant, elle sonne « at » — raḥmat-…" },
+      { texte: "Et sa valeur : elle marque le plus souvent le féminin. Rien à analyser pour l'instant — prenez seulement le réflexe de la REPÉRER d'un coup d'œil en fin de mot. Ce réflexe vous servira dans tout le Cycle III." },
+      { texte: "Remarquez comme ces mots féminins sont au cœur de la foi : la prière, la miséricorde, le jardin, la parole. Les lire, c'est déjà fréquenter le vocabulaire du Coran." },
     ],
     grammaire: {
-      titre: "La tāʾ marbūṭa, signe du féminin",
+      titre: "La tāʾ marbūṭa, signe à repérer",
       corps: "La lettre ة, en fin de mot, indique presque toujours le féminin : on l'obtient souvent en ajoutant ة à la forme masculine.\n" +
         "À l'oral, elle se dit « a » quand le mot est isolé, et « at » quand il est suivi d'un autre mot.\n" +
-        "Le tanwīn, lui, ajoute un « n » final et signale l'indéfini. Ce sont les dernières briques avant de lire des phrases.",
+        "Pour l'instant, contentez-vous de la lire juste et de la repérer : la grammaire du genre viendra à son heure, au Cycle III.",
     },
     approfondissement: [
-      { titre: "Le tanwīn et les cas : soyez rassuré·e",
-        corps: "Le tanwīn (ـٌ ـٍ ـً) peut intimider, car il touche à la grammaire des « cas ». Pour l'instant, ne retenez que ceci : c'est une terminaison qui ajoute un « n » et marque l'indéfini, « un / une ».\n" +
-          "Ses trois formes répondent au rôle du mot dans la phrase : « -oun » (ـٌ), « -in » (ـٍ), « -an » (ـً). كِتَابٌ, كِتَابٍ, كِتَابًا, cela reste toujours « un livre » : seul le rôle change. Ces rôles, vous les étudierez plus tard, sans aucune hâte.\n" +
-          "Pour la tāʾ marbūṭa, gardez sa règle simple en tête : « a » quand le mot s'arrête, « at » quand il s'enchaîne. صَلَاة se lit « ṣalā » seul, et « ṣalāt » lié au mot suivant.",
+      { titre: "raḥma, la miséricorde qui enveloppe tout",
+        corps: "Le mot رَحْمَة vient d'une racine qui désigne aussi la matrice maternelle (raḥim) : la miséricorde d'Allah enveloppe comme le sein enveloppe l'enfant.\n" +
+          "De cette même racine naissent ar-Raḥmān et ar-Raḥīm, les deux noms qui ouvrent presque chaque sourate. Vous les lirez bientôt en comprenant leur parenté.\n" +
+          "Un mot, une racine, une constellation de sens : c'est ainsi que le vocabulaire coranique se laisse aimer.",
     }],
     vocabulaire: [
       { ar: 'صَلَاة', tr: 'ṣalāt', fr: 'prière', cle: 'salat', ill: '🤲' },
@@ -588,31 +921,22 @@ const Lecons = {
       { ar: 'كَلِمَة', tr: 'kalima', fr: 'parole, mot', cle: 'kalima', ill: '💬' },
     ],
     exercices: [
+      { type: 'qcm', consigne: 'Rappel de la leçon 8 : que fait la shadda ?',
+        options: [{ texte: 'elle double la consonne' }, { texte: 'elle allonge la voyelle' }], bonne: 0,
+        explication: 'La shadda redouble : رَبّ = rabb. Vous la retrouvez aujourd\'hui dans جَنَّة (janna).' },
       { type: 'qcm', consigne: 'Quelle lettre marque le plus souvent le féminin, en fin de mot ?',
         options: [{ ar: 'ة' }, { ar: 'ن' }, { ar: 'ا' }], bonne: 0,
         explication: 'La tāʾ marbūṭa ة, en fin de mot, signale le féminin.' },
       { type: 'qcm', consigne: 'Comment se prononce la ة de صَلَاة quand le mot est isolé ?',
         options: [{ texte: 'at' }, { texte: 'a' }, { texte: 'on' }], bonne: 1,
-        explication: 'À la pause, on dit ṣalā(t) avec un simple « a » ; liée, elle redevient « at ».' },
-      { type: 'qcm', consigne: 'Le tanwīn ( ـً ـٍ ـٌ ) se prononce avec :',
-        options: [{ texte: 'un son « n » final' }, { texte: 'un souffle' }, { texte: 'rien de particulier' }], bonne: 0,
-        explication: 'Le tanwīn ajoute un « n » : salām-un, kitāb-an.' },
-      { type: 'qcm', consigne: 'Que devient le lām ل suivi d’un alif ا ?',
-        options: [{ texte: 'ils fusionnent en لا' }, { texte: 'le lām disparaît' }, { texte: 'rien ne change' }], bonne: 0,
-        explication: 'Le lām + alif fusionnent obligatoirement en la ligature لا.' },
+        explication: 'À la pause, on dit ṣalā(h) avec un simple « a » ; liée, elle redevient « at ».' },
       { type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription.',
         motAr: 'رَحْمَة', options: ['raḥma', 'raḥīm', 'raḥam'], bonne: 0, cles: ['rahma'] },
-      { type: 'phonetique', consigne: 'Lisez ce mot avec son tanwīn.',
-        motAr: 'سَلَامٌ', options: ['salāmun', 'salāman', 'salāmin'], bonne: 0,
-        explication: 'سَلَام (salām, « paix ») + tanwīn ḍamma (ـٌ) se lit « salāmun ». Le tanwīn ajoute le son « -oun » et marque l\'indéfini : « une paix ». C\'est exactement le même mot que سَلَام, avec sa terminaison.' },
       { type: 'dictee', consigne: 'Écoutez le mot féminin, puis choisissez son écriture.',
-        audio: 'جَنَّة', options: [{ ar: 'جَنَّة' }, { ar: 'جَنَّات' }, { ar: 'جَنَب' }], bonne: 0, cles: ['janna'] },
+        audio: 'جَنَّة', options: [{ ar: 'جَنَّة' }, { ar: 'جَنَّب' }, { ar: 'حَنَّة' }], bonne: 0, cles: ['janna'] },
       { type: 'contexte', consigne: 'Pour écrire « miséricorde » au féminin, quelle lettre finale ?',
         avant: 'رَحْمَ', apres: '', options: [{ ar: 'ة' }, { ar: 'ت' }, { ar: 'ه' }], bonne: 0,
         traduction: 'raḥma — la miséricorde', cles: ['rahma'] },
-      { type: 'contexte', consigne: 'Choisissez le tanwīn qui donne le son « oun » (indéfini, cas sujet).',
-        avant: '', apres: '', options: [{ ar: 'سَلَامٌ' }, { ar: 'سَلَامً' }, { ar: 'سَلَامٍ' }], bonne: 0,
-        traduction: 'salāmun — une paix' },
       { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
         paires: [ { ar: 'صَلَاة', fr: 'prière', cle: 'salat' }, { ar: 'رَحْمَة', fr: 'miséricorde', cle: 'rahma' }, { ar: 'جَنَّة', fr: 'jardin', cle: 'janna' }, { ar: 'كَلِمَة', fr: 'parole', cle: 'kalima' } ] },
       { type: 'texteLibre', consigne: 'Écrivez le mot « miséricorde » (avec une tāʾ marbūṭa finale).',
@@ -623,9 +947,6 @@ const Lecons = {
         indice: 'kalima : ك ل م + ة.', reponse: 'كلمة', cles: ['kalima'] },
       { type: 'dictee', consigne: 'Écoutez le mot, puis écrivez-le au clavier.',
         mode: 'saisie', audio: 'صَلَاة', reponse: 'صلاة', cles: ['salat'] },
-      { type: 'dictee', consigne: 'L\'oreille du tanwīn : « oun », « an » ou « in » ? Écoutez la finale.',
-        audio: 'سَلَامٌ', options: [{ ar: 'سَلَامٌ' }, { ar: 'سَلَامًا' }, { ar: 'سَلَامٍ' }], bonne: 0, cles: ['salam'],
-        explication: 'salām-un : le tanwīn ḍamma. L\'option en « an » se reconnaît aussi à l\'œil, par son alif final.' },
       { type: 'ecoute', consigne: 'L\'oreille seule : écoutez ce mot féminin et choisissez son sens.',
         audio: 'رَحْمَة', options: [{ texte: 'miséricorde' }, { texte: 'prière' }, { texte: 'parole' }], bonne: 0, cles: ['rahma'],
         explication: 'raḥma : la douceur du ḥ, la ة finale du féminin. La miséricorde, mot-clé de toute la révélation.' },
@@ -634,51 +955,126 @@ const Lecons = {
     ],
     memoriser: { ar: 'رَحْمَة', tr: 'raḥma', fr: 'La miséricorde. La ة finale en fait un mot féminin.' },
     recap: [
-      'La tāʾ marbūṭa ة marque le féminin : « a » isolée, « at » liée.',
-      'Le tanwīn double la voyelle finale avec un « n » : marque de l’indéfini.',
-      'Le lām + alif fusionnent en la ligature لا.',
+      'La tāʾ marbūṭa ة ne vit qu\'en fin de mot : « a » isolée, « at » liée.',
+      'Elle marque le plus souvent le féminin — un signe à repérer d\'un coup d\'œil.',
       'Vous lisez صَلَاة, رَحْمَة, جَنَّة, كَلِمَة.',
+      'La grammaire du genre viendra au Cycle III ; aujourd\'hui, on lit juste.',
     ],
   },
 
-  6: {
-    cycle: 1,
-    titre: "La hamza, l'alif maqṣūra, la madda — et premières lectures",
-    intro: "Dernière étape du système d'écriture. Après cette leçon, vous saurez déchiffrer n'importe quel mot vocalisé, et vous lirez votre premier verset entier.\n" +
-      "Au programme : la hamza (le coup de glotte), l'alif maqṣūra et la madda. Puis une grande révision active.\n" +
-      "Félicitez-vous : ce que vous voyiez comme des dessins est devenu une langue qui se lit.",
+  10: {
+    cycle: 2,
+    titre: "Le tanwīn : le petit « n » de la fin des mots",
+    intro: "Vous avez sûrement remarqué, à l'écoute, ces finales en « -oun » ou « -ane » : salāmun, kitāban… C'est le tanwīn, une voyelle doublée en fin de mot, qui se prononce avec un « n ».\n" +
+      "Aujourd'hui, on apprend simplement à le LIRE — trois formes, trois sons. Ce qu'il veut dire en grammaire attendra son heure, et vous verrez qu'elle viendra toute seule.\n" +
+      "Une promesse pour vous rassurer : rien de nouveau à prononcer, seulement un « n » à ajouter.",
     decouverte: [
-      { texte: "La hamza ء note un bref coup de glotte, comme l'arrêt entre les deux « a » de « la-aïe ». Elle se pose souvent sur un support : أ et إ (sur l'alif), ؤ (sur le wāw), ئ (sur le yāʾ)." },
+      { texte: "Le tanwīn double la voyelle finale du mot et se prononce avec un « n » : ـٌ (oun), ـٍ (in), ـً (an). Écoutez-le sur سَلَام, que vous connaissez depuis la leçon 5 :" },
       { lignes: [
-        { ar: 'أَخ', tr: 'akh', fr: 'un frère', note: 'hamza sur l’alif + fatḥa' },
-        { ar: 'إِيمَان', tr: 'īmān', fr: 'la foi', note: 'hamza sur kasra : « i »' },
-        { ar: 'سَمَاء', tr: 'samāʾ', fr: 'le ciel', note: 'hamza finale' },
+        { ar: 'سَلَامٌ', tr: 'salāmun', fr: 'une paix', note: 'tanwīn ḍamma : « oun »' },
+        { ar: 'كِتَابًا', tr: 'kitāban', fr: 'un livre', note: 'tanwīn fatḥa : « an »' },
+        { ar: 'نَجْمٍ', tr: 'najmin', fr: 'une étoile', note: 'tanwīn kasra : « in »' },
       ]},
-      { texte: "L'alif maqṣūra ى est un alif final écrit comme un yāʾ sans points ; il note un « â » à la fin de mots comme عَلَى. La madda آ note un « â » long en début de mot, comme dans قُرْآن." },
-      { texte: "Avant de lire, exerçons l'oreille sur les sons les plus délicats. Changer l'un pour l'autre, c'est changer de mot. Lisez chaque paire à voix haute :" },
+      { texte: "Le même mot sous ses trois tanwīn — نَجْم, l'étoile de la leçon 4. Une règle d'écriture à remarquer : après le son « an », on ajoute un alif." },
       { lignes: [
-        { ar: 'كَلْب ← قَلْب', tr: 'kalb → qalb', fr: 'chien → cœur', note: 'ك ordinaire ↔ ق profond' },
-        { ar: 'أَمَل ← عَمَل', tr: 'amal → ʿamal', fr: 'espoir → œuvre', note: 'ء hamza ↔ ع de gorge' },
-        { ar: 'نَذِير ← نَظِير', tr: 'nadhīr → naẓīr', fr: 'avertisseur → semblable', note: 'ذ simple ↔ ظ emphatique' },
+        { ar: 'نَجْمٌ', tr: 'najmun', fr: 'une étoile (son « oun »)', ill: '⭐', note: 'tanwīn ḍamma ـٌ' },
+        { ar: 'نَجْمًا', tr: 'najman', fr: 'une étoile (son « an »)', note: 'tanwīn fatḥa ـً + alif ajouté' },
+        { ar: 'نَجْمٍ', tr: 'najmin', fr: 'une étoile (son « in »)', note: 'tanwīn kasra ـٍ' },
       ]},
-      { texte: "Vous avez désormais toutes les clés. Voici le premier verset entièrement lisible, la sourate al-Ikhlāṣ (versets 1-2) :" },
-      { lignes: [
-        { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ', tr: 'qul huwa llāhu aḥad', fr: 'Dis : Il est Allah, Unique.' },
-        { ar: 'اللَّهُ الصَّمَدُ', tr: 'allāhu ṣ-ṣamad', fr: 'Allah, le Soutien universel.' },
-      ]},
+      { texte: "Ces trois finales correspondent aux « cas » : elles disent le rôle du mot dans la phrase. Aujourd'hui, sachez seulement les LIRE — leur sens précis viendra en son temps, sans effort." },
+      { texte: "Un mot nouveau pour s'entraîner : وَلَد (un garçon, un enfant). Lisez : وَلَدٌ (waladun), وَلَدًا (waladan), وَلَدٍ (waladin). Toujours le même enfant — seule la terminaison danse." },
     ],
     grammaire: {
-      titre: "Distinguer les sons proches : le sens en dépend",
-      corps: "Confondre deux lettres voisines n'est pas une maladresse d'accent : en arabe, cela change le mot. Dire kalb (chien) pour qalb (cœur), ou amal (espoir) pour ʿamal (œuvre), c'est dire autre chose.\n" +
-        "Dans la récitation du Coran, cette exactitude porte un nom : le tajwīd, l'art de donner à chaque lettre son point de sortie et ses qualités.\n" +
-        "Un conseil : lisez lentement, à voix haute, en exagérant d'abord la différence, puis revenez au naturel. L'oreille apprend par contraste.",
+      titre: "Trois tanwīn, un seul geste",
+      corps: "Le tanwīn s'écrit en doublant le signe de la voyelle finale : ـٌ se lit « -oun », ـٍ « -in », ـً « -an » (avec un alif ajouté à l'écrit).\n" +
+        "Il ne change pas le mot : سَلَام et سَلَامٌ sont le même mot, « paix » — le tanwīn ne fait qu'ajouter la terminaison.\n" +
+        "Vous entendrez ces finales dans chaque verset. Désormais, elles ne vous surprendront plus : vous saurez les lire et les écrire.",
     },
     approfondissement: [
-      { titre: "Ligatures et signes à reconnaître",
-        corps: "Quelques assemblages reviennent sans cesse. Le lām suivi d'un alif fusionne en لا (لَا, non ; سَلَام, paix).\n" +
-          "Deux alifs qui se rencontrent se fondent en un seul surmonté d'une madda : آ, comme dans آمَنَ (il a cru) ou القُرْآن.\n" +
-          "L'alif maqṣūra ى note un « â » final dans عَلَى, إِلَى, مُوسَى." },
+      { titre: "Le tanwīn et les cas : soyez rassuré·e",
+        corps: "Le tanwīn (ـٌ ـٍ ـً) peut intimider, car il touche à la grammaire des « cas ». Pour l'instant, ne retenez que ceci : c'est une terminaison qui ajoute un « n » — et vous découvrirez au Cycle III qu'elle signale souvent « un / une ».\n" +
+          "Ses trois formes répondent au rôle du mot dans la phrase : « -oun » (ـٌ), « -in » (ـٍ), « -an » (ـً). كِتَابٌ, كِتَابٍ, كِتَابًا, cela reste toujours « un livre » : seul le rôle change. Ces rôles, vous les étudierez plus tard, sans aucune hâte.\n" +
+          "La salutation que vous connaissez déjà en porte un : السَّلَامُ عَلَيْكُمْ répond à سَلَامٌ عَلَيْكُمْ dans le Coran — « une paix sur vous ». Votre oreille connaissait le tanwīn avant vous.",
+    }],
+    vocabulaire: [
+      { ar: 'وَلَد', tr: 'walad', fr: 'garçon, enfant', cle: 'walad', ill: '🧒' },
     ],
+    exercices: [
+      { type: 'qcm', consigne: 'Rappel de la leçon 9 : comment se lit la ة de رَحْمَة, à la pause ?',
+        options: [{ texte: '« a » : raḥma' }, { texte: '« at » : raḥmat' }], bonne: 0, cles: ['rahma'],
+        explication: 'À la pause, la tāʾ marbūṭa se lit « a » ; liée au mot suivant, « at ».' },
+      { type: 'qcm', consigne: 'Le tanwīn ( ـً ـٍ ـٌ ) se prononce avec :',
+        options: [{ texte: 'un son « n » final' }, { texte: 'un souffle' }, { texte: 'rien de particulier' }], bonne: 0,
+        explication: 'Le tanwīn ajoute un « n » : salām-un, kitāb-an.' },
+      { type: 'phonetique', consigne: 'Lisez ce mot avec son tanwīn.',
+        motAr: 'سَلَامٌ', options: ['salāmun', 'salāman', 'salāmin'], bonne: 0, cles: ['salam'],
+        explication: 'سَلَام + tanwīn ḍamma (ـٌ) se lit « salāmun ». C\'est exactement le même mot que سَلَام, avec sa terminaison.' },
+      { type: 'appariement', consigne: 'Reliez chaque forme de نَجْم à son son final.',
+        paires: [ { ar: 'نَجْمٌ', fr: 'najm-oun', cle: 'najm' }, { ar: 'نَجْمًا', fr: 'najm-ane' }, { ar: 'نَجْمٍ', fr: 'najm-ine' } ] },
+      { type: 'qcm', consigne: 'Quelle particularité d\'écriture accompagne le tanwīn « an » (ـً) ?',
+        options: [{ texte: 'on ajoute un alif : نَجْمًا' }, { texte: 'on double la lettre' }, { texte: 'aucune' }], bonne: 0,
+        explication: 'Après le son « an », l\'écriture ajoute un alif : كِتَابًا, نَجْمًا.' },
+      { type: 'contexte', consigne: 'Choisissez le tanwīn qui donne le son « oun ».',
+        avant: '', apres: '', options: [{ ar: 'سَلَامٌ' }, { ar: 'سَلَامًا' }, { ar: 'سَلَامٍ' }], bonne: 0,
+        traduction: 'salāmun — une paix', cles: ['salam'] },
+      { type: 'dictee', consigne: 'L\'oreille du tanwīn : « oun », « an » ou « in » ? Écoutez la finale.',
+        audio: 'سَلَامٌ', options: [{ ar: 'سَلَامٌ' }, { ar: 'سَلَامًا' }, { ar: 'سَلَامٍ' }], bonne: 0, cles: ['salam'],
+        explication: 'salām-un : le tanwīn ḍamma. L\'option en « an » se reconnaît aussi à l\'œil, par son alif final.' },
+      { type: 'dictee', consigne: 'Écoutez ce mot nouveau et choisissez-le.',
+        audio: 'وَلَدٌ', options: [{ ar: 'وَلَدٌ' }, { ar: 'وَلَدٍ' }, { ar: 'بَلَدٌ' }], bonne: 0, cles: ['walad'],
+        explication: 'waladun : un garçon. La finale « -oun » est le tanwīn ḍamma.' },
+      { type: 'texteLibre', consigne: 'Écrivez le mot « garçon, enfant » (sans tanwīn).',
+        reponse: 'ولد', indice: 'walad : و ل د', traduction: 'un garçon', cles: ['walad'] },
+      { type: 'ecoute', consigne: 'L\'oreille seule : écoutez et choisissez le sens.',
+        audio: 'وَلَدٌ', options: [{ texte: 'un garçon' }, { texte: 'une étoile' }, { texte: 'une paix' }], bonne: 0, cles: ['walad'],
+        explication: 'waladun — un garçon, un enfant. Le tanwīn final dit « un » : vous l\'apprendrez bientôt.' },
+      { type: 'oral', consigne: 'Lisez le même mot sous ses trois tanwīn.',
+        phraseAr: 'نَجْمٌ نَجْمًا نَجْمٍ', translit: 'najmun, najman, najmin', cles: ['najm'] },
+    ],
+    memoriser: { ar: 'سَلَامٌ', tr: 'salāmun', fr: 'Une paix. « salāmun ʿalaykum » : une paix sur vous — la salutation de la jannah.' },
+    recap: [
+      'Le tanwīn double la voyelle finale et ajoute un « n » : ـٌ (oun), ـٍ (in), ـً (an).',
+      'Après le son « an », l\'écriture ajoute un alif : كِتَابًا.',
+      'Le mot ne change pas : سَلَامٌ reste « paix », avec sa terminaison.',
+      'Les « cas » derrière ces finales : on les écoute, on les comprendra au Cycle III.',
+    ],
+  },
+
+  11: {
+    cycle: 2,
+    titre: "La hamza, la madda et l'alif maqṣūra",
+    intro: "Voici les trois derniers signes du système d'écriture. Après cette leçon, vous saurez déchiffrer n'importe quel mot vocalisé du Coran.\n" +
+      "La hamza note le coup de glotte — ce petit arrêt de la voix entre les deux « a » de « la-haut ». La madda et l'alif maqṣūra sont deux façons d'écrire un « â » long.\n" +
+      "Et quels mots ils vous ouvrent : إِيمَان (la foi), سَمَاء (le ciel), قُرْآن (le Coran), أَحَد (Unique).",
+    decouverte: [
+      { texte: "La hamza ء note un bref coup de glotte, comme l'arrêt entre les deux « a » de « la-aïe ». Elle se pose souvent sur un support : أ et إ (sur l'alif), ؤ (sur le wāw), ئ (sur le yāʾ), ou reste seule en fin de mot : ء." },
+      { lignes: [
+        { ar: 'أَخ', tr: 'akh', fr: 'un frère', ill: '👦', note: 'hamza sur l\'alif + fatḥa' },
+        { ar: 'إِيمَان', tr: 'īmān', fr: 'la foi', ill: '💚', note: 'hamza sous l\'alif + kasra : « i »' },
+        { ar: 'سَمَاء', tr: 'samāʾ', fr: 'le ciel', ill: '🌌', note: 'hamza finale, sans support' },
+        { ar: 'أَحَد', tr: 'aḥad', fr: 'un, unique', ill: '☝️' },
+      ]},
+      { texte: "La règle du support est simple à l'usage : avec une fatḥa la hamza s'assied SUR l'alif (أَ), avec une kasra elle se glisse DESSOUS (إِ). Lisez : أَ = « a », إِ = « i »." },
+      { texte: "La madda آ note un « â » long commençant par un coup de glotte : deux alifs fondus en un seul, surmonté d'une vague. On la voit dans le plus beau des exemples : قُرْآن, qur-ʾān." },
+      { texte: "L'alif maqṣūra ى est un alif final déguisé en yāʾ sans points : il note un « â » à la fin de mots comme عَلَى (ʿalā, « sur ») ou مُوسَى (Mūsā, Moïse)." },
+      { lignes: [
+        { ar: 'قُرْآن', tr: 'qurʾān', fr: 'Coran, récitation', ill: '📿', note: 'la madda آ : « ʾā » long' },
+        { ar: 'عَلَى', tr: 'ʿalā', fr: 'sur', note: 'alif maqṣūra finale : un « â »' },
+      ]},
+      { texte: "C'était les trois derniers signes. Faites le compte : lettres, voyelles brèves et longues, sukūn, shadda, tāʾ marbūṭa, tanwīn, hamza, madda, maqṣūra — le système d'écriture est à vous." },
+    ],
+    grammaire: {
+      titre: "La hamza est une vraie consonne",
+      corps: "Le coup de glotte n'est pas un ornement : c'est une consonne à part entière, qui porte ses voyelles comme les autres — أَ (a), إِ (i), أُ (ou).\n" +
+        "Son support (alif, wāw, yāʾ ou rien) suit des règles d'écriture que vous absorberez par la lecture, sans les apprendre par cœur.\n" +
+        "La madda آ, elle, condense hamza + alif long : آمَنَ (il a cru) se lit ʾā-ma-na.",
+    },
+    approfondissement: [
+      { titre: "īmān, samāʾ : la foi et le ciel",
+        corps: "Le mot إِيمَان (la foi) vient d'une racine qui dit la sécurité et la confiance : croire, c'est se mettre en sûreté auprès de Celui qu'on croit. Le mot أَمَان (sécurité) en est le frère.\n" +
+          "Quant à سَمَاء (le ciel), il revient plus de trois cents fois dans le Coran, souvent au pluriel : سَمَاوَات, les cieux.\n" +
+          "Avec la hamza, ce sont les mots de la foi elle-même qui entrent dans votre lecture.",
+    }],
     vocabulaire: [
       { ar: 'أَخ', tr: 'akh', fr: 'frère', cle: 'akh', ill: '👦' },
       { ar: 'إِيمَان', tr: 'īmān', fr: 'foi', cle: 'iman', ill: '💚' },
@@ -687,79 +1083,219 @@ const Lecons = {
       { ar: 'قُرْآن', tr: 'qurʾān', fr: 'Coran, récitation', cle: 'quran', ill: '📿' },
     ],
     exercices: [
+      { type: 'qcm', consigne: 'Rappel de la leçon 10 : que se lit سَلَامٌ ?',
+        options: [{ texte: 'salāmun' }, { texte: 'salāman' }, { texte: 'salāmin' }], bonne: 0, cles: ['salam'],
+        explication: 'Le tanwīn ḍamma ajoute « -oun » : salāmun.' },
       { type: 'qcm', consigne: 'À quoi sert la hamza ( ء ) ?',
         options: [{ texte: 'à doubler la lettre' }, { texte: 'à noter un coup de glotte' }, { texte: 'à allonger la voyelle' }], bonne: 1,
-        explication: 'La hamza est l’arrêt glottal, ce petit blocage de la voix.' },
-      { type: 'qcm', consigne: 'L’alif maqṣūra ى, en fin de mot, se prononce :',
+        explication: 'La hamza est l\'arrêt glottal, ce petit blocage de la voix.' },
+      { type: 'qcm', consigne: 'L\'alif maqṣūra ى, en fin de mot, se prononce :',
         options: [{ texte: 'comme un « â » long' }, { texte: 'comme un « i »' }, { texte: 'comme un « n »' }], bonne: 0,
         explication: 'ى note un « â » final, comme dans عَلَى (ʿalā).' },
-      { type: 'qcm', consigne: 'Que note la madda ( آ ) en début de mot ?',
-        options: [{ texte: 'un « â » long' }, { texte: 'un coup de glotte seul' }, { texte: 'un « ou »' }], bonne: 0,
-        explication: 'La madda fond deux alifs en un « â » long : القُرْآن.' },
-      { type: 'phonetique', consigne: 'Distinguez le ق du ك : quelle transcription pour قَلْب ?',
-        motAr: 'قَلْب', options: ['qalb (cœur)', 'kalb (chien)'], bonne: 0 },
-      { type: 'phonetique', consigne: 'Écoutez le ع de gorge : quelle transcription pour عَمَل ?',
-        motAr: 'عَمَل', options: ['ʿamal (œuvre)', 'amal (espoir)'], bonne: 0 },
-      { type: 'dictee', consigne: 'Hamza ou ʿayn ? Écoutez et choisissez.',
-        audio: 'أَمَل', options: [{ ar: 'أَمَل' }, { ar: 'عَمَل' }], bonne: 0 },
-      { type: 'dictee', consigne: 'Cœur ou chien ? Un seul point d\'articulation les sépare. Écoutez.',
-        audio: 'قَلْب', options: [{ ar: 'قَلْب' }, { ar: 'كَلْب' }], bonne: 0,
-        explication: 'qalb : le ق vient du fond de la gorge. Avec le ك ordinaire, on obtient kalb, le chien. En récitation, cette distinction est capitale.' },
+      { type: 'qcm', consigne: 'Que note la madda ( آ ) ?',
+        options: [{ texte: 'un « â » long ouvert par un coup de glotte' }, { texte: 'un coup de glotte seul' }, { texte: 'un « ou »' }], bonne: 0,
+        explication: 'La madda fond hamza et alif long : قُرْآن (qur-ʾān).' },
       { type: 'dictee', consigne: 'Écoutez ce mot et choisissez son écriture.',
-        audio: 'إِيمَان', options: [{ ar: 'إِيمَان' }, { ar: 'أَمَان' }, { ar: 'عَمَل' }], bonne: 0, cles: ['iman'] },
-      { type: 'contexte', consigne: 'Pour écrire « îmân » (la foi), quel support de hamza au début, avec une kasra ?',
+        audio: 'إِيمَان', options: [{ ar: 'إِيمَان' }, { ar: 'أَمَان' }, { ar: 'إِنسَان' }], bonne: 0, cles: ['iman'] },
+      { type: 'contexte', consigne: 'Pour écrire « īmān » (la foi), quel support de hamza au début, avec une kasra ?',
         avant: '', apres: 'يمَان', options: [{ ar: 'إِ' }, { ar: 'أَ' }, { ar: 'ا' }], bonne: 0,
         traduction: 'īmān — la foi', cles: ['iman'] },
       { type: 'texteLibre', consigne: 'Écrivez le mot « foi ».',
-        reponse: 'إيمان', indice: 'īmān, hamza initiale sur kasra.', traduction: 'la foi', cles: ['iman'] },
+        reponse: 'إيمان', indice: 'īmān, hamza initiale sous l\'alif (kasra).', traduction: 'la foi', cles: ['iman'] },
       { type: 'texteLibre', consigne: 'Écrivez le mot « ciel ».',
         reponse: 'سماء', indice: 'samāʾ, avec une hamza finale.', traduction: 'le ciel', cles: ['sama'] },
       { type: 'saisie', consigne: 'Écrivez le mot « frère ».',
         indice: 'akh : hamza sur alif + خ.', reponse: 'أخ', cles: ['akh'] },
-      { type: 'glisser', consigne: 'Reconstituez le premier verset de la sourate al-Ikhlāṣ.',
-        ordre: ['قُلْ', 'هُوَ', 'اللَّهُ', 'أَحَدٌ'], traduction: 'Dis : Il est Allah, Unique.', cles: ['qul','ahad'],
-        explication: 'أَحَد dit l’Unicité absolue. Ce verset est le socle du tawḥīd.' },
-      { type: 'qcm', consigne: 'Que signifie قُلْ هُوَ اللَّهُ أَحَدٌ ?',
-        options: [{ texte: 'Louange à Allah' }, { texte: 'Dis : Il est Allah, Unique' }, { texte: 'Allah est le plus grand' }], bonne: 1, cles: ['qul','ahad'],
-        explication: 'qul (dis) + huwa (il) + allāh + aḥad (unique).' },
       { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
         paires: [ { ar: 'أَخ', fr: 'frère', cle: 'akh' }, { ar: 'إِيمَان', fr: 'foi', cle: 'iman' }, { ar: 'سَمَاء', fr: 'ciel', cle: 'sama' }, { ar: 'قُرْآن', fr: 'Coran', cle: 'quran' } ] },
       { type: 'dictee', consigne: 'Écoutez le mot, puis écrivez-le au clavier.',
         mode: 'saisie', audio: 'سَمَاء', reponse: 'سماء', cles: ['sama'] },
       { type: 'ecoute', consigne: 'L\'oreille seule : écoutez et choisissez le sens.',
         audio: 'أَحَد', options: [{ texte: 'un, unique' }, { texte: 'frère' }, { texte: 'ciel' }], bonne: 0, cles: ['ahad'],
-        explication: 'aḥad, l\'Unique — le mot qui clôt le premier verset d\'al-Ikhlāṣ, que vous savez maintenant lire.' },
-      { type: 'oral', consigne: 'Récitez le premier verset, lentement et à voix haute.',
-        phraseAr: 'قُلْ هُوَ اللَّهُ أَحَدٌ', translit: 'qul huwa llāhu aḥad', cles: ['qul','ahad'] },
-      { type: 'lecture',
-        consigne: 'Épreuve de passage. Vous savez désormais tout déchiffrer. Voici un vrai passage du Coran, que peu de gens connaissent par cœur : à vous de le lire. Écoutez chaque partie, lisez-la à voix haute, puis validez pour entrer dans le Cycle II.',
-        titre: 'Sourate al-Mulk (la Royauté), versets 1 et 2',
-        reference: 'Appuyez sur « Tout écouter » pour entendre la lecture partie par partie, puis lisez vous-même.',
-        segments: [
-          { ar: 'تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ', tr: 'tabāraka lladhī bi-yadihi l-mulk', fr: 'Béni soit Celui qui détient la royauté,' },
-          { ar: 'وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'wa-huwa ʿalā kulli shayʾin qadīr', fr: 'et qui est capable de toute chose ;' },
-          { ar: 'الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ', tr: 'alladhī khalaqa l-mawta wa-l-ḥayāt', fr: 'Celui qui a créé la mort et la vie' },
-          { ar: 'لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا', tr: 'li-yabluwakum ayyukum aḥsanu ʿamalā', fr: 'pour vous éprouver : qui de vous agira le mieux.' },
-          { ar: 'وَهُوَ الْعَزِيزُ الْغَفُورُ', tr: 'wa-huwa l-ʿazīzu l-ghafūr', fr: 'Et c\'est Lui le Puissant, le Pardonneur.' },
-        ] },
+        explication: 'aḥad, l\'Unique — le mot qui clôt le premier verset d\'al-Ikhlāṣ, votre sourate de la leçon 13.' },
+      { type: 'oral', consigne: 'Lisez ce mot en marquant bien la madda.',
+        phraseAr: 'قُرْآن', translit: 'qurʾān', cles: ['quran'] },
     ],
-    memoriser: { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ', tr: 'qul huwa llāhu aḥad', fr: 'Dis : Il est Allah, Unique. (al-Ikhlāṣ, 1) — votre premier verset entièrement lu.' },
+    memoriser: { ar: 'قُرْآن', tr: 'qurʾān', fr: 'La Récitation. Le Livre que vous apprenez, lettre à lettre, à lire.' },
     recap: [
       'La hamza ء note le coup de glotte, souvent sur un support (أ إ ؤ ئ).',
-      'L’alif maqṣūra ى note un « â » final ; la madda آ un « â » long initial.',
-      'Distinguez les sons proches : qalb (cœur) ≠ kalb (chien), ʿamal ≠ amal.',
-      'Vous savez désormais déchiffrer tout mot vocalisé — et lire un premier verset.',
+      'La madda آ note « ʾā » long ; l\'alif maqṣūra ى un « â » final.',
+      'Vous lisez إِيمَان, سَمَاء, قُرْآن, أَحَد, عَلَى.',
+      'Le système d\'écriture est désormais complet : tout mot vocalisé vous est lisible.',
     ],
   },
 
-  /* ===================== CYCLE II — PREMIERS MOTS ET STRUCTURES ===================== */
-
-  7: {
+  12: {
     cycle: 2,
+    titre: "L'oreille juste : distinguer les sons proches",
+    intro: "Aucun signe nouveau aujourd'hui — et c'est voulu. Avant d'entrer dans le sens des mots, offrons une leçon entière à votre oreille.\n" +
+      "En arabe, confondre deux lettres voisines n'est pas un accent : c'est changer de mot. kalb (chien) n'est pas qalb (cœur) ; amal (espoir) n'est pas ʿamal (œuvre).\n" +
+      "Écoutez beaucoup, exagérez d'abord les contrastes, puis revenez au naturel. C'est le premier pas du tajwīd, l'art de réciter juste.",
+    decouverte: [
+      { texte: "Voici les paires que les francophones confondent le plus. Lisez chaque paire à voix haute, plusieurs fois, en sentant ce qui change dans la bouche :" },
+      { lignes: [
+        { ar: 'كَلْب ← قَلْب', tr: 'kalb → qalb', fr: 'chien → cœur', note: 'ك ordinaire ↔ ق profond' },
+        { ar: 'أَمَل ← عَمَل', tr: 'amal → ʿamal', fr: 'espoir → œuvre', note: 'ء hamza ↔ ع de gorge' },
+        { ar: 'هَال ← حَال', tr: 'hāl → ḥāl', fr: 'h léger ↔ souffle appuyé', note: 'ه ↔ ح' },
+        { ar: 'سَيْف ← صَيْف', tr: 'sayf → ṣayf', fr: 'épée → été', note: 'س simple ↔ ص emphatique' },
+        { ar: 'نَذِير ← نَظِير', tr: 'nadhīr → naẓīr', fr: 'avertisseur → semblable', note: 'ذ simple ↔ ظ emphatique' },
+      ]},
+      { texte: "Trois familles de confusion : le fond de gorge (ق/ك، ع/ء، ح/ه), les emphatiques (ص/س، ط/ت، ظ/ذ، ض/د), et les durées (بَ bref / بَا long). Chacune distingue des mots réels du Coran." },
+      { texte: "Deux mots du jour, tirés de ces paires : عَمَل (l'œuvre, l'action — ce que pèse la balance au Jour du Jugement) et نَذِير (l'avertisseur — l'un des titres du Prophète ﷺ)." },
+      { texte: "Méthode pour toute la suite : quand deux sons se confondent, dites-les en alternance rapide — qa-ka-qa-ka, ha-ḥa-ha-ḥa — jusqu'à sentir le point précis où ils se séparent. L'oreille apprend par contraste." },
+    ],
+    grammaire: {
+      titre: "Distinguer les sons proches : le sens en dépend",
+      corps: "Confondre deux lettres voisines n'est pas une maladresse d'accent : en arabe, cela change le mot. Dire kalb (chien) pour qalb (cœur), ou amal (espoir) pour ʿamal (œuvre), c'est dire autre chose.\n" +
+        "Dans la récitation du Coran, cette exactitude porte un nom : le tajwīd, l'art de donner à chaque lettre son point de sortie et ses qualités.\n" +
+        "Un conseil : lisez lentement, à voix haute, en exagérant d'abord la différence, puis revenez au naturel. L'oreille apprend par contraste.",
+    },
+    approfondissement: [
+      { titre: "Pourquoi une leçon entière pour l'oreille",
+        corps: "On pourrait courir vers la grammaire — mais une oreille mal réglée transformerait chaque leçon suivante en malentendu. Les dix minutes que vous passez ici vous en économiseront cent.\n" +
+          "C'est aussi une affaire de respect : réciter le Coran en donnant à chaque lettre son droit, c'est honorer la Parole. Les récitateurs passent leur vie à polir ces distinctions.\n" +
+          "Ne cherchez pas la perfection aujourd'hui : cherchez la CONSCIENCE de la différence. La précision suivra, récitation après récitation.",
+    }],
+    vocabulaire: [
+      { ar: 'عَمَل', tr: 'ʿamal', fr: 'œuvre, action', cle: 'amal', ill: '⚒️' },
+      { ar: 'نَذِير', tr: 'nadhīr', fr: 'avertisseur', cle: 'nadhir', ill: '📢' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Rappel de la leçon 11 : que note la madda آ ?',
+        options: [{ texte: 'un « ʾā » long : قُرْآن' }, { texte: 'un coup de glotte seul' }], bonne: 0, cles: ['quran'],
+        explication: 'La madda fond hamza et alif long : qur-ʾān.' },
+      { type: 'phonetique', consigne: 'Distinguez le ق du ك : quelle transcription pour قَلْب ?',
+        motAr: 'قَلْب', options: ['qalb (cœur)', 'kalb (chien)'], bonne: 0, cles: ['qalb'] },
+      { type: 'phonetique', consigne: 'Écoutez le ع de gorge : quelle transcription pour عَمَل ?',
+        motAr: 'عَمَل', options: ['ʿamal (œuvre)', 'amal (espoir)'], bonne: 0, cles: ['amal'] },
+      { type: 'dictee', consigne: 'Hamza ou ʿayn ? Écoutez et choisissez.',
+        audio: 'أَمَل', options: [{ ar: 'أَمَل' }, { ar: 'عَمَل' }], bonne: 0,
+        explication: 'amal, l\'espoir : la voix s\'arrête net (hamza). ʿamal, l\'œuvre, serre le fond de la gorge.' },
+      { type: 'dictee', consigne: 'Cœur ou chien ? Un seul point d\'articulation les sépare. Écoutez.',
+        audio: 'قَلْب', options: [{ ar: 'قَلْب' }, { ar: 'كَلْب' }], bonne: 0, cles: ['qalb'],
+        explication: 'qalb : le ق vient du fond de la gorge. Avec le ك ordinaire, on obtient kalb, le chien. En récitation, cette distinction est capitale.' },
+      { type: 'dictee', consigne: 'h léger ou souffle appuyé ? Écoutez.',
+        audio: 'حَال', options: [{ ar: 'حَال' }, { ar: 'هَال' }], bonne: 0,
+        explication: 'ḥāl : le souffle vient de la gorge, dense. Le ه est léger comme un soupir.' },
+      { type: 'dictee', consigne: 'Épée ou été ? L\'emphatique assombrit la voyelle. Écoutez.',
+        audio: 'صَيْف', options: [{ ar: 'صَيْف' }, { ar: 'سَيْف' }], bonne: 0,
+        explication: 'ṣayf, l\'été : le « a » s\'assombrit après le ṣād. sayf, l\'épée, reste clair.' },
+      { type: 'qcm', consigne: 'نَذِير (avertisseur) et نَظِير (semblable) diffèrent par :',
+        options: [{ texte: 'la lettre ذ simple contre ظ emphatique' }, { texte: 'la voyelle finale' }, { texte: 'rien' }], bonne: 0, cles: ['nadhir'],
+        explication: 'Un seul trait de langue les sépare — et le sens change du tout au tout.' },
+      { type: 'dictee', consigne: 'Bref ou long ? Écoutez la durée de la voyelle.',
+        audio: 'بَا', options: [{ ar: 'بَا' }, { ar: 'بَ' }], bonne: 0,
+        explication: 'La longue dure environ deux fois plus : bā. La durée est une information, pas une décoration.' },
+      { type: 'saisie', consigne: 'Écrivez « œuvre » — avec le ʿayn, pas la hamza.',
+        indice: 'ʿamal : ع م ل.', reponse: 'عمل', cles: ['amal'] },
+      { type: 'ecoute', consigne: 'L\'oreille seule : écoutez et choisissez le sens.',
+        audio: 'عَمَل', options: [{ texte: 'œuvre, action' }, { texte: 'espoir' }, { texte: 'chien' }], bonne: 0, cles: ['amal'],
+        explication: 'ʿamal — l\'œuvre. Le ʿayn initial la distingue d\'amal, l\'espoir. Votre oreille vient de peser le sens.' },
+      { type: 'oral', consigne: 'Lisez chaque paire en exagérant le contraste, puis au naturel.',
+        phraseAr: 'قَلْب كَلْب ، عَمَل أَمَل', translit: 'qalb / kalb, ʿamal / amal', cles: ['qalb','amal'] },
+    ],
+    memoriser: { ar: 'قَلْبٌ سَلِيمٌ', tr: 'qalbun salīm', fr: 'Un cœur sain. (ash-Shuʿarāʾ, 89) — ce que chacun apportera de plus précieux au Jour dernier.' },
+    recap: [
+      'Confondre deux sons proches, c\'est changer de mot : qalb ≠ kalb, ʿamal ≠ amal.',
+      'Trois familles de pièges : fond de gorge, emphatiques, durées.',
+      'La méthode : alterner les deux sons à voix haute jusqu\'à sentir la frontière.',
+      'C\'est le premier pas du tajwīd — réciter en donnant à chaque lettre son droit.',
+    ],
+  },
+
+  13: {
+    cycle: 2,
+    titre: "Première sourate : al-Ikhlāṣ, entière",
+    intro: "Le moment est venu. Vous connaissez chaque lettre, chaque voyelle, chaque signe : aujourd'hui, vous lisez une sourate complète — al-Ikhlāṣ, « la Pureté du culte », que le Prophète ﷺ a décrite comme valant un tiers du Coran.\n" +
+      "Quatre versets que vous récitez peut-être déjà par cœur dans la prière. Les lire de vos propres yeux, mot à mot, est une autre rencontre.\n" +
+      "Au passage, deux petites habitudes d'écriture du muṣḥaf, à reconnaître sans les étudier. Puis la lecture, votre premier grand jalon.",
+    decouverte: [
+      { texte: "D'abord, deux détails de l'orthographe coranique. Vous les avez déjà croisés sans le savoir ; il suffit de les nommer." },
+      { texte: "Le petit alif suscrit ( ـٰ ) : un alif miniature posé au-dessus d'une lettre, qui allonge en « â » — vous l'avez lu dans اللَّه (leçon 8). Le muṣḥaf l'emploie dans des mots très fréquents. Lisez-le comme un alif ordinaire." },
+      { texte: "Et la liaison des mots : en récitation, les mots s'enchaînent d'un souffle. La terminaison de l'un se fond dans le début du suivant : qul huwa llāhu — le « a » initial d'اللَّه s'efface après huwa. Écoutez l'audio, votre oreille fera le reste." },
+      { texte: "Voici la sourate, verset par verset. Déchiffrez chaque mot vous-même — tout vous est connu :" },
+      { lignes: [
+        { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ', tr: 'qul huwa llāhu aḥad', fr: 'Dis : Il est Allah, Unique.', note: 'qul (leçon 7), allāh (leçon 8), aḥad (leçon 11)' },
+        { ar: 'اللَّهُ الصَّمَدُ', tr: 'allāhu ṣ-ṣamad', fr: 'Allah, le Soutien absolu.', note: 'aṣ-ṣamad : Celui dont tout dépend' },
+        { ar: 'لَمْ يَلِدْ وَلَمْ يُولَدْ', tr: 'lam yalid wa-lam yūlad', fr: 'Il n\'a pas engendré et n\'a pas été engendré.', note: 'لَمْ = « ne… pas » — à reconnaître seulement, expliqué au Cycle V' },
+        { ar: 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ', tr: 'wa-lam yakun lahu kufuwan aḥad', fr: 'Et nul n\'est égal à Lui.', note: 'remarquez le tanwīn de كُفُوًا — leçon 10' },
+      ]},
+      { texte: "Vous remarquerez devant certains mots le petit bloc الـ (comme dans الصَّمَد, lu « aṣ-ṣamad ») : c'est l'article, « le ». Il ouvrira le Cycle III — pour aujourd'hui, lisez-le simplement comme il s'entend." },
+    ],
+    grammaire: {
+      titre: "Comprendre avant d'analyser",
+      corps: "Ne cherchez pas encore à décomposer chaque mot : ce jalon est une lecture, pas une analyse. Vous connaissez le sens global de la sourate ; laissez les mots arabes venir se poser sur ce sens.\n" +
+        "C'est l'ordre naturel de cette méthode : d'abord lire juste, ensuite comprendre la mécanique. Les Cycles III à V rouvriront ces versets avec les outils de la grammaire.\n" +
+        "Aujourd'hui, une seule exigence : chaque lettre à sa place, chaque voyelle honorée, sans hâte.",
+    },
+    approfondissement: [
+      { titre: "Un tiers du Coran",
+        corps: "Le Prophète ﷺ a enseigné que cette sourate équivaut au tiers du Coran : elle condense le tawḥīd, l'affirmation de l'Unicité, cœur de toute la révélation.\n" +
+          "الصَّمَد est un nom unique dans le Coran : le Soutien absolu, Celui dont tout dépend et qui ne dépend de rien.\n" +
+          "La réciter en comprenant chaque mot qu'on lit — c'est exactement le but de tout ce parcours. Vous venez d'en franchir la première porte.",
+    }],
+    vocabulaire: [
+      { ar: 'الصَّمَد', tr: 'aṣ-ṣamad', fr: 'le Soutien absolu (nom divin)', cle: 'samad' },
+      { ar: 'هُوَ', tr: 'huwa', fr: 'il, lui', cle: 'huwa' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Rappel de la leçon 12 : قَلْب et كَلْب diffèrent par…',
+        options: [{ texte: 'le ق profond contre le ك clair' }, { texte: 'la voyelle' }], bonne: 0, cles: ['qalb'],
+        explication: 'qalb, le cœur ; kalb, le chien. L\'oreille juste protège le sens — surtout en récitation.' },
+      { type: 'qcm', consigne: 'Que signifie قُلْ هُوَ اللَّهُ أَحَدٌ ?',
+        options: [{ texte: 'Louange à Allah' }, { texte: 'Dis : Il est Allah, Unique' }, { texte: 'Allah est le plus grand' }], bonne: 1, cles: ['qul','ahad'],
+        explication: 'qul (dis) + huwa (il) + allāh + aḥad (unique).' },
+      { type: 'glisser', consigne: 'Reconstituez le premier verset de la sourate al-Ikhlāṣ.',
+        ordre: ['قُلْ', 'هُوَ', 'اللَّهُ', 'أَحَدٌ'], traduction: 'Dis : Il est Allah, Unique.', cles: ['qul','ahad','huwa'],
+        explication: 'أَحَد dit l\'Unicité absolue. Ce verset est le socle du tawḥīd.' },
+      { type: 'qcm', consigne: 'Que signifie le nom divin الصَّمَد ?',
+        options: [{ texte: 'le Soutien absolu, dont tout dépend' }, { texte: 'le Pardonneur' }, { texte: 'le Créateur' }], bonne: 0, cles: ['samad'],
+        explication: 'aṣ-ṣamad : Celui vers qui tout se tourne et qui ne dépend de rien — un nom propre à cette sourate.' },
+      { type: 'qcm', consigne: 'Dans لَمْ يَلِدْ, le petit mot لَمْ exprime…',
+        options: [{ texte: 'une négation : « il n\'a pas… »' }, { texte: 'une question' }, { texte: 'un ordre' }], bonne: 0,
+        explication: 'lam = « ne… pas ». Reconnaissez-le sans plus : le Cycle V lui donnera sa leçon.' },
+      { type: 'appariement', consigne: 'Reliez chaque verset à son sens.',
+        paires: [
+          { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ', fr: 'Dis : Il est Allah, Unique' },
+          { ar: 'اللَّهُ الصَّمَدُ', fr: 'Allah, le Soutien absolu' },
+          { ar: 'لَمْ يَلِدْ وَلَمْ يُولَدْ', fr: 'Il n\'a pas engendré ni été engendré' },
+          { ar: 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ', fr: 'Et nul n\'est égal à Lui' },
+        ] },
+      { type: 'dictee', consigne: 'Écoutez : quel verset entendez-vous ?',
+        audio: 'اللَّهُ الصَّمَدُ', options: [{ ar: 'اللَّهُ الصَّمَدُ' }, { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ' }], bonne: 0, cles: ['samad'],
+        explication: 'allāhu ṣ-ṣamad — le deuxième verset. Remarquez la liaison : le « a » de aṣ- se fond après allāhu.' },
+      { type: 'texteLibre', consigne: 'Écrivez le dernier mot de la sourate (« Unique »).',
+        reponse: 'أحد', indice: 'aḥad : hamza sur alif, ح, د.', traduction: 'un, unique', cles: ['ahad'] },
+      { type: 'oral', consigne: 'Récitez le premier verset, lentement et à voix haute.',
+        phraseAr: 'قُلْ هُوَ اللَّهُ أَحَدٌ', translit: 'qul huwa llāhu aḥad', cles: ['qul','ahad'] },
+      { type: 'lecture',
+        consigne: 'Votre premier grand jalon : la sourate al-Ikhlāṣ, entière. Écoutez chaque verset, lisez-le à voix haute, puis validez pour entrer dans le Cycle III — celui du sens et de la phrase.',
+        titre: 'Sourate al-Ikhlāṣ (la Pureté du culte), versets 1 à 4',
+        reference: 'Appuyez sur « Tout écouter » pour entendre la récitation verset par verset, puis lisez vous-même.',
+        segments: [
+          { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ', tr: 'qul huwa llāhu aḥad', fr: 'Dis : Il est Allah, Unique.' },
+          { ar: 'اللَّهُ الصَّمَدُ', tr: 'allāhu ṣ-ṣamad', fr: 'Allah, le Soutien absolu.' },
+          { ar: 'لَمْ يَلِدْ وَلَمْ يُولَدْ', tr: 'lam yalid wa-lam yūlad', fr: 'Il n\'a pas engendré et n\'a pas été engendré.' },
+          { ar: 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ', tr: 'wa-lam yakun lahu kufuwan aḥad', fr: 'Et nul n\'est égal à Lui.' },
+        ], cles: ['qul','ahad','samad'] },
+    ],
+    memoriser: { ar: 'قُلْ هُوَ اللَّهُ أَحَدٌ', tr: 'qul huwa llāhu aḥad', fr: 'Dis : Il est Allah, Unique. (al-Ikhlāṣ, 1) — votre première sourate entièrement lue.' },
+    recap: [
+      'Vous avez lu une sourate complète : al-Ikhlāṣ, quatre versets.',
+      'Le petit alif suscrit ( ـٰ ) se lit comme un alif : اللَّه.',
+      'En récitation, les mots s\'enchaînent d\'un souffle : qul huwa llāhu…',
+      'Le Cycle II est achevé : tout mot vocalisé du Coran vous est désormais lisible.',
+    ],
+  },
+
+  /* ===================== CYCLE III — LA PHRASE SANS VERBE ===================== */
+
+  14: {
+    cycle: 3,
     titre: 'L\'identité des mots : défini et indéfini',
     intro: 'Vous savez déchiffrer tout mot vocalisé. Entrons maintenant dans le sens, et dans la première grande idée de la grammaire arabe : un mot porte, dans sa forme sonore, sa carte d\'identité.\n' +
       'Un mot indéfini (« un livre, une lumière ») se reconnaît souvent à sa terminaison en « -n », le tanwīn. Un mot défini (« le livre, la lumière ») reçoit l\'article ال (al-), unique, invariable, collé au mot.\n' +
-      'Nous n\'inventons aucun mot : nous reprenons votre vocabulaire du Cycle I et lui donnons, pour la première fois, une identité — indéfini ou défini.',
+      'Nous n\'inventons aucun mot : nous reprenons votre vocabulaire des Cycles I et II et lui donnons, pour la première fois, une identité — indéfini ou défini.',
     decouverte: [
       { texte: 'Sans article, un nom est indéfini et porte souvent un tanwīn « -oun » : كِتَابٌ, « un livre ». Avec l\'article ال, il devient défini : الْكِتَابُ, « le livre ». Écoutez la différence sur des mots que vous connaissez déjà :' },
       { lignes: [
@@ -777,7 +1313,7 @@ const Lecons = {
         { ar: 'اللَّيْل', tr: 'al-layl', fr: 'la nuit', ill: '🌃', note: 'solaire (ل) : un « l » appuyé' },
       ]},
       { texte: 'Le moyen mnémotechnique est dans les noms eux-mêmes : dans الْقَمَر (la LUNE), le « l » se prononce — le ق est donc LUNAIRE. Dans الشَّمْس (le SOLEIL), il se fond — le ش est SOLAIRE. Les deux mots-témoins portent la règle : il suffit de se les redire.' },
-      { texte: 'L\'astuce du Cycle I revient : si la consonne se forme avec le bout de la langue (ت ث د ذ ر ز س ش ص ض ط ظ ل ن), elle est solaire et avale le « l ». Sinon, elle est lunaire. Inutile de tout retenir : l\'oreille s\'en charge à force d\'écouter.' },
+      { texte: 'Une astuce pour sentir la règle : si la consonne se forme avec le bout de la langue (ت ث د ذ ر ز س ش ص ض ط ظ ل ن), elle est solaire et avale le « l ». Sinon, elle est lunaire. Inutile de tout retenir : l\'oreille s\'en charge à force d\'écouter.' },
       { texte: 'Un mot pour vous rassurer une fois pour toutes : vous croiserez de petites terminaisons (الْبَيْتُ « -ou », فِي الْبَيْتِ « -i », بَيْتٌ « -oun »). Ce sont les « cas », qui précisent le rôle du mot. Pour l\'instant, contentez-vous de les entendre. Lisez en confiance.' },
     ],
     grammaire: {
@@ -817,7 +1353,7 @@ const Lecons = {
       { type: 'qcm', consigne: 'Quelle forme est correcte pour « le livre » ?',
         options: [{ ar: 'الْكِتَابُ' }, { ar: 'الْكِتَابٌ' }], bonne: 0, cles: ['kitab'],
         explication: 'Article et tanwīn ne se cumulent jamais : الْكِتَابُ (-u), jamais الْكِتَابٌ.' },
-      { type: 'appariement', consigne: 'Reliez chaque mot défini du Cycle I à sa traduction.',
+      { type: 'appariement', consigne: 'Reliez chaque mot défini, déjà bien connu, à sa traduction.',
         paires: [ { ar: 'الْبَاب', fr: 'la porte', cle: 'bab' }, { ar: 'الْبَحْر', fr: 'la mer', cle: 'bahr' }, { ar: 'الْمَلِك', fr: 'le roi', cle: 'malik' }, { ar: 'الْيَوْم', fr: 'le jour', cle: 'yawm' } ] },
       { type: 'contexte', consigne: 'On veut dire « LE soleil » (défini). Choisissez la forme.',
         avant: '', apres: '', options: [{ ar: 'الشَّمْس', fr: 'le soleil' }, { ar: 'شَمْسٌ', fr: 'un soleil' }], bonne: 0,
@@ -858,7 +1394,7 @@ const Lecons = {
     ],
     memoriser: { ar: 'الرَّحْمَٰنِ الرَّحِيمِ', tr: 'ar-raḥmāni r-raḥīm', fr: 'Le Tout Miséricordieux, le Très Miséricordieux.',
       construction: 'Deux noms définis par l\'article, tous deux sur une lettre solaire (ر) : on dit ar-raḥmān, ar-raḥīm, le « l » fondu.\n' +
-        'Ce sont deux des plus beaux noms d\'Allah, issus de la même racine ر-ح-م que رَحْمَة (la miséricorde, vue au Cycle I).\n' +
+        'Ce sont deux des plus beaux noms d\'Allah, issus de la même racine ر-ح-م que رَحْمَة (la miséricorde, vue à la leçon 9).\n' +
         'On les récite dans la basmala et à chaque Fātiḥa : les avoir sur les lèvres, c\'est déjà prier.' },
     recap: [
       'Un mot porte son identité : indéfini (tanwīn « -n ») ou défini (article الـ).',
@@ -869,8 +1405,8 @@ const Lecons = {
     ],
   },
 
-  8: {
-    cycle: 2,
+  15: {
+    cycle: 3,
     titre: 'Pointer et questionner (au masculin)',
     intro: 'Vous savez nommer les choses, défini ou indéfini. Apprenez maintenant à les montrer du doigt et à les questionner : c\'est ainsi que naît le dialogue.\n' +
       'Pour ce qui est proche, l\'arabe dit هَٰذَا (hādhā, « ceci ») ; pour ce qui est plus loin ou plus élevé, ذَٰلِكَ (dhālika, « cela »). Aujourd\'hui, au masculin, sur des noms déjà connus.\n' +
@@ -988,10 +1524,10 @@ const Lecons = {
     ],
   },
 
-  9: {
-    cycle: 2,
+  16: {
+    cycle: 3,
     titre: 'Le miroir féminin',
-    intro: 'Vous montrez et questionnez au masculin. Passons de l\'autre côté du miroir : le féminin. En arabe, il se repère le plus souvent à un signe que vous lisez depuis le Cycle I — la tāʾ marbūṭa ة.\n' +
+    intro: 'Vous montrez et questionnez au masculin. Passons de l\'autre côté du miroir : le féminin. En arabe, il se repère le plus souvent à un signe que vous lisez depuis la leçon 9 — la tāʾ marbūṭa ة.\n' +
       'Plus besoin de la mémoriser dans l\'abstrait : il suffit de la repérer en fin de mot. À côté de هَٰذَا et ذَٰلِكَ, voici leurs miroirs féminins : هَٰذِهِ et تِلْكَ.\n' +
       'Et pour bien sentir l\'accord, nous mettrons sans cesse face à face un mot masculin et un mot féminin déjà connus.',
     decouverte: [
@@ -1038,7 +1574,7 @@ const Lecons = {
     exercices: [
       { type: 'qcm', consigne: 'En fin de mot, que signale la tāʾ marbūṭa ة ?',
         options: [{ texte: 'le pluriel' }, { texte: 'le féminin' }, { texte: 'le passé' }], bonne: 1,
-        explication: 'La ة finale, déjà lue depuis le Cycle I, marque le genre féminin.' },
+        explication: 'La ة finale, déjà lue depuis la leçon 9, marque le genre féminin.' },
       { type: 'qcm', consigne: 'Quel démonstratif pour un objet féminin PROCHE ?',
         options: [{ ar: 'هَٰذَا' }, { ar: 'هَٰذِهِ' }, { ar: 'ذَٰلِكَ' }], bonne: 1, cles: ['hadhihi'],
         explication: 'هَٰذِهِ désigne un féminin proche : hādhihi āya.' },
@@ -1104,10 +1640,10 @@ const Lecons = {
     ],
   },
 
-  10: {
-    cycle: 2,
+  17: {
+    cycle: 3,
     titre: 'La première phrase nominale',
-    intro: 'Vous avez l\'identité des mots (séance 7), de quoi montrer et questionner (séances 8 et 9). Réunissons tout : vous allez former vos premières phrases complètes — et comprendre comment l\'arabe dit « est » sans aucun verbe.\n' +
+    intro: 'Vous avez l\'identité des mots (séance 14), de quoi montrer et questionner (séances 15 et 16). Réunissons tout : vous allez former vos premières phrases complètes — et comprendre comment l\'arabe dit « est » sans aucun verbe.\n' +
       'Le secret est déjà entre vos mains : il suffit de poser côte à côte un nom défini et un nom indéfini. الْبَيْتُ كَبِيرٌ : « la maison est grande ».\n' +
       'Nous y ajoutons une dizaine d\'adjectifs essentiels du Coran, et trois pronoms (هُوَ، هِيَ، أَنَا) comme outils pour alléger la phrase.',
     decouverte: [
@@ -1118,7 +1654,7 @@ const Lecons = {
         { ar: 'اللَّهُ كَرِيمٌ', tr: 'allāhu karīm', fr: 'Allah est généreux', note: 'sujet + attribut' },
         { ar: 'اللَّهُ عَظِيمٌ', tr: 'allāhu ʿaẓīm', fr: 'Allah est immense' },
       ]},
-      { texte: 'L\'attribut s\'accorde en genre avec le sujet (séance 9). Au féminin, l\'adjectif prend lui aussi la ة : الرَّحْمَةُ قَرِيبَةٌ, « la miséricorde est proche », féminin des deux côtés.' },
+      { texte: 'L\'attribut s\'accorde en genre avec le sujet (séance 16). Au féminin, l\'adjectif prend lui aussi la ة : الرَّحْمَةُ قَرِيبَةٌ, « la miséricorde est proche », féminin des deux côtés.' },
       { texte: 'Voici les adjectifs du jour, tous fréquents dans le Coran : كَبِير (grand) et صَغِير (petit), قَرِيب (proche) et بَعِيد (loin), عَظِيم (immense), كَرِيم (généreux, noble), رَحِيم (miséricordieux), حَكِيم (sage). Plusieurs sont des attributs d\'Allah.' },
       { texte: 'Pour ne pas répéter le sujet, on le remplace par un pronom : هُوَ (il), هِيَ (elle), أَنَا (je). Ce sont des outils de substitution dans la phrase nominale :' },
       { lignes: [
@@ -1171,7 +1707,7 @@ const Lecons = {
         explication: 'Épithète d\'un nom défini : l\'adjectif reprend l\'article. « la mer est grande » serait sans article sur kabīr.' },
       { type: 'glisser', consigne: 'Reconstituez « ce livre est grand » (hādhā l-kitābu kabīr).',
         ordre: ['هَٰذَا', 'الْكِتَابُ', 'كَبِيرٌ'], traduction: 'ce livre est grand', cles: ['hadha','kitab','kabir'],
-        explication: 'Le démonstratif هَٰذَا (séance 8) entre dans la phrase nominale : « ce livre est grand ».' },
+        explication: 'Le démonstratif هَٰذَا (séance 15) entre dans la phrase nominale : « ce livre est grand ».' },
       { type: 'appariement', consigne: 'Reliez chaque adjectif à son sens.',
         paires: [ { ar: 'كَبِير', fr: 'grand', cle: 'kabir' }, { ar: 'صَغِير', fr: 'petit', cle: 'saghir' }, { ar: 'قَرِيب', fr: 'proche', cle: 'qarib' }, { ar: 'بَعِيد', fr: 'loin', cle: 'baid' } ] },
       { type: 'appariement', consigne: 'Reliez chaque attribut (souvent dit d\'Allah) à son sens.',
@@ -1226,14 +1762,14 @@ const Lecons = {
     recap: [
       'La phrase nominale n\'a pas de verbe « être » au présent.',
       'Sujet généralement défini, attribut généralement indéfini : الْبَيْتُ كَبِيرٌ.',
-      'L\'attribut s\'accorde en genre avec le sujet (acquis de la séance 9).',
+      'L\'attribut s\'accorde en genre avec le sujet (acquis de la séance 16).',
       'Un pronom (هُوَ، هِيَ، أَنَا) peut tenir lieu de sujet.',
       'L\'épithète suit le nom ; si le nom est défini, elle reprend l\'article.',
     ],
   },
 
-  11: {
-    cycle: 2,
+  18: {
+    cycle: 3,
     titre: 'Les petits mots qui gouvernent',
     intro: 'Vos phrases tiennent debout. Il leur manque les petits mots qui les relient au monde : les prépositions. Quatre suffisent pour commencer — فِي، عَلَى، مِنْ، لِـ.\n' +
       'Ces mots ont un effet discret mais constant : le nom qui les suit passe au son « -i ». فِي الْبَيْتِ (dans la maison), عَلَى الْأَرْضِ (sur la terre).\n' +
@@ -1269,6 +1805,10 @@ const Lecons = {
         corps: 'La forme لِلَّهِ condense beaucoup en peu de signes. La préposition لِ (à, pour) s\'attache à اللَّه ; l\'alif de l\'article disparaît, les lām se fondent, et l\'on obtient لِلَّه, « à Allah ».\n' +
           'Le même réflexe d\'enchaînement vaut pour بِسْمِ اللَّهِ (« au nom d\'Allah ») : on lit bismi-llāh d\'un seul souffle. L\'arabe aime relier les mots, comme la récitation relie les souffles.\n' +
           'Retenez surtout الْحَمْدُ لِلَّهِ : la louange revient à Allah seul. C\'est la deuxième parole de la Fātiḥa, et l\'une des plus dites au monde. À la prochaine séance, nous lui ajouterons « Seigneur des mondes ».' },
+      { titre: 'Situer avec précision : les prépositions de lieu',
+        corps: 'Pour dire où sont les choses, l\'arabe dispose aussi de prépositions de lieu : أَمَامَ (devant), خَلْفَ (derrière), فَوْقَ (au-dessus), تَحْتَ (dessous), بَيْنَ (entre), عِنْدَ (auprès de). Le nom qui suit prend, là encore, le « -i ».\n' +
+          'Et quand on situe, l\'arabe place souvent le lieu AVANT un sujet indéfini : وَفِي الْأَرْضِ آيَاتٌ, « et sur la terre il y a des signes » (adh-Dhāriyāt, 20). Le sens « il y a » naît de cette inversion, sans aucun verbe.\n' +
+          'Rien à réciter par cœur : retenez فَوْقَ et تَحْتَ, أَمَامَ et عِنْدَ — les exercices s\'en chargent.' },
     ],
     vocabulaire: [
       { ar: 'فِي', tr: 'fī', fr: 'dans, en', cle: 'fi' },
@@ -1277,6 +1817,11 @@ const Lecons = {
       { ar: 'إِلَى', tr: 'ilā', fr: 'vers, jusqu\'à', cle: 'ila' },
       { ar: 'لِـ', tr: 'li-', fr: 'à, pour', cle: 'li' },
       { ar: 'الْحَمْد', tr: 'al-ḥamd', fr: 'la louange', cle: 'hamd', ill: '🤍' },
+      { ar: 'فَوْقَ', tr: 'fawqa', fr: 'au-dessus de', cle: 'fawqa' },
+      { ar: 'تَحْتَ', tr: 'taḥta', fr: 'au-dessous de', cle: 'tahta' },
+      { ar: 'أَمَامَ', tr: 'amāma', fr: 'devant', cle: 'amama' },
+      { ar: 'عِنْدَ', tr: 'ʿinda', fr: 'auprès de, chez', cle: 'inda' },
+      { ar: 'لِلَّه', tr: 'li-llāh', fr: 'à Allah, pour Allah', cle: 'lillah' },
     ],
     exercices: [
       { type: 'qcm', consigne: 'Après une préposition, le nom prend en général la terminaison :',
@@ -1336,13 +1881,18 @@ const Lecons = {
         mode: 'saisie', reponse: 'الكتاب في الدار', indice: 'al-kitābu fī d-dār',
         aides: [{ ar: 'فِي', fr: 'dans' }, { ar: 'الدَّار', fr: 'la demeure' }], cles: ['kitab','fi','dar'],
         explication: 'Sujet défini + groupe prépositionnel : la phrase locative, que vous produisez désormais vous-même.' },
+      { type: 'appariement', consigne: 'Les prépositions de lieu : reliez chacune à son sens.',
+        paires: [ { ar: 'فَوْقَ', fr: 'au-dessus de', cle: 'fawqa' }, { ar: 'تَحْتَ', fr: 'au-dessous de', cle: 'tahta' }, { ar: 'أَمَامَ', fr: 'devant', cle: 'amama' }, { ar: 'عِنْدَ', fr: 'auprès de', cle: 'inda' } ] },
+      { type: 'trous', consigne: 'Situez : « le calame est au-dessus du livre ».',
+        segments: [ 'الْقَلَمُ', { options: ['فَوْقَ', 'تَحْتَ'], bonne: 0 }, 'الْكِتَابِ.' ], traduction: 'le calame est au-dessus du livre',
+        aide: [ { ar: 'فَوْقَ', fr: 'au-dessus' }, { ar: 'تَحْتَ', fr: 'dessous' } ], cles: ['fawqa','qalam','kitab'] },
       { type: 'oral', consigne: 'Lisez et savourez cette parole, en soudant bien لِلَّهِ.',
         phraseAr: 'الْحَمْدُ لِلَّهِ', translit: 'al-ḥamdu li-llāh', cles: ['hamd'] },
     ],
     memoriser: { ar: 'الْحَمْدُ لِلَّهِ', tr: 'al-ḥamdu li-llāh', fr: 'Louange à Allah.',
       construction: 'الْحَمْدُ (la louange) est le sujet, défini par l\'article, avec sa terminaison « -ou ».\n' +
         'لِلَّهِ = لِ (préposition « à ») soudée à اللَّه ; le nom gouverné prend le « -i » : li-llāhi.\n' +
-        'Mot à mot : « la louange [appartient] à Allah ». À la séance 12, nous y ajouterons رَبِّ الْعَالَمِينَ, « Seigneur des mondes ».' },
+        'Mot à mot : « la louange [appartient] à Allah ». À la séance 19, nous y ajouterons رَبِّ الْعَالَمِينَ, « Seigneur des mondes ».' },
     recap: [
       'Une préposition introduit un nom et le fait passer au son « -i » (le cas jarr).',
       'Quatre essentielles : فِي (dans), عَلَى (sur), مِنْ (de), لِـ (à) ; et إِلَى (vers).',
@@ -1351,8 +1901,8 @@ const Lecons = {
     ],
   },
 
-  12: {
-    cycle: 2,
+  19: {
+    cycle: 3,
     titre: 'L\'alliance des noms : l\'iḍāfa et al-Fātiḥa',
     intro: 'Voici la construction reine du Coran : l\'annexion, l\'iḍāfa. Deux noms s\'allient pour dire « le … de … », sans aucun mot pour « de ».\n' +
       'رَسُولُ اللَّهِ, « le messager d\'Allah » ; كِتَابُ اللَّهِ, « le Livre d\'Allah » ; يَوْمُ الدِّينِ, « le Jour du Jugement ». Le premier nom perd son article, le second passe au « -i ».\n' +
@@ -1379,7 +1929,7 @@ const Lecons = {
       { titre: 'La Fātiḥa, tissée d\'annexions',
         corps: 'Relisez la Fātiḥa avec vos yeux neufs. رَبِّ الْعَالَمِينَ (Seigneur des mondes), مَالِكِ يَوْمِ الدِّينِ (Maître du Jour du Jugement), صِرَاطَ الَّذِينَ أَنْعَمْتَ (le chemin de ceux que Tu as comblés) : autant d\'iḍāfa enchâssées.\n' +
           'Et tout le reste vous est connu : بِسْمِ اللَّهِ (préposition + annexion), الْحَمْدُ لِلَّهِ (phrase nominale + préposition), الرَّحْمَٰنِ الرَّحِيمِ (deux adjectifs définis), الصِّرَاطَ الْمُسْتَقِيمَ (nom + épithète, deux définis).\n' +
-          'En six séances, vous êtes passé du déchiffrage à la compréhension de la sourate d\'ouverture. Ce n\'est pas une fin : c\'est une porte. Le Cycle III vous donnera le verbe, et avec lui, l\'action.' },
+          'En six séances, vous êtes passé du déchiffrage à la compréhension de la sourate d\'ouverture. Ce n\'est pas une fin : c\'est une porte. Le Cycle IV vous donnera le verbe, et avec lui, l\'action.' },
     ],
     vocabulaire: [
       { ar: 'رَسُول', tr: 'rasūl', fr: 'messager, envoyé', cle: 'rasul', ill: '✉️' },
@@ -1388,6 +1938,8 @@ const Lecons = {
       { ar: 'الْعَالَمِين', tr: 'al-ʿālamīn', fr: 'les mondes, les univers', cle: 'alamin', ill: '🌍' },
       { ar: 'صِرَاط', tr: 'ṣirāṭ', fr: 'chemin, voie', cle: 'sirat', ill: '🛤️' },
       { ar: 'مُسْتَقِيم', tr: 'mustaqīm', fr: 'droit', cle: 'mustaqim' },
+      { ar: 'بِسْم', tr: 'bism', fr: 'au nom de', cle: 'bism' },
+      { ar: 'إِيَّاكَ', tr: 'iyyāka', fr: 'Toi (seul)', cle: 'iyyaka' },
     ],
     exercices: [
       { type: 'qcm', consigne: 'Dans une iḍāfa, le premier nom (ce qu\'on possède) :',
@@ -1406,11 +1958,11 @@ const Lecons = {
         paires: [ { ar: 'رَسُولُ اللَّهِ', fr: 'le messager d\'Allah', cle: 'rasul' }, { ar: 'كِتَابُ اللَّهِ', fr: 'le Livre d\'Allah', cle: 'kitab' }, { ar: 'يَوْمُ الدِّينِ', fr: 'le Jour du Jugement', cle: 'din' }, { ar: 'عَبْدُ اللَّهِ', fr: 'le serviteur d\'Allah', cle: 'abd' } ] },
       { type: 'appariement', consigne: 'Reliez chaque nouveau mot à son sens.',
         paires: [ { ar: 'رَسُول', fr: 'messager', cle: 'rasul' }, { ar: 'دِين', fr: 'religion, jugement', cle: 'din' }, { ar: 'صِرَاط', fr: 'chemin', cle: 'sirat' }, { ar: 'مُسْتَقِيم', fr: 'droit', cle: 'mustaqim' } ] },
-      { type: 'appariement', consigne: 'Révision du Cycle I : reliez chaque mot à son sens.',
+      { type: 'appariement', consigne: 'Révision des premiers cycles : reliez chaque mot à son sens.',
         paires: [ { ar: 'نُور', fr: 'lumière', cle: 'nur' }, { ar: 'رَحْمَة', fr: 'miséricorde', cle: 'rahma' }, { ar: 'صَلَاة', fr: 'prière', cle: 'salat' }, { ar: 'حُبّ', fr: 'amour', cle: 'hubb' }, { ar: 'سَلَام', fr: 'paix', cle: 'salam' } ] },
       { type: 'glisser', consigne: 'Reconstituez « ceci est le Livre d\'Allah » (hādhā kitābu llāh).',
         ordre: ['هَٰذَا', 'كِتَابُ', 'اللَّهِ'], traduction: 'ceci est le Livre d\'Allah', cles: ['hadha','kitab'],
-        explication: 'Le démonstratif هَٰذَا (séance 8) précède l\'annexion كِتَابُ اللَّهِ : « ceci est le Livre d\'Allah ».' },
+        explication: 'Le démonstratif هَٰذَا (séance 15) précède l\'annexion كِتَابُ اللَّهِ : « ceci est le Livre d\'Allah ».' },
       { type: 'contexte', consigne: 'Pour dire « le messager d\'Allah », le premier nom doit être :',
         avant: '', apres: 'اللَّهِ', options: [{ ar: 'رَسُولُ', fr: 'messager (sans article)' }, { ar: 'الرَّسُولُ', fr: 'le messager (avec article)' }], bonne: 0,
         traduction: 'le messager d\'Allah', cles: ['rasul'] },
@@ -1433,9 +1985,9 @@ const Lecons = {
       { type: 'dictee', consigne: 'Quelle annexion entendez-vous ?',
         audio: 'رَسُولُ اللَّهِ', options: [{ ar: 'رَسُولُ اللَّهِ' }, { ar: 'كِتَابُ اللَّهِ' }, { ar: 'يَوْمُ الدِّينِ' }], bonne: 0, cles: ['rasul'],
         explication: 'rasūlu llāh : le messager d\'Allah. Les trois options sont des annexions — l\'oreille distingue le premier nom.' },
-      { type: 'racine', consigne: 'Avant-goût du Cycle III : sous رَسُول (messager) vit une racine. Retrouvez ses trois consonnes.',
+      { type: 'racine', consigne: 'Avant-goût du Cycle IV : sous رَسُول (messager) vit une racine. Retrouvez ses trois consonnes.',
         mot: 'رَسُول', racine: ['ر','س','ل'], distracteurs: ['و','ب','ك'], cles: ['rasul'],
-        explication: 'ر-س-ل : l\'idée d\'envoyer. rasūl est « l\'envoyé » — et le Cycle III vous apprendra à faire parler ces racines.' },
+        explication: 'ر-س-ل : l\'idée d\'envoyer. rasūl est « l\'envoyé » — et le Cycle IV vous apprendra à faire parler ces racines.' },
       { type: 'dialogue', consigne: 'Une question, une attestation : choisissez la réponse.',
         questionAr: 'مَنْ رَسُولُ اللَّهِ ؟', questionTr: 'man rasūlu llāh', contexte: 'مَنْ demande « qui ? » pour les personnes.',
         options: [{ ar: 'مُحَمَّدٌ رَسُولُ اللَّهِ', fr: 'Muhammad est le messager d\'Allah' }, { ar: 'الْكِتَابُ كَبِيرٌ', fr: 'Le livre est grand' }], bonne: 0,
@@ -1446,10 +1998,16 @@ const Lecons = {
         mode: 'saisie', reponse: 'هذا كتاب الله', indice: 'hādhā kitābu llāh',
         aides: [{ ar: 'كِتَابُ اللَّهِ', fr: 'le Livre d\'Allah (annexion)' }], cles: ['hadha','kitab'],
         explication: 'Démonstratif + annexion : kitāb sans article, allāh au « -i ». Vous produisez la construction reine du Coran.' },
+      { type: 'decomposition', consigne: 'Ouverture de la Fātiḥa : décomposez بِسْمِ, la préposition et le nom.',
+        segments: [ { ar: 'بِـ', role: 'préposition' }, { ar: 'اسْمِ', role: 'nom' } ], roles: ['préposition','nom'], cles: ['bism','ism'],
+        explication: 'bi (par, au nom de) + ism (nom) : « au nom de ». Suivie de l\'annexion, cela donne بِسْمِ اللَّهِ, « au nom d\'Allah ».' },
+      { type: 'glisser', consigne: 'Reconstituez « C\'est Toi que nous adorons » (al-Fātiḥa, 5).',
+        ordre: ['إِيَّاكَ', 'نَعْبُدُ'], traduction: 'iyyāka naʿbudu — C\'est Toi que nous adorons', cles: ['iyyaka'],
+        explication: 'إِيَّاكَ (Toi) placé AVANT le verbe dit l\'exclusivité : Toi seul, nul autre. Le verbe نَعْبُدُ (nous adorons) vous attend au Cycle IV.' },
       { type: 'oral', consigne: 'Lisez cette double annexion (al-Fātiḥa, 4).',
         phraseAr: 'مَالِكِ يَوْمِ الدِّينِ', translit: 'māliki yawmi d-dīn', cles: ['malik','yawm','din'] },
       { type: 'lecture',
-        consigne: 'Jalon du Cycle II : vous comprenez désormais la charpente de chaque verset. Lisez al-Fātiḥa en entier, partie par partie, en repérant vos acquis (article, phrase nominale, prépositions, iḍāfa), puis validez pour entrer dans le Cycle III, celui du verbe.',
+        consigne: 'Jalon du Cycle III : vous comprenez désormais la charpente de chaque verset. Lisez al-Fātiḥa en entier, partie par partie, en repérant vos acquis (article, phrase nominale, prépositions, iḍāfa), puis validez pour entrer dans le Cycle IV, celui du verbe.',
         titre: 'Sourate al-Fātiḥa (l\'Ouvrante), versets 1 à 7',
         reference: 'Appuyez sur « Tout écouter » pour entendre la récitation partie par partie, puis lisez vous-même.',
         segments: [
@@ -1475,12 +2033,12 @@ const Lecons = {
     ],
   },
 
-  /* ===================== CYCLE III — LE VERBE ET L'ANNEXION ===================== */
+  /* ===================== CYCLE IV — LE VERBE ET L'INVOCATION ===================== */
 
-  13: {
-    cycle: 3,
+  20: {
+    cycle: 4,
     titre: 'Le verbe accompli à la troisième personne',
-    intro: 'Vous savez lire, et vous comprenez la Fātiḥa mot à mot. Il manque à vos phrases une seule chose : le mouvement. C\'est le rôle du verbe, et le Cycle III lui est consacré.\n' +
+    intro: 'Vous savez lire, et vous comprenez la Fātiḥa mot à mot. Il manque à vos phrases une seule chose : le mouvement. C\'est le rôle du verbe, et le Cycle IV lui est consacré.\n' +
       'Avec le verbe vient l\'idée la plus féconde de l\'arabe : la racine. Presque tout mot est bâti sur trois consonnes qui en portent le sens — la racine ك ت ب tourne autour de l\'écriture, et vous en connaissez déjà deux fruits : كِتَاب et كَاتِب.\n' +
       'L\'accompli exprime une action achevée, vue comme un tout : « il a créé, il a écrit ». Commençons par la troisième personne, la forme la plus simple — c\'est elle qui raconte le Coran.',
     decouverte: [
@@ -1493,8 +2051,8 @@ const Lecons = {
       { texte: 'Avant de conjuguer, voyez la puissance de la racine : les trois mêmes consonnes ك-ت-ب engendrent toute une famille de mots. C\'est le secret de l\'arabe — apprendre une racine, c\'est entrevoir dix mots :' },
       { lignes: [
         { ar: 'كَتَبَ', tr: 'kataba', fr: 'il a écrit', note: 'le verbe nu' },
-        { ar: 'كِتَاب', tr: 'kitāb', fr: 'livre', note: 'ce qui est écrit — vous le connaissez depuis la leçon 4' },
-        { ar: 'كَاتِب', tr: 'kātib', fr: 'écrivain, scribe', note: 'celui qui écrit — le alif long de la leçon 6' },
+        { ar: 'كِتَاب', tr: 'kitāb', fr: 'livre', note: 'ce qui est écrit — vous le connaissez depuis la leçon 5' },
+        { ar: 'كَاتِب', tr: 'kātib', fr: 'écrivain, scribe', note: 'celui qui écrit — avec son alif long (leçon 1)' },
       ]},
       { texte: 'Pour le féminin, on ajoute ـَتْ : kataba devient katabat, « elle a écrit ». Pour le pluriel masculin, on ajoute ـُوا : katabū, « ils ont écrit ».' },
       { lignes: [
@@ -1525,7 +2083,7 @@ const Lecons = {
     approfondissement: [
       { titre: 'L\'accompli n\'est pas un « passé »',
         corps: 'Les grammairiens arabes ne parlent pas de « temps » mais d\'« aspect ». L\'accompli (al-māḍī) présente l\'action comme un tout achevé — le plus souvent passée, mais pas toujours : dans le Coran, il peut décrire le Jour dernier comme déjà accompli, tant sa venue est certaine.\n' +
-          'Retenez la version simple : accompli = action vue comme faite. Son miroir, l\'inaccompli (action en cours ou à venir), viendra à la séance 15.\n' +
+          'Retenez la version simple : accompli = action vue comme faite. Son miroir, l\'inaccompli (action en cours ou à venir), viendra à la séance 22.\n' +
           'C\'est pourquoi les traductions oscillent entre « il créa », « il a créé » : l\'arabe dit seulement que l\'acte est accompli — le reste appartient au contexte.' },
       { titre: 'Trois consonnes, un monde : le génie sémitique',
         corps: 'Le système des racines est la signature des langues sémitiques. Trois consonnes portent une idée ; les voyelles et les affixes la déclinent en verbe, agent, lieu, instrument…\n' +
@@ -1599,7 +2157,7 @@ const Lecons = {
         questionAr: 'مَنْ خَلَقَ السَّمَاوَاتِ ؟', questionTr: 'man khalaqa s-samāwāt', contexte: 'Un seul mot suffit pour répondre.',
         mode: 'saisie', reponse: 'الله', indice: 'allāh',
         aides: [{ ar: 'مَنْ', fr: 'qui ?' }, { ar: 'السَّمَاوَات', fr: 'les cieux' }], cles: ['khalaqa'],
-        explication: 'La question man khalaqa… ? appelle le sujet du verbe : Allāh. Question et réponse, tout est en place pour le Cycle III.' },
+        explication: 'La question man khalaqa… ? appelle le sujet du verbe : Allāh. Question et réponse, tout est en place pour la suite du Cycle IV.' },
       { type: 'glisser', consigne: 'Reconstituez le verset dans l\'ordre verbal arabe : verbe, puis sujet, puis complément.',
         ordre: ['خَلَقَ', 'اللَّهُ', 'السَّمَاوَاتِ', 'وَالْأَرْضَ'], traduction: 'Allah a créé les cieux et la terre. (al-ʿAnkabūt, 44)', cles: ['khalaqa','sama'],
         explication: 'L\'ordre VSO en action : khalaqa (a créé) + allāhu (Allah, le sujet) + le complément. Le français inverse, l\'arabe commence par l\'acte.' },
@@ -1623,31 +2181,44 @@ const Lecons = {
     ],
   },
 
-  14: {
-    cycle: 3,
-    titre: 'La conjugaison complète de l\'accompli',
-    intro: 'Vous connaissez la troisième personne. Voyons maintenant tout le tableau de l\'accompli.\n' +
-      'La bonne nouvelle : la racine ne bouge pas, on ne fait qu\'ajouter des terminaisons.\n' +
-      'Apprenez ce tableau peu à peu ; il vous servira pour tous les verbes réguliers.',
+  21: {
+    cycle: 4,
+    titre: 'Dire « je », « tu », « nous » : l\'accompli du dialogue',
+    intro: 'Vous savez dire « il a créé », « elle a écrit », « ils ont cru ». Entrons dans le dialogue : « j\'ai entendu », « tu as fait », « nous avons adoré ».\n' +
+      'La bonne nouvelle tient en une ligne : la base du verbe ne bouge jamais — on ne fait qu\'ajouter une terminaison. katab-tu, katab-ta, katab-nā.\n' +
+      'Et vous récitez déjà l\'une de ces formes chaque jour : أَنْعَمْتَ, « Tu as comblé », dans la Fātiḥa.',
     decouverte: [
-      { texte: 'Conjugaison de كَتَبَ (écrire) à l\'accompli. La terminaison varie, la base katab- reste.' },
+      { texte: 'Les personnes du dialogue, sur كَتَبَ (écrire). Observez : la base katab- est immuable, seule la fin change.' },
       { lignes: [
-        { ar: 'كَتَبْتُ', tr: 'katabtu', fr: 'j\'ai écrit', note: 'ـْتُ' },
-        { ar: 'كَتَبْتَ', tr: 'katabta', fr: 'tu as écrit (m.)', note: 'ـْتَ' },
-        { ar: 'كَتَبْتِ', tr: 'katabti', fr: 'tu as écrit (f.)', note: 'ـْتِ' },
-        { ar: 'كَتَبَ', tr: 'kataba', fr: 'il a écrit', note: 'ـَ' },
-        { ar: 'كَتَبَتْ', tr: 'katabat', fr: 'elle a écrit', note: 'ـَتْ' },
-        { ar: 'كَتَبْنَا', tr: 'katabnā', fr: 'nous avons écrit', note: 'ـْنَا' },
-        { ar: 'كَتَبْتُمْ', tr: 'katabtum', fr: 'vous avez écrit', note: 'ـْتُمْ' },
-        { ar: 'كَتَبُوا', tr: 'katabū', fr: 'ils ont écrit', note: 'ـُوا' },
+        { ar: 'كَتَبْتُ', tr: 'katabtu', fr: 'j\'ai écrit', note: 'ـْتُ = je' },
+        { ar: 'كَتَبْتَ', tr: 'katabta', fr: 'tu as écrit (m.)', note: 'ـْتَ = tu (à un homme)' },
+        { ar: 'كَتَبْتِ', tr: 'katabti', fr: 'tu as écrit (f.)', note: 'ـْتِ = tu (à une femme)' },
+        { ar: 'كَتَبْنَا', tr: 'katabnā', fr: 'nous avons écrit', note: 'ـْنَا = nous' },
       ]},
+      { texte: 'Une astuce d\'oreille : « je » et « tu » ne diffèrent que par la voyelle du ت — katabtu (je), katabta (tu, m.), katabti (tu, f.). La kasra va vers le féminin, comme souvent.' },
+      { texte: 'Pour parler à plusieurs personnes, on dira كَتَبْتُمْ (katabtum, « vous avez écrit »). Contentez-vous de la reconnaître : elle est moins fréquente dans vos premières lectures.' },
+      { texte: 'Vous connaissez déjà l\'une de ces formes par cœur. Dans la Fātiḥa : صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ — « le chemin de ceux que TU AS COMBLÉS ». Le verbe أَنْعَمَ (combler de grâces) + ـْتَ (tu) = أَنْعَمْتَ.' },
+      { titreDialogue: 'Le verbe entre en conversation — tout est déjà connu.',
+        dialogue: [
+          { qui: 'A', ar: 'أَسَمِعْتَ الْقُرْآنَ ؟', tr: 'a-samiʿta l-qurʾān', fr: 'As-tu entendu le Coran ?' },
+          { qui: 'B', ar: 'نَعَمْ، سَمِعْتُ الْقُرْآنَ.', tr: 'naʿam, samiʿtu l-qurʾān', fr: 'Oui, j\'ai entendu le Coran.' },
+          { qui: 'A', ar: 'وَمَاذَا فَعَلْتُمْ ؟', tr: 'wa-mādhā faʿaltum', fr: 'Et qu\'avez-vous fait ?' },
+          { qui: 'B', ar: 'سَجَدْنَا لِلَّهِ.', tr: 'sajadnā li-llāh', fr: 'Nous nous sommes prosternés devant Allah.' },
+        ] },
+      { texte: 'Regardez ce dialogue de près : la particule de question أَ (séance 15), le verbe سَمِعَ (séance 20), et les terminaisons du jour. Chaque leçon porte les suivantes.' },
     ],
     grammaire: {
-      titre: 'Des terminaisons qui s\'ajoutent',
-      corps: 'À l\'accompli, on part de la base verbale et on ajoute un suffixe selon la personne.\n' +
-        'Les terminaisons en ـتُ، ـتَ، ـتِ marquent celui qui parle ou à qui l\'on parle ; ـَ et ـَتْ marquent la troisième personne.\n' +
-        'Inutile de tout retenir d\'un coup : la régularité fait que ces formes s\'ancrent vite par la pratique.',
+      titre: 'Des terminaisons qui s\'ajoutent, une base qui ne bouge pas',
+      corps: 'À l\'accompli, on part de la base verbale et on ajoute un suffixe selon la personne : ـْتُ (je), ـْتَ (tu, m.), ـْتِ (tu, f.), ـْنَا (nous) — et ـْتُمْ (vous), à reconnaître.\n' +
+        'Avec la 3e personne de la séance précédente (ـَ il, ـَتْ elle, ـُوا ils), vous couvrez l\'essentiel des formes que le Coran emploie.\n' +
+        'Inutile de réciter des tableaux : la pratique, dans les exercices et les versets, ancre ces formes bien mieux que la mémorisation forcée.',
     },
+    approfondissement: [
+      { titre: 'anʿamta : la grâce conjuguée',
+        corps: 'Chaque fois que vous récitez la Fātiḥa, vous conjuguez un verbe à la deuxième personne : أَنْعَمْتَ عَلَيْهِمْ, « Tu les as comblés ». C\'est un « tu » adressé à Allah — la grammaire au service de l\'intimité de la prière.\n' +
+          'De même, سَمِعْنَا وَأَطَعْنَا (« nous avons entendu et nous avons obéi », al-Baqara 285) porte deux fois la terminaison ـْنَا du « nous » des croyants.\n' +
+          'Apprendre ces suffixes, ce n\'est pas de la technique : c\'est entendre qui parle à qui, dans chaque verset.',
+    }],
     vocabulaire: [
       { ar: 'عَبَدَ', tr: 'ʿabada', fr: 'il a adoré', cle: 'abada' },
       { ar: 'شَكَرَ', tr: 'shakara', fr: 'il a remercié', cle: 'shakara' },
@@ -1656,40 +2227,59 @@ const Lecons = {
       { ar: 'دَخَلَ', tr: 'dakhala', fr: 'il est entré', cle: 'dakhala' },
     ],
     exercices: [
-      { type: 'qcm', consigne: 'Comment dit-on « nous avons écrit » ?',
-        options: [{ ar: 'كَتَبْتُ' }, { ar: 'كَتَبْنَا' }, { ar: 'كَتَبُوا' }], bonne: 1,
-        explication: 'La terminaison ـْنَا marque « nous » : katabnā.' },
+      { type: 'qcm', consigne: 'Rappel de la séance 20 : dans la phrase verbale arabe, qui vient en premier ?',
+        options: [{ texte: 'le verbe' }, { texte: 'le sujet' }, { texte: 'le complément' }], bonne: 0,
+        explication: 'Verbe → sujet → complément : خَلَقَ اللَّهُ الْإِنسَانَ. L\'acte avant l\'acteur.' },
       { type: 'qcm', consigne: 'La forme كَتَبْتُ se traduit par :',
         options: [{ texte: 'j\'ai écrit' }, { texte: 'tu as écrit' }, { texte: 'il a écrit' }], bonne: 0,
         explication: 'ـْتُ marque la première personne : katabtu, « j\'ai écrit ».' },
+      { type: 'qcm', consigne: 'Comment dit-on « nous avons écrit » ?',
+        options: [{ ar: 'كَتَبْتُ' }, { ar: 'كَتَبْنَا' }, { ar: 'كَتَبُوا' }], bonne: 1,
+        explication: 'La terminaison ـْنَا marque « nous » : katabnā.' },
       { type: 'appariement', consigne: 'Reliez chaque forme conjuguée à sa personne.',
-        paires: [ { ar: 'كَتَبْتَ', fr: 'tu as écrit (m.)' }, { ar: 'كَتَبَتْ', fr: 'elle a écrit' }, { ar: 'كَتَبْتُمْ', fr: 'vous avez écrit' }, { ar: 'كَتَبُوا', fr: 'ils ont écrit' } ] },
+        paires: [ { ar: 'كَتَبْتَ', fr: 'tu as écrit (m.)' }, { ar: 'كَتَبْتِ', fr: 'tu as écrit (f.)' }, { ar: 'كَتَبْنَا', fr: 'nous avons écrit' }, { ar: 'كَتَبْتُمْ', fr: 'vous avez écrit' } ] },
+      { type: 'qcm', consigne: 'Dans la Fātiḥa, أَنْعَمْتَ signifie :',
+        options: [{ texte: 'Tu as comblé (de grâces)' }, { texte: 'il a comblé' }, { texte: 'nous avons comblé' }], bonne: 0,
+        explication: 'anʿam-ta : le suffixe ـْتَ est le « tu » adressé à Allah — « Tu as comblé ».' },
       { type: 'trous', consigne: 'Complétez « nous avons adoré » à partir de عَبَدَ.',
         segments: [ 'عَبَدْ', { options: ['نَا', 'تُ', 'وا'], bonne: 0 } ], traduction: 'nous avons adoré', cles: ['abada'] },
-      { type: 'racine', consigne: 'Donnez la racine de غَفَرَ (il a pardonné).',
-        mot: 'غَفَرَ', racine: ['غ','ف','ر'], distracteurs: ['ع','ق','ل'], cles: ['ghafara'] },
-      { type: 'oral', consigne: 'Prononcez « nous avons adoré ».',
-        phraseAr: 'عَبَدْنَا', translit: 'ʿabadnā', cles: ['abada'] },
       { type: 'contexte', consigne: 'Sujet « je » : choisissez la terminaison de l\'accompli.',
         sujet: 'أَنَا (je)', avant: 'شَكَرْ', apres: '', options: [{ ar: 'تُ', fr: '-tu (je)' }, { ar: 'نَا', fr: '-nā (nous)' }, { ar: 'تُمْ', fr: '-tum (vous)' }], bonne: 0,
         traduction: 'j\'ai remercié (shakartu)', cles: ['shakara'] },
-      { type: 'contexte', consigne: 'Sujet « vous » : choisissez la terminaison correcte.',
-        sujet: 'أَنْتُمْ (vous)', avant: 'دَخَلْ', apres: '', options: [{ ar: 'تُمْ', fr: '-tum (vous)' }, { ar: 'تُ', fr: '-tu (je)' }, { ar: 'نَا', fr: '-nā (nous)' }], bonne: 0,
-        traduction: 'vous êtes entrés (dakhaltum)', cles: ['dakhala'] },
+      { type: 'contexte', consigne: 'Vous parlez à une femme : choisissez la forme correcte.',
+        sujet: 'أَنْتِ (tu, f.)', avant: 'صَبَرْ', apres: '', options: [{ ar: 'تِ', fr: '-ti (tu, f.)' }, { ar: 'تَ', fr: '-ta (tu, m.)' }], bonne: 0,
+        traduction: 'tu as patienté (ṣabarti)', cles: ['sabara'] },
+      { type: 'racine', consigne: 'Donnez la racine de غَفَرَ (il a pardonné).',
+        mot: 'غَفَرَ', racine: ['غ','ف','ر'], distracteurs: ['ع','ق','ل'], cles: ['ghafara'] },
+      { type: 'dictee', consigne: '« Je » ou « tu » ? Tout tient dans la dernière voyelle. Écoutez.',
+        audio: 'كَتَبْتُ', options: [{ ar: 'كَتَبْتُ' }, { ar: 'كَتَبْتَ' }], bonne: 0,
+        explication: 'katabtu, finale en « ou » : j\'ai écrit. katabta, finale en « a » : tu as écrit.' },
+      { type: 'dialogue', consigne: 'On vous demande : أَسَمِعْتَ الْقُرْآنَ ؟ Répondez logiquement.',
+        questionAr: 'أَسَمِعْتَ الْقُرْآنَ ؟', questionTr: 'a-samiʿta l-qurʾān', contexte: 'La particule أَ pose la question ; répondez pour vous-même (« je »).',
+        options: [{ ar: 'نَعَمْ، سَمِعْتُ الْقُرْآنَ', fr: 'Oui, j\'ai entendu le Coran' }, { ar: 'نَعَمْ، سَمِعْتَ الْقُرْآنَ', fr: 'Oui, tu as entendu le Coran' }], bonne: 0,
+        aides: [{ ar: 'سَمِعْتُ', fr: 'j\'ai entendu' }, { ar: 'سَمِعْتَ', fr: 'tu as entendu' }], cles: ['samia'],
+        explication: 'À une question en « tu », on répond en « je » : samiʿtu. La terminaison porte toute la conversation.' },
       { type: 'texteLibre', consigne: 'Écrivez « ils ont patienté » à partir de صَبَرَ.',
-        reponse: 'صبروا', indice: 'ṣabarū', traduction: 'ils ont patienté', cles: ['sabara'] },
+        reponse: 'صبروا', indice: 'ṣabarū : la terminaison ـُوا de la séance 20.', traduction: 'ils ont patienté', cles: ['sabara'] },
+      { type: 'oral', consigne: 'Prononcez « nous avons adoré ».',
+        phraseAr: 'عَبَدْنَا', translit: 'ʿabadnā', cles: ['abada'] },
+      { type: 'oral', consigne: 'Récitez ce fragment de la Fātiḥa, en sentant le « Tu ».',
+        phraseAr: 'أَنْعَمْتَ عَلَيْهِمْ', translit: 'anʿamta ʿalayhim' },
     ],
-    memoriser: { ar: 'إِيَّاكَ نَعْبُدُ', tr: 'iyyāka naʿbudu', fr: 'C\'est Toi que nous adorons. (al-Fātiḥa, 5)' },
+    memoriser: { ar: 'سَمِعْنَا وَأَطَعْنَا', tr: 'samiʿnā wa-aṭaʿnā', fr: 'Nous avons entendu et nous avons obéi. (al-Baqara, 285)',
+      construction: 'سَمِعْنَا = samiʿ-nā : le verbe سَمِعَ (entendre, séance 20) + le suffixe ـْنَا « nous ». « Nous avons entendu ».\n' +
+        'وَأَطَعْنَا : la liaison وَ (et) + aṭaʿ-nā, « nous avons obéi » — même suffixe, même geste.\n' +
+        'C\'est la réponse des croyants à la révélation : deux verbes à l\'accompli, conjugués au « nous ». Vous savez désormais entendre qui parle.' },
     recap: [
-      'L\'accompli ajoute un suffixe à la base verbale.',
-      'ـتُ (je), ـتَ/ـتِ (tu), ـَ/ـَتْ (il/elle), ـنَا (nous), ـتُمْ (vous), ـُوا (ils).',
-      'La racine reste stable d\'une forme à l\'autre.',
-      'La pratique ancre le tableau bien mieux que la mémorisation forcée.',
+      'L\'accompli ajoute un suffixe à une base immuable : katab-tu, katab-ta, katab-ti, katab-nā.',
+      'ـْتُ (je), ـْتَ (tu, m.), ـْتِ (tu, f.), ـْنَا (nous) — et ـْتُمْ (vous), à reconnaître.',
+      'أَنْعَمْتَ dans la Fātiḥa : « Tu as comblé » — vous le conjuguiez sans le savoir.',
+      'La pratique ancre les formes bien mieux que la mémorisation forcée.',
     ],
   },
 
-  15: {
-    cycle: 3,
+  22: {
+    cycle: 4,
     titre: 'Le verbe inaccompli',
     intro: 'L\'accompli regardait vers le passé. L\'inaccompli, lui, exprime le présent et le futur, l\'action en cours ou à venir.\n' +
       'Sa marque la plus visible est un préfixe : un petit son placé devant la racine.\n' +
@@ -1760,77 +2350,8 @@ const Lecons = {
     ],
   },
 
-  16: {
-    cycle: 3,
-    titre: 'L\'annexion (idāfa)',
-    intro: 'Comment dire « le livre d\'Allah », « le Seigneur des mondes » ? L\'arabe procède par simple juxtaposition.\n' +
-      'On accole deux noms : le premier est possédé, le second possesseur. C\'est l\'idāfa, l\'annexion.\n' +
-      'Cette construction est partout dans le Coran : rabbi l-ʿālamīn, māliki yawmi d-dīn.',
-    decouverte: [
-      { texte: 'Dans l\'annexion, le premier nom perd son article et le second se met au cas indirect (kasra finale).' },
-      { lignes: [
-        { ar: 'كِتَابُ اللَّهِ', tr: 'kitābu llāh', fr: 'le livre d\'Allah', note: 'kitāb sans article + Allāh' },
-        { ar: 'رَبُّ الْعَالَمِينَ', tr: 'rabbu l-ʿālamīn', fr: 'le Seigneur des mondes' },
-        { ar: 'يَوْمُ الدِّينِ', tr: 'yawmu d-dīn', fr: 'le Jour de la rétribution' },
-      ]},
-      { texte: 'Le premier mot ne prend jamais l\'article : on ne dit pas al-kitābu llāh, mais kitābu llāh. C\'est le second mot, défini, qui rend l\'ensemble défini.' },
-      { texte: 'Une parole gravée dans toutes les mémoires repose sur une annexion :' },
-      { lignes: [
-        { ar: 'مُحَمَّدٌ رَسُولُ اللَّهِ', tr: 'muḥammadun rasūlu llāh', fr: 'Muhammad est l\'envoyé d\'Allah.', note: 'al-Fatḥ, 29 · rasūlu + llāh, « l\'envoyé d\'Allah »' },
-      ]},
-    ],
-    grammaire: {
-      titre: 'Deux noms accolés',
-      corps: 'L\'idāfa relie un possédé et un possesseur en les juxtaposant, sans préposition.\n' +
-        'Le premier nom ne porte jamais d\'article ni de tanwīn ; le second se met à la kasra et peut, lui, porter l\'article.\n' +
-        'On traduit par « de » : bābu l-bayt, « la porte de la maison ».',
-    },
-    vocabulaire: [
-      { ar: 'رَبّ', tr: 'rabb', fr: 'seigneur', cle: 'rabb' },
-      { ar: 'عَالَمِين', tr: 'ʿālamīn', fr: 'les mondes', cle: 'alamin' },
-      { ar: 'يَوْم', tr: 'yawm', fr: 'jour', cle: 'yawm' },
-      { ar: 'دِين', tr: 'dīn', fr: 'religion, rétribution', cle: 'din' },
-      { ar: 'رَسُول', tr: 'rasūl', fr: 'messager, envoyé', cle: 'rasul' },
-      { ar: 'كَلِمَة', tr: 'kalima', fr: 'parole, mot', cle: 'kalima' },
-    ],
-    exercices: [
-      { type: 'qcm', consigne: 'Que signifie كِتَابُ اللَّهِ ?',
-        options: [{ texte: 'un livre et Allah' }, { texte: 'le livre d\'Allah' }, { texte: 'Allah a un livre' }], bonne: 1, cles: ['kitab','rabb'],
-        explication: 'Annexion : possédé (kitāb) + possesseur (Allāh) = « le livre d\'Allah ».' },
-      { type: 'qcm', consigne: 'Dans une idāfa, le premier nom :',
-        options: [{ texte: 'porte l\'article' }, { texte: 'ne porte jamais l\'article' }], bonne: 1,
-        explication: 'Le premier terme est défini par le second, jamais par un article propre.' },
-      { type: 'glisser', consigne: 'Reconstituez « le Seigneur des mondes ».',
-        ordre: ['رَبُّ', 'الْعَالَمِينَ'], traduction: 'le Seigneur des mondes', cles: ['rabb','alamin'],
-        explication: 'رَبّ n\'est pas seulement « seigneur » : la racine ر-ب-ب dit Celui qui nourrit, élève et conduit chaque chose à sa perfection. Dire رَبُّ الْعَالَمِينَ, c\'est reconnaître Sa seigneurie sur tous les mondes.' },
-      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
-        paires: [ { ar: 'رَسُول', fr: 'messager', cle: 'rasul' }, { ar: 'دِين', fr: 'religion', cle: 'din' }, { ar: 'كَلِمَة', fr: 'parole', cle: 'kalima' }, { ar: 'يَوْم', fr: 'jour', cle: 'yawm' } ] },
-      { type: 'trous', consigne: 'Complétez « le Jour de la rétribution ».',
-        segments: [ 'يَوْمُ', { options: ['الدِّينِ', 'دِينٌ'], bonne: 0 } ], traduction: 'le Jour de la rétribution', cles: ['yawm','din'] },
-      { type: 'phonetique', consigne: 'Lisez ce mot et choisissez sa transcription exacte.',
-        motAr: 'رَسُول', options: ['rasūl', 'rusul', 'rasīl'], bonne: 0, cles: ['rasul'] },
-      { type: 'oral', consigne: 'Lisez cette annexion célèbre.',
-        phraseAr: 'رَبِّ الْعَالَمِينَ', translit: 'rabbi l-ʿālamīn', cles: ['rabb','alamin'] },
-      { type: 'contexte', consigne: 'Dans l\'annexion, le premier nom ne porte pas l\'article.',
-        avant: '', apres: 'اللَّهِ', options: [{ ar: 'كِتَابُ', fr: 'livre (sans article)' }, { ar: 'الْكِتَابُ', fr: 'le livre (avec article)' }], bonne: 0,
-        traduction: 'le livre d\'Allah (kitābu llāh)', cles: ['kitab'] },
-      { type: 'texteLibre', consigne: 'Écrivez « le messager d\'Allah » : complétez le premier nom.',
-        avant: '', apres: 'اللَّهِ', reponse: 'رسول', indice: 'rasūlu', traduction: 'le messager d\'Allah', cles: ['rasul'] },
-    ],
-    memoriser: { ar: 'مَالِكِ يَوْمِ الدِّينِ', tr: 'māliki yawmi d-dīn', fr: 'Maître du Jour de la rétribution. (al-Fātiḥa, 4)',
-      construction: 'Trois noms, deux annexions (idāfa) emboîtées : مَالِكِ (maître) annexé à يَوْمِ (jour), lui-même annexé à الدِّينِ (la rétribution).\n' +
-        'Dans une annexion, seul le dernier mot porte l\'article : c\'est الدِّين qui est défini, et toute la chaîne devient définie — « le maître du jour de la rétribution ».\n' +
-        'Les termes annexés prennent la kasra : mālik-i, yawm-i, d-dīn-i. Ce petit « i » répété est la signature sonore de l\'idāfa.' },
-    recap: [
-      'L\'idāfa accole un possédé et un possesseur, sans préposition.',
-      'Le premier nom ne porte ni article ni tanwīn.',
-      'Le second nom se met à la kasra et peut porter l\'article.',
-      'On traduit l\'annexion par « de ».',
-    ],
-  },
-
-  17: {
-    cycle: 3,
+  23: {
+    cycle: 4,
     titre: 'Les pronoms suffixes',
     intro: 'Pour dire « mon Seigneur », « son livre », l\'arabe attache un petit pronom à la fin du mot.\n' +
       'Ces pronoms suffixes expriment la possession sur un nom, et le complément sur un verbe ou une préposition.\n' +
@@ -1914,11 +2435,104 @@ const Lecons = {
     ],
   },
 
-  18: {
-    cycle: 3,
+  24: {
+    cycle: 4,
+    titre: 'Demander et invoquer : l\'impératif des formules',
+    intro: 'Une notion vous manque encore pour comprendre ce que vous récitez chaque jour : l\'impératif — la forme de l\'ordre et de la demande.\n' +
+      'قُلْ (dis !), اقْرَأْ (lis !), اهْدِنَا (guide-nous !) : le Coran ordonne, invite, et nous enseigne à demander. Vous connaissez déjà ces mots ; aujourd\'hui, vous comprenez leur forme.\n' +
+      'Et avec la structure أَعُوذُ بِـ… مِنْ… (je cherche refuge auprès de… contre…), cette séance prépare mot à mot les deux sourates protectrices de la séance prochaine.',
+    decouverte: [
+      { texte: 'L\'impératif est la forme par laquelle on ordonne ou l\'on demande, adressée à « tu » ou « vous ». En voici quatre que vous fréquentez déjà :' },
+      { lignes: [
+        { ar: 'قُلْ', tr: 'qul', fr: 'dis !', ill: '🗣️', note: 'de قَالَ (dire) — ouvre al-Ikhlāṣ, al-Falaq, an-Nās' },
+        { ar: 'اقْرَأْ', tr: 'iqraʾ', fr: 'lis !', ill: '📖', note: 'le tout premier mot révélé (al-ʿAlaq, 1)' },
+        { ar: 'صَلِّ', tr: 'ṣalli', fr: 'prie !', ill: '🤲', note: 'de la même racine que صَلَاة' },
+        { ar: 'اسْجُدْ', tr: 'usjud', fr: 'prosterne-toi !', ill: '🙇', note: 'racine س-ج-د, celle de مَسْجِد (séance 20)' },
+      ]},
+      { texte: 'Comment le reconnaître ? L\'impératif est court, souvent ouvert par un petit alif d\'appui (اقْرَأْ، اسْجُدْ) et fermé par un sukūn (قُلْ). On le RECONNAÎT pour l\'instant — on apprendra à le fabriquer plus tard.' },
+      { texte: 'La demande s\'adoucit d\'un pronom : اهْدِنَا = اهْدِ (guide !) + نَا (nous, le suffixe de la séance 23). « Guide-nous ! » — c\'est le cœur de la Fātiḥa, et vous pouvez désormais le décomposer vous-même.' },
+      { texte: 'Enfin, la formule du refuge. Le verbe أَعُوذُ (je cherche refuge) appelle deux prépositions : بِـ pour dire auprès de QUI l\'on s\'abrite, مِنْ pour dire contre QUOI :' },
+      { lignes: [
+        { ar: 'أَعُوذُ بِاللَّهِ', tr: 'aʿūdhu bi-llāh', fr: 'je cherche refuge auprès d\'Allah', note: 'la formule que vous dites avant chaque lecture' },
+        { ar: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ', tr: 'aʿūdhu bi-llāhi mina sh-shayṭān', fr: '… contre le shayṭān', note: 'بِـ (auprès de) + مِنْ (contre)' },
+      ]},
+      { texte: 'Retenez ce squelette — aʿūdhu bi-… min… — : la séance prochaine, les sourates al-Falaq et an-Nās le déploieront verset par verset.' },
+    ],
+    grammaire: {
+      titre: 'L\'impératif : l\'action demandée',
+      corps: 'L\'impératif s\'adresse à « tu » ou « vous » : قُلْ (dis), اقْرَأْ (lis), اسْجُدْ (prosterne-toi). Forme brève, souvent un alif d\'appui au début, un sukūn à la fin.\n' +
+        'Un pronom suffixe peut s\'y coller pour préciser la demande : اهْدِنَا (guide-NOUS), comme sur les noms et les prépositions (séance 23).\n' +
+        'Et أَعُوذُ بِـ… مِنْ… n\'est pas un impératif mais une déclaration (« je cherche refuge ») : l\'invocation mêle les deux — on déclare, on demande.',
+    },
+    approfondissement: [
+      { titre: 'iqraʾ : le premier mot de la révélation',
+        corps: 'Le tout premier mot descendu sur le Prophète ﷺ fut un impératif : اقْرَأْ, « Lis ! » (al-ʿAlaq, 1). Une religion inaugurée par l\'ordre de lire — vous qui apprenez à lire le Coran, vous répondez très littéralement à ce premier appel.\n' +
+          'Remarquez sa racine : ق-ر-أ, celle-là même de قُرْآن, « la Récitation ». Lire, réciter, le Livre : une seule famille de sens.\n' +
+          'Et méditez l\'ordre des choses : avant d\'ordonner la prière ou le jeûne, la révélation a ordonné la lecture. Votre travail présent est une adoration.',
+    }],
+    vocabulaire: [
+      { ar: 'اقْرَأْ', tr: 'iqraʾ', fr: 'lis !', cle: 'iqra', ill: '📖' },
+      { ar: 'صَلِّ', tr: 'ṣalli', fr: 'prie !', cle: 'salli', ill: '🤲' },
+      { ar: 'اهْدِنَا', tr: 'ihdinā', fr: 'guide-nous !', cle: 'ihdina' },
+      { ar: 'أَعُوذُ', tr: 'aʿūdhu', fr: 'je cherche refuge', cle: 'audhu' },
+      { ar: 'دُعَاء', tr: 'duʿāʾ', fr: 'invocation', cle: 'dua', ill: '🤲' },
+      { ar: 'سُجُود', tr: 'sujūd', fr: 'prosternation', cle: 'sujud' },
+    ],
+    exercices: [
+      { type: 'qcm', consigne: 'Rappel de la séance 23 : dans رَبَّنَا, le suffixe ـنَا signifie…',
+        options: [{ texte: 'notre / nous' }, { texte: 'ton' }, { texte: 'leur' }], bonne: 0, cles: ['rabbuna'],
+        explication: 'rabbanā : « notre Seigneur ». Ce même ـنَا se collera aujourd\'hui à un impératif : اهْدِنَا.' },
+      { type: 'qcm', consigne: 'قُلْ est…',
+        options: [{ texte: 'un impératif : « dis ! »' }, { texte: 'un accompli : « il a dit »' }, { texte: 'un nom : « la parole »' }], bonne: 0, cles: ['qul'],
+        explication: 'qul, bref et fermé par un sukūn : l\'ordre de dire, qui ouvre plusieurs sourates.' },
+      { type: 'qcm', consigne: 'Quel fut le premier mot révélé du Coran ?',
+        options: [{ ar: 'اقْرَأْ' }, { ar: 'قُلْ' }, { ar: 'صَلِّ' }], bonne: 0, cles: ['iqra'],
+        explication: 'iqraʾ, « Lis ! » (al-ʿAlaq, 1) — de la racine ق-ر-أ, celle de قُرْآن.' },
+      { type: 'decomposition', consigne: 'Décomposez اهْدِنَا : l\'impératif et son pronom.',
+        segments: [ { ar: 'اهْدِ', role: 'impératif (guide !)' }, { ar: 'نَا', role: 'suffixe (nous)' } ], roles: ['impératif (guide !)','suffixe (nous)'], cles: ['ihdina'],
+        explication: 'ihdi (guide) + nā (nous) : « guide-nous ». La demande centrale de la Fātiḥa, désormais transparente.' },
+      { type: 'qcm', consigne: 'Dans أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ, la préposition مِنْ introduit :',
+        options: [{ texte: 'ce dont on se protège' }, { texte: 'celui auprès de qui l\'on s\'abrite' }], bonne: 0, cles: ['audhu','min'],
+        explication: 'بِـ = auprès de qui (Allah) ; مِنْ = contre quoi (le mal). Le squelette des sourates protectrices.' },
+      { type: 'appariement', consigne: 'Reliez chaque impératif ou formule à son sens.',
+        paires: [ { ar: 'قُلْ', fr: 'dis !', cle: 'qul' }, { ar: 'اقْرَأْ', fr: 'lis !', cle: 'iqra' }, { ar: 'صَلِّ', fr: 'prie !', cle: 'salli' }, { ar: 'اهْدِنَا', fr: 'guide-nous !', cle: 'ihdina' } ] },
+      { type: 'glisser', consigne: 'Reconstituez la formule du refuge : « je cherche refuge auprès d\'Allah ».',
+        ordre: ['أَعُوذُ', 'بِاللَّهِ'], traduction: 'aʿūdhu bi-llāh', cles: ['audhu'],
+        explication: 'Le verbe puis بِـ soudée au nom d\'Allah : la formule dite avant chaque lecture du Coran.' },
+      { type: 'racine', consigne: 'Retrouvez la racine de سُجُود (la prosternation).',
+        mot: 'سُجُود', racine: ['س','ج','د'], distracteurs: ['ص','ل','ة'], cles: ['sujud'],
+        explication: 'س-ج-د : se prosterner. De là مَسْجِد, le lieu de la prosternation — la mosquée (séance 20).' },
+      { type: 'trous', consigne: 'Complétez la demande de la Fātiḥa : « guide-nous sur le chemin droit ».',
+        segments: [ { options: ['اهْدِنَا', 'أَعُوذُ'], bonne: 0 }, 'الصِّرَاطَ الْمُسْتَقِيمَ' ], traduction: 'ihdinā ṣ-ṣirāṭa l-mustaqīm', cles: ['ihdina','sirat'] },
+      { type: 'dialogue', consigne: 'Avant de lire le Coran, que dit-on ? Choisissez la formule.',
+        questionAr: 'مَاذَا نَقُولُ قَبْلَ الْقِرَاءَةِ ؟', questionTr: 'mādhā naqūlu qabla l-qirāʾa', contexte: 'qabla = avant ; al-qirāʾa = la lecture.',
+        options: [{ ar: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ', fr: 'Je cherche refuge auprès d\'Allah contre le shayṭān' }, { ar: 'كَتَبْنَا كِتَابًا', fr: 'Nous avons écrit un livre' }], bonne: 0,
+        aides: [{ ar: 'أَعُوذُ', fr: 'je cherche refuge' }, { ar: 'قَبْلَ', fr: 'avant' }], cles: ['audhu'] },
+      { type: 'texteLibre', consigne: 'Écrivez l\'impératif « guide-nous » (verbe + suffixe, en un mot).',
+        reponse: 'اهدنا', indice: 'ihdinā : اهد + نا.', traduction: 'guide-nous !', cles: ['ihdina'] },
+      { type: 'ecoute', consigne: 'L\'oreille seule : écoutez et choisissez le sens.',
+        audio: 'دُعَاء', options: [{ texte: 'invocation' }, { texte: 'prosternation' }, { texte: 'lecture' }], bonne: 0, cles: ['dua'],
+        explication: 'duʿāʾ : l\'invocation, la demande adressée à Allah — « l\'os même de l\'adoration », dit le hadith.' },
+      { type: 'oral', consigne: 'Récitez le premier mot révélé, puis la suite du verset.',
+        phraseAr: 'اقْرَأْ بِاسْمِ رَبِّكَ', translit: 'iqraʾ bi-smi rabbika', cles: ['iqra'] },
+    ],
+    memoriser: { ar: 'اقْرَأْ بِاسْمِ رَبِّكَ', tr: 'iqraʾ bi-smi rabbika', fr: 'Lis, au nom de ton Seigneur ! (al-ʿAlaq, 1) — le premier verset révélé.',
+      construction: 'اقْرَأْ : l\'impératif « lis ! », racine ق-ر-أ — la même que قُرْآن, la Récitation.\n' +
+        'بِاسْمِ = بِـ (par, au nom de) + اسْم (nom) : la préposition collée, comme dans بِسْمِ اللَّهِ.\n' +
+        'رَبِّكَ = رَبّ (Seigneur) + ـكَ (ton, séance 23) : « ton Seigneur ». Trois mots, et toutes vos leçons s\'y donnent rendez-vous.' },
+    recap: [
+      'L\'impératif ordonne ou demande : قُلْ (dis), اقْرَأْ (lis), صَلِّ (prie), اسْجُدْ (prosterne-toi).',
+      'On le reconnaît : forme brève, alif d\'appui fréquent, sukūn final.',
+      'Un suffixe précise la demande : اهْدِنَا = guide + nous.',
+      'أَعُوذُ بِـ… مِنْ… : le squelette des sourates protectrices, pour la séance prochaine.',
+    ],
+  },
+
+  25: {
+    cycle: 4,
     titre: 'Sourates al-Falaq et an-Nās',
     intro: 'Deux sourates de protection, souvent récitées ensemble, closent le Coran. Elles partagent le même élan : chercher refuge auprès d\'Allah.\n' +
-      'Vous y retrouverez l\'annexion (rabbi l-falaq), les pronoms suffixes et la préposition min.\n' +
+      'Vous y retrouverez l\'annexion (rabbi l-falaq), les pronoms suffixes et la structure أَعُوذُ بِـ… مِنْ apprise à la séance 24.\n' +
       'Lisez-les verset par verset, sans hâte, en savourant les mots reconnus.',
     decouverte: [
       { texte: 'Sourate 113, al-Falaq, l\'Aube naissante.' },
@@ -1933,6 +2547,7 @@ const Lecons = {
         { ar: 'مَلِكِ النَّاسِ', tr: 'maliki n-nās', fr: 'le Roi des hommes,' },
         { ar: 'إِلَـٰهِ النَّاسِ', tr: 'ilāhi n-nās', fr: 'le Dieu des hommes,' },
       ]},
+      { texte: 'Vous venez d\'en lire l\'ouverture ; les deux sourates entières — cinq et six versets — vous attendent dans l\'exercice de lecture, pour le jalon du cycle.' },
     ],
     grammaire: {
       titre: 'Chercher refuge : aʿūdhu bi-',
@@ -1969,6 +2584,23 @@ const Lecons = {
         traduction: 'al-Falaq, verset 1', cles: ['falaq'] },
       { type: 'texteLibre', consigne: 'Écrivez le mot « mal » dont on cherche protection.',
         avant: 'مِنْ', apres: 'مَا خَلَقَ', reponse: 'شر', indice: 'sharr', traduction: 'contre le mal de ce qu\'Il a créé', cles: ['sharr'] },
+      { type: 'lecture',
+        consigne: 'Jalon du Cycle IV : les deux protectrices, entières. Écoutez chaque verset, lisez-le à voix haute — et reconnaissez au passage aʿūdhu bi-… min… (séance 24), les annexions et les pronoms suffixes.',
+        titre: 'Sourates al-Falaq (l\'Aube naissante) et an-Nās (les Hommes), complètes',
+        reference: 'Appuyez sur « Tout écouter » pour entendre la récitation verset par verset, puis lisez vous-même.',
+        segments: [
+          { ar: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ', tr: 'qul aʿūdhu bi-rabbi l-falaq', fr: 'Dis : je cherche refuge auprès du Seigneur de l\'aube,' },
+          { ar: 'مِن شَرِّ مَا خَلَقَ', tr: 'min sharri mā khalaq', fr: 'contre le mal de ce qu\'Il a créé,' },
+          { ar: 'وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ', tr: 'wa-min sharri ghāsiqin idhā waqab', fr: 'contre le mal de l\'obscurité quand elle s\'étend,' },
+          { ar: 'وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ', tr: 'wa-min sharri n-naffāthāti fī l-ʿuqad', fr: 'contre le mal de celles qui soufflent sur les nœuds,' },
+          { ar: 'وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ', tr: 'wa-min sharri ḥāsidin idhā ḥasad', fr: 'et contre le mal de l\'envieux quand il envie.' },
+          { ar: 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ', tr: 'qul aʿūdhu bi-rabbi n-nās', fr: 'Dis : je cherche refuge auprès du Seigneur des hommes,' },
+          { ar: 'مَلِكِ النَّاسِ', tr: 'maliki n-nās', fr: 'le Roi des hommes,' },
+          { ar: 'إِلَـٰهِ النَّاسِ', tr: 'ilāhi n-nās', fr: 'le Dieu des hommes,' },
+          { ar: 'مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ', tr: 'min sharri l-waswāsi l-khannās', fr: 'contre le mal du tentateur qui se dérobe,' },
+          { ar: 'الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ', tr: 'alladhī yuwaswisu fī ṣudūri n-nās', fr: 'qui souffle le mal dans les poitrines des hommes,' },
+          { ar: 'مِنَ الْجِنَّةِ وَالنَّاسِ', tr: 'mina l-jinnati wa-n-nās', fr: 'qu\'il soit djinn ou humain.' },
+        ], cles: ['audhu','falaq','sharr','nas'] },
     ],
     memoriser: { ar: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ', tr: 'qul aʿūdhu bi-rabbi l-falaq', fr: 'Dis : je cherche refuge auprès du Seigneur de l\'aube. (al-Falaq, 1)' },
     recap: [
@@ -1979,14 +2611,14 @@ const Lecons = {
     ],
   },
 
-  /* ===================== CYCLE IV — GRAMMAIRE APPROFONDIE ===================== */
+  /* ===================== CYCLE V — VERS LA LECTURE AUTONOME ===================== */
 
-  19: {
-    cycle: 4,
-    titre: 'Les particules de coordination',
+  26: {
+    cycle: 5,
+    titre: 'Relier et insister : wa, fa, thumma et inna',
     intro: 'De petits mots relient les propositions entre elles et donnent au texte son mouvement.\n' +
       'Trois reviennent sans cesse : wa (et), fa (alors, donc), thumma (ensuite, puis).\n' +
-      'Les deux premières se collent au mot suivant ; elles sont faciles à repérer une fois connues.',
+      'Les deux premières se collent au mot suivant. Et pour appuyer une affirmation, l\'arabe possède une particule d\'insistance : إِنَّ, « certes ».',
     decouverte: [
       { texte: 'Les particules wa et fa s\'attachent directement au mot qui suit.' },
       { lignes: [
@@ -1995,6 +2627,11 @@ const Lecons = {
         { ar: 'ثُمَّ', tr: 'thumma', fr: 'ensuite, puis', note: 'mot séparé' },
       ]},
       { texte: 'wa relie deux éléments de même rang ; fa marque une conséquence ou une suite immédiate ; thumma indique une succession dans le temps, avec un délai.' },
+      { texte: 'Voici maintenant إِنَّ (inna), « certes, vraiment » : elle ouvre la phrase en l\'appuyant, et le nom qui la suit prend une fatḥa. La petite particule لَـ (la-) peut renforcer encore :' },
+      { lignes: [
+        { ar: 'إِنَّ رَبَّكَ حَكِيمٌ عَلِيمٌ', tr: 'inna rabbaka ḥakīmun ʿalīm', fr: 'Ton Seigneur est certes Sage, Omniscient.', note: 'al-Anʿām, 83 · rabba-ka prend la fatḥa après inna' },
+        { ar: 'إِنَّ اللَّهَ لَغَفُورٌ رَحِيمٌ', tr: 'inna llāha la-ghafūrun raḥīm', fr: 'Allah est certes Pardonneur, Miséricordieux.', note: 'an-Naḥl, 18 · double insistance : inna + la-' },
+      ]},
     ],
     grammaire: {
       titre: 'wa, fa, thumma : trois nuances de liaison',
@@ -2002,10 +2639,17 @@ const Lecons = {
         'فَ (fa) ajoute une idée de conséquence ou d\'enchaînement rapide : « et alors, donc ».\n' +
         'ثُمَّ (thumma) marque une succession espacée : « puis, ensuite ». Le sens du verset dépend souvent de ces nuances.',
     },
+    approfondissement: [
+      { titre: 'inna, particule d\'insistance',
+        corps: 'إِنَّ (inna) renforce l\'affirmation : « certes, vraiment ». Elle ouvre très souvent un verset, et le nom qui la suit prend une fatḥa : إِنَّ اللَّهَ, إِنَّ الْإِنسَانَ.\n' +
+          'La particule لَـ (la-), soudée à ce qui suit, ajoute encore de l\'insistance : إِنَّ اللَّهَ لَغَفُورٌ, « Allah est BIEN Pardonneur ».\n' +
+          'Souvent, inna s\'allie aux pronoms suffixes de la séance 23 : إِنَّكَ (certes toi…), إِنَّا (certes nous…). Vous les reconnaîtrez dans al-Kawthar, à la séance 29.' },
+    ],
     vocabulaire: [
       { ar: 'وَ', tr: 'wa', fr: 'et', cle: 'wa' },
       { ar: 'فَ', tr: 'fa', fr: 'alors, donc', cle: 'fa' },
       { ar: 'ثُمَّ', tr: 'thumma', fr: 'ensuite, puis', cle: 'thumma' },
+      { ar: 'إِنَّ', tr: 'inna', fr: 'certes, vraiment', cle: 'inna' },
       { ar: 'الْعَصْر', tr: 'al-ʿaṣr', fr: 'le temps, l\'après-midi', cle: 'asr' },
       { ar: 'صَلَّى', tr: 'ṣallā', fr: 'il a prié', cle: 'salla' },
       { ar: 'خَرَجَ', tr: 'kharaja', fr: 'il est sorti', cle: 'kharaja' },
@@ -2031,6 +2675,15 @@ const Lecons = {
       { type: 'contexte', consigne: 'Choisissez la particule qui marque une succession dans le temps.',
         avant: 'دَخَلَ', apres: 'خَرَجَ', options: [{ ar: 'ثُمَّ', fr: 'ensuite, puis' }, { ar: 'فَ', fr: 'donc' }], bonne: 0,
         traduction: 'il est entré, puis il est sorti', aides: [{ ar: 'دَخَلَ', fr: 'il est entré' }, { ar: 'خَرَجَ', fr: 'il est sorti' }], cles: ['thumma','kharaja'] },
+      { type: 'qcm', consigne: 'Que signifie إِنَّ en tête de verset ?',
+        options: [{ texte: 'si' }, { texte: 'certes, vraiment' }, { texte: 'mais' }], bonne: 1, cles: ['inna'],
+        explication: 'inna renforce l\'affirmation : « certes ». Le nom qui suit prend la fatḥa.' },
+      { type: 'contexte', consigne: 'Après إِنَّ, le nom prend la fatḥa. Choisissez la forme correcte.',
+        avant: 'إِنَّ', apres: 'حَكِيمٌ عَلِيمٌ', options: [{ ar: 'رَبَّكَ', fr: 'ton Seigneur (fatḥa)' }, { ar: 'رَبُّكَ', fr: 'ton Seigneur (ḍamma)' }], bonne: 0,
+        traduction: 'Ton Seigneur est certes Sage, Omniscient (al-Anʿām, 83)', cles: ['inna'] },
+      { type: 'decomposition', consigne: 'Décomposez لَغَفُورٌ : la particule d\'insistance et l\'attribut.',
+        segments: [ { ar: 'لَـ', role: 'insistance' }, { ar: 'غَفُورٌ', role: 'attribut' } ], roles: ['insistance','attribut'], cles: ['inna'],
+        explication: 'la- (bien, certes) + ghafūr (Pardonneur) : une insistance qui redouble celle d\'inna.' },
     ],
     memoriser: { ar: 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', tr: 'fa-ṣalli li-rabbika wa-nḥar', fr: 'Prie donc ton Seigneur et sacrifie. (al-Kawthar, 2)',
       construction: 'فَـ (fa) est ici la conjonction « alors, donc » collée au verbe : elle tire une conséquence de ce qui précède (le don d\'al-Kawthar).\n' +
@@ -2041,181 +2694,16 @@ const Lecons = {
       'fa : « alors, donc », conséquence ou suite immédiate.',
       'thumma : « ensuite, puis », succession espacée.',
       'wa et fa se collent au mot suivant.',
+      'إِنَّ ouvre le verset en insistant ; le nom qui suit prend la fatḥa.',
     ],
   },
 
-  20: {
-    cycle: 4,
-    titre: 'Les prépositions principales',
-    intro: 'Les prépositions situent, relient, orientent. Six d\'entre elles couvrent l\'essentiel du Coran.\n' +
-      'Trois s\'écrivent séparément (fī, ʿalā, ilā), trois se collent au mot (bi-, li-, et parfois min).\n' +
-      'Le nom qui suit une préposition se met toujours au cas indirect, avec une kasra.',
-    decouverte: [
-      { texte: 'Les prépositions séparées :' },
-      { lignes: [
-        { ar: 'فِي', tr: 'fī', fr: 'dans, en' },
-        { ar: 'عَلَىٰ', tr: 'ʿalā', fr: 'sur' },
-        { ar: 'إِلَىٰ', tr: 'ilā', fr: 'vers, jusqu\'à' },
-        { ar: 'مِنْ', tr: 'min', fr: 'de, depuis, contre' },
-      ]},
-      { texte: 'Les prépositions collées, qui s\'attachent au mot :' },
-      { lignes: [
-        { ar: 'بِاللَّهِ', tr: 'bi-llāh', fr: 'par Allah, en Allah', note: 'بِـ collé' },
-        { ar: 'لِلَّهِ', tr: 'li-llāh', fr: 'à Allah, pour Allah', note: 'لِـ collé' },
-      ]},
-      { titreDialogue: 'Où est… ? Situer les choses, tout en mots connus.',
-        dialogue: [
-          { qui: 'A', ar: 'أَيْنَ الْكِتَابُ ؟', tr: 'ayna l-kitāb', fr: 'Où est le livre ?' },
-          { qui: 'B', ar: 'الْكِتَابُ فِي الْبَيْتِ.', tr: 'al-kitāb fī l-bayt', fr: 'Le livre est dans la maison.' },
-          { qui: 'A', ar: 'وَأَيْنَ الْوَلَدُ ؟', tr: 'wa-ayna l-walad', fr: 'Et où est l\'enfant ?' },
-          { qui: 'B', ar: 'الْوَلَدُ أَمَامَ الْبَيْتِ.', tr: 'al-walad amāma l-bayt', fr: 'L\'enfant est devant la maison.' },
-          { qui: 'A', ar: 'وَالطَّيْرُ ؟', tr: 'wa-ṭ-ṭayr', fr: 'Et l\'oiseau ?' },
-          { qui: 'B', ar: 'الطَّيْرُ فَوْقَ الشَّجَرَةِ.', tr: 'aṭ-ṭayr fawqa sh-shajara', fr: 'L\'oiseau est au-dessus de l\'arbre.' },
-        ] },
-      { texte: 'Remarquez la kasra après chaque préposition : fī l-bayt-i, amāma l-bayt-i, fawqa sh-shajara-ti. Avec أَيْنَ et trois prépositions, vous posez et répondez déjà à de vraies questions de lieu.' },
-    ],
-    grammaire: {
-      titre: 'Le cas indirect après la préposition',
-      corps: 'Toute préposition entraîne le cas indirect : le nom qui suit prend une kasra (ou un tanwīn kasra).\n' +
-        'بِـ (bi) signifie « par, avec, en » ; لِـ (li) signifie « à, pour, appartenant à ».\n' +
-        'On reconnaît bi-smi llāh, « au nom d\'Allah », où bi- est collé et Allāh porte la kasra.',
-    },
-    approfondissement: [
-      { titre: 'Le prédicat en tête : la phrase locative',
-        corps: 'Quand on situe quelque chose, l\'arabe place souvent le groupe prépositionnel (le khabar) AVANT le sujet indéfini. On lit alors, mot à mot, « dans tel lieu, telle chose ».\n' +
-          'Ainsi وَفِي الْأَرْضِ آيَاتٌ se traduit « et sur la terre il y a des signes » (al-Dhāriyāt, 20). Le sens « il y a » naît de cette inversion, sans aucun verbe.\n' +
-          'Pour situer avec précision, voici les prépositions de lieu : أَمَامَ (devant), خَلْفَ (derrière), فَوْقَ (au-dessus), تَحْتَ (dessous), جَنْبَ (à côté), بَيْنَ (entre), عِنْدَ (auprès de).' },
-    ],
-    vocabulaire: [
-      { ar: 'فَوْقَ', tr: 'fawqa', fr: 'au-dessus de', cle: 'fawqa' },
-      { ar: 'تَحْتَ', tr: 'taḥta', fr: 'au-dessous de', cle: 'tahta' },
-      { ar: 'أَمَامَ', tr: 'amāma', fr: 'devant', cle: 'amama' },
-      { ar: 'عِنْدَ', tr: 'ʿinda', fr: 'auprès de, chez', cle: 'inda' },
-      { ar: 'فِي', tr: 'fī', fr: 'dans', cle: 'fi' },
-      { ar: 'عَلَىٰ', tr: 'ʿalā', fr: 'sur', cle: 'ala' },
-      { ar: 'إِلَىٰ', tr: 'ilā', fr: 'vers', cle: 'ila' },
-      { ar: 'بِـ', tr: 'bi-', fr: 'par, avec', cle: 'bi' },
-      { ar: 'لِـ', tr: 'li-', fr: 'à, pour', cle: 'li' },
-      { ar: 'صَدْر', tr: 'ṣadr', fr: 'poitrine', cle: 'sadr' },
-      { ar: 'الطَّيْر', tr: 'aṭ-ṭayr', fr: 'l\'oiseau', cle: 'tayr' },
-      { ar: 'الشَّجَرَة', tr: 'ash-shajara', fr: 'l\'arbre', cle: 'shajara' },
-    ],
-    exercices: [
-      { type: 'qcm', consigne: 'Que signifie la préposition فِي ?',
-        options: [{ texte: 'sur' }, { texte: 'dans, en' }, { texte: 'vers' }], bonne: 1, cles: ['fi'],
-        explication: 'fī signifie « dans, en » : fī ṣudūri n-nās, « dans les poitrines des hommes ».' },
-      { type: 'qcm', consigne: 'Après une préposition, le nom se met :',
-        options: [{ texte: 'au cas indirect (kasra)' }, { texte: 'au cas sujet (ḍamma)' }], bonne: 0,
-        explication: 'La préposition régit le cas indirect, marqué par la kasra.' },
-      { type: 'appariement', consigne: 'Reliez chaque préposition à son sens.',
-        paires: [ { ar: 'فِي', fr: 'dans', cle: 'fi' }, { ar: 'عَلَىٰ', fr: 'sur', cle: 'ala' }, { ar: 'إِلَىٰ', fr: 'vers', cle: 'ila' }, { ar: 'لِـ', fr: 'pour', cle: 'li' } ] },
-      { type: 'decomposition', consigne: 'Séparez la préposition de son nom dans لِلَّهِ.',
-        segments: [ { ar: 'لِـ', role: 'préposition' }, { ar: 'اللَّهِ', role: 'nom' } ], roles: ['préposition','nom'], cles: ['li'] },
-      { type: 'trous', consigne: 'Complétez « dans les poitrines » (fī ṣudūr).',
-        segments: [ { options: ['فِي', 'عَلَىٰ'], bonne: 0 }, 'صُدُورِ النَّاسِ' ], traduction: 'dans les poitrines des hommes', cles: ['fi'] },
-      { type: 'qcm', consigne: 'Que signifie la préposition فَوْقَ ?',
-        options: [{ texte: 'au-dessus de' }, { texte: 'au-dessous de' }, { texte: 'devant' }], bonne: 0, cles: ['fawqa'],
-        explication: 'فَوْقَ : au-dessus ; son opposé est تَحْتَ (dessous).' },
-      { type: 'oral', consigne: 'Lisez ce groupe prépositionnel.',
-        phraseAr: 'فِي الْعُقَدِ', translit: 'fī l-ʿuqad', cles: ['fi'] },
-      { type: 'trous', consigne: 'Choisissez la préposition de lieu qui convient.',
-        segments: [ 'الطَّيْرُ', { options: ['فَوْقَ', 'تَحْتَ'], bonne: 0 }, 'الشَّجَرَةِ.' ], traduction: 'l\'oiseau est au-dessus de l\'arbre',
-        aide: [ { ar: 'طَيْر', fr: 'oiseau' }, { ar: 'شَجَرَة', fr: 'arbre' }, { ar: 'فَوْقَ', fr: 'au-dessus' }, { ar: 'تَحْتَ', fr: 'dessous' } ], cles: ['fawqa'] },
-      { type: 'dialogue', consigne: 'Choisissez la réponse logique à la question de lieu.',
-        question: 'أَيْنَ الْكِتَابُ ؟',
-        options: [ { ar: 'الْكِتَابُ فِي الْبَيْتِ.' }, { ar: 'الْكِتَابُ كَبِيرٌ.' }, { ar: 'هَٰذَا وَلَدٌ.' } ], bonne: 0,
-        aide: 'ayna l-kitāb ? = où est le livre ?', cles: ['fi'],
-        explication: 'أَيْنَ (où) appelle un lieu : fī l-bayt (dans la maison).' },
-      { type: 'contexte', consigne: 'Situez : « le livre est … la maison ».',
-        avant: 'الْكِتَابُ', apres: 'الْبَيْتِ', options: [{ ar: 'فِي', fr: 'dans' }, { ar: 'عَلَىٰ', fr: 'sur' }], bonne: 0,
-        traduction: 'le livre est dans la maison', cles: ['fi'] },
-      { type: 'dialogue', consigne: 'On demande où est le livre. Choisissez la réponse logique.',
-        questionAr: 'أَيْنَ الْكِتَابُ ؟', questionTr: 'ayna l-kitāb',
-        options: [{ ar: 'الْكِتَابُ فِي الْبَيْتِ', fr: 'Le livre est dans la maison' }, { ar: 'الْكِتَابُ كَبِيرٌ', fr: 'Le livre est grand' }], bonne: 0,
-        aides: [{ ar: 'أَيْنَ', fr: 'où' }, { ar: 'فِي', fr: 'dans' }], cles: ['fi'] },
-      { type: 'dialogue', consigne: 'Où est l\'oiseau ? Choisissez la réponse cohérente.',
-        questionAr: 'أَيْنَ الطَّيْرُ ؟', questionTr: 'ayna ṭ-ṭayr', contexte: 'L\'oiseau est posé au-dessus de l\'arbre.',
-        options: [{ ar: 'الطَّيْرُ فَوْقَ الشَّجَرَةِ', fr: 'L\'oiseau est au-dessus de l\'arbre' }, { ar: 'الطَّيْرُ تَحْتَ الْبَيْتِ', fr: 'L\'oiseau est sous la maison' }], bonne: 0,
-        aides: [{ ar: 'فَوْقَ', fr: 'au-dessus de' }, { ar: 'الشَّجَرَة', fr: 'l\'arbre' }, { ar: 'الطَّيْر', fr: 'l\'oiseau' }], cles: ['fawqa','tayr','shajara'] },
-    ],
-    memoriser: { ar: 'فِي صُدُورِ النَّاسِ', tr: 'fī ṣudūri n-nās', fr: 'dans les poitrines des hommes. (an-Nās, 5)' },
-    recap: [
-      'Prépositions séparées : fī (dans), ʿalā (sur), ilā (vers), min (de).',
-      'Prépositions collées : bi- (par), li- (à, pour).',
-      'Le nom régi par une préposition prend la kasra.',
-      'bi-smi llāh : « au nom d\'Allah ».',
-    ],
-  },
-
-  21: {
-    cycle: 4,
-    titre: 'Le pluriel',
-    intro: 'L\'arabe forme ses pluriels de trois manières, dont une qui déroute d\'abord : le pluriel brisé.\n' +
-      'Le pluriel sain ajoute une terminaison régulière. Le pluriel brisé, lui, remodèle l\'intérieur du mot.\n' +
-      'Ne cherchez pas de règle unique : on retient les pluriels brisés mot par mot, comme en allemand.',
-    decouverte: [
-      { texte: 'Le pluriel sain masculin ajoute ـُونَ ou ـِينَ. Le pluriel sain féminin ajoute ـَات.' },
-      { lignes: [
-        { ar: 'مُسْلِم ← مُسْلِمُونَ', tr: 'muslim → muslimūn', fr: 'musulman → musulmans', note: 'sain masculin' },
-        { ar: 'مُؤْمِنَة ← مُؤْمِنَات', tr: 'muʾmina → muʾmināt', fr: 'croyante → croyantes', note: 'sain féminin' },
-      ]},
-      { texte: 'Le pluriel brisé change la forme interne du mot, sans terminaison régulière.' },
-      { lignes: [
-        { ar: 'كِتَاب ← كُتُب', tr: 'kitāb → kutub', fr: 'livre → livres', note: 'brisé' },
-        { ar: 'رَسُول ← رُسُل', tr: 'rasūl → rusul', fr: 'messager → messagers', note: 'brisé' },
-        { ar: 'قَلْب ← قُلُوب', tr: 'qalb → qulūb', fr: 'cœur → cœurs', note: 'brisé' },
-      ]},
-    ],
-    grammaire: {
-      titre: 'Trois pluriels, un réflexe',
-      corps: 'Le pluriel sain masculin se forme avec ـُونَ / ـِينَ, le sain féminin avec ـَات : ce sont les plus réguliers.\n' +
-        'Le pluriel brisé reconstruit le mot de l\'intérieur : kitāb donne kutub, qalb donne qulūb.\n' +
-        'La racine reste lisible sous le pluriel brisé : repérez-la, et le sens reste accessible même si la forme surprend.',
-    },
-    vocabulaire: [
-      { ar: 'قَلْب', tr: 'qalb', fr: 'cœur', cle: 'qalb' },
-      { ar: 'قُلُوب', tr: 'qulūb', fr: 'cœurs', cle: 'qulub' },
-      { ar: 'كُتُب', tr: 'kutub', fr: 'livres', cle: 'kutub' },
-      { ar: 'رُسُل', tr: 'rusul', fr: 'messagers', cle: 'rusul' },
-      { ar: 'آيَات', tr: 'āyāt', fr: 'signes, versets', cle: 'ayat' },
-      { ar: 'صَالِحَات', tr: 'ṣāliḥāt', fr: 'bonnes œuvres', cle: 'salihat' },
-    ],
-    exercices: [
-      { type: 'qcm', consigne: 'Quel est le pluriel de مُسْلِم (musulman) ?',
-        options: [{ ar: 'مُسْلِمَات' }, { ar: 'مُسْلِمُونَ' }, { ar: 'مَسَاجِد' }], bonne: 1,
-        explication: 'Pluriel sain masculin : on ajoute ـُونَ, muslimūn.' },
-      { type: 'qcm', consigne: 'كِتَاب → كُتُب est un pluriel :',
-        options: [{ texte: 'sain masculin' }, { texte: 'sain féminin' }, { texte: 'brisé' }], bonne: 2, cles: ['kutub'],
-        explication: 'La forme interne change : c\'est un pluriel brisé.' },
-      { type: 'appariement', consigne: 'Reliez chaque pluriel à son singulier.',
-        paires: [ { ar: 'قُلُوب', fr: 'cœurs (qalb)', cle: 'qulub' }, { ar: 'رُسُل', fr: 'messagers (rasūl)', cle: 'rusul' }, { ar: 'كُتُب', fr: 'livres (kitāb)', cle: 'kutub' }, { ar: 'آيَات', fr: 'signes (āya)', cle: 'ayat' } ] },
-      { type: 'racine', consigne: 'Retrouvez la racine sous le pluriel brisé قُلُوب (cœurs).',
-        mot: 'قُلُوب', racine: ['ق','ل','ب'], distracteurs: ['ك','ت','ر'], cles: ['qulub'] },
-      { type: 'trous', consigne: 'Complétez « les bonnes œuvres » au pluriel féminin.',
-        segments: [ 'الصَّالِحَ', { options: ['ات', 'ون', 'ين'], bonne: 0 } ], traduction: 'les bonnes œuvres', cles: ['salihat'] },
-      { type: 'oral', consigne: 'Prononcez ce pluriel brisé.',
-        phraseAr: 'قُلُوب', translit: 'qulūb', cles: ['qulub'] },
-      { type: 'contexte', consigne: 'Choisissez le pluriel sain masculin de « musulman ».',
-        avant: '', apres: '', options: [{ ar: 'مُسْلِمُونَ', fr: 'musulmans (m.)' }, { ar: 'مُسْلِمَاتٌ', fr: 'musulmanes (f.)' }], bonne: 0,
-        traduction: 'des musulmans (pluriel masculin)', cles: ['muslim'] },
-      { type: 'texteLibre', consigne: 'Écrivez le pluriel brisé de كِتَاب (livre).',
-        reponse: 'كتب', indice: 'kutub', traduction: 'des livres', cles: ['kutub'] },
-    ],
-    memoriser: { ar: 'وَعَمِلُوا الصَّالِحَاتِ', tr: 'wa-ʿamilū ṣ-ṣāliḥāt', fr: 'et ont accompli les bonnes œuvres. (al-ʿAṣr, 3)' },
-    recap: [
-      'Pluriel sain masculin : ـُونَ / ـِينَ.',
-      'Pluriel sain féminin : ـَات.',
-      'Pluriel brisé : la forme interne change (kitāb → kutub).',
-      'La racine reste repérable sous le pluriel brisé.',
-    ],
-  },
-
-  22: {
-    cycle: 4,
-    titre: 'La négation',
+  27: {
+    cycle: 5,
+    titre: 'Nier et excepter : lā, mā, lam et illā',
     intro: 'Nier, c\'est essentiel pour comprendre le Coran, qui affirme autant qu\'il écarte.\n' +
       'L\'arabe choisit l\'outil de négation selon le temps et la nature de ce qu\'on nie : lā, mā, lam, laysa.\n' +
-      'Vous connaissez déjà lam, qui nie au passé. Complétons le tableau.',
+      'Vous avez déjà croisé لَمْ dans al-Ikhlāṣ (lam yalid, leçon 13) : voici enfin sa règle, et celles de ses sœurs.',
     decouverte: [
       { lignes: [
         { ar: 'لَا إِلَـٰهَ إِلَّا اللَّهُ', tr: 'lā ilāha illā llāh', fr: 'il n\'est de dieu sinon Allah', note: 'لَا nie le nom' },
@@ -2235,14 +2723,7 @@ const Lecons = {
         'لَمْ (lam) nie le passé et se construit avec un verbe à l\'inaccompli : lam yalid, « il n\'a pas engendré ».\n' +
         'لَيْسَ (laysa) est un verbe qui signifie « ne pas être » ; مَا (mā) sert aussi de négation, surtout du passé.',
     },
-    approfondissement: [
-      { titre: 'Conjuguer laysa : « ne pas être »',
-        corps: 'Pour nier une phrase nominale, l\'arabe emploie le verbe لَيْسَ, « ne pas être ». Il n\'existe qu\'à une seule forme mais exprime le présent.\n' +
-          'Aux premières personnes : لَسْتُ (je ne suis pas), لَسْتَ (tu n\'es pas, masc.), لَسْتِ (tu n\'es pas, fém.), لَيْسَ (il n\'est pas), لَيْسَتْ (elle n\'est pas).\n' +
-          'Exemple : لَسْتُ غَنِيًّا, « je ne suis pas riche ». Remarquez que l\'attribut qui suit laysa prend la terminaison « an » (cas direct).' },
-    ],
     vocabulaire: [
-      { ar: 'لَسْتُ', tr: 'lastu', fr: 'je ne suis pas', cle: 'lastu' },
       { ar: 'لَمْ', tr: 'lam', fr: 'ne... pas (au passé)', cle: 'lam' },
       { ar: 'لَا', tr: 'lā', fr: 'non, ne... pas', cle: 'la' },
       { ar: 'مَا', tr: 'mā', fr: 'ne... pas ; ce que', cle: 'ma' },
@@ -2264,8 +2745,6 @@ const Lecons = {
         paires: [ { ar: 'لَا', fr: 'ne... pas (général)', cle: 'la' }, { ar: 'لَمْ', fr: 'ne... pas (passé)', cle: 'lam' }, { ar: 'لَيْسَ', fr: 'il n\'est pas', cle: 'laysa' }, { ar: 'إِلَّا', fr: 'sinon', cle: 'illa' } ] },
       { type: 'glisser', consigne: 'Reconstituez la formule « il n\'est de dieu sinon Allah ».',
         ordre: ['لَا', 'إِلَـٰهَ', 'إِلَّا', 'اللَّهُ'], traduction: 'il n\'est de dieu sinon Allah', cles: ['la','ilah','illa'] },
-      { type: 'trous', consigne: 'Complétez « je ne suis pas riche » avec la forme de laysa.',
-        segments: [ { options: ['لَسْتُ', 'لَيْسَ'], bonne: 0 }, 'غَنِيًّا' ], traduction: 'je ne suis pas riche', cles: ['lastu'] },
       { type: 'oral', consigne: 'Récitez cette attestation fondamentale.',
         phraseAr: 'لَا إِلَـٰهَ إِلَّا اللَّهُ', translit: 'lā ilāha illā llāh', cles: ['la','illa'] },
       { type: 'contexte', consigne: 'Niez au passé, devant un verbe à l\'inaccompli.',
@@ -2289,164 +2768,40 @@ const Lecons = {
     ],
   },
 
-  23: {
-    cycle: 4,
-    titre: 'Les pronoms relatifs',
-    intro: 'Pour dire « celui qui », « celle que », l\'arabe dispose de relatifs qui s\'accordent en genre.\n' +
-      'Les deux plus courants sont alladhī (masculin) et allatī (féminin).\n' +
-      'On les rencontre dès le début de la Fātiḥa et dans an-Nās : alladhī yuwaswisu.',
-    decouverte: [
-      { lignes: [
-        { ar: 'الَّذِي', tr: 'alladhī', fr: 'celui qui (m.)' },
-        { ar: 'الَّتِي', tr: 'allatī', fr: 'celle qui (f.)' },
-        { ar: 'الَّذِينَ', tr: 'alladhīna', fr: 'ceux qui (m. pluriel)' },
-      ]},
-      { texte: 'Le relatif renvoie à un être ou une chose déjà défini. الَّذِينَ آمَنُوا : « ceux qui ont cru ».' },
-      { lignes: [
-        { ar: 'الَّذِي يُوَسْوِسُ', tr: 'alladhī yuwaswisu', fr: 'celui qui souffle (le mal)', note: 'an-Nās, 5' },
-        { ar: 'الَّذِينَ آمَنُوا', tr: 'alladhīna āmanū', fr: 'ceux qui ont cru', note: 'al-ʿAṣr, 3' },
-      ]},
-    ],
-    grammaire: {
-      titre: 'Un relatif qui s\'accorde',
-      corps: 'Le pronom relatif s\'accorde en genre et en nombre avec ce qu\'il reprend : الَّذِي (masculin singulier), الَّتِي (féminin singulier), الَّذِينَ (masculin pluriel).\n' +
-        'Il ne s\'emploie qu\'avec un antécédent défini ; après un indéfini, l\'arabe se passe de relatif.\n' +
-        'La proposition qui suit complète le sens : alladhī khalaqa, « celui qui a créé ».',
-    },
-    vocabulaire: [
-      { ar: 'الَّذِي', tr: 'alladhī', fr: 'celui qui', cle: 'alladhi' },
-      { ar: 'الَّتِي', tr: 'allatī', fr: 'celle qui', cle: 'allati' },
-      { ar: 'الَّذِينَ', tr: 'alladhīna', fr: 'ceux qui', cle: 'alladhina' },
-      { ar: 'آمَنُوا', tr: 'āmanū', fr: 'ils ont cru', cle: 'amanu' },
-      { ar: 'يُوَسْوِسُ', tr: 'yuwaswisu', fr: 'il souffle (le mal)', cle: 'yuwaswisu' },
-      { ar: 'الْمَرْأَة', tr: 'al-marʾa', fr: 'la femme', cle: 'mara' },
-    ],
-    exercices: [
-      { type: 'qcm', consigne: 'Comment dit-on « celle qui » ?',
-        options: [{ ar: 'الَّذِي' }, { ar: 'الَّتِي' }, { ar: 'الَّذِينَ' }], bonne: 1, cles: ['allati'],
-        explication: 'الَّتِي est le relatif féminin singulier.' },
-      { type: 'qcm', consigne: 'الَّذِينَ آمَنُوا signifie :',
-        options: [{ texte: 'celui qui croit' }, { texte: 'ceux qui ont cru' }, { texte: 'la foi' }], bonne: 1, cles: ['alladhina','amanu'],
-        explication: 'الَّذِينَ (ceux qui) + آمَنُوا (ils ont cru).' },
-      { type: 'qcm', consigne: 'Le relatif s\'emploie avec un antécédent :',
-        options: [{ texte: 'défini' }, { texte: 'indéfini' }], bonne: 0,
-        explication: 'On n\'emploie alladhī, allatī qu\'après un nom défini.' },
-      { type: 'appariement', consigne: 'Reliez chaque relatif à sa valeur.',
-        paires: [ { ar: 'الَّذِي', fr: 'celui qui', cle: 'alladhi' }, { ar: 'الَّتِي', fr: 'celle qui', cle: 'allati' }, { ar: 'الَّذِينَ', fr: 'ceux qui', cle: 'alladhina' }, { ar: 'آمَنُوا', fr: 'ils ont cru', cle: 'amanu' } ] },
-      { type: 'glisser', consigne: 'Reconstituez « celui qui souffle le mal ».',
-        ordre: ['الَّذِي', 'يُوَسْوِسُ'], traduction: 'celui qui souffle le mal', cles: ['alladhi','yuwaswisu'] },
-      { type: 'oral', consigne: 'Lisez ce fragment d\'an-Nās.',
-        phraseAr: 'الَّذِي يُوَسْوِسُ', translit: 'alladhī yuwaswisu', cles: ['alladhi'] },
-      { type: 'contexte', consigne: 'L\'antécédent est féminin singulier. Choisissez le relatif.',
-        sujet: 'الْمَرْأَة (la femme, fém.)', avant: 'الْمَرْأَةُ', apres: 'آمَنَتْ', options: [{ ar: 'الَّتِي', fr: 'celle qui' }, { ar: 'الَّذِي', fr: 'celui qui' }], bonne: 0,
-        traduction: 'la femme qui a cru', aides: [{ ar: 'الْمَرْأَة', fr: 'la femme' }, { ar: 'آمَنَتْ', fr: 'elle a cru' }], cles: ['allati','mara'] },
-      { type: 'contexte', consigne: 'L\'antécédent est un pluriel masculin. Choisissez le relatif.',
-        sujet: 'النَّاس (les gens)', avant: 'النَّاسُ', apres: 'آمَنُوا', options: [{ ar: 'الَّذِينَ', fr: 'ceux qui' }, { ar: 'الَّتِي', fr: 'celle qui' }], bonne: 0,
-        traduction: 'les gens qui ont cru', cles: ['alladhina'] },
-      { type: 'texteLibre', consigne: 'Écrivez le relatif masculin singulier « celui qui ».',
-        reponse: 'الذي', indice: 'alladhī', traduction: 'celui qui', cles: ['alladhi'] },
-    ],
-    memoriser: { ar: 'إِلَّا الَّذِينَ آمَنُوا', tr: 'illā lladhīna āmanū', fr: 'sauf ceux qui ont cru. (al-ʿAṣr, 3)' },
-    recap: [
-      'Relatifs : الَّذِي (m.), الَّتِي (f.), الَّذِينَ (m. pluriel).',
-      'Le relatif s\'accorde en genre et en nombre.',
-      'Il suppose un antécédent défini.',
-      'La proposition suivante précise le sens.',
-    ],
-  },
-
-  24: {
-    cycle: 4,
-    titre: 'Sourates al-Kawthar et al-ʿAṣr',
-    intro: 'Deux sourates brèves mais denses. al-Kawthar est la plus courte du Coran ; al-ʿAṣr tient en un serment et une leçon de vie.\n' +
-      'Vous y mobiliserez tout le cycle : particules, prépositions, pluriels, négation, relatifs.\n' +
-      'Lisez, comprenez, puis laissez les mots résonner.',
-    decouverte: [
-      { texte: 'Sourate 108, al-Kawthar, l\'Abondance.' },
-      { lignes: [
-        { ar: 'إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ', tr: 'innā aʿṭaynāka l-kawthar', fr: 'Nous t\'avons certes accordé l\'abondance.' },
-        { ar: 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', tr: 'fa-ṣalli li-rabbika wa-nḥar', fr: 'Prie donc ton Seigneur et sacrifie.' },
-        { ar: 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ', tr: 'inna shāni\'aka huwa l-abtar', fr: 'Celui qui te hait sera, lui, sans postérité.' },
-      ]},
-      { texte: 'Sourate 103, al-ʿAṣr, le Temps.' },
-      { lignes: [
-        { ar: 'وَالْعَصْرِ', tr: 'wa-l-ʿaṣr', fr: 'Par le Temps,' },
-        { ar: 'إِنَّ الْإِنسَانَ لَفِي خُسْرٍ', tr: 'inna l-insāna la-fī khusr', fr: 'l\'être humain est certes en perdition,' },
-        { ar: 'إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ', tr: 'illā lladhīna āmanū wa-ʿamilū ṣ-ṣāliḥāt', fr: 'sauf ceux qui croient et accomplissent les bonnes œuvres,' },
-      ]},
-    ],
-    grammaire: {
-      titre: 'inna, particule d\'insistance',
-      corps: 'إِنَّ (inna) renforce l\'affirmation : « certes, vraiment ». Elle ouvre souvent un verset.\n' +
-        'Le nom qui la suit prend une fatḥa : inna l-insāna, « l\'être humain, certes ».\n' +
-        'La particule لَـ (la-) ajoutée renforce encore : la-fī khusr, « bien en perdition ».',
-    },
-    vocabulaire: [
-      { ar: 'الْكَوْثَر', tr: 'al-kawthar', fr: 'l\'abondance', cle: 'kawthar' },
-      { ar: 'إِنَّ', tr: 'inna', fr: 'certes, vraiment', cle: 'inna' },
-      { ar: 'الْإِنْسَان', tr: 'al-insān', fr: 'l\'être humain', cle: 'insan' },
-      { ar: 'خُسْر', tr: 'khusr', fr: 'perte, perdition', cle: 'khusr' },
-      { ar: 'الصَّبْر', tr: 'aṣ-ṣabr', fr: 'la patience', cle: 'sabr' },
-      { ar: 'الْحَقّ', tr: 'al-ḥaqq', fr: 'la vérité, le vrai', cle: 'haqq' },
-    ],
-    exercices: [
-      { type: 'qcm', consigne: 'Que signifie إِنَّ en tête de verset ?',
-        options: [{ texte: 'si' }, { texte: 'certes, vraiment' }, { texte: 'mais' }], bonne: 1, cles: ['inna'],
-        explication: 'inna renforce l\'affirmation : « certes ».' },
-      { type: 'qcm', consigne: 'Que signifie خُسْر ?',
-        options: [{ texte: 'abondance' }, { texte: 'perdition, perte' }, { texte: 'patience' }], bonne: 1, cles: ['khusr'],
-        explication: 'khusr : la perte, la perdition.' },
-      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
-        paires: [ { ar: 'الْكَوْثَر', fr: 'l\'abondance', cle: 'kawthar' }, { ar: 'الْإِنْسَان', fr: 'l\'être humain', cle: 'insan' }, { ar: 'الصَّبْر', fr: 'la patience', cle: 'sabr' }, { ar: 'الْحَقّ', fr: 'la vérité', cle: 'haqq' } ] },
-      { type: 'glisser', consigne: 'Reconstituez « par le Temps, l\'être humain est en perdition ».',
-        ordre: ['وَالْعَصْرِ', 'إِنَّ', 'الْإِنسَانَ', 'لَفِي', 'خُسْرٍ'], traduction: 'Par le Temps, l\'être humain est certes en perdition', cles: ['insan','khusr','inna'],
-        explication: 'Allah jure par le Temps (ʿaṣr), notre bien le plus précieux et le plus vite perdu. La double insistance إِنَّ… لَـ souligne que la perte est la règle, sauf pour les quatre exceptions du verset suivant.' },
-      { type: 'decomposition', consigne: 'Décomposez لَفِي : la particule d\'insistance et la préposition.',
-        segments: [ { ar: 'لَـ', role: 'insistance' }, { ar: 'فِي', role: 'préposition' } ], roles: ['insistance','préposition'], cles: ['fi'] },
-      { type: 'oral', consigne: 'Récitez al-ʿAṣr en entier, lentement.',
-        phraseAr: 'وَالْعَصْرِ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ', translit: 'wa-l-ʿaṣr, inna l-insāna la-fī khusr', cles: ['insan','khusr'] },
-      { type: 'contexte', consigne: 'Après إِنَّ, le nom prend la fatḥa. Choisissez la forme correcte.',
-        avant: 'إِنَّ', apres: 'لَفِي خُسْرٍ', options: [{ ar: 'الْإِنْسَانَ', fr: 'l\'humain (fatḥa)' }, { ar: 'الْإِنْسَانُ', fr: 'l\'humain (ḍamma)' }], bonne: 0,
-        traduction: 'l\'être humain est certes en perdition', cles: ['insan'] },
-      { type: 'texteLibre', consigne: 'Écrivez le mot « patience », clé du salut dans al-ʿAṣr.',
-        reponse: 'الصبر', indice: 'aṣ-ṣabr', traduction: 'la patience', cles: ['sabr'] },
-    ],
-    memoriser: { ar: 'إِنَّ الْإِنسَانَ لَفِي خُسْرٍ', tr: 'inna l-insāna la-fī khusr', fr: 'L\'être humain est certes en perdition. (al-ʿAṣr, 2)',
-      construction: 'إِنَّ (certes) ouvre la phrase en insistant ; elle met son sujet au cas direct : الْإِنسَانَ porte la fatḥa (-a), « l\'être humain ».\n' +
-        'لَـ (la-) est un second outil d\'insistance, soudé à ce qui suit : لَفِي « est bien dans ».\n' +
-        'فِي خُسْرٍ : la préposition فِي (dans) régit خُسْرٍ (perdition), qui prend une kasra avec tanwīn (-in), indéfini au cas indirect. Mot à mot : « certes l\'humain [est] bien en perdition ».' },
-    recap: [
-      'al-Kawthar : la plus courte sourate, trois versets.',
-      'al-ʿAṣr : un serment par le Temps, puis la voie du salut.',
-      'إِنَّ renforce l\'affirmation ; le nom qui suit prend la fatḥa.',
-      'لَـ ajoute encore de l\'insistance : la-fī khusr.',
-    ],
-  },
-
-  /* ===================== CYCLE V — PREMIÈRES LECTURES CORANIQUES ===================== */
-
-  25: {
+  28: {
     cycle: 5,
-    titre: 'Les noms d\'Allah les plus fréquents',
-    intro: 'Le Coran nomme Allah par de nombreux attributs. En connaître les principaux éclaire d\'innombrables versets.\n' +
-      'Beaucoup sont bâtis sur une racine que vous savez maintenant repérer : ر-ح-م pour la miséricorde, ع-ل-م pour le savoir.\n' +
-      'Ces noms reviennent en fin de verset, comme une signature du sens.',
+    titre: 'Le mot se transforme : pluriels et schèmes',
+    intro: 'Vous savez qu\'une racine de trois consonnes porte le sens. Voici l\'autre moitié du génie de l\'arabe : les moules — les schèmes — dans lesquels cette racine se coule.\n' +
+      'Le pluriel en est la première illustration : tantôt une terminaison régulière (muslim → muslimūn), tantôt un remodelage interne (kitāb → kutub, le pluriel « brisé »).\n' +
+      'Et les plus beaux fruits de ces moules sont les noms d\'Allah : ʿalīm, ghafūr, raḥmān… Une leçon de grammaire qui se termine en dhikr.',
     decouverte: [
+      { texte: 'Le pluriel sain masculin ajoute ـُونَ ou ـِينَ. Le pluriel sain féminin ajoute ـَات. La forme du mot ne bouge pas :' },
       { lignes: [
-        { ar: 'الرَّحْمَـٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux', note: 'racine ر-ح-م' },
-        { ar: 'الرَّحِيم', tr: 'ar-raḥīm', fr: 'le Très Miséricordieux', note: 'même racine' },
-        { ar: 'الْعَلِيم', tr: 'al-ʿalīm', fr: 'l\'Omniscient', note: 'racine ع-ل-م' },
-        { ar: 'الْحَكِيم', tr: 'al-ḥakīm', fr: 'le Sage', note: 'racine ح-ك-م' },
-        { ar: 'الْغَفُور', tr: 'al-ghafūr', fr: 'le Pardonneur', note: 'racine غ-ف-ر' },
-        { ar: 'الْعَزِيز', tr: 'al-ʿazīz', fr: 'le Tout-Puissant', note: 'racine ع-ز-ز' },
+        { ar: 'مُسْلِم ← مُسْلِمُونَ', tr: 'muslim → muslimūn', fr: 'musulman → musulmans', note: 'sain masculin' },
+        { ar: 'مُؤْمِنَة ← مُؤْمِنَات', tr: 'muʾmina → muʾmināt', fr: 'croyante → croyantes', note: 'sain féminin' },
+        { ar: 'آيَة ← آيَات', tr: 'āya → āyāt', fr: 'verset → versets', note: 'sain féminin' },
       ]},
-      { texte: 'ar-Raḥmān et ar-Raḥīm partagent la racine de la miséricorde. Le premier dit une miséricorde immense et générale, le second une miséricorde continue et agissante.' },
+      { texte: 'Le pluriel brisé, lui, remodèle l\'intérieur du mot — la racine reste, le moule change :' },
+      { lignes: [
+        { ar: 'كِتَاب ← كُتُب', tr: 'kitāb → kutub', fr: 'livre → livres', note: 'brisé' },
+        { ar: 'رَسُول ← رُسُل', tr: 'rasūl → rusul', fr: 'messager → messagers', note: 'brisé' },
+        { ar: 'قَلْب ← قُلُوب', tr: 'qalb → qulūb', fr: 'cœur → cœurs', note: 'brisé' },
+      ]},
+      { texte: 'Ne cherchez pas de règle unique au pluriel brisé : on le retient mot par mot, et la racine — toujours lisible — garde le sens accessible.' },
+      { texte: 'Cette idée du moule va plus loin que le pluriel. Le schème فَعِيل (faʿīl) exprime une qualité stable et intense ; c\'est le moule de beaucoup de noms divins :' },
+      { lignes: [
+        { ar: 'الْعَلِيم', tr: 'al-ʿalīm', fr: 'l\'Omniscient', note: 'racine ع-ل-م, le savoir' },
+        { ar: 'الرَّحِيم', tr: 'ar-raḥīm', fr: 'le Très Miséricordieux', note: 'racine ر-ح-م — comme رَحْمَة' },
+        { ar: 'الْعَزِيز', tr: 'al-ʿazīz', fr: 'le Tout-Puissant', note: 'racine ع-ز-ز' },
+        { ar: 'الْغَفُور', tr: 'al-ghafūr', fr: 'le Pardonneur', note: 'racine غ-ف-ر — comme غَفَرَ, séance 21' },
+      ]},
+      { texte: 'ar-Raḥmān et ar-Raḥīm partagent la racine de la miséricorde : le premier dit une miséricorde immense et générale, le second une miséricorde continue et agissante. Ces noms signent la fin de très nombreux versets.' },
     ],
     grammaire: {
-      titre: 'Des noms sur le schéma faʿīl',
-      corps: 'Beaucoup de noms divins suivent le schéma faʿīl : ʿalīm (savant), ḥakīm (sage), raḥīm (miséricordieux), ʿazīz (puissant).\n' +
-        'Ce schéma exprime une qualité stable, intense et permanente.\n' +
-        'Reconnaître la racine sous le nom en dévoile aussitôt le sens : sous ʿalīm, la racine ع-ل-م du savoir.',
+      titre: 'Racine + schème : toute la morphologie arabe',
+      corps: 'Le pluriel sain masculin se forme avec ـُونَ / ـِينَ, le sain féminin avec ـَات ; le pluriel brisé reconstruit le mot de l\'intérieur : kitāb → kutub, qalb → qulūb.\n' +
+        'Dans tous les cas, la racine reste lisible : repérez-la, et le sens reste accessible même si la forme surprend.\n' +
+        'C\'est le même principe pour les schèmes de qualité : faʿīl (ʿalīm, raḥīm, ʿazīz) dit une qualité stable, intense, permanente.',
     },
     approfondissement: [
       { titre: 'Les beaux noms et le dhikr',
@@ -2459,298 +2814,197 @@ const Lecons = {
           'Reconnaître ce schème, c\'est entendre dans le Nom une générosité ou une miséricorde sans limite, et non une simple qualité.' },
     ],
     vocabulaire: [
+      { ar: 'قُلُوب', tr: 'qulūb', fr: 'cœurs', cle: 'qulub' },
+      { ar: 'كُتُب', tr: 'kutub', fr: 'livres', cle: 'kutub' },
+      { ar: 'رُسُل', tr: 'rusul', fr: 'messagers', cle: 'rusul' },
+      { ar: 'آيَات', tr: 'āyāt', fr: 'signes, versets', cle: 'ayat' },
+      { ar: 'صَالِحَات', tr: 'ṣāliḥāt', fr: 'bonnes œuvres', cle: 'salihat' },
       { ar: 'الرَّحْمَـٰن', tr: 'ar-raḥmān', fr: 'le Tout Miséricordieux', cle: 'rahman' },
-      { ar: 'الرَّحِيم', tr: 'ar-raḥīm', fr: 'le Très Miséricordieux', cle: 'rahim' },
       { ar: 'الْعَلِيم', tr: 'al-ʿalīm', fr: 'l\'Omniscient', cle: 'alim' },
       { ar: 'الْغَفُور', tr: 'al-ghafūr', fr: 'le Pardonneur', cle: 'ghafur' },
       { ar: 'الْعَزِيز', tr: 'al-ʿazīz', fr: 'le Tout-Puissant', cle: 'aziz' },
       { ar: 'الْقَدِير', tr: 'al-qadīr', fr: 'le Tout-Capable', cle: 'qadir' },
     ],
     exercices: [
+      { type: 'qcm', consigne: 'Rappel de la séance 27 : quelle négation dans لَا إِلَـٰهَ إِلَّا اللَّهُ ?',
+        options: [{ ar: 'لَا' }, { ar: 'لَمْ' }, { ar: 'مَا' }], bonne: 0, cles: ['la'],
+        explication: 'لَا nie le nom : « il n\'est aucune divinité… sinon Allah ».' },
+      { type: 'qcm', consigne: 'Quel est le pluriel de مُسْلِم (musulman) ?',
+        options: [{ ar: 'مُسْلِمَات' }, { ar: 'مُسْلِمُونَ' }, { ar: 'مَسَاجِد' }], bonne: 1, cles: ['muslim'],
+        explication: 'Pluriel sain masculin : on ajoute ـُونَ, muslimūn.' },
+      { type: 'qcm', consigne: 'كِتَاب → كُتُب est un pluriel :',
+        options: [{ texte: 'sain masculin' }, { texte: 'sain féminin' }, { texte: 'brisé' }], bonne: 2, cles: ['kutub'],
+        explication: 'La forme interne change : c\'est un pluriel brisé.' },
+      { type: 'appariement', consigne: 'Reliez chaque pluriel à son singulier.',
+        paires: [ { ar: 'قُلُوب', fr: 'cœurs (qalb)', cle: 'qulub' }, { ar: 'رُسُل', fr: 'messagers (rasūl)', cle: 'rusul' }, { ar: 'كُتُب', fr: 'livres (kitāb)', cle: 'kutub' }, { ar: 'آيَات', fr: 'signes (āya)', cle: 'ayat' } ] },
+      { type: 'racine', consigne: 'Retrouvez la racine sous le pluriel brisé قُلُوب (cœurs).',
+        mot: 'قُلُوب', racine: ['ق','ل','ب'], distracteurs: ['ك','ت','ر'], cles: ['qulub'] },
+      { type: 'trous', consigne: 'Complétez « les bonnes œuvres » au pluriel féminin.',
+        segments: [ 'الصَّالِحَ', { options: ['ات', 'ون', 'ين'], bonne: 0 } ], traduction: 'les bonnes œuvres', cles: ['salihat'] },
       { type: 'qcm', consigne: 'Que signifie الْعَلِيم ?',
         options: [{ texte: 'le Sage' }, { texte: 'l\'Omniscient' }, { texte: 'le Pardonneur' }], bonne: 1, cles: ['alim'],
-        explication: 'al-ʿalīm, de la racine ع-ل-م, « l\'Omniscient ».' },
+        explication: 'al-ʿalīm, de la racine ع-ل-م, « l\'Omniscient » — le schème faʿīl dit la qualité permanente.' },
       { type: 'racine', consigne: 'Quelle racine se cache sous الْغَفُور (le Pardonneur) ?',
-        mot: 'الْغَفُور', racine: ['غ','ف','ر'], distracteurs: ['ع','ل','م'], cles: ['ghafur'] },
+        mot: 'الْغَفُور', racine: ['غ','ف','ر'], distracteurs: ['ع','ل','م'], cles: ['ghafur'],
+        explication: 'La même racine que غَفَرَ (il a pardonné, séance 21) : le nom divin en est la qualité portée au comble.' },
       { type: 'appariement', consigne: 'Reliez chaque nom divin à son sens.',
-        paires: [ { ar: 'الرَّحْمَـٰن', fr: 'le Tout Miséricordieux', cle: 'rahman' }, { ar: 'الْعَزِيز', fr: 'le Tout-Puissant', cle: 'aziz' }, { ar: 'الْحَكِيم', fr: 'le Sage', cle: 'hakim' }, { ar: 'الْغَفُور', fr: 'le Pardonneur', cle: 'ghafur' } ] },
+        paires: [ { ar: 'الرَّحْمَـٰن', fr: 'le Tout Miséricordieux', cle: 'rahman' }, { ar: 'الْعَزِيز', fr: 'le Tout-Puissant', cle: 'aziz' }, { ar: 'الْغَفُور', fr: 'le Pardonneur', cle: 'ghafur' }, { ar: 'الْقَدِير', fr: 'le Tout-Capable', cle: 'qadir' } ] },
       { type: 'qcm', consigne: 'ar-Raḥmān et ar-Raḥīm partagent :',
-        options: [{ texte: 'la même racine, ر-ح-م' }, { texte: 'le même nombre de lettres' }, { texte: 'rien' }], bonne: 0, cles: ['rahman','rahim'],
-        explication: 'Tous deux dérivent de la racine de la miséricorde, ر-ح-م.' },
-      { type: 'trous', consigne: 'Complétez le couple de noms qui clôt tant de versets.',
-        segments: [ 'الرَّحْمَـٰنِ', { options: ['الرَّحِيمِ', 'الْعَلِيمِ'], bonne: 0 } ], traduction: 'le Tout Miséricordieux, le Très Miséricordieux', cles: ['rahim'] },
-      { type: 'phonetique', consigne: 'Lisez ce nom divin et choisissez sa transcription.',
-        motAr: 'الْعَزِيز', options: ['al-ʿalīm', 'al-ʿazīz', 'al-ʿazīm'], bonne: 1, cles: ['aziz'] },
-      { type: 'oral', consigne: 'Prononcez ce couple de noms.',
-        phraseAr: 'الرَّحْمَـٰنِ الرَّحِيمِ', translit: 'ar-raḥmāni r-raḥīm', cles: ['rahman','rahim'] },
+        options: [{ texte: 'la même racine, ر-ح-م' }, { texte: 'le même nombre de lettres' }, { texte: 'rien' }], bonne: 0, cles: ['rahman'],
+        explication: 'Tous deux dérivent de la racine de la miséricorde, ر-ح-م — celle de رَحْمَة, apprise à la leçon 9.' },
       { type: 'contexte', consigne: 'Complétez le couple de noms qui clôt tant de versets.',
         avant: 'الرَّحْمَـٰنِ', apres: '', options: [{ ar: 'الرَّحِيمِ', fr: 'le Très Miséricordieux' }, { ar: 'الْحَكِيمِ', fr: 'le Sage' }], bonne: 0,
-        traduction: 'le Tout Miséricordieux, le Très Miséricordieux', cles: ['rahim'] },
-      { type: 'dialogue', consigne: 'Quel nom divin est bâti sur la racine de la miséricorde (ر-ح-م) ?',
-        questionAr: 'ر ح م', questionTr: 'r-ḥ-m', contexte: 'Choisissez le nom issu de cette racine.',
-        options: [{ ar: 'الرَّحِيم', fr: 'le Très Miséricordieux' }, { ar: 'الْعَزِيز', fr: 'le Tout-Puissant' }], bonne: 0,
-        cles: ['rahim'] },
-      { type: 'texteLibre', consigne: 'Écrivez le nom divin « l\'Omniscient ».',
-        reponse: 'العليم', indice: 'al-ʿalīm', traduction: 'l\'Omniscient', cles: ['alim'] },
+        traduction: 'le Tout Miséricordieux, le Très Miséricordieux', cles: ['rahman','rahim'] },
+      { type: 'texteLibre', consigne: 'Écrivez le pluriel brisé de كِتَاب (livre).',
+        reponse: 'كتب', indice: 'kutub', traduction: 'des livres', cles: ['kutub'] },
+      { type: 'oral', consigne: 'Prononcez ce pluriel brisé.',
+        phraseAr: 'قُلُوب', translit: 'qulūb', cles: ['qulub'] },
+      { type: 'oral', consigne: 'Prononcez ce couple de noms, comme dans la basmala.',
+        phraseAr: 'الرَّحْمَـٰنِ الرَّحِيمِ', translit: 'ar-raḥmāni r-raḥīm', cles: ['rahman','rahim'] },
     ],
-    memoriser: { ar: 'الرَّحْمَـٰنِ الرَّحِيمِ', tr: 'ar-raḥmāni r-raḥīm', fr: 'Le Tout Miséricordieux, le Très Miséricordieux.' },
+    memoriser: { ar: 'وَعَمِلُوا الصَّالِحَاتِ', tr: 'wa-ʿamilū ṣ-ṣāliḥāt', fr: 'et ont accompli les bonnes œuvres. (al-ʿAṣr, 3)',
+      construction: 'عَمِلُوا : le verbe ʿamila (œuvrer, la racine de عَمَل vue à la leçon 12) à l\'accompli, avec la terminaison ـُوا « ils ».\n' +
+        'الصَّالِحَاتِ : « les bonnes œuvres », un pluriel sain féminin en ـَات, défini par l\'article.\n' +
+        'Vous relirez cette formule dans la sourate al-ʿAṣr, dès la séance prochaine : elle décrit ceux qui échappent à la perdition.' },
     recap: [
-      'De nombreux noms divins suivent le schéma faʿīl (qualité stable).',
-      'ar-Raḥmān et ar-Raḥīm dérivent de la racine de la miséricorde.',
-      'Reconnaître la racine révèle aussitôt le sens du nom.',
-      'Ces noms signent souvent la fin d\'un verset.',
-    ],
-  },
-
-  26: {
-    cycle: 5,
-    titre: 'Le vocabulaire de la prière et de la spiritualité',
-    intro: 'Avant d\'aborder la Fātiḥa, rassemblons les mots du culte et de la vie intérieure.\n' +
-      'Beaucoup vous sont déjà familiers : ṣalāt, dhikr, raḥma. Nous les complétons.\n' +
-      'Ce lexique forme le socle de la compréhension de la prière quotidienne.',
-    decouverte: [
-      { lignes: [
-        { ar: 'صَلَاة', tr: 'ṣalāt', fr: 'prière rituelle' },
-        { ar: 'دُعَاء', tr: 'duʿāʾ', fr: 'invocation' },
-        { ar: 'سُجُود', tr: 'sujūd', fr: 'prosternation' },
-        { ar: 'ذِكْر', tr: 'dhikr', fr: 'évocation, rappel d\'Allah' },
-        { ar: 'تَوْبَة', tr: 'tawba', fr: 'repentir, retour' },
-        { ar: 'هِدَايَة', tr: 'hidāya', fr: 'guidance' },
-      ]},
-      { texte: 'Le mot هِدَايَة (guidance) vient de la racine ه-د-ي, celle du verbe ihdinā, « guide-nous », que vous lirez dans la Fātiḥa.' },
-    ],
-    grammaire: {
-      titre: 'Du verbe au nom d\'action',
-      corps: 'À côté du verbe existe souvent un nom d\'action, qui désigne le fait même d\'agir.\n' +
-        'De la racine de la guidance ه-د-ي viennent à la fois ihdī (guide) et hidāya (la guidance).\n' +
-        'Repérer ce lien entre verbe et nom d\'action enrichit la lecture : un même sens se décline en plusieurs mots.',
-    },
-    vocabulaire: [
-      { ar: 'دُعَاء', tr: 'duʿāʾ', fr: 'invocation', cle: 'dua' },
-      { ar: 'سُجُود', tr: 'sujūd', fr: 'prosternation', cle: 'sujud' },
-      { ar: 'تَوْبَة', tr: 'tawba', fr: 'repentir', cle: 'tawba' },
-      { ar: 'هِدَايَة', tr: 'hidāya', fr: 'guidance', cle: 'hidaya' },
-      { ar: 'صِرَاط', tr: 'ṣirāṭ', fr: 'voie, chemin', cle: 'sirat' },
-      { ar: 'نِعْمَة', tr: 'niʿma', fr: 'bienfait, grâce', cle: 'nima' },
-    ],
-    exercices: [
-      { type: 'qcm', consigne: 'Que signifie سُجُود ?',
-        options: [{ texte: 'invocation' }, { texte: 'prosternation' }, { texte: 'repentir' }], bonne: 1, cles: ['sujud'],
-        explication: 'sujūd : la prosternation, moment fort de la prière.' },
-      { type: 'qcm', consigne: 'Le mot هِدَايَة (guidance) partage sa racine avec :',
-        options: [{ texte: 'ihdinā, « guide-nous »' }, { texte: 'ṣalāt, « prière »' }, { texte: 'tawba, « repentir »' }], bonne: 0, cles: ['hidaya'],
-        explication: 'Tous deux viennent de la racine ه-د-ي de la guidance.' },
-      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
-        paires: [ { ar: 'دُعَاء', fr: 'invocation', cle: 'dua' }, { ar: 'صِرَاط', fr: 'chemin', cle: 'sirat' }, { ar: 'نِعْمَة', fr: 'bienfait', cle: 'nima' }, { ar: 'تَوْبَة', fr: 'repentir', cle: 'tawba' } ] },
-      { type: 'racine', consigne: 'Quelle est la racine de هِدَايَة (guidance) ?',
-        mot: 'هِدَايَة', racine: ['ه','د','ي'], distracteurs: ['ص','ر','ط'], cles: ['hidaya'] },
-      { type: 'saisie', consigne: 'Écrivez le mot « chemin, voie ».',
-        indice: 'ṣirāṭ, que vous lirez dans la Fātiḥa.', reponse: 'صراط', cles: ['sirat'] },
-      { type: 'oral', consigne: 'Prononcez ce mot central de la Fātiḥa.',
-        phraseAr: 'الصِّرَاط الْمُسْتَقِيم', translit: 'aṣ-ṣirāṭ al-mustaqīm', cles: ['sirat'] },
-      { type: 'texteLibre', consigne: 'Écrivez le mot « invocation ».',
-        reponse: 'دعاء', indice: 'duʿāʾ', traduction: 'l\'invocation', cles: ['dua'] },
-      { type: 'dialogue', consigne: 'Quel mot désigne la prosternation, front au sol ?',
-        questionAr: 'مَا اسْمُ هَٰذَا الرُّكْنِ ؟', questionTr: 'mā smu hādhā r-rukn', contexte: 'On se prosterne pendant la prière.',
-        options: [{ ar: 'سُجُود', fr: 'prosternation' }, { ar: 'تَوْبَة', fr: 'repentir' }], bonne: 0,
-        aides: [{ ar: 'سُجُود', fr: 'prosternation' }, { ar: 'رُكْن', fr: 'pilier, élément' }], cles: ['sujud'] },
-    ],
-    memoriser: { ar: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ', tr: 'ihdinā ṣ-ṣirāṭa l-mustaqīm', fr: 'Guide-nous vers le droit chemin. (al-Fātiḥa, 6)' },
-    recap: [
-      'Lexique du culte : ṣalāt, duʿāʾ, sujūd, dhikr.',
-      'Lexique de la vie intérieure : tawba, hidāya, niʿma.',
-      'Un même sens se décline du verbe au nom d\'action (ihdī / hidāya).',
-      'ṣirāṭ, « la voie », prépare la lecture de la Fātiḥa.',
-    ],
-  },
-
-  27: {
-    cycle: 5,
-    titre: 'Sourate al-Fātiḥa, versets 1 à 3',
-    intro: 'Voici l\'Ouverture, la sourate qui inaugure le Coran et que l\'on récite à chaque prière.\n' +
-      'Nous l\'abordons en deux temps. Aujourd\'hui, les trois premiers versets : la formule d\'ouverture et la louange.\n' +
-      'Chaque mot vous est désormais accessible. Savourez ce moment.',
-    decouverte: [
-      { lignes: [
-        { ar: 'بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ', tr: 'bismi llāhi r-raḥmāni r-raḥīm', fr: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux.' },
-        { ar: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', tr: 'al-ḥamdu li-llāhi rabbi l-ʿālamīn', fr: 'Louange à Allah, Seigneur des mondes,' },
-        { ar: 'الرَّحْمَـٰنِ الرَّحِيمِ', tr: 'ar-raḥmāni r-raḥīm', fr: 'le Tout Miséricordieux, le Très Miséricordieux,' },
-      ]},
-      { texte: 'بِسْمِ se décompose en بِـ (au, par) + اسْم (nom) : « au nom de ». الْحَمْدُ لِلَّهِ : « la louange appartient à Allah », avec lām de l\'appartenance.' },
-    ],
-    grammaire: {
-      titre: 'al-ḥamdu li-llāh : la louange à Allah',
-      corps: 'الْحَمْدُ est le sujet, défini par l\'article ; لِلَّهِ associe la préposition لِـ (à, pour) au nom Allāh.\n' +
-        'L\'ensemble dit, mot à mot, « la louange est à Allah », c\'est-à-dire lui appartient en propre.\n' +
-        'Puis vient une annexion déjà connue : rabbi l-ʿālamīn, « le Seigneur des mondes ».',
-    },
-    vocabulaire: [
-      { ar: 'بِسْم', tr: 'bism', fr: 'au nom de', cle: 'bism' },
-      { ar: 'اسْم', tr: 'ism', fr: 'nom', cle: 'ism' },
-      { ar: 'الْحَمْد', tr: 'al-ḥamd', fr: 'la louange', cle: 'hamd' },
-      { ar: 'لِلَّه', tr: 'li-llāh', fr: 'à Allah', cle: 'lillah' },
-      { ar: 'الْعَالَمِين', tr: 'al-ʿālamīn', fr: 'les mondes', cle: 'alamin' },
-    ],
-    exercices: [
-      { type: 'qcm', consigne: 'Que signifie الْحَمْدُ لِلَّهِ ?',
-        options: [{ texte: 'au nom d\'Allah' }, { texte: 'louange à Allah' }, { texte: 'Allah est grand' }], bonne: 1, cles: ['hamd','lillah'],
-        explication: 'al-ḥamd (la louange) + li-llāh (à Allah).' },
-      { type: 'decomposition', consigne: 'Décomposez بِسْمِ : la préposition et le nom.',
-        segments: [ { ar: 'بِـ', role: 'préposition' }, { ar: 'اسْمِ', role: 'nom' } ], roles: ['préposition','nom'], cles: ['bism','ism'] },
-      { type: 'glisser', consigne: 'Reconstituez « Louange à Allah, Seigneur des mondes ».',
-        ordre: ['الْحَمْدُ', 'لِلَّهِ', 'رَبِّ', 'الْعَالَمِينَ'], traduction: 'Louange à Allah, Seigneur des mondes', cles: ['hamd','lillah','alamin'],
-        explication: 'الْحَمْد est une louange qui contient la gratitude et l\'amour, plus que le simple éloge. La Fātiḥa s\'ouvre ainsi : avant toute demande, on reconnaît et on remercie.' },
-      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
-        paires: [ { ar: 'اسْم', fr: 'nom', cle: 'ism' }, { ar: 'الْحَمْد', fr: 'la louange', cle: 'hamd' }, { ar: 'الْعَالَمِين', fr: 'les mondes', cle: 'alamin' }, { ar: 'بِسْم', fr: 'au nom de', cle: 'bism' } ] },
-      { type: 'trous', consigne: 'Complétez la formule d\'ouverture.',
-        segments: [ 'بِسْمِ اللَّهِ', { options: ['الرَّحْمَـٰنِ الرَّحِيمِ', 'رَبِّ الْعَالَمِينَ'], bonne: 0 } ], traduction: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux', cles: ['bism'] },
-      { type: 'oral', consigne: 'Récitez la basmala, lentement.',
-        phraseAr: 'بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ', translit: 'bismi llāhi r-raḥmāni r-raḥīm', cles: ['bism'] },
-      { type: 'contexte', consigne: 'Annexion : choisissez la forme de « Seigneur » (sans article, kasra).',
-        avant: 'الْحَمْدُ لِلَّهِ', apres: 'الْعَالَمِينَ', options: [{ ar: 'رَبِّ', fr: 'Seigneur de (annexé)' }, { ar: 'رَبُّ', fr: 'Seigneur (cas sujet)' }], bonne: 0,
-        traduction: 'Louange à Allah, Seigneur des mondes', cles: ['hamd','alamin'] },
-      { type: 'texteLibre', consigne: 'Écrivez « la louange », premier mot du verset.',
-        avant: '', apres: 'لِلَّهِ', reponse: 'الحمد', indice: 'al-ḥamd', traduction: 'la louange à Allah', cles: ['hamd'] },
-    ],
-    memoriser: { ar: 'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ', tr: 'al-ḥamdu li-llāhi rabbi l-ʿālamīn', fr: 'Louange à Allah, Seigneur des mondes. (al-Fātiḥa, 2)',
-      construction: 'Trois blocs s\'enchaînent. الْحَمْدُ : « la louange », nom défini par l\'article, sujet de la phrase.\n' +
-        'لِلَّهِ : la préposition لِـ (à, pour) collée au nom اللَّه ; littéralement « est à Allah », c\'est-à-dire Lui appartient en propre.\n' +
-        'رَبِّ الْعَالَمِينَ : une annexion (idāfa), « le Seigneur des mondes », qui qualifie Allah. Reconnaissez ici tout ce que vous avez appris : article, préposition collée, et annexion.' },
-    recap: [
-      'بِسْمِ = بِـ (au) + اسْم (nom) : « au nom de ».',
-      'الْحَمْدُ لِلَّهِ : « la louange appartient à Allah ».',
-      'rabbi l-ʿālamīn : annexion, « le Seigneur des mondes ».',
-      'Vous lisez les trois premiers versets de la Fātiḥa.',
-    ],
-  },
-
-  28: {
-    cycle: 5,
-    titre: 'Sourate al-Fātiḥa, versets 4 à 7',
-    intro: 'Nous achevons l\'Ouverture. Ces versets passent de la louange à la demande : adoration, secours, guidance.\n' +
-      'Vous y retrouverez iyyāka (Toi seul), naʿbudu (nous adorons), ihdinā (guide-nous), alladhīna (ceux que).\n' +
-      'Au terme de cette leçon, vous saurez lire et comprendre la Fātiḥa en entier.',
-    decouverte: [
-      { lignes: [
-        { ar: 'مَالِكِ يَوْمِ الدِّينِ', tr: 'māliki yawmi d-dīn', fr: 'Maître du Jour de la rétribution.' },
-        { ar: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ', tr: 'iyyāka naʿbudu wa-iyyāka nastaʿīn', fr: 'C\'est Toi que nous adorons, et c\'est Toi dont nous implorons le secours.' },
-        { ar: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ', tr: 'ihdinā ṣ-ṣirāṭa l-mustaqīm', fr: 'Guide-nous vers le droit chemin,' },
-        { ar: 'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ', tr: 'ṣirāṭa lladhīna anʿamta ʿalayhim', fr: 'le chemin de ceux que Tu as comblés de grâces,' },
-      ]},
-      { texte: 'إِيَّاكَ place le complément en tête pour insister : « Toi seul, nous T\'adorons ». اهْدِنَا = ihdi (guide) + nā (nous).' },
-    ],
-    grammaire: {
-      titre: 'Mettre le complément en avant',
-      corps: 'En plaçant إِيَّاكَ (Toi) avant le verbe نَعْبُدُ (nous adorons), l\'arabe insiste : c\'est Toi, et nul autre.\n' +
-        'Cette mise en avant exprime l\'exclusivité de l\'adoration et de la demande de secours.\n' +
-        'Le verbe اهْدِنَا joint l\'impératif ihdi (guide) au pronom suffixe nā (nous) : « guide-nous ».',
-    },
-    vocabulaire: [
-      { ar: 'مَالِك', tr: 'mālik', fr: 'maître, possesseur', cle: 'malik2' },
-      { ar: 'إِيَّاكَ', tr: 'iyyāka', fr: 'Toi (seul)', cle: 'iyyaka' },
-      { ar: 'نَعْبُدُ', tr: 'naʿbudu', fr: 'nous adorons', cle: 'nabudu' },
-      { ar: 'اهْدِنَا', tr: 'ihdinā', fr: 'guide-nous', cle: 'ihdina' },
-      { ar: 'الْمُسْتَقِيم', tr: 'al-mustaqīm', fr: 'le droit, le rectiligne', cle: 'mustaqim' },
-    ],
-    exercices: [
-      { type: 'qcm', consigne: 'Pourquoi إِيَّاكَ est-il placé avant le verbe ?',
-        options: [{ texte: 'par hasard' }, { texte: 'pour insister : Toi seul' }, { texte: 'pour nier' }], bonne: 1, cles: ['iyyaka'],
-        explication: 'La mise en tête marque l\'exclusivité : « C\'est Toi que nous adorons ».' },
-      { type: 'decomposition', consigne: 'Décomposez اهْدِنَا : le verbe et le pronom.',
-        segments: [ { ar: 'اهْدِ', role: 'verbe' }, { ar: 'نَا', role: 'suffixe' } ], roles: ['verbe','suffixe'], cles: ['ihdina'] },
-      { type: 'glisser', consigne: 'Reconstituez « C\'est Toi que nous adorons ».',
-        ordre: ['إِيَّاكَ', 'نَعْبُدُ'], traduction: 'C\'est Toi que nous adorons', cles: ['iyyaka','nabudu'],
-        explication: 'Placer إِيَّاكَ (Toi) avant le verbe exprime l\'exclusivité : Toi seul, nul autre. C\'est le cœur de la Fātiḥa, charnière entre la louange et la demande.' },
-      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
-        paires: [ { ar: 'مَالِك', fr: 'maître', cle: 'malik2' }, { ar: 'نَعْبُدُ', fr: 'nous adorons', cle: 'nabudu' }, { ar: 'اهْدِنَا', fr: 'guide-nous', cle: 'ihdina' }, { ar: 'الْمُسْتَقِيم', fr: 'le droit', cle: 'mustaqim' } ] },
-      { type: 'trous', consigne: 'Complétez « guide-nous vers le droit chemin ».',
-        segments: [ 'اهْدِنَا الصِّرَاطَ', { options: ['الْمُسْتَقِيمَ', 'الدِّينِ'], bonne: 0 } ], traduction: 'guide-nous vers le droit chemin', cles: ['mustaqim'] },
-      { type: 'oral', consigne: 'Récitez ce verset de demande.',
-        phraseAr: 'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ', translit: 'ihdinā ṣ-ṣirāṭa l-mustaqīm', cles: ['ihdina','mustaqim'] },
-      { type: 'contexte', consigne: 'Complétez la demande : « guide-nous vers le … chemin ».',
-        avant: 'اهْدِنَا الصِّرَاطَ', apres: '', options: [{ ar: 'الْمُسْتَقِيمَ', fr: 'le droit' }, { ar: 'الدِّينِ', fr: 'de la religion' }], bonne: 0,
-        traduction: 'guide-nous vers le droit chemin', cles: ['mustaqim'] },
-      { type: 'texteLibre', consigne: 'Écrivez « nous adorons » (préfixe « nous » + racine ع-ب-د).',
-        avant: 'إِيَّاكَ', apres: '', reponse: 'نعبد', indice: 'naʿbudu', traduction: 'C\'est Toi que nous adorons', cles: ['nabudu'] },
-    ],
-    memoriser: { ar: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ', tr: 'iyyāka naʿbudu wa-iyyāka nastaʿīn', fr: 'C\'est Toi que nous adorons, et c\'est Toi dont nous implorons le secours. (al-Fātiḥa, 5)',
-      construction: 'إِيَّاكَ (Toi) est placé AVANT le verbe : cet ordre crée l\'exclusivité — « C\'est Toi, et nul autre ».\n' +
-        'نَعْبُدُ se lit na-ʿbudu : verbe à l\'inaccompli avec le préfixe نَـ « nous » — « nous adorons ». De même نَسْتَعِينُ « nous implorons le secours ».\n' +
-        'وَ relie les deux propositions parallèles. Tout le verset tient sur ce balancement : Toi seul nous adorons / Toi seul nous implorons.' },
-    recap: [
-      'إِيَّاكَ en tête marque l\'exclusivité de l\'adoration.',
-      'اهْدِنَا = ihdi (guide) + nā (nous).',
-      'الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ : « ceux que Tu as comblés ».',
-      'Vous lisez et comprenez désormais la Fātiḥa en entier.',
+      'Pluriel sain masculin : ـُونَ / ـِينَ ; sain féminin : ـَات.',
+      'Pluriel brisé : la forme interne change (kitāb → kutub), la racine reste lisible.',
+      'Le schème faʿīl (ʿalīm, raḥīm, ʿazīz) dit une qualité stable et intense.',
+      'Le schème faʿʿāl porte la qualité à son comble : al-Ghaffār, ar-Razzāq.',
     ],
   },
 
   29: {
     cycle: 5,
-    titre: 'Synthèse grammaticale et lecture de versets variés',
-    intro: 'Avant le bilan, rassemblons les acquis sur des versets nouveaux mais accessibles.\n' +
-      'Vous y reconnaîtrez phrase nominale, annexion, négation, relatifs, pronoms suffixes.\n' +
-      'L\'objectif n\'est pas de tout analyser, mais de saisir le sens général en s\'appuyant sur les mots connus.',
+    titre: 'Ceux qui… : les relatifs — et deux sourates',
+    intro: 'Dernier outil de grammaire du parcours : les pronoms relatifs, « celui qui », « celle qui », « ceux qui ». Le Coran décrit sans cesse par eux : ceux qui croient, ceux qui patientent…\n' +
+      'Les deux plus fréquents sont alladhī (masculin) et allatī (féminin) — et surtout leur pluriel alladhīna, omniprésent.\n' +
+      'Puis le jalon du cycle : deux sourates entières, al-Kawthar (la plus courte du Coran) et al-ʿAṣr — où les relatifs vous attendent.',
     decouverte: [
       { lignes: [
-        { ar: 'إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'inna llāha ʿalā kulli shayʾin qadīr', fr: 'Allah est, certes, capable de toute chose.', note: 'inna + ʿalā + qadīr' },
-        { ar: 'وَاللَّهُ غَفُورٌ رَحِيمٌ', tr: 'wa-llāhu ghafūrun raḥīm', fr: 'et Allah est Pardonneur, Miséricordieux.', note: 'phrase nominale, deux attributs' },
-        { ar: 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ', tr: 'alladhīna yuʾminūna bi-l-ghayb', fr: 'ceux qui croient à l\'invisible', note: 'relatif + inaccompli + bi-' },
+        { ar: 'الَّذِي', tr: 'alladhī', fr: 'celui qui (m.)' },
+        { ar: 'الَّتِي', tr: 'allatī', fr: 'celle qui (f.)' },
+        { ar: 'الَّذِينَ', tr: 'alladhīna', fr: 'ceux qui (m. pluriel)' },
       ]},
-      { texte: 'Chacun de ces versets combine des structures déjà vues. Repérez d\'abord les mots connus, puis laissez le sens se former.' },
+      { texte: 'Le relatif renvoie à un être ou une chose déjà défini, et s\'accorde en genre et en nombre : الَّذِينَ آمَنُوا, « ceux qui ont cru » — la description coranique par excellence des croyants.' },
+      { lignes: [
+        { ar: 'الَّذِي يُوَسْوِسُ', tr: 'alladhī yuwaswisu', fr: 'celui qui souffle (le mal)', note: 'an-Nās, 5 — vous l\'avez lu à la séance 25' },
+        { ar: 'الَّذِينَ آمَنُوا', tr: 'alladhīna āmanū', fr: 'ceux qui ont cru', note: 'al-ʿAṣr, 3 — vous le lirez aujourd\'hui' },
+      ]},
+      { texte: 'Sourate 108, al-Kawthar, l\'Abondance — la plus courte du Coran, trois versets. Vous y reconnaîtrez فَصَلِّ (la particule فَ + l\'impératif صَلِّ, séances 26 et 24) et إِنَّ (séance 26) :' },
+      { lignes: [
+        { ar: 'إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ', tr: 'innā aʿṭaynāka l-kawthar', fr: 'Nous t\'avons certes accordé l\'abondance.', note: 'innā = inna + nā ; aʿṭaynā-ka : le suffixe ـكَ, séance 23' },
+        { ar: 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', tr: 'fa-ṣalli li-rabbika wa-nḥar', fr: 'Prie donc ton Seigneur et sacrifie.', note: 'fa + impératif : « prie donc »' },
+        { ar: 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ', tr: 'inna shāniʾaka huwa l-abtar', fr: 'Celui qui te hait sera, lui, sans postérité.' },
+      ]},
+      { texte: 'Sourate 103, al-ʿAṣr, le Temps — un serment, un constat, une exception. Toute la grammaire du parcours s\'y donne rendez-vous :' },
+      { lignes: [
+        { ar: 'وَالْعَصْرِ', tr: 'wa-l-ʿaṣr', fr: 'Par le Temps !', note: 'le وَ du serment' },
+        { ar: 'إِنَّ الْإِنسَانَ لَفِي خُسْرٍ', tr: 'inna l-insāna la-fī khusr', fr: 'l\'être humain est certes en perdition,', note: 'inna + لَـ d\'insistance, séance 26' },
+        { ar: 'إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ', tr: 'illā lladhīna āmanū wa-ʿamilū ṣ-ṣāliḥāt', fr: 'sauf ceux qui croient et accomplissent les bonnes œuvres,', note: 'illā (séance 27) + le relatif du jour' },
+        { ar: 'وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ', tr: 'wa-tawāṣaw bi-l-ḥaqqi wa-tawāṣaw bi-ṣ-ṣabr', fr: 's\'enjoignent mutuellement la vérité et s\'enjoignent mutuellement la patience.', note: 'ṣabr — votre mot de la leçon 6' },
+      ]},
     ],
     grammaire: {
-      titre: 'Lire par reconnaissance',
-      corps: 'Face à un verset nouveau, ne traduisez pas mot à mot d\'emblée : repérez les piliers.\n' +
-        'Cherchez le nom d\'Allah, le verbe, la particule (inna, wa), la préposition, le relatif.\n' +
-        'Le sens général émerge de ces points d\'appui, puis se précise. C\'est ainsi qu\'on lit, avec aisance et sans crispation.',
+      titre: 'Un relatif qui s\'accorde',
+      corps: 'Le pronom relatif s\'accorde en genre et en nombre avec ce qu\'il reprend : الَّذِي (masculin singulier), الَّتِي (féminin singulier), الَّذِينَ (masculin pluriel).\n' +
+        'Il ne s\'emploie qu\'avec un antécédent défini ; après un indéfini, l\'arabe se passe de relatif.\n' +
+        'La proposition qui suit complète le sens : alladhī khalaqa, « celui qui a créé » ; alladhīna āmanū, « ceux qui ont cru ».',
     },
+    approfondissement: [
+      { titre: 'al-ʿAṣr : le programme d\'une vie en trois versets',
+        corps: 'L\'imam ash-Shāfiʿī disait : si les gens méditaient cette seule sourate, elle leur suffirait. Un serment par le temps qui file, le constat que l\'humain court à sa perte — puis l\'exception, en quatre traits : la foi, les bonnes œuvres, la vérité partagée, la patience partagée.\n' +
+          'Grammaticalement, c\'est votre parcours entier en miniature : serment en wa-, particule inna avec son lām d\'insistance, exception en illā, relatif alladhīna, accomplis en -ū, pluriel en -āt, prépositions bi-.\n' +
+          'Quand une sourate entière devient transparente à ce point, vous ne « déchiffrez » plus : vous lisez.',
+    }],
     vocabulaire: [
-      { ar: 'كُلّ', tr: 'kull', fr: 'tout, chaque', cle: 'kull' },
-      { ar: 'شَيْء', tr: 'shayʾ', fr: 'chose', cle: 'shay' },
-      { ar: 'قَدِير', tr: 'qadīr', fr: 'capable, puissant', cle: 'qadir' },
-      { ar: 'الْغَيْب', tr: 'al-ghayb', fr: 'l\'invisible, le mystère', cle: 'ghayb' },
-      { ar: 'يُؤْمِنُونَ', tr: 'yuʾminūn', fr: 'ils croient', cle: 'yuminun' },
+      { ar: 'الَّذِي', tr: 'alladhī', fr: 'celui qui', cle: 'alladhi' },
+      { ar: 'الَّتِي', tr: 'allatī', fr: 'celle qui', cle: 'allati' },
+      { ar: 'الَّذِينَ', tr: 'alladhīna', fr: 'ceux qui', cle: 'alladhina' },
+      { ar: 'آمَنُوا', tr: 'āmanū', fr: 'ils ont cru', cle: 'amanu' },
+      { ar: 'الْكَوْثَر', tr: 'al-kawthar', fr: 'l\'abondance', cle: 'kawthar' },
+      { ar: 'الْإِنْسَان', tr: 'al-insān', fr: 'l\'être humain', cle: 'insan' },
+      { ar: 'خُسْر', tr: 'khusr', fr: 'perte, perdition', cle: 'khusr' },
+      { ar: 'الْحَقّ', tr: 'al-ḥaqq', fr: 'la vérité, le vrai', cle: 'haqq' },
     ],
     exercices: [
-      { type: 'qcm', consigne: 'Dans عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ, que signifie كُلّ شَيْء ?',
-        options: [{ texte: 'aucune chose' }, { texte: 'toute chose' }, { texte: 'quelque chose' }], bonne: 1, cles: ['kull','shay'],
-        explication: 'kull (tout) + shayʾ (chose) : « toute chose ».' },
-      { type: 'qcm', consigne: 'وَاللَّهُ غَفُورٌ رَحِيمٌ est :',
-        options: [{ texte: 'une phrase nominale à deux attributs' }, { texte: 'une annexion' }, { texte: 'une négation' }], bonne: 0,
-        explication: 'Sujet (Allāh) + deux attributs indéfinis : phrase nominale.' },
-      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
-        paires: [ { ar: 'كُلّ', fr: 'tout', cle: 'kull' }, { ar: 'شَيْء', fr: 'chose', cle: 'shay' }, { ar: 'الْغَيْب', fr: 'l\'invisible', cle: 'ghayb' }, { ar: 'قَدِير', fr: 'capable', cle: 'qadir' } ] },
-      { type: 'glisser', consigne: 'Reconstituez « Allah est Pardonneur, Miséricordieux ».',
-        ordre: ['اللَّهُ', 'غَفُورٌ', 'رَحِيمٌ'], traduction: 'Allah est Pardonneur, Miséricordieux', cles: ['ghafur','rahim'] },
-      { type: 'racine', consigne: 'Quelle racine porte يُؤْمِنُونَ (ils croient) ?',
-        mot: 'يُؤْمِنُونَ', racine: ['ء','م','ن'], distracteurs: ['ع','ل','م'], cles: ['yuminun'] },
-      { type: 'oral', consigne: 'Lisez ce verset de synthèse.',
-        phraseAr: 'إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', translit: 'inna llāha ʿalā kulli shayʾin qadīr', cles: ['kull','qadir'] },
-      { type: 'contexte', consigne: 'Phrase nominale : choisissez l\'attribut indéfini accordé à « Allah ».',
-        sujet: 'اللَّه', avant: 'وَاللَّهُ', apres: 'رَحِيمٌ', options: [{ ar: 'غَفُورٌ', fr: 'Pardonneur (indéfini)' }, { ar: 'الْغَفُورُ', fr: 'le Pardonneur (défini)' }], bonne: 0,
-        traduction: 'et Allah est Pardonneur, Miséricordieux', cles: ['ghafur'] },
-      { type: 'texteLibre', consigne: 'Écrivez « chose » dans « capable de toute chose ».',
-        avant: 'عَلَىٰ كُلِّ', apres: 'قَدِيرٌ', reponse: 'شيء', indice: 'shayʾ', traduction: 'capable de toute chose', cles: ['shay'] },
+      { type: 'qcm', consigne: 'Rappel de la séance 28 : كِتَاب → كُتُب est un pluriel…',
+        options: [{ texte: 'brisé (la forme interne change)' }, { texte: 'sain masculin' }], bonne: 0, cles: ['kutub'],
+        explication: 'Le moule change, la racine ك-ت-ب demeure : un pluriel brisé.' },
+      { type: 'qcm', consigne: 'Comment dit-on « celle qui » ?',
+        options: [{ ar: 'الَّذِي' }, { ar: 'الَّتِي' }, { ar: 'الَّذِينَ' }], bonne: 1, cles: ['allati'],
+        explication: 'الَّتِي est le relatif féminin singulier.' },
+      { type: 'qcm', consigne: 'الَّذِينَ آمَنُوا signifie :',
+        options: [{ texte: 'celui qui croit' }, { texte: 'ceux qui ont cru' }, { texte: 'la foi' }], bonne: 1, cles: ['alladhina','amanu'],
+        explication: 'الَّذِينَ (ceux qui) + آمَنُوا (ils ont cru).' },
+      { type: 'qcm', consigne: 'Le relatif s\'emploie avec un antécédent :',
+        options: [{ texte: 'défini' }, { texte: 'indéfini' }], bonne: 0,
+        explication: 'On n\'emploie alladhī, allatī qu\'après un nom défini.' },
+      { type: 'appariement', consigne: 'Reliez chaque relatif à sa valeur.',
+        paires: [ { ar: 'الَّذِي', fr: 'celui qui', cle: 'alladhi' }, { ar: 'الَّتِي', fr: 'celle qui', cle: 'allati' }, { ar: 'الَّذِينَ', fr: 'ceux qui', cle: 'alladhina' }, { ar: 'آمَنُوا', fr: 'ils ont cru', cle: 'amanu' } ] },
+      { type: 'contexte', consigne: 'L\'antécédent est féminin singulier. Choisissez le relatif.',
+        sujet: 'الْمَرْأَة (la femme, fém.)', avant: 'الْمَرْأَةُ', apres: 'آمَنَتْ', options: [{ ar: 'الَّتِي', fr: 'celle qui' }, { ar: 'الَّذِي', fr: 'celui qui' }], bonne: 0,
+        traduction: 'la femme qui a cru', aides: [{ ar: 'الْمَرْأَة', fr: 'la femme' }, { ar: 'آمَنَتْ', fr: 'elle a cru' }], cles: ['allati'] },
+      { type: 'contexte', consigne: 'L\'antécédent est un pluriel masculin. Choisissez le relatif.',
+        sujet: 'النَّاس (les gens)', avant: 'النَّاسُ', apres: 'آمَنُوا', options: [{ ar: 'الَّذِينَ', fr: 'ceux qui' }, { ar: 'الَّتِي', fr: 'celle qui' }], bonne: 0,
+        traduction: 'les gens qui ont cru', cles: ['alladhina'] },
+      { type: 'glisser', consigne: 'Reconstituez « par le Temps, l\'être humain est certes en perdition ».',
+        ordre: ['وَالْعَصْرِ', 'إِنَّ', 'الْإِنسَانَ', 'لَفِي', 'خُسْرٍ'], traduction: 'Par le Temps, l\'être humain est certes en perdition', cles: ['insan','khusr'],
+        explication: 'Allah jure par le Temps (ʿaṣr), notre bien le plus précieux et le plus vite perdu. La double insistance إِنَّ… لَـ souligne que la perte est la règle — sauf les exceptions du verset suivant.' },
+      { type: 'trous', consigne: 'Complétez l\'exception d\'al-ʿAṣr : « sauf ceux qui ont cru ».',
+        segments: [ 'إِلَّا', { options: ['الَّذِينَ', 'الَّتِي'], bonne: 0 }, 'آمَنُوا' ], traduction: 'illā lladhīna āmanū', cles: ['alladhina','amanu'] },
+      { type: 'qcm', consigne: 'Dans فَصَلِّ لِرَبِّكَ, la particule فَـ marque :',
+        options: [{ texte: 'la conséquence : « prie DONC »' }, { texte: 'une simple addition' }], bonne: 0, cles: ['fa'],
+        explication: 'Le don d\'al-Kawthar appelle une réponse : fa-ṣalli, « prie donc » — fa (séance 26) + impératif (séance 24).' },
+      { type: 'texteLibre', consigne: 'Écrivez le relatif masculin singulier « celui qui ».',
+        reponse: 'الذي', indice: 'alladhī', traduction: 'celui qui', cles: ['alladhi'] },
+      { type: 'oral', consigne: 'Récitez le début d\'al-ʿAṣr, lentement.',
+        phraseAr: 'وَالْعَصْرِ إِنَّ الْإِنسَانَ لَفِي خُسْرٍ', translit: 'wa-l-ʿaṣr, inna l-insāna la-fī khusr', cles: ['insan','khusr'] },
+      { type: 'lecture',
+        consigne: 'Jalon du cycle : deux sourates entières, la plus courte du Coran puis la balance d\'une vie. Écoutez, lisez à voix haute, et repérez au passage vos acquis — serment, inna, impératif, exception, relatif, pluriels.',
+        titre: 'Sourates al-Kawthar (l\'Abondance) et al-ʿAṣr (le Temps)',
+        reference: 'Appuyez sur « Tout écouter » pour entendre la récitation partie par partie, puis lisez vous-même.',
+        segments: [
+          { ar: 'إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ', tr: 'innā aʿṭaynāka l-kawthar', fr: 'Nous t\'avons certes accordé l\'abondance.' },
+          { ar: 'فَصَلِّ لِرَبِّكَ وَانْحَرْ', tr: 'fa-ṣalli li-rabbika wa-nḥar', fr: 'Prie donc ton Seigneur et sacrifie.' },
+          { ar: 'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ', tr: 'inna shāniʾaka huwa l-abtar', fr: 'Celui qui te hait sera, lui, sans postérité.' },
+          { ar: 'وَالْعَصْرِ', tr: 'wa-l-ʿaṣr', fr: 'Par le Temps !' },
+          { ar: 'إِنَّ الْإِنسَانَ لَفِي خُسْرٍ', tr: 'inna l-insāna la-fī khusr', fr: 'L\'être humain est certes en perdition,' },
+          { ar: 'إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ', tr: 'illā lladhīna āmanū wa-ʿamilū ṣ-ṣāliḥāti wa-tawāṣaw bi-l-ḥaqqi wa-tawāṣaw bi-ṣ-ṣabr', fr: 'sauf ceux qui croient, accomplissent les bonnes œuvres, s\'enjoignent la vérité et s\'enjoignent la patience.' },
+        ], cles: ['kawthar','insan','khusr','alladhina'] },
     ],
-    memoriser: { ar: 'إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'inna llāha ʿalā kulli shayʾin qadīr', fr: 'Allah est, certes, capable de toute chose.' },
+    memoriser: { ar: 'إِنَّ الْإِنسَانَ لَفِي خُسْرٍ', tr: 'inna l-insāna la-fī khusr', fr: 'L\'être humain est certes en perdition. (al-ʿAṣr, 2)',
+      construction: 'إِنَّ (certes) ouvre la phrase en insistant ; elle met son sujet au cas direct : الْإِنسَانَ porte la fatḥa (-a), « l\'être humain ».\n' +
+        'لَـ (la-) est un second outil d\'insistance, soudé à ce qui suit : لَفِي « est bien dans ».\n' +
+        'فِي خُسْرٍ : la préposition فِي (dans) régit خُسْرٍ (perdition), qui prend une kasra avec tanwīn (-in). Mot à mot : « certes l\'humain [est] bien en perdition ».' },
     recap: [
-      'Les structures se combinent dans un même verset.',
-      'On lit en repérant d\'abord les piliers : nom divin, verbe, particule.',
-      'Le sens général précède l\'analyse détaillée.',
-      'كُلّ شَيْء : « toute chose », expression fréquente.',
+      'Relatifs : الَّذِي (m.), الَّتِي (f.), الَّذِينَ (m. pluriel) — toujours après un défini.',
+      'الَّذِينَ آمَنُوا : la description coranique des croyants.',
+      'al-Kawthar : la plus courte sourate ; al-ʿAṣr : le serment et la voie du salut.',
+      'Vous lisez ces deux sourates en en comprenant chaque rouage.',
     ],
   },
 
   30: {
     cycle: 5,
-    titre: 'Bilan, auto-évaluation et chemins pour continuer',
-    intro: 'Vous voici au terme du parcours. De l\'alphabet inconnu à la lecture comprise de plusieurs sourates, le chemin parcouru est réel.\n' +
-      'Cette dernière leçon fait le point, vous invite à vous évaluer avec honnêteté et bienveillance, et trace des voies pour aller plus loin.\n' +
-      'Quoi que vous décidiez ensuite, vous possédez désormais une base solide et autonome.',
+    titre: 'La boucle est bouclée : synthèse, al-Mulk, et la suite',
+    intro: 'Vous voici au terme du parcours. De l\'alphabet inconnu à la lecture comprise de six sourates, le chemin parcouru est réel — mesurons-le ensemble.\n' +
+      'D\'abord une synthèse : lire des versets nouveaux « par reconnaissance », en s\'appuyant sur les piliers. Puis un texte que cette méthode vous doit : les premiers versets d\'al-Mulk, illisibles pour vous au premier jour.\n' +
+      'Enfin, l\'essentiel : comment continuer seul, avec douceur et constance.',
     decouverte: [
-      { texte: 'Ce que vous savez faire maintenant : lire tout mot arabe vocalisé, reconnaître une racine, comprendre une phrase nominale, une annexion, une négation, un relatif, et déchiffrer six sourates courtes.' },
-      { texte: 'Pour continuer, trois voies se complètent.' },
+      { texte: 'Ce que vous savez faire maintenant : lire tout mot arabe vocalisé, reconnaître une racine, comprendre une phrase nominale, une annexion, un verbe conjugué, une négation, un relatif — et déchiffrer six sourates courtes.' },
+      { texte: 'Face à un verset nouveau, la méthode est toujours la même : repérer les piliers. Essayez sur ces trois versets — chacun ne combine que des structures connues :' },
+      { lignes: [
+        { ar: 'إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'inna llāha ʿalā kulli shayʾin qadīr', fr: 'Allah est, certes, capable de toute chose.', note: 'inna + ʿalā + le schème qadīr' },
+        { ar: 'وَاللَّهُ غَفُورٌ رَحِيمٌ', tr: 'wa-llāhu ghafūrun raḥīm', fr: 'et Allah est Pardonneur, Miséricordieux.', note: 'phrase nominale, deux attributs' },
+        { ar: 'الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ', tr: 'alladhīna yuʾminūna bi-l-ghayb', fr: 'ceux qui croient à l\'invisible', note: 'relatif + inaccompli + bi-' },
+      ]},
+      { texte: 'Et maintenant, la preuve du chemin parcouru. Au premier jour de ce cours, on vous aurait montré ces lignes : un rideau de signes. Lisez-les aujourd\'hui — al-Mulk, versets 1 et 2 :' },
+      { lignes: [
+        { ar: 'تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ', tr: 'tabāraka lladhī bi-yadihi l-mulk', fr: 'Béni soit Celui qui détient la royauté,', note: 'le relatif + bi- + le suffixe ـهِ : tout est à vous' },
+        { ar: 'وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'wa-huwa ʿalā kulli shayʾin qadīr', fr: 'et qui est capable de toute chose.', note: 'vous venez de lire cette structure plus haut' },
+      ]},
+      { texte: 'Pour continuer, trois voies se complètent :' },
       { lignes: [
         { ar: 'الْقُرْآن', tr: 'al-qurʾān', fr: 'le Coran', note: 'lire chaque jour un court passage vocalisé' },
         { ar: 'الْمُرَاجَعَة', tr: 'al-murājaʿa', fr: 'la révision', note: 'entretenir le vocabulaire par la salle de révision' },
@@ -2759,46 +3013,76 @@ const Lecons = {
       { texte: 'Reprenez les sourates apprises dans un Coran annoté, écoutez de bons récitateurs, et abordez peu à peu des sourates un peu plus longues. La méthode reste la même : douceur, régularité, imprégnation.' },
     ],
     grammaire: {
-      titre: 'Apprendre, c\'est entretenir',
-      corps: 'Une langue ne se garde qu\'en la pratiquant. Quelques minutes par jour valent mieux qu\'un long effort épisodique.\n' +
-        'Servez-vous de la salle de révision : elle ramène les mots au moment précis où l\'on risque de les oublier.\n' +
-        'Et relisez les sourates connues : chaque relecture les enracine davantage et prépare les suivantes.',
+      titre: 'Lire par reconnaissance — et entretenir',
+      corps: 'Face à un verset nouveau, ne traduisez pas mot à mot d\'emblée : repérez les piliers — le nom d\'Allah, le verbe, la particule (inna, wa), la préposition, le relatif. Le sens général émerge de ces points d\'appui, puis se précise.\n' +
+        'Une langue ne se garde qu\'en la pratiquant : quelques minutes par jour valent mieux qu\'un long effort épisodique.\n' +
+        'Servez-vous de la salle de révision — elle ramène les mots au moment précis où l\'on risque de les oublier — et relisez les sourates connues : chaque relecture les enracine davantage.',
     },
+    approfondissement: [
+      { titre: 'Le chemin parcouru, le chemin qui s\'ouvre',
+        corps: 'Trente leçons : 28 lettres, tous les signes, des centaines de mots, la phrase nominale et la phrase verbale, l\'annexion, les pronoms, la négation, les relatifs — et six sourates lues en conscience : al-Ikhlāṣ, al-Fātiḥa, al-Falaq, an-Nās, al-Kawthar, al-ʿAṣr.\n' +
+          'Ce n\'est pas une fin : c\'est un seuil. Le vocabulaire du Coran s\'apprivoise par familles de racines ; la grammaire que vous avez ne demande qu\'à s\'exercer sur des sourates plus longues.\n' +
+          'Qu\'Allah bénisse votre constance, et fasse de chaque verset lu une lumière. La suite du chemin vous appartient — vous savez marcher.',
+    }],
     vocabulaire: [
-      { ar: 'الْقُرْآن', tr: 'al-qurʾān', fr: 'le Coran, la récitation', cle: 'quran' },
+      { ar: 'كُلّ', tr: 'kull', fr: 'tout, chaque', cle: 'kull' },
+      { ar: 'شَيْء', tr: 'shayʾ', fr: 'chose', cle: 'shay' },
+      { ar: 'الْغَيْب', tr: 'al-ghayb', fr: 'l\'invisible, le mystère', cle: 'ghayb' },
+      { ar: 'يُؤْمِنُونَ', tr: 'yuʾminūn', fr: 'ils croient', cle: 'yuminun' },
+      { ar: 'الْمُلْك', tr: 'al-mulk', fr: 'la royauté', cle: 'mulk' },
       { ar: 'مُرَاجَعَة', tr: 'murājaʿa', fr: 'révision', cle: 'murajaa' },
-      { ar: 'قِرَاءَة', tr: 'qirāʾa', fr: 'lecture, récitation', cle: 'qiraa' },
-      { ar: 'فَهْم', tr: 'fahm', fr: 'compréhension', cle: 'fahm' },
       { ar: 'بَرَكَة', tr: 'baraka', fr: 'bénédiction', cle: 'baraka' },
     ],
     exercices: [
+      { type: 'qcm', consigne: 'Dans عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ, que signifie كُلّ شَيْء ?',
+        options: [{ texte: 'aucune chose' }, { texte: 'toute chose' }, { texte: 'quelque chose' }], bonne: 1, cles: ['kull','shay'],
+        explication: 'kull (tout) + shayʾ (chose) : « toute chose ».' },
+      { type: 'qcm', consigne: 'وَاللَّهُ غَفُورٌ رَحِيمٌ est :',
+        options: [{ texte: 'une phrase nominale à deux attributs' }, { texte: 'une annexion' }, { texte: 'une négation' }], bonne: 0, cles: ['ghafur'],
+        explication: 'Sujet (Allāh) + deux attributs indéfinis : la phrase nominale de la séance 17.' },
+      { type: 'appariement', consigne: 'Reliez chaque mot à son sens.',
+        paires: [ { ar: 'كُلّ', fr: 'tout', cle: 'kull' }, { ar: 'شَيْء', fr: 'chose', cle: 'shay' }, { ar: 'الْغَيْب', fr: 'l\'invisible', cle: 'ghayb' }, { ar: 'الْمُلْك', fr: 'la royauté', cle: 'mulk' } ] },
+      { type: 'glisser', consigne: 'Reconstituez « Allah est Pardonneur, Miséricordieux ».',
+        ordre: ['اللَّهُ', 'غَفُورٌ', 'رَحِيمٌ'], traduction: 'Allah est Pardonneur, Miséricordieux', cles: ['ghafur','rahim'] },
+      { type: 'racine', consigne: 'Quelle racine porte يُؤْمِنُونَ (ils croient) ?',
+        mot: 'يُؤْمِنُونَ', racine: ['ء','م','ن'], distracteurs: ['ع','ل','م'], cles: ['yuminun'],
+        explication: 'ء-م-ن, la racine de la sécurité et de la confiance — celle d\'إِيمَان, apprise à la leçon 11.' },
+      { type: 'qcm', consigne: 'Dans بِيَدِهِ الْمُلْكُ (al-Mulk, 1), le petit ـهِ final de بِيَدِهِ est :',
+        options: [{ texte: 'un pronom suffixe : « dans SA main »' }, { texte: 'la marque du féminin' }, { texte: 'un tanwīn' }], bonne: 0, cles: ['mulk'],
+        explication: 'bi-yadi-hi : la préposition bi-, le nom yad (main), le suffixe -hi (à lui). Séance 23 en action.' },
+      { type: 'contexte', consigne: 'Phrase nominale : choisissez l\'attribut indéfini accordé à « Allah ».',
+        sujet: 'اللَّه', avant: 'وَاللَّهُ', apres: 'رَحِيمٌ', options: [{ ar: 'غَفُورٌ', fr: 'Pardonneur (indéfini)' }, { ar: 'الْغَفُورُ', fr: 'le Pardonneur (défini)' }], bonne: 0,
+        traduction: 'et Allah est Pardonneur, Miséricordieux', cles: ['ghafur'] },
+      { type: 'appariement', consigne: 'Révision du parcours : reliez chaque sourate à son thème.',
+        paires: [ { ar: 'الْإِخْلَاص', fr: 'l\'unicité d\'Allah' }, { ar: 'الْفَلَق', fr: 'le refuge contre le mal' }, { ar: 'الْعَصْر', fr: 'le temps et le salut' }, { ar: 'الْفَاتِحَة', fr: 'l\'ouverture et la demande' } ] },
       { type: 'qcm', consigne: 'D\'où vient le mot الْقُرْآن (le Coran) ?',
         options: [{ texte: 'de la racine de la lecture, ق-ر-أ' }, { texte: 'de la racine du savoir' }, { texte: 'de la racine de la prière' }], bonne: 0, cles: ['quran'],
-        explication: 'al-qurʾān, « la récitation », vient de la racine ق-ر-أ, lire et réciter.' },
-      { type: 'appariement', consigne: 'Révision : reliez chaque sourate à son thème.',
-        paires: [ { ar: 'الْإِخْلَاص', fr: 'l\'unicité d\'Allah' }, { ar: 'الْفَلَق', fr: 'le refuge contre le mal' }, { ar: 'الْعَصْر', fr: 'le temps et le salut' }, { ar: 'الْفَاتِحَة', fr: 'l\'ouverture et la demande' } ] },
+        explication: 'al-qurʾān, « la récitation », vient de la racine ق-ر-أ — celle d\'اقْرَأْ, le premier mot révélé (séance 24).' },
       { type: 'qcm', consigne: 'Quelle attitude la méthode recommande-t-elle pour continuer ?',
-        options: [{ texte: 'de longues sessions espacées' }, { texte: 'de petites doses régulières' }, { texte: 'tout réapprendre depuis le début' }], bonne: 1,
+        options: [{ texte: 'de longues sessions espacées' }, { texte: 'de petites doses régulières' }, { texte: 'tout réapprendre depuis le début' }], bonne: 1, cles: ['murajaa'],
         explication: 'La régularité douce ancre mieux qu\'un effort intense et rare.' },
-      { type: 'glisser', consigne: 'Reconstituez la formule d\'ouverture du Coran.',
-        ordre: ['بِسْمِ', 'اللَّهِ', 'الرَّحْمَـٰنِ', 'الرَّحِيمِ'], traduction: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux', cles: ['bism','rahman','rahim'] },
-      { type: 'racine', consigne: 'Pour finir, retrouvez la racine de الْقُرْآن.',
-        mot: 'الْقُرْآن', racine: ['ق','ر','أ'], distracteurs: ['ك','ت','ب'], cles: ['quran'] },
-      { type: 'oral', consigne: 'Récitez une dernière fois la sourate al-Ikhlāṣ en entier.',
-        phraseAr: 'قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ', translit: 'qul huwa llāhu aḥad, allāhu ṣ-ṣamad', cles: ['quran'] },
+      { type: 'oral', consigne: 'Lisez ce verset de synthèse.',
+        phraseAr: 'إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', translit: 'inna llāha ʿalā kulli shayʾin qadīr', cles: ['kull','shay'] },
       { type: 'texteLibre', consigne: 'Pour finir, écrivez le mot « le Coran ».',
         reponse: 'القرآن', indice: 'al-qurʾān', traduction: 'le Coran, la récitation', cles: ['quran'] },
-      { type: 'dialogue', consigne: 'Quelle attitude la méthode recommande-t-elle pour continuer ?',
-        questionAr: 'كَيْفَ نُتَابِعُ ؟', questionTr: 'kayfa nutābiʿu', contexte: 'Comment poursuivre l\'apprentissage ?',
-        options: [{ ar: 'الصَّبْرُ وَالْمُرَاجَعَةُ', fr: 'la patience et la révision' }, { ar: 'تَرْكُ كُلِّ شَيْءٍ', fr: 'tout abandonner' }], bonne: 0,
-        aides: [{ ar: 'الصَّبْر', fr: 'la patience' }, { ar: 'الْمُرَاجَعَة', fr: 'la révision' }], cles: ['murajaa'] },
+      { type: 'lecture',
+        consigne: 'Le dernier jalon — et la preuve du chemin parcouru. Ces versets d\'al-Mulk étaient, au premier jour, un rideau de signes. Écoutez chaque partie, lisez-la à voix haute, et mesurez : vous lisez le Coran.',
+        titre: 'Sourate al-Mulk (la Royauté), versets 1 et 2',
+        reference: 'Appuyez sur « Tout écouter » pour entendre la lecture partie par partie, puis lisez vous-même.',
+        segments: [
+          { ar: 'تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ', tr: 'tabāraka lladhī bi-yadihi l-mulk', fr: 'Béni soit Celui qui détient la royauté,' },
+          { ar: 'وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'wa-huwa ʿalā kulli shayʾin qadīr', fr: 'et qui est capable de toute chose ;' },
+          { ar: 'الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ', tr: 'alladhī khalaqa l-mawta wa-l-ḥayāt', fr: 'Celui qui a créé la mort et la vie' },
+          { ar: 'لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا', tr: 'li-yabluwakum ayyukum aḥsanu ʿamalā', fr: 'pour vous éprouver : qui de vous agira le mieux.' },
+          { ar: 'وَهُوَ الْعَزِيزُ الْغَفُورُ', tr: 'wa-huwa l-ʿazīzu l-ghafūr', fr: 'Et c\'est Lui le Puissant, le Pardonneur.' },
+        ], cles: ['mulk','kull','shay'] },
     ],
-    memoriser: { ar: 'وَتَوَاصَوْا بِالصَّبْرِ', tr: 'wa-tawāṣaw bi-ṣ-ṣabr', fr: 'et se sont enjoint mutuellement la patience. (al-ʿAṣr, 3)' },
+    memoriser: { ar: 'وَتَوَاصَوْا بِالصَّبْرِ', tr: 'wa-tawāṣaw bi-ṣ-ṣabr', fr: 'et se sont enjoint mutuellement la patience. (al-ʿAṣr, 3) — le viatique de la suite du chemin.' },
     recap: [
       'Vous lisez tout mot vocalisé et comprenez six sourates courtes.',
+      'Face au nouveau : repérer les piliers (nom divin, verbe, particule), puis préciser.',
       'Entretenez vos acquis par la révision espacée, quelques minutes par jour.',
-      'Relisez les sourates connues : chaque relecture les enracine.',
-      'Avancez ensuite vers des sourates plus longues, avec la même douceur.',
+      'al-Mulk, illisible au premier jour, est désormais sous vos yeux : continuez, avec douceur.',
     ],
   },
 
