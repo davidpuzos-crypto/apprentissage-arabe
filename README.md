@@ -111,10 +111,11 @@ vite — l'alphabet, notamment, s'étale sur huit leçons :
 - **exercices en escalier** : reconnaissance → discrimination (paires proches,
   points, emphatiques) → lecture (transcription) → écriture (saisie, texte à
   trous libre) → vocabulaire → oral ;
-- **des batteries fournies** : 9 à 14 exercices rédigés par leçon, complétés
-  par des questions générées depuis le vocabulaire — de quoi s'assurer que
-  c'est maîtrisé avant la leçon suivante, le seuil d'acquisition restant à
-  80 % de réussite ;
+- **des batteries fournies** : au moins 50 exercices rédigés par leçon
+  (cours guidé en escalier, puis batterie systématique : gammes de lecture,
+  discrimination auditive, écriture, accords, conjugaison, mot à mot des
+  sourates), complétés par des questions générées depuis le vocabulaire —
+  le seuil d'acquisition restant à 80 % de réussite ;
 - **rythme libre** : les leçons denses invitent explicitement à s'étaler sur
   deux jours ; rien ne presse.
 
