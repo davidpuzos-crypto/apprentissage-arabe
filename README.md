@@ -61,6 +61,14 @@ un bilan animé (étoiles, points gagnés, niveau). Un bouton 🔊 coupe ou rét
 le son ; toutes les animations se taisent si le système demande un mouvement
 réduit.
 
+La session d'exercices se joue **par étapes** d'une douzaine d'exercices :
+entre deux étapes, un écran de palier fait souffler (perles de progression,
+réussites de l'étape, bonus « sans faute » de +20 points), et propose de
+continuer ou de faire une pause. **L'avancée est sauvegardée localement à
+chaque réponse** : on peut fermer la page et, au retour, reprendre exactement
+où l'on était (ou recommencer du début). Les séries de 10 bonnes réponses
+déclenchent une célébration plus marquée que les séries de 5.
+
 ## Usage mobile
 
 L'interface est pensée pour le téléphone : la navigation se replie derrière
