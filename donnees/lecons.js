@@ -826,6 +826,11 @@ const Lecons = {
         { ar: 'كَتَبَ', tr: 'kataba', fr: 'il a écrit', ill: '✍️', note: 'trois fatḥa : ka-ta-ba' },
       ]},
       { texte: "Remarquez كَتَبَ (il a écrit) et كِتَاب (un livre) : les mêmes trois lettres ك ت ب, habillées différemment. Ce n'est pas un hasard — vous découvrirez ce secret au Cycle IV." },
+      { texte: "Et la récompense du jour : une parole que vous prononcez depuis toujours — et que vous savez désormais LIRE. Le petit الـ devant سَلَام est l\'article « la » (leçon 14) ; lisez l\'ensemble lentement :" },
+      { lignes: [
+        { ar: 'السَّلَامُ عَلَيْكُمْ', tr: 'as-salāmu ʿalaykum', fr: 'que la paix soit sur vous', note: 'votre mot سَلَام — عَلَيْكُمْ (« sur vous ») se décortiquera leçon 23' },
+        { ar: 'وَعَلَيْكُمُ السَّلَامُ', tr: 'wa-ʿalaykumu s-salām', fr: 'et sur vous la paix', note: 'la réponse — retrouvez le même سَلَام' },
+      ]},
     ],
     grammaire: {
       titre: "qāf profond, kāf clair : le sens en dépend",
@@ -884,6 +889,15 @@ const Lecons = {
       { type: 'oral', consigne: 'Lisez ces mots à voix haute, en soignant le qāf.',
         phraseAr: 'قَلَم كِتَاب سَلَام', translit: 'qalam, kitāb, salām', cles: ['qalam','kitab','salam'] },
 
+      { type: 'dialogue', consigne: 'Votre premier échange écrit : on vous salue. Choisissez la réponse.',
+        questionAr: 'السَّلَامُ عَلَيْكُمْ', questionTr: 'as-salāmu ʿalaykum', contexte: 'La salutation que vous connaissez par cœur — répondez comme chaque jour.',
+        options: [ { ar: 'وَعَلَيْكُمُ السَّلَامُ', fr: 'et sur vous la paix' }, { ar: 'كِتَاب وَقَلَم', fr: 'un livre et un calame' } ], bonne: 0,
+        aides: [ { ar: 'سَلَام', fr: 'paix' } ], cles: [ 'salam' ],
+        explication: 'Vous venez de LIRE et de rendre le salām. La lecture rejoint la vie.' },
+      { type: 'ecoute', consigne: 'L\'oreille seule : que dit cette salutation ?',
+        audio: 'السَّلَامُ عَلَيْكُمْ', options: [ { texte: 'que la paix soit sur vous' }, { texte: 'un livre est sur la table' } ], bonne: 0, cles: [ 'salam' ] },
+      { type: 'oral', consigne: 'Lisez la salutation et sa réponse — pour la première fois, sur le papier.',
+        phraseAr: 'السَّلَامُ عَلَيْكُمْ ، وَعَلَيْكُمُ السَّلَامُ', translit: 'as-salāmu ʿalaykum, wa-ʿalaykumu s-salām', cles: [ 'salam' ] },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'qcm', consigne: 'Gamme de reconnaissance : laquelle est la lettre fāʾ ?',
         options: [ { ar: 'ف' }, { ar: 'ق' } ], bonne: 0, explication: 'fāʾ : la boucle à un point.' },
@@ -1416,6 +1430,10 @@ const Lecons = {
         { ar: 'و', nom: 'wāw', son: 'w / ū' },
         { ar: 'ي', nom: 'yāʾ', son: 'y / ī' },
       ]},
+      { texte: "Et une seconde récompense : le tasbīḥ, que votre langue connaît par cœur. Toutes ses lettres vous appartiennent — lisez :" },
+      { lignes: [
+        { ar: 'سُبْحَانَ اللَّهِ', tr: 'subḥāna llāh', fr: 'Gloire et pureté à Allah', note: 'س ب ح ا ن — puis le Nom que vous venez d\'apprendre' },
+      ]},
     ],
     grammaire: {
       titre: "La shadda : une consonne doublée",
@@ -1479,6 +1497,11 @@ const Lecons = {
       { type: 'oral', consigne: 'Lisez, lentement et du fond du cœur.',
         phraseAr: 'اللَّه', translit: 'allāh', cles: ['allah'] },
 
+      { type: 'glisser', consigne: 'Assemblez le tasbīḥ que vous dites chaque jour.',
+        ordre: [ 'سُبْحَانَ', 'اللَّهِ' ], traduction: 'subḥāna llāh — Gloire à Allah', cles: [ 'allah' ],
+        explication: 'La racine س-ب-ح dit la nage, le glissement : proclamer Allah au-dessus de tout défaut, d\'un cœur qui glisse vers Lui.' },
+      { type: 'ecoute', consigne: 'L\'oreille seule : quelle formule entendez-vous ?',
+        audio: 'سُبْحَانَ اللَّهِ', options: [ { texte: 'Gloire à Allah (tasbīḥ)' }, { texte: 'que la paix soit sur vous' } ], bonne: 0, cles: [ 'allah' ] },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'qcm', consigne: 'Gamme de reconnaissance : laquelle est la lettre ʿayn ?',
         options: [ { ar: 'غ' }, { ar: 'ع' }, { ar: 'ح' } ], bonne: 1, explication: 'ʿayn : la gorge serrée.' },
@@ -1749,6 +1772,10 @@ const Lecons = {
       ]},
       { texte: "Ces trois finales correspondent aux « cas » : elles disent le rôle du mot dans la phrase. Aujourd'hui, sachez seulement les LIRE — leur sens précis viendra en son temps, sans effort." },
       { texte: "Un mot nouveau pour s'entraîner : وَلَد (un garçon, un enfant). Lisez : وَلَدٌ (waladun), وَلَدًا (waladan), وَلَدٍ (waladin). Toujours le même enfant — seule la terminaison danse." },
+      { texte: "La formule du jour, celle du merci : جَزَاكَ اللَّهُ خَيْرًا — « qu\'Allah te récompense en bien ». Regardez sa finale : خَيْرًا porte exactement le tanwīn fatḥa, avec son alif, que vous venez d\'apprendre." },
+      { lignes: [
+        { ar: 'جَزَاكَ اللَّهُ خَيْرًا', tr: 'jazāka llāhu khayran', fr: 'qu\'Allah te récompense en bien', note: 'khayr (le bien) + tanwīn « an » + alif' },
+      ]},
     ],
     grammaire: {
       titre: "Trois tanwīn, un seul geste",
@@ -1764,6 +1791,7 @@ const Lecons = {
     }],
     vocabulaire: [
       { ar: 'وَلَد', tr: 'walad', fr: 'garçon, enfant', cle: 'walad', ill: '🧒' },
+      { ar: 'خَيْر', tr: 'khayr', fr: 'bien', cle: 'khayr', ill: '🌟' },
     ],
     exercices: [
       { type: 'qcm', consigne: 'Rappel de la leçon 9 : comment se lit la ة de رَحْمَة, à la pause ?',
@@ -1797,6 +1825,14 @@ const Lecons = {
       { type: 'oral', consigne: 'Lisez le même mot sous ses trois tanwīn.',
         phraseAr: 'نَجْمٌ نَجْمًا نَجْمٍ', translit: 'najmun, najman, najmin', cles: ['najm'] },
 
+      { type: 'qcm', consigne: 'Que souhaite-t-on en disant جَزَاكَ اللَّهُ خَيْرًا ?',
+        options: [ { texte: 'qu\'Allah te récompense en bien' }, { texte: 'que la paix soit sur toi' }, { texte: 'bonne nuit' } ], bonne: 0, cles: [ 'khayr' ],
+        explication: 'Le merci du croyant : on remet la récompense à Allah. khayran — « en bien ».' },
+      { type: 'trous', consigne: 'Complétez le merci : la finale porte le tanwīn « an » ET son alif.',
+        segments: [ 'جَزَاكَ اللَّهُ', { options: [ 'خَيْرًا', 'خَيْرٌ' ], bonne: 0 } ], traduction: 'jazāka llāhu khayran', cles: [ 'khayr' ],
+        explication: 'khayran, au cas direct : le tanwīn fatḥa s\'écrit toujours avec son alif.' },
+      { type: 'oral', consigne: 'Dites le merci du croyant, en soignant la finale « -an ».',
+        phraseAr: 'جَزَاكَ اللَّهُ خَيْرًا', translit: 'jazāka llāhu khayran', cles: [ 'khayr' ] },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'phonetique', consigne: 'Lisez ce mot avec son tanwīn.',
         motAr: 'وَلَدًا', options: [ 'waladin', 'waladan', 'waladoun' ], bonne: 1, cles: [ 'walad' ] },
@@ -1912,6 +1948,12 @@ const Lecons = {
         { ar: 'عَلَى', tr: 'ʿalā', fr: 'sur', note: 'alif maqṣūra finale : un « â »' },
       ]},
       { texte: "C'était les trois derniers signes. Faites le compte : lettres, voyelles brèves et longues, sukūn, shadda, tāʾ marbūṭa, tanwīn, hamza, madda, maqṣūra — le système d'écriture est à vous." },
+      { texte: "Trois formules de votre quotidien deviennent lisibles aujourd\'hui — chacune attendait un signe de cette leçon :" },
+      { lignes: [
+        { ar: 'آمِين', tr: 'āmīn', fr: 'āmīn — exauce-nous', note: 'la madda آ' },
+        { ar: 'إِنْ شَاءَ اللَّهُ', tr: 'in shāʾa llāh', fr: 'si Allah le veut', note: 'hamza sous l\'alif, puis hamza sur la ligne' },
+        { ar: 'اللَّهُ أَكْبَرُ', tr: 'allāhu akbar', fr: 'Allah est plus grand (que tout)', note: 'la hamza du takbīr : أَ' },
+      ]},
     ],
     grammaire: {
       titre: "La hamza est une vraie consonne",
@@ -1931,6 +1973,7 @@ const Lecons = {
       { ar: 'سَمَاء', tr: 'samāʾ', fr: 'ciel', cle: 'sama', ill: '🌌' },
       { ar: 'أَحَد', tr: 'aḥad', fr: 'un, unique', cle: 'ahad', ill: '☝️' },
       { ar: 'قُرْآن', tr: 'qurʾān', fr: 'Coran, récitation', cle: 'quran', ill: '📿' },
+      { ar: 'آمِين', tr: 'āmīn', fr: 'āmīn — exauce-nous', cle: 'amin', ill: '🤲' },
     ],
     exercices: [
       { type: 'qcm', consigne: 'Rappel de la leçon 10 : que se lit سَلَامٌ ?',
@@ -1966,6 +2009,13 @@ const Lecons = {
       { type: 'oral', consigne: 'Lisez ce mot en marquant bien la madda.',
         phraseAr: 'قُرْآن', translit: 'qurʾān', cles: ['quran'] },
 
+      { type: 'dictee', consigne: 'āmīn ou īmān ? Les mêmes lettres, un ordre différent. Écoutez.',
+        audio: 'آمِين', options: [ { ar: 'آمِين' }, { ar: 'إِيمَان' } ], bonne: 0, cles: [ 'amin', 'iman' ],
+        explication: 'āmīn ouvre par la madda آ ; īmān par la hamza-kasra إِ. Deux mots frères, deux attaques.' },
+      { type: 'ecoute', consigne: 'L\'oreille seule : quelle formule entendez-vous ?',
+        audio: 'إِنْ شَاءَ اللَّهُ', options: [ { texte: 'si Allah le veut' }, { texte: 'Allah est plus grand' }, { texte: 'gloire à Allah' } ], bonne: 0, cles: [ 'allah' ] },
+      { type: 'oral', consigne: 'Lisez le takbīr — sa hamza أَ est celle de la leçon.',
+        phraseAr: 'اللَّهُ أَكْبَرُ', translit: 'allāhu akbar', cles: [ 'allah' ] },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'phonetique', consigne: 'Lisez ce mot.',
         motAr: 'أَخ', options: [ 'akh', 'ikh', 'ākh' ], bonne: 0, cles: [ 'akh' ] },
@@ -2071,6 +2121,10 @@ const Lecons = {
       { texte: "Trois familles de confusion : le fond de gorge (ق/ك، ع/ء، ح/ه), les emphatiques (ص/س، ط/ت، ظ/ذ، ض/د), et les durées (بَ bref / بَا long). Chacune distingue des mots réels du Coran." },
       { texte: "Deux mots du jour, tirés de ces paires : عَمَل (l'œuvre, l'action — ce que pèse la balance au Jour du Jugement) et نَذِير (l'avertisseur — l'un des titres du Prophète ﷺ)." },
       { texte: "Méthode pour toute la suite : quand deux sons se confondent, dites-les en alternance rapide — qa-ka-qa-ka, ha-ḥa-ha-ḥa — jusqu'à sentir le point précis où ils se séparent. L'oreille apprend par contraste." },
+      { texte: "La formule du jour : l\'istighfār. Elle contient le غ raclé tout près du ف — deux sons à ne pas confondre, en plein dans le travail de cette leçon. Lisez en articulant :" },
+      { lignes: [
+        { ar: 'أَسْتَغْفِرُ اللَّهَ', tr: 'astaghfiru llāh', fr: 'je demande pardon à Allah', note: 'gh puis f : deux points d\'articulation bien distincts' },
+      ]},
     ],
     grammaire: {
       titre: "Distinguer les sons proches : le sens en dépend",
@@ -2122,6 +2176,11 @@ const Lecons = {
       { type: 'oral', consigne: 'Lisez chaque paire en exagérant le contraste, puis au naturel.',
         phraseAr: 'قَلْب كَلْب ، عَمَل أَمَل', translit: 'qalb / kalb, ʿamal / amal', cles: ['qalb','amal'] },
 
+      { type: 'phonetique', consigne: 'L\'istighfār, précisément : gh AVANT f. Lisez.',
+        motAr: 'أَسْتَغْفِرُ', options: [ 'astaghfiru', 'astafghiru', 'astakhfiru' ], bonne: 0, cles: [ 'allah' ],
+        explication: 'a-sta-GH-Fi-ru : le ghayn racle, puis le fāʾ souffle. Les intervertir déforme la formule.' },
+      { type: 'oral', consigne: 'Dites l\'istighfār, lentement, en donnant au غ et au ف leur droit.',
+        phraseAr: 'أَسْتَغْفِرُ اللَّهَ', translit: 'astaghfiru llāh', cles: [ 'allah' ] },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'dictee', consigne: 'Gamme de discrimination (sā/ṣā) : que entendez-vous ?',
         audio: 'سَا', options: [ { ar: 'صَا' }, { ar: 'سَا' } ], bonne: 1 },
@@ -2229,6 +2288,10 @@ const Lecons = {
         { ar: 'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ', tr: 'wa-lam yakun lahu kufuwan aḥad', fr: 'Et nul n\'est égal à Lui.', note: 'remarquez le tanwīn de كُفُوًا — leçon 10' },
       ]},
       { texte: "Vous remarquerez devant certains mots le petit bloc الـ (comme dans الصَّمَد, lu « aṣ-ṣamad ») : c'est l'article, « le ». Il ouvrira le Cycle III — pour aujourd'hui, lisez-le simplement comme il s'entend." },
+      { texte: "Avant la sourate, une dernière formule — LA formule : la basmala. Vous la dites avant chaque geste ; lisez-la maintenant de vos yeux, comme un seuil avant al-Ikhlāṣ. Le petit trait vertical de الرَّحْمَٰن est l\'alif suscrit d\'اللَّه :" },
+      { lignes: [
+        { ar: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', tr: 'bismi llāhi r-raḥmāni r-raḥīm', fr: 'Au nom d\'Allah, le Tout Miséricordieux, le Très Miséricordieux' },
+      ]},
     ],
     grammaire: {
       titre: "Comprendre avant d'analyser",
@@ -2277,6 +2340,11 @@ const Lecons = {
       { type: 'oral', consigne: 'Récitez le premier verset, lentement et à voix haute.',
         phraseAr: 'قُلْ هُوَ اللَّهُ أَحَدٌ', translit: 'qul huwa llāhu aḥad', cles: ['qul','ahad'] },
 
+      { type: 'glisser', consigne: 'Assemblez la basmala — celle qui ouvrira votre lecture.',
+        ordre: [ 'بِسْمِ', 'اللَّهِ', 'الرَّحْمَٰنِ', 'الرَّحِيمِ' ], traduction: 'bismi llāhi r-raḥmāni r-raḥīm', cles: [ 'allah' ],
+        explication: 'Quatre mots que vous direz avant chaque sourate. الرَّحْمَٰن et الرَّحِيم viennent de la racine de رَحْمَة (leçon 9).' },
+      { type: 'oral', consigne: 'Lisez la basmala, lentement — c\'est votre seuil d\'entrée.',
+        phraseAr: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', translit: 'bismi llāhi r-raḥmāni r-raḥīm', cles: [ 'allah' ] },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'trous', consigne: 'Complétez le premier verset.',
         segments: [ 'قُلْ هُوَ اللَّهُ', { options: [ 'أَحَدٌ', 'الصَّمَدُ' ], bonne: 0 } ], traduction: 'Dis : Il est Allah, Unique.', cles: [ 'ahad' ] },
@@ -3902,6 +3970,14 @@ const Lecons = {
         { ar: 'يَعْلَمُ', tr: 'yaʿlamu', fr: 'il sait' },
         { ar: 'نَعْبُدُ', tr: 'naʿbudu', fr: 'nous adorons' },
       ]},
+      { titreDialogue: 'L\'inaccompli fait vivre l\'échange : « que fais-tu ? »',
+        dialogue: [
+          { qui: 'A', ar: 'مَاذَا تَفْعَلُ ؟', tr: 'mādhā tafʿalu', fr: 'Que fais-tu ?' },
+          { qui: 'B', ar: 'أَكْتُبُ كَلِمَةً.', tr: 'aktubu kalima(tan)', fr: 'J\'écris une parole.' },
+          { qui: 'A', ar: 'وَمَاذَا يَفْعَلُ الْوَلَدُ ؟', tr: 'wa-mādhā yafʿalu l-walad', fr: 'Et que fait le garçon ?' },
+          { qui: 'B', ar: 'يَسْمَعُ الْقُرْآنَ.', tr: 'yasmaʿu l-qurʾān', fr: 'Il écoute le Coran.' },
+        ] },
+      { texte: 'Tout l\'échange tient sur vos préfixes : تَـ (tu), أَـ (je), يَـ (il). Le vocabulaire vient des leçons 9, 10 et 11 : كَلِمَة، وَلَد، قُرْآن. Rien ne se perd.' },
     ],
     grammaire: {
       titre: 'Le préfixe de l\'inaccompli',
@@ -3955,6 +4031,16 @@ const Lecons = {
         audio: 'يَعْلَمُ', options: [{ texte: 'il sait' }, { texte: 'il dit' }, { texte: 'il adore' }], bonne: 0, cles: ['yalamu'],
         explication: 'ya-ʿlam-u : le préfixe يَـ (il) + la racine ع-ل-م du savoir.' },
 
+      { type: 'dialogue', consigne: 'On vous demande ce que VOUS faites : répondez à la bonne personne.',
+        questionAr: 'مَاذَا تَفْعَلُ ؟', questionTr: 'mādhā tafʿalu', contexte: 'La question est en « tu » : la réponse est en « je ».',
+        options: [ { ar: 'أَسْمَعُ الْقُرْآنَ', fr: 'j\'écoute le Coran' }, { ar: 'يَسْمَعُ الْقُرْآنَ', fr: 'il écoute le Coran' } ], bonne: 0,
+        aides: [ { ar: 'أَـ', fr: 'préfixe « je »' }, { ar: 'يَـ', fr: 'préfixe « il »' } ], cles: [ 'madha', 'samia' ],
+        explication: 'ta-fʿalu (tu) appelle a-smaʿu (je) : le préfixe porte toute la conversation.' },
+      { type: 'dialogue', consigne: 'À vous d\'écrire : on vous demande ce que vous faites. Répondez « j\'écris », en un seul mot.',
+        questionAr: 'مَاذَا تَفْعَلُ ؟', questionTr: 'mādhā tafʿalu', contexte: 'Le préfixe أَـ + la racine ك-ت-ب.',
+        mode: 'saisie', reponse: 'أكتب', indice: 'aktubu',
+        aides: [ { ar: 'أَـ', fr: 'je' }, { ar: 'كتب', fr: 'écrire' } ], cles: [ 'kataba', 'madha' ],
+        explication: 'aktubu — votre première réponse produite à l\'inaccompli. Vous conversez au présent.' },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'contexte', consigne: 'Sujet « il » : choisissez le préfixe de l\'inaccompli.',
         avant: '', apres: 'كْتُبُ', sujet: 'il', options: [ { ar: 'تَ' }, { ar: 'يَ' }, { ar: 'أَ' } ], bonne: 1, traduction: 'يَ… — il écrit', cles: [ 'kataba' ] },
@@ -4232,6 +4318,14 @@ const Lecons = {
         { ar: 'أَعُوذُ بِاللَّهِ', tr: 'aʿūdhu bi-llāh', fr: 'je cherche refuge auprès d\'Allah', note: 'la formule que vous dites avant chaque lecture' },
         { ar: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ', tr: 'aʿūdhu bi-llāhi mina sh-shayṭān', fr: '… contre le shayṭān', note: 'بِـ (auprès de) + مِنْ (contre)' },
       ]},
+      { titreDialogue: 'L\'impératif fait naître l\'échange maître-élève. Le petit mot يَا appelle quelqu\'un : « ô… ! »',
+        dialogue: [
+          { qui: 'A', ar: 'اقْرَأْ يَا وَلَدُ.', tr: 'iqraʾ yā walad', fr: 'Lis, ô garçon !' },
+          { qui: 'B', ar: 'مَاذَا أَقْرَأُ ؟', tr: 'mādhā aqraʾu', fr: 'Que dois-je lire ?' },
+          { qui: 'A', ar: 'اقْرَأْ سُورَةَ الْإِخْلَاصِ.', tr: 'iqraʾ sūrata l-ikhlāṣ', fr: 'Lis la sourate al-Ikhlāṣ.' },
+          { qui: 'B', ar: 'بِسْمِ اللَّهِ… قُلْ هُوَ اللَّهُ أَحَدٌ.', tr: 'bismi llāh… qul huwa llāhu aḥad', fr: 'Au nom d\'Allah… Dis : Il est Allah, Unique.' },
+        ] },
+      { texte: 'Regardez le maillage : l\'impératif du jour (اقْرَأْ), l\'interrogatif مَاذَا (leçon 20), l\'annexion سُورَةَ الْإِخْلَاصِ (leçon 19), et votre sourate de la leçon 13 en réponse. Chaque leçon porte les suivantes.' },
       { texte: 'Retenez ce squelette — aʿūdhu bi-… min… — : la séance prochaine, les sourates al-Falaq et an-Nās le déploieront verset par verset.' },
     ],
     grammaire: {
@@ -4292,6 +4386,14 @@ const Lecons = {
       { type: 'oral', consigne: 'Récitez le premier mot révélé, puis la suite du verset.',
         phraseAr: 'اقْرَأْ بِاسْمِ رَبِّكَ', translit: 'iqraʾ bi-smi rabbika', cles: ['iqra'] },
 
+      { type: 'dialogue', consigne: 'On vous ordonne de lire. Demandez QUOI lire — à la bonne personne.',
+        questionAr: 'اقْرَأْ يَا وَلَدُ.', questionTr: 'iqraʾ yā walad', contexte: 'C\'est vous qui allez lire : demandez en « je ».',
+        options: [ { ar: 'مَاذَا أَقْرَأُ ؟', fr: 'que dois-je lire ?' }, { ar: 'مَاذَا تَقْرَأُ ؟', fr: 'que lis-tu ? (mauvaise personne)' } ], bonne: 0,
+        aides: [ { ar: 'أَقْرَأُ', fr: 'je lis' }, { ar: 'تَقْرَأُ', fr: 'tu lis' } ], cles: [ 'iqra', 'madha' ],
+        explication: 'L\'ordre s\'adresse à vous : la question repart en « je » — aqraʾu.' },
+      { type: 'qcm', consigne: 'Dans اقْرَأْ يَا وَلَدُ, à quoi sert le petit mot يَا ?',
+        options: [ { texte: 'à appeler quelqu\'un : « ô garçon ! »' }, { texte: 'à nier' }, { texte: 'à interroger' } ], bonne: 0, cles: [ 'walad' ],
+        explication: 'يَا est le vocatif : il ouvre l\'adresse directe — يَا رَبِّ (ô mon Seigneur), يَا أَخِي (ô mon frère).' },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'qcm', consigne: 'Que demande l\'invocation رَبِّ اغْفِرْ لِي ?',
         options: [ { texte: 'Notre Seigneur, pardonne-nous' }, { texte: 'guide-nous' }, { texte: 'Mon Seigneur, pardonne-moi' } ], bonne: 2, cles: [ 'ghafara', 'rabbi' ] },
@@ -4573,6 +4675,14 @@ const Lecons = {
       { lignes: [
         { ar: 'إِنَّ رَبَّكَ حَكِيمٌ عَلِيمٌ', tr: 'inna rabbaka ḥakīmun ʿalīm', fr: 'Ton Seigneur est certes Sage, Omniscient.', note: 'al-Anʿām, 83 · rabba-ka prend la fatḥa après inna' },
         { ar: 'إِنَّ اللَّهَ لَغَفُورٌ رَحِيمٌ', tr: 'inna llāha la-ghafūrun raḥīm', fr: 'Allah est certes Pardonneur, Miséricordieux.', note: 'an-Naḥl, 18 · double insistance : inna + la-' },
+      { titreDialogue: 'Racontez votre journée : ce sont les liaisons qui font le récit.',
+        dialogue: [
+          { qui: 'A', ar: 'مَاذَا فَعَلْتَ الْيَوْمَ ؟', tr: 'mādhā faʿalta l-yawm', fr: 'Qu\'as-tu fait aujourd\'hui ?' },
+          { qui: 'B', ar: 'دَخَلْتُ الْبَيْتَ ثُمَّ سَمِعْتُ الْقُرْآنَ.', tr: 'dakhaltu l-bayta thumma samiʿtu l-qurʾān', fr: 'Je suis entré à la maison, puis j\'ai écouté le Coran.' },
+          { qui: 'A', ar: 'وَبَعْدَ ذَٰلِكَ ؟', tr: 'wa-baʿda dhālika', fr: 'Et après cela ?' },
+          { qui: 'B', ar: 'سَجَدْتُ لِلَّهِ فَشَكَرْتُهُ.', tr: 'sajadtu li-llāhi fa-shakartuhu', fr: 'Je me suis prosterné devant Allah, et aussitôt je L\'ai remercié.' },
+        ] },
+      { texte: 'Un récit entier avec vos accomplis de la leçon 21 (فَعَلْتَ، دَخَلْتُ، سَمِعْتُ), vos liaisons du jour (ثُمَّ، فَ، وَ), la préposition لِـ (leçon 18) et le suffixe ـهُ sur le verbe (leçon 23). بَعْدَ ذَٰلِكَ, « après cela » : votre ذَٰلِكَ de la leçon 15.' },
       ]},
     ],
     grammaire: {
@@ -4627,6 +4737,14 @@ const Lecons = {
         segments: [ { ar: 'لَـ', role: 'insistance' }, { ar: 'غَفُورٌ', role: 'attribut' } ], roles: ['insistance','attribut'], cles: ['inna'],
         explication: 'la- (bien, certes) + ghafūr (Pardonneur) : une insistance qui redouble celle d\'inna.' },
 
+      { type: 'dialogue', consigne: 'On vous demande votre journée : choisissez le récit cohérent (personne ET temps).',
+        questionAr: 'مَاذَا فَعَلْتَ الْيَوْمَ ؟', questionTr: 'mādhā faʿalta l-yawm', contexte: 'Question au passé, en « tu » : réponse au passé, en « je ».',
+        options: [ { ar: 'سَمِعْتُ الْقُرْآنَ ثُمَّ كَتَبْتُ', fr: 'j\'ai écouté le Coran, puis j\'ai écrit' }, { ar: 'يَسْمَعُ الْقُرْآنَ', fr: 'il écoute le Coran (mauvaise personne, mauvais temps)' } ], bonne: 0,
+        aides: [ { ar: 'ثُمَّ', fr: 'puis' } ], cles: [ 'samia', 'thumma', 'kataba' ],
+        explication: 'faʿalta (tu as fait) appelle un accompli en « je » — et ثُمَّ enchaîne les étapes du récit.' },
+      { type: 'glisser', consigne: 'Racontez dans l\'ordre : « je suis entré, puis j\'ai écouté, alors je me suis prosterné ».',
+        ordre: [ 'دَخَلْتُ', 'ثُمَّ سَمِعْتُ', 'فَسَجَدْتُ' ], traduction: 'dakhaltu, thumma samiʿtu, fa-sajadtu', cles: [ 'dakhala', 'thumma', 'samia', 'fa' ],
+        explication: 'thumma espace les moments, fa colle la conséquence : la prosternation suit l\'écoute, aussitôt.' },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'trous', consigne: 'Choisissez la particule juste : « il est entré, PUIS il est sorti (plus tard) ».',
         segments: [ 'دَخَلَ', { options: [ 'ثُمَّ', 'فَ' ], bonne: 0 }, 'خَرَجَ' ], traduction: 'il est entré, PUIS il est sorti (plus tard)', cles: [ 'dakhala', 'thumma', 'kharaja' ] },
@@ -4740,6 +4858,14 @@ const Lecons = {
       { lignes: [
         { ar: 'لَا إِكْرَاهَ فِي الدِّينِ', tr: 'lā ikrāha fī d-dīn', fr: 'Nulle contrainte en religion.', note: 'al-Baqara, 256 · لَا + nom : négation absolue' },
       ]},
+      { titreDialogue: 'Savoir dire « je ne sais pas » : la négation entre en conversation — et c\'est une parole de science.',
+        dialogue: [
+          { qui: 'A', ar: 'أَتَعْلَمُ ؟', tr: 'a-taʿlamu', fr: 'Sais-tu ?' },
+          { qui: 'B', ar: 'لَا، لَا أَعْلَمُ.', tr: 'lā, lā aʿlamu', fr: 'Non, je ne sais pas.' },
+          { qui: 'A', ar: 'أَسَمِعْتَ الْآيَةَ ؟', tr: 'a-samiʿta l-āya', fr: 'As-tu entendu le verset ?' },
+          { qui: 'B', ar: 'لَا، لَمْ أَسْمَعْ.', tr: 'lā, lam asmaʿ', fr: 'Non, je n\'ai pas entendu.' },
+        ] },
+      { texte: 'Deux négations en situation : لَا أَعْلَمُ (présent) et لَمْ أَسْمَعْ (passé — remarquez le sukūn final). Les savants disent que « lā aʿlamu est la moitié de la science » : la dire sans gêne, c\'est déjà savoir.' },
     ],
     grammaire: {
       titre: 'Choisir la bonne négation',
@@ -4789,6 +4915,16 @@ const Lecons = {
         audio: 'لَا إِلَـٰهَ إِلَّا اللَّهُ', options: [{ texte: 'Il n\'est de divinité sinon Allah' }, { texte: 'Louange à Allah' }], bonne: 0, cles: ['la','illa'],
         explication: 'lā (négation absolue) + illā (exception) : on nie tout, pour n\'affirmer que Lui. Le tawḥīd, désormais transparent.' },
 
+      { type: 'dialogue', consigne: 'On vous interroge : répondez honnêtement que vous ne savez pas.',
+        questionAr: 'أَتَعْلَمُ ؟', questionTr: 'a-taʿlamu', contexte: 'La moitié de la science…',
+        options: [ { ar: 'لَا، لَا أَعْلَمُ', fr: 'non, je ne sais pas' }, { ar: 'نَعَمْ، لَا أَعْلَمُ', fr: 'oui, je ne sais pas (contradictoire !)' } ], bonne: 0,
+        aides: [ { ar: 'لَا أَعْلَمُ', fr: 'je ne sais pas' } ], cles: [ 'la', 'yalamu' ],
+        explication: 'On nie d\'abord (lā), puis on précise : lā aʿlamu. Une réponse droite vaut mieux qu\'une réponse fausse.' },
+      { type: 'dialogue', consigne: 'À vous d\'écrire : avez-vous entendu ? Répondez « je n\'ai pas entendu » (lam + verbe).',
+        questionAr: 'أَسَمِعْتَ ؟', questionTr: 'a-samiʿta', contexte: 'Négation du passé : lam + inaccompli au sukūn final.',
+        mode: 'saisie', reponse: 'لم أسمع', indice: 'lam asmaʿ',
+        aides: [ { ar: 'لَمْ', fr: 'ne… pas (passé)' }, { ar: 'أَسْمَعُ', fr: 'j\'entends' } ], cles: [ 'lam', 'samia' ],
+        explication: 'lam asmaʿ : la négation du passé, produite par vous — la conversation honnête est complète.' },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'trous', consigne: 'Niez juste : « il ne sait pas (présent) ».',
         segments: [ { options: [ 'لَا', 'لَمْ' ], bonne: 0 }, 'يَعْلَمُ' ], traduction: 'il ne sait pas (présent)', aide: [ { ar: 'لَا + inaccompli', fr: 'négation du présent' }, { ar: 'لَمْ + inaccompli', fr: 'négation du passé' } ], cles: [ 'yalamu', 'la' ] },
@@ -4909,6 +5045,14 @@ const Lecons = {
         { ar: 'الْغَفُور', tr: 'al-ghafūr', fr: 'le Pardonneur', note: 'racine غ-ف-ر — comme غَفَرَ, séance 21' },
       ]},
       { texte: 'ar-Raḥmān et ar-Raḥīm partagent la racine de la miséricorde : le premier dit une miséricorde immense et générale, le second une miséricorde continue et agissante. Ces noms signent la fin de très nombreux versets.' },
+      { titreDialogue: 'Le pluriel entre en conversation — avec une règle-surprise : les pluriels de choses se montrent au FÉMININ SINGULIER.',
+        dialogue: [
+          { qui: 'A', ar: 'أَهَٰذِهِ كُتُبٌ ؟', tr: 'a-hādhihi kutub', fr: 'Est-ce que ce sont des livres ?' },
+          { qui: 'B', ar: 'نَعَمْ، هَٰذِهِ كُتُبٌ.', tr: 'naʿam, hādhihi kutub', fr: 'Oui, ce sont des livres.' },
+          { qui: 'A', ar: 'وَمَا تِلْكَ ؟', tr: 'wa-mā tilka', fr: 'Et cela, qu\'est-ce ?' },
+          { qui: 'B', ar: 'تِلْكَ آيَاتُ اللَّهِ.', tr: 'tilka āyātu llāh', fr: 'Ce sont les versets d\'Allah.' },
+        ] },
+      { texte: 'La surprise : un pluriel de choses (كُتُب، آيَات) s\'annonce avec هَٰذِهِ et تِلْكَ — les démonstratifs féminins SINGULIERS de la leçon 16. Et تِلْكَ آيَاتُ اللَّهِ était déjà votre phrase à mémoriser de cette même leçon : la boucle se referme.' },
     ],
     grammaire: {
       titre: 'Racine + schème : toute la morphologie arabe',
@@ -4975,6 +5119,15 @@ const Lecons = {
       { type: 'oral', consigne: 'Prononcez ce couple de noms, comme dans la basmala.',
         phraseAr: 'الرَّحْمَـٰنِ الرَّحِيمِ', translit: 'ar-raḥmāni r-raḥīm', cles: ['rahman','rahim'] },
 
+      { type: 'dialogue', consigne: 'Des livres, au pluriel : répondez avec le bon accord.',
+        questionAr: 'أَهَٰذِهِ كُتُبٌ ؟', questionTr: 'a-hādhihi kutub', contexte: 'Pluriel de choses → démonstratif féminin singulier.',
+        options: [ { ar: 'نَعَمْ، هَٰذِهِ كُتُبٌ', fr: 'oui, ce sont des livres' }, { ar: 'نَعَمْ، هَٰذَا كُتُبٌ', fr: 'oui — mais l\'accord est faux' } ], bonne: 0,
+        aides: [ { ar: 'هَٰذِهِ', fr: 'ceci (f.)' }, { ar: 'كُتُب', fr: 'des livres' } ], cles: [ 'hadhihi', 'kutub' ],
+        explication: 'Règle d\'or : les pluriels de choses s\'accordent au féminin singulier — hādhihi kutub, tilka āyāt.' },
+      { type: 'trous', consigne: 'Des étoiles, au loin : accordez le démonstratif (pluriel de choses !).',
+        segments: [ { options: [ 'تِلْكَ', 'ذَٰلِكَ' ], bonne: 0 }, 'نُجُومٌ' ], traduction: 'tilka nujūm — ce sont des étoiles, là-bas',
+        aide: [ { ar: 'نُجُوم', fr: 'des étoiles (pluriel brisé)' } ], cles: [ 'tilka', 'najm' ],
+        explication: 'Même au loin, le pluriel de choses reste au féminin singulier : tilka nujūm.' },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'qcm', consigne: 'Quel est le pluriel de كِتَاب (livre) ?',
         options: [ { ar: 'رُسُل' }, { ar: 'كُتُب' }, { ar: 'قُلُوب' } ], bonne: 1, explication: 'kitāb → kutub — pluriel brisé.', cles: [ 'kutub' ] },
@@ -5276,6 +5429,16 @@ const Lecons = {
         { ar: 'تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ', tr: 'tabāraka lladhī bi-yadihi l-mulk', fr: 'Béni soit Celui qui détient la royauté,', note: 'le relatif + bi- + le suffixe ـهِ : tout est à vous' },
         { ar: 'وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'wa-huwa ʿalā kulli shayʾin qadīr', fr: 'et qui est capable de toute chose.', note: 'vous venez de lire cette structure plus haut' },
       ]},
+      { titreDialogue: 'Et pour couronner le parcours : votre première conversation complète. Chaque mot vient d\'une leçon.',
+        dialogue: [
+          { qui: 'A', ar: 'السَّلَامُ عَلَيْكُمْ.', tr: 'as-salāmu ʿalaykum', fr: 'Que la paix soit sur vous.' },
+          { qui: 'B', ar: 'وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللَّهِ.', tr: 'wa-ʿalaykumu s-salāmu wa-raḥmatu llāh', fr: 'Et sur vous la paix, et la miséricorde d\'Allah.' },
+          { qui: 'A', ar: 'مَاذَا تَقْرَأُ يَا أَخِي ؟', tr: 'mādhā taqraʾu yā akhī', fr: 'Que lis-tu, mon frère ?' },
+          { qui: 'B', ar: 'أَقْرَأُ الْقُرْآنَ وَأَفْهَمُ كَلِمَاتِهِ، الْحَمْدُ لِلَّهِ.', tr: 'aqraʾu l-qurʾāna wa-afhamu kalimātihi, al-ḥamdu li-llāh', fr: 'Je lis le Coran et je comprends ses mots, louange à Allah.' },
+          { qui: 'A', ar: 'مَا شَاءَ اللَّهُ ! جَزَاكَ اللَّهُ خَيْرًا.', tr: 'mā shāʾa llāh ! jazāka llāhu khayran', fr: 'Mā shāʾa Llāh ! Qu\'Allah te récompense en bien.' },
+          { qui: 'B', ar: 'آمِين، وَإِيَّاكَ.', tr: 'āmīn, wa-iyyāka', fr: 'Āmīn — et toi de même.' },
+        ] },
+      { texte: 'Faites l\'inventaire : la salutation (leçon 5), l\'annexion رَحْمَةُ اللَّهِ (leçon 19), l\'inaccompli مَاذَا تَقْرَأُ (leçon 22), l\'appel يَا أَخِي (leçons 11 et 23), le pluriel à suffixe كَلِمَاتِهِ (leçons 28 et 23), les formules du merci (leçons 10 et 11) — et وَإِيَّاكَ, votre إِيَّاكَ de la Fātiḥa devenu réponse de politesse. Trente leçons dans six répliques : vous conversez.' },
       { texte: 'Pour continuer, trois voies se complètent :' },
       { lignes: [
         { ar: 'الْقُرْآن', tr: 'al-qurʾān', fr: 'le Coran', note: 'lire chaque jour un court passage vocalisé' },
@@ -5338,6 +5501,18 @@ const Lecons = {
       { type: 'texteLibre', consigne: 'Pour finir, écrivez le mot « le Coran ».',
         reponse: 'القرآن', indice: 'al-qurʾān', traduction: 'le Coran, la récitation', cles: ['quran'] },
 
+      { type: 'dialogue', consigne: 'La conversation finale : on vous demande ce que vous lisez.',
+        questionAr: 'مَاذَا تَقْرَأُ يَا أَخِي ؟', questionTr: 'mādhā taqraʾu yā akhī', contexte: 'Répondez en « je », comme dans la conversation du cours.',
+        options: [ { ar: 'أَقْرَأُ الْقُرْآنَ، الْحَمْدُ لِلَّهِ', fr: 'je lis le Coran, louange à Allah' }, { ar: 'تَقْرَأُ الْقُرْآنَ', fr: 'tu lis le Coran (mauvaise personne)' } ], bonne: 0,
+        aides: [ { ar: 'أَقْرَأُ', fr: 'je lis' } ], cles: [ 'quran', 'hamd' ],
+        explication: 'aqraʾu l-qurʾān : ce que vous savez désormais dire — et faire.' },
+      { type: 'dialogue', consigne: 'On vous salue une dernière fois. Écrivez la réponse complète, de mémoire.',
+        questionAr: 'السَّلَامُ عَلَيْكُمْ.', questionTr: 'as-salāmu ʿalaykum', contexte: 'La réponse que vous donnez chaque jour — désormais par écrit.',
+        mode: 'saisie', reponse: 'وعليكم السلام', indice: 'wa-ʿalaykumu s-salām',
+        aides: [ { ar: 'وَ', fr: 'et' }, { ar: 'السَّلَام', fr: 'la paix' } ], cles: [ 'salam', 'wa' ],
+        explication: 'Du premier salām de la leçon 5 à cette réponse écrite de vos mains : le cercle est complet.' },
+      { type: 'oral', consigne: 'Jouez la conversation à voix haute — les deux premières répliques.',
+        phraseAr: 'السَّلَامُ عَلَيْكُمْ ، وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللَّهِ', translit: 'as-salāmu ʿalaykum — wa-ʿalaykumu s-salāmu wa-raḥmatu llāh', cles: [ 'salam', 'rahma' ] },
       /* ---- Entraînement : batterie systématique ---- */
       { type: 'qcm', consigne: 'Diagnostic de lecture : quelle structure reconnaissez-vous dans اللَّهُ نُورُ السَّمَاوَاتِ ?',
         options: [ { texte: 'une négation' }, { texte: 'une annexion (nūru s-samāwāt)' }, { texte: 'un impératif' } ], bonne: 1 },
