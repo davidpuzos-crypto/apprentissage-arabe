@@ -380,6 +380,35 @@
     const comptes = new Set();
     let naviguePopstate = false;
 
+    // Étapes : la passe principale se joue par paliers d'une douzaine
+    // d'exercices, avec un écran de respiration entre chaque. L'avancée est
+    // sauvegardée localement à chaque réponse : on peut fermer la page et
+    // reprendre plus tard exactement où l'on était.
+    const nbEtapes = Math.max(1, Math.round(total / 13));
+    const tailleEtape = Math.max(1, Math.ceil(total / nbEtapes));
+    const etapeDe = (i) => Math.min(nbEtapes - 1, Math.floor(i / tailleEtape));
+    const bornesVues = new Set();
+    let fautesEtape = 0, reussitesEtape = 0, questionsEtape = 0;
+    let repriseTraitee = false;
+    const CLE_SESSION = 'lecon-session-' + id;
+    let ratesIdx = [];
+    function sauverSession() {
+      try {
+        localStorage.setItem(CLE_SESSION, JSON.stringify({
+          v: total, idx, repondus, reussis, sessionPoints, combo, meilleurCombo,
+          fautesEtape, reussitesEtape, questionsEtape,
+          rates: ratesIdx, comptes: [...comptes], bornes: [...bornesVues],
+        }));
+      } catch (e) {}
+    }
+    function effacerSession() { try { localStorage.removeItem(CLE_SESSION); } catch (e) {} }
+    function lireSession() {
+      try {
+        const s = JSON.parse(localStorage.getItem(CLE_SESSION) || 'null');
+        return (s && s.v === total && s.idx > 0 && s.idx < total) ? s : null;
+      } catch (e) { return null; }
+    }
+
     function enregistrer(reussi, cles) {
       repondus++;
       if (reussi) reussis++;
@@ -438,10 +467,27 @@
     brContinuer.onclick = () => {
       cacherRetour();
       idx++;
-      document.getElementById('exo-barre').style.width = Math.round((idx / totalCourant) * 100) + '%';
       afficherExo();
       if (!enRattrapage && idx < totalCourant) pousser({ vue: 'exo', idx });
     };
+
+    function majJauge() {
+      const compteur = document.getElementById('exo-compteur');
+      const barre = document.getElementById('exo-barre');
+      if (enRattrapage) {
+        compteur.textContent = 'Rattrapage · Exercice ' + (idx + 1) + ' / ' + totalCourant;
+        barre.style.width = Math.round((idx / totalCourant) * 100) + '%';
+        return;
+      }
+      const et = etapeDe(idx);
+      const debut = et * tailleEtape, fin = Math.min(totalCourant, (et + 1) * tailleEtape);
+      const perles = nbEtapes > 1
+        ? '●'.repeat(et) + '◐' + '○'.repeat(Math.max(0, nbEtapes - et - 1)) + '  ·  ' : '';
+      compteur.textContent = perles
+        + (nbEtapes > 1 ? 'Étape ' + (et + 1) + ' / ' + nbEtapes + ' · ' : '')
+        + 'Exercice ' + (idx - debut + 1) + ' / ' + (fin - debut);
+      barre.style.width = Math.round(((idx - debut) / Math.max(1, fin - debut)) * 100) + '%';
+    }
 
     function majCombo() {
       const c = document.getElementById('exo-combo');
@@ -454,16 +500,24 @@
     function afficherExo() {
       const slot = document.getElementById('exo-slot');
       cacherRetour();
+      if (!enRattrapage && !repriseTraitee) {
+        repriseTraitee = true;
+        const s = (idx === 0 && repondus === 0) ? lireSession() : null;
+        if (s) { montrerReprise(s); return; }
+      }
       if (idx >= totalCourant) { finPasse(); return; }
+      if (!enRattrapage && idx > 0 && idx % tailleEtape === 0 && !bornesVues.has(idx)) {
+        bornesVues.add(idx);
+        montrerEtape(idx);
+        return;
+      }
       slot.innerHTML = '';
-      document.getElementById('exo-compteur').textContent =
-        (enRattrapage ? 'Rattrapage · ' : '') + 'Exercice ' + (idx + 1) + ' / ' + totalCourant;
-      document.getElementById('exo-barre').style.width = Math.round((idx / totalCourant) * 100) + '%';
+      majJauge();
 
       const nav = document.createElement('div'); nav.className = 'exo-nav';
       const passer = document.createElement('button');
       passer.className = 'btn-fantome petit'; passer.textContent = 'Passer';
-      passer.onclick = () => { idx++; afficherExo(); if (!enRattrapage && idx < totalCourant) pousser({ vue: 'exo', idx }); };
+      passer.onclick = () => { idx++; if (!enRattrapage) sauverSession(); afficherExo(); if (!enRattrapage && idx < totalCourant) pousser({ vue: 'exo', idx }); };
       nav.appendChild(passer);
 
       let repondu = false;
@@ -491,7 +545,10 @@
         if (!enRattrapage) {
           comptes.add(cle);
           enregistrer(reussi, cles);
-          if (!reussi) aRevoir.push(exoCourant);
+          questionsEtape++;
+          if (reussi) reussitesEtape++;
+          else { aRevoir.push(exoCourant); ratesIdx.push(idx); fautesEtape++; }
+          sauverSession();
         } else {
           // En rattrapage : on alimente la répétition espacée, et une réussite
           // récupère le score (sans dépasser le total) ; sinon on garde l'exo.
@@ -507,7 +564,8 @@
           sessionPoints += gagne;
           Jeu.compteAnime(document.getElementById('exo-pts'), sessionPoints, '', '', 450);
           majCombo();
-          if (combo % 5 === 0) { Jeu.son('serie'); Jeu.confettis({ y: window.innerHeight * 0.35, nombre: 70 }); }
+          if (combo % 10 === 0) { Jeu.son('fin'); Jeu.confettis({ y: window.innerHeight * 0.3, nombre: 130 }); }
+          else if (combo % 5 === 0) { Jeu.son('serie'); Jeu.confettis({ y: window.innerHeight * 0.35, nombre: 70 }); }
           else { Jeu.son('bon'); }
           montrerBarre(true, '+' + gagne + ' pts' + (bonus ? ' · série ' + combo : ''), detail, dernier);
         } else {
@@ -518,6 +576,81 @@
         passer.style.display = 'none';
       }, id);
       slot.appendChild(nav);
+    }
+
+    /* ---- Écran de palier entre deux étapes ---- */
+    function montrerEtape(borne) {
+      cacherRetour();
+      const slot = document.getElementById('exo-slot');
+      slot.innerHTML = '';
+      const et = Math.round(borne / tailleEtape);
+      const sansFaute = fautesEtape === 0 && questionsEtape > 0;
+      let bonus = 0;
+      if (sansFaute) {
+        bonus = 20; sessionPoints += bonus;
+        Jeu.compteAnime(document.getElementById('exo-pts'), sessionPoints, '', '', 450);
+      }
+      document.getElementById('exo-compteur').textContent = 'Étape ' + et + ' / ' + nbEtapes + ' terminée';
+      document.getElementById('exo-barre').style.width = '100%';
+      const mots = ['Beau travail — respirez un instant.', 'Encore une pierre posée.',
+        'La régularité fait tout : vous êtes en plein dedans.', 'Chaque étape ancre la précédente.'];
+      const c = document.createElement('div'); c.className = 'exercice apparait centre';
+      c.innerHTML = '<span class="exercice-numero">Étape ' + et + ' sur ' + nbEtapes + '</span>' +
+        '<div class="jeu-etoiles" style="font-size:1.4rem;letter-spacing:0.35rem;margin:0.45rem 0;">' +
+          '●'.repeat(et) + '○'.repeat(Math.max(0, nbEtapes - et)) + '</div>' +
+        (questionsEtape > 0
+          ? '<h3 style="margin:0.2rem 0 0.4rem;">' + reussitesEtape + ' / ' + questionsEtape + ' réussis dans cette étape</h3>'
+          : '<h3 style="margin:0.2rem 0 0.4rem;">Étape parcourue</h3>') +
+        (sansFaute ? '<p style="color:var(--accent);font-weight:600;">Sans faute — bonus +' + bonus + ' pts, mā shāʾa Llāh !</p>' : '') +
+        '<p class="muet">' + mots[(et - 1) % mots.length] +
+        ' Votre avancée est enregistrée : vous pouvez faire une pause et reprendre exactement ici.</p>';
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;';
+      const go = document.createElement('button'); go.className = 'btn';
+      go.textContent = 'Continuer — étape ' + (et + 1) + ' / ' + nbEtapes;
+      go.onclick = () => afficherExo();
+      const pause = document.createElement('button'); pause.className = 'btn btn-secondaire'; pause.textContent = 'Faire une pause';
+      pause.onclick = () => { sauverSession(); montrer('cours'); pousser({ vue: 'cours' }); };
+      wrap.appendChild(go); wrap.appendChild(pause);
+      c.appendChild(wrap); slot.appendChild(c);
+      if (sansFaute) { Jeu.son('fin'); Jeu.confettis({ nombre: 90, y: window.innerHeight * 0.35 }); }
+      else { Jeu.son('serie'); }
+      fautesEtape = 0; reussitesEtape = 0; questionsEtape = 0;
+      sauverSession();
+    }
+
+    /* ---- Écran de reprise d'une session interrompue ---- */
+    function montrerReprise(s) {
+      cacherRetour();
+      const slot = document.getElementById('exo-slot');
+      slot.innerHTML = '';
+      document.getElementById('exo-compteur').textContent = 'Session en cours';
+      document.getElementById('exo-barre').style.width = Math.round((s.idx / total) * 100) + '%';
+      const c = document.createElement('div'); c.className = 'exercice apparait centre';
+      c.innerHTML = '<span class="exercice-numero">Reprendre</span>' +
+        '<h3 style="margin:0.2rem 0 0.4rem;">Une session est en cours</h3>' +
+        '<p class="muet">Vous vous étiez arrêté à l\'exercice ' + (s.idx + 1) + ' sur ' + total +
+        (nbEtapes > 1 ? ' (étape ' + (etapeDe(s.idx) + 1) + ' / ' + nbEtapes + ')' : '') +
+        ', avec ' + s.reussis + ' réussite' + (s.reussis > 1 ? 's' : '') + ' et ' + (s.sessionPoints || 0) + ' points.</p>';
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:1rem;';
+      const go = document.createElement('button'); go.className = 'btn'; go.textContent = 'Reprendre là où j\'en étais';
+      go.onclick = () => { restaurerSession(s); afficherExo(); pousser({ vue: 'exo', idx }); };
+      const rz = document.createElement('button'); rz.className = 'btn btn-secondaire'; rz.textContent = 'Recommencer du début';
+      rz.onclick = () => { effacerSession(); afficherExo(); };
+      wrap.appendChild(go); wrap.appendChild(rz);
+      c.appendChild(wrap); slot.appendChild(c);
+    }
+    function restaurerSession(s) {
+      idx = s.idx; repondus = s.repondus; reussis = s.reussis;
+      sessionPoints = s.sessionPoints || 0; combo = s.combo || 0; meilleurCombo = s.meilleurCombo || 0;
+      fautesEtape = s.fautesEtape || 0; reussitesEtape = s.reussitesEtape || 0; questionsEtape = s.questionsEtape || 0;
+      ratesIdx = s.rates || [];
+      aRevoir = ratesIdx.map((i) => exercices[i]).filter(Boolean);
+      (s.comptes || []).forEach((c) => comptes.add(c));
+      (s.bornes || []).forEach((b) => bornesVues.add(b));
+      document.getElementById('exo-pts').textContent = sessionPoints;
+      majCombo();
     }
 
     // Fin d'une passe : s'il reste des exercices manqués, on les repropose
@@ -603,6 +736,7 @@
     vueBilan.appendChild(pied);
 
     function majBilan() {
+      effacerSession();
       const seuil = Math.ceil(total * 0.8);
       const acquis = reussis >= seuil;
       if (acquis) Stockage.enregistrerScoreLecon(id, reussis, total);
@@ -652,6 +786,8 @@
       idx = 0; repondus = 0; reussis = 0; sessionPoints = 0; combo = 0; meilleurCombo = 0; xpAttribue = false;
       fileCourante = exercices; totalCourant = total; enRattrapage = false; aRevoir = [];
       comptes.clear();
+      effacerSession(); bornesVues.clear(); ratesIdx = [];
+      fautesEtape = 0; reussitesEtape = 0; questionsEtape = 0; repriseTraitee = true;
       document.getElementById('exo-pts').textContent = '0';
       document.getElementById('exo-combo').hidden = true;
       montrer('exo');
