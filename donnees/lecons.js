@@ -2474,6 +2474,14 @@ const Lecons = {
       ]},
       { texte: 'Le moyen mnémotechnique est dans les noms eux-mêmes : dans الْقَمَر (la LUNE), le « l » se prononce — le ق est donc LUNAIRE. Dans الشَّمْس (le SOLEIL), il se fond — le ش est SOLAIRE. Les deux mots-témoins portent la règle : il suffit de se les redire.' },
       { texte: 'Une astuce pour sentir la règle : si la consonne se forme avec le bout de la langue (ت ث د ذ ر ز س ش ص ض ط ظ ل ن), elle est solaire et avale le « l ». Sinon, elle est lunaire. Inutile de tout retenir : l\'oreille s\'en charge à force d\'écouter.' },
+      { titreDialogue: 'Voici يُوسُف (Yūsuf) — son nom se lit avec vos lettres du Cycle I. Cet enfant curieux grandira avec vous jusqu\'à la fin du parcours. Aujourd\'hui, il découvre le ciel — écoutez l\'article chanter. (أَيْنَ demande « où » ; فِي veut dire « dans » — leçon 18.)',
+        dialogue: [
+          { qui: 'A', ar: 'أَيْنَ الشَّمْسُ ؟', tr: 'ayna sh-shams', fr: 'Où est le soleil ?' },
+          { qui: 'B', ar: 'الشَّمْسُ فِي السَّمَاءِ.', tr: 'ash-shamsu fī s-samāʾ', fr: 'Le soleil est dans le ciel.' },
+          { qui: 'A', ar: 'وَأَيْنَ الْقَمَرُ ؟', tr: 'wa-ayna l-qamar', fr: 'Et où est la lune ?' },
+          { qui: 'B', ar: 'الْقَمَرُ فِي اللَّيْلِ.', tr: 'al-qamaru fī l-layl', fr: 'La lune est dans la nuit.' },
+        ] },
+      { texte: 'Écoutez Yūsuf : ash-SHams (solaire, le l fondu), al-Qamar (lunaire, le l net) — les deux mots-témoins de la règle, en pleine conversation.' },
       { texte: 'Un mot pour vous rassurer une fois pour toutes : vous croiserez de petites terminaisons (الْبَيْتُ « -ou », فِي الْبَيْتِ « -i », بَيْتٌ « -oun »). Ce sont les « cas », qui précisent le rôle du mot. Pour l\'instant, contentez-vous de les entendre. Lisez en confiance.' },
     ],
     grammaire: {
@@ -2648,7 +2656,7 @@ const Lecons = {
       { texte: 'Devant un nom indéfini, hādhā / dhālika se traduit « ceci / cela est un… » : هَٰذَا كِتَابٌ = « ceci est un livre ». Devant un nom défini (avec article), par « ce…-là » : ذَٰلِكَ الْبَابُ = « cette porte-là, voilà la porte ».' },
       { texte: 'Le démonstratif ذَٰلِكَ ouvre la deuxième sourate du Coran : ذَٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ, « Voilà le Livre, nul doute en lui ». Ici, le lointain dhālika ne marque pas la distance, mais l\'élévation : la majesté du Livre.' },
       { texte: 'Pour interroger, deux outils. مَا (mā) demande « qu\'est-ce que » : مَا هَٰذَا ؟ « qu\'est-ce que ceci ? ». Et la petite particule أَ (a-), collée en tête de phrase, transforme une affirmation en question fermée : هَٰذَا قَلَمٌ (ceci est un calame) → أَهَٰذَا قَلَمٌ ؟ (est-ce que ceci est un calame ?). On répond par نَعَمْ (oui) ou لَا (non).' },
-      { titreDialogue: 'On montre, on demande : tout vous est déjà connu.',
+      { titreDialogue: 'Yūsuf montre tout ce qu\'il voit : « qu\'est-ce que c\'est ? » Tout vous est déjà connu.',
         dialogue: [
           { qui: 'A', ar: 'مَا هَٰذَا ؟', tr: 'mā hādhā', fr: 'Qu\'est-ce que ceci ?' },
           { qui: 'B', ar: 'هَٰذَا كِتَابٌ.', tr: 'hādhā kitāb', fr: 'Ceci est un livre.' },
@@ -2832,7 +2840,7 @@ const Lecons = {
       ]},
       { texte: 'Le démonstratif s\'accorde en genre, comme un écho. Mettez les deux mondes face à face : هَٰذَا كِتَابٌ (masculin) répond à هَٰذِهِ آيَةٌ (féminin) ; ذَٰلِكَ الْبَابُ à تِلْكَ السُّورَةُ.' },
       { texte: 'Attention, deux pièges utiles à connaître. Certains mots féminins n\'ont pas de ة : أَرْض (la terre), شَمْس (le soleil) sont féminins par nature. Et tout mot en ة n\'est pas un être féminin : c\'est d\'abord une marque de forme.' },
-      { titreDialogue: 'On montre tour à tour le masculin et le féminin.',
+      { titreDialogue: 'Yūsuf apprend le féminin : on lui montre tour à tour le masculin et le féminin.',
         dialogue: [
           { qui: 'A', ar: 'مَا هَٰذَا ؟', tr: 'mā hādhā', fr: 'Qu\'est-ce que ceci (m.) ?' },
           { qui: 'B', ar: 'هَٰذَا كِتَابٌ.', tr: 'hādhā kitāb', fr: 'Ceci est un livre.' },
@@ -3018,7 +3026,7 @@ const Lecons = {
         { ar: 'هِيَ قَرِيبَةٌ', tr: 'hiya qarība', fr: 'elle est proche', note: 'هِيَ + accord féminin' },
         { ar: 'أَنَا مُسْلِمٌ', tr: 'anā muslim', fr: 'je suis musulman', note: 'sans verbe « être »' },
       ]},
-      { titreDialogue: 'La phrase nominale en situation : on décrit le monde. Le mot كَيْفَ (kayfa) demande « comment ».',
+      { titreDialogue: 'Yūsuf décrit le monde : la phrase nominale en situation. Le mot كَيْفَ (kayfa) demande « comment ».',
         dialogue: [
           { qui: 'A', ar: 'كَيْفَ الْبَحْرُ ؟', tr: 'kayfa l-baḥr', fr: 'Comment est la mer ?' },
           { qui: 'B', ar: 'الْبَحْرُ كَبِيرٌ عَظِيمٌ.', tr: 'al-baḥru kabīrun ʿaẓīm', fr: 'La mer est grande, immense.' },
@@ -3204,7 +3212,7 @@ const Lecons = {
       ]},
       { texte: 'La préposition لِـ (« à, pour ») se colle directement au mot suivant : لِرَبٍّ (à un seigneur), لِلْمَلِكِ (au roi). Devant le nom d\'Allah, elle donne une forme magnifique et très fréquente : لِلَّهِ.' },
       { texte: 'Décortiquons لِلَّهِ. On prend la préposition لِ (à) et le nom اللَّه (Allah). En les soudant, le ا de l\'article s\'efface et les deux ل se rejoignent : لِ + اللَّه → لِلَّه, qu\'on lit li-llāh. Le « -i » final marque le nom gouverné : li-llāhi.' },
-      { titreDialogue: 'Les prépositions en situation : on cherche, on situe.',
+      { titreDialogue: 'Yūsuf a égaré son calame : on cherche, on situe — les prépositions en situation.',
         dialogue: [
           { qui: 'A', ar: 'أَيْنَ الْقَلَمُ ؟', tr: 'ayna l-qalam', fr: 'Où est le calame ?' },
           { qui: 'B', ar: 'الْقَلَمُ عَلَى الْكِتَابِ.', tr: 'al-qalamu ʿalā l-kitāb', fr: 'Le calame est sur le livre.' },
@@ -3395,6 +3403,13 @@ const Lecons = {
       ]},
       { texte: 'On peut enchaîner trois noms : مَالِكِ يَوْمِ الدِّينِ, « le Maître du Jour du Jugement ». Chaque maillon possède le suivant. Remarquez : aucun de ces noms ne porte l\'article ال, et pourtant tout le groupe est défini.' },
       { texte: 'Cette structure tisse le Coran tout entier : عَبْدُ اللَّهِ (le serviteur d\'Allah), رَبِّ الْعَالَمِينَ (le Seigneur des mondes), صِرَاطَ الَّذِينَ (le chemin de ceux…). La reconnaître, c\'est comprendre des versets entiers d\'un coup d\'œil.' },
+      { titreDialogue: 'Yūsuf découvre l\'annexion — deux questions, deux réponses immenses. (مَنْ demande « qui ? »)',
+        dialogue: [
+          { qui: 'A', ar: 'مَا هَٰذَا الْكِتَابُ ؟', tr: 'mā hādhā l-kitāb', fr: 'Quel est ce livre ?' },
+          { qui: 'B', ar: 'هَٰذَا كِتَابُ اللَّهِ.', tr: 'hādhā kitābu llāh', fr: 'C\'est le Livre d\'Allah.' },
+          { qui: 'A', ar: 'وَمَنْ رَسُولُ اللَّهِ ؟', tr: 'wa-man rasūlu llāh', fr: 'Et qui est le messager d\'Allah ?' },
+          { qui: 'B', ar: 'مُحَمَّدٌ رَسُولُ اللَّهِ.', tr: 'muḥammadun rasūlu llāh', fr: 'Muhammad est le messager d\'Allah.' },
+        ] },
       { texte: 'Atelier final du cycle : al-Fātiḥa, « l\'Ouvrante ». Sept versets que tout musulman récite chaque jour. Vous y retrouverez tout ce que vous savez : l\'article, le défini / indéfini, la phrase nominale, les prépositions, l\'iḍāfa. Lisez-la lentement, dans l\'exercice de lecture final.' },
     ],
     grammaire: {
@@ -3603,7 +3618,7 @@ const Lecons = {
         { ar: 'قَالَ رَبِّي', tr: 'qāla rabbī', fr: 'mon Seigneur a dit', note: 'litt. « a-dit mon-Seigneur »' },
       ]},
       { texte: 'Prenez ce réflexe dès maintenant : quand un verset s\'ouvre sur un verbe (خَلَقَ، قَالَ، أَنْزَلَ…), le mot suivant est presque toujours son sujet. Ce seul réflexe déverrouille des centaines de versets.' },
-      { titreDialogue: 'Le verbe entre en conversation. Le mot مَاذَا (mādhā) demande « qu\'est-ce que » devant un verbe.',
+      { titreDialogue: 'Yūsuf interroge la création. Le mot مَاذَا (mādhā) demande « qu\'est-ce que » devant un verbe.',
         dialogue: [
           { qui: 'A', ar: 'مَاذَا خَلَقَ اللَّهُ ؟', tr: 'mādhā khalaqa llāh', fr: 'Qu\'a créé Allah ?' },
           { qui: 'B', ar: 'خَلَقَ اللَّهُ السَّمَاوَاتِ وَالْأَرْضَ.', tr: 'khalaqa llāhu s-samāwāti wa-l-arḍ', fr: 'Allah a créé les cieux et la terre.' },
@@ -3795,7 +3810,7 @@ const Lecons = {
       { texte: 'Une astuce d\'oreille : « je » et « tu » ne diffèrent que par la voyelle du ت — katabtu (je), katabta (tu, m.), katabti (tu, f.). La kasra va vers le féminin, comme souvent.' },
       { texte: 'Pour parler à plusieurs personnes, on dira كَتَبْتُمْ (katabtum, « vous avez écrit »). Contentez-vous de la reconnaître : elle est moins fréquente dans vos premières lectures.' },
       { texte: 'Vous connaissez déjà l\'une de ces formes par cœur. Dans la Fātiḥa : صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ — « le chemin de ceux que TU AS COMBLÉS ». Le verbe أَنْعَمَ (combler de grâces) + ـْتَ (tu) = أَنْعَمْتَ.' },
-      { titreDialogue: 'Le verbe entre en conversation — tout est déjà connu.',
+      { titreDialogue: 'Yūsuf et son père conversent au passé — tout vous est connu.',
         dialogue: [
           { qui: 'A', ar: 'أَسَمِعْتَ الْقُرْآنَ ؟', tr: 'a-samiʿta l-qurʾān', fr: 'As-tu entendu le Coran ?' },
           { qui: 'B', ar: 'نَعَمْ، سَمِعْتُ الْقُرْآنَ.', tr: 'naʿam, samiʿtu l-qurʾān', fr: 'Oui, j\'ai entendu le Coran.' },
@@ -3970,7 +3985,7 @@ const Lecons = {
         { ar: 'يَعْلَمُ', tr: 'yaʿlamu', fr: 'il sait' },
         { ar: 'نَعْبُدُ', tr: 'naʿbudu', fr: 'nous adorons' },
       ]},
-      { titreDialogue: 'L\'inaccompli fait vivre l\'échange : « que fais-tu ? »',
+      { titreDialogue: 'Que fait Yūsuf ? L\'inaccompli fait vivre l\'échange.',
         dialogue: [
           { qui: 'A', ar: 'مَاذَا تَفْعَلُ ؟', tr: 'mādhā tafʿalu', fr: 'Que fais-tu ?' },
           { qui: 'B', ar: 'أَكْتُبُ كَلِمَةً.', tr: 'aktubu kalima(tan)', fr: 'J\'écris une parole.' },
@@ -4144,7 +4159,7 @@ const Lecons = {
         { ar: 'رَبُّهُمْ', tr: 'rabbuhum', fr: 'leur Seigneur', note: 'ـهُمْ = leur' },
       ]},
       { texte: 'Le même suffixe, attaché à une préposition, donne : لَهُ (à lui), بِهِ (par lui), عَلَيْهِمْ (sur eux).' },
-      { titreDialogue: 'À qui est-ce ? Un échange tout en pronoms suffixes.',
+      { titreDialogue: 'À qui est-ce ? Yūsuf retrouve son livre — un échange tout en pronoms suffixes.',
         dialogue: [
           { qui: 'A', ar: 'هَٰذَا كِتَابُكَ ؟', tr: 'hādhā kitābuka', fr: 'Ceci est ton livre ?' },
           { qui: 'B', ar: 'نَعَمْ، هَٰذَا كِتَابِي.', tr: 'naʿam, hādhā kitābī', fr: 'Oui, ceci est mon livre.' },
@@ -4318,7 +4333,7 @@ const Lecons = {
         { ar: 'أَعُوذُ بِاللَّهِ', tr: 'aʿūdhu bi-llāh', fr: 'je cherche refuge auprès d\'Allah', note: 'la formule que vous dites avant chaque lecture' },
         { ar: 'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ', tr: 'aʿūdhu bi-llāhi mina sh-shayṭān', fr: '… contre le shayṭān', note: 'بِـ (auprès de) + مِنْ (contre)' },
       ]},
-      { titreDialogue: 'L\'impératif fait naître l\'échange maître-élève. Le petit mot يَا appelle quelqu\'un : « ô… ! »',
+      { titreDialogue: 'Le maître enseigne à Yūsuf : l\'impératif fait naître l\'échange. Le petit mot يَا appelle quelqu\'un : « ô… ! »',
         dialogue: [
           { qui: 'A', ar: 'اقْرَأْ يَا وَلَدُ.', tr: 'iqraʾ yā walad', fr: 'Lis, ô garçon !' },
           { qui: 'B', ar: 'مَاذَا أَقْرَأُ ؟', tr: 'mādhā aqraʾu', fr: 'Que dois-je lire ?' },
@@ -4675,7 +4690,7 @@ const Lecons = {
       { lignes: [
         { ar: 'إِنَّ رَبَّكَ حَكِيمٌ عَلِيمٌ', tr: 'inna rabbaka ḥakīmun ʿalīm', fr: 'Ton Seigneur est certes Sage, Omniscient.', note: 'al-Anʿām, 83 · rabba-ka prend la fatḥa après inna' },
         { ar: 'إِنَّ اللَّهَ لَغَفُورٌ رَحِيمٌ', tr: 'inna llāha la-ghafūrun raḥīm', fr: 'Allah est certes Pardonneur, Miséricordieux.', note: 'an-Naḥl, 18 · double insistance : inna + la-' },
-      { titreDialogue: 'Racontez votre journée : ce sont les liaisons qui font le récit.',
+      { titreDialogue: 'Yūsuf raconte sa journée : ce sont les liaisons qui font le récit.',
         dialogue: [
           { qui: 'A', ar: 'مَاذَا فَعَلْتَ الْيَوْمَ ؟', tr: 'mādhā faʿalta l-yawm', fr: 'Qu\'as-tu fait aujourd\'hui ?' },
           { qui: 'B', ar: 'دَخَلْتُ الْبَيْتَ ثُمَّ سَمِعْتُ الْقُرْآنَ.', tr: 'dakhaltu l-bayta thumma samiʿtu l-qurʾān', fr: 'Je suis entré à la maison, puis j\'ai écouté le Coran.' },
@@ -4858,7 +4873,7 @@ const Lecons = {
       { lignes: [
         { ar: 'لَا إِكْرَاهَ فِي الدِّينِ', tr: 'lā ikrāha fī d-dīn', fr: 'Nulle contrainte en religion.', note: 'al-Baqara, 256 · لَا + nom : négation absolue' },
       ]},
-      { titreDialogue: 'Savoir dire « je ne sais pas » : la négation entre en conversation — et c\'est une parole de science.',
+      { titreDialogue: 'Yūsuf ose dire « je ne sais pas » : la négation entre en conversation — et c\'est une parole de science.',
         dialogue: [
           { qui: 'A', ar: 'أَتَعْلَمُ ؟', tr: 'a-taʿlamu', fr: 'Sais-tu ?' },
           { qui: 'B', ar: 'لَا، لَا أَعْلَمُ.', tr: 'lā, lā aʿlamu', fr: 'Non, je ne sais pas.' },
@@ -5045,7 +5060,7 @@ const Lecons = {
         { ar: 'الْغَفُور', tr: 'al-ghafūr', fr: 'le Pardonneur', note: 'racine غ-ف-ر — comme غَفَرَ, séance 21' },
       ]},
       { texte: 'ar-Raḥmān et ar-Raḥīm partagent la racine de la miséricorde : le premier dit une miséricorde immense et générale, le second une miséricorde continue et agissante. Ces noms signent la fin de très nombreux versets.' },
-      { titreDialogue: 'Le pluriel entre en conversation — avec une règle-surprise : les pluriels de choses se montrent au FÉMININ SINGULIER.',
+      { titreDialogue: 'Yūsuf devant les livres : le pluriel entre en conversation — avec une règle-surprise : les pluriels de choses se montrent au FÉMININ SINGULIER.',
         dialogue: [
           { qui: 'A', ar: 'أَهَٰذِهِ كُتُبٌ ؟', tr: 'a-hādhihi kutub', fr: 'Est-ce que ce sont des livres ?' },
           { qui: 'B', ar: 'نَعَمْ، هَٰذِهِ كُتُبٌ.', tr: 'naʿam, hādhihi kutub', fr: 'Oui, ce sont des livres.' },
@@ -5429,7 +5444,7 @@ const Lecons = {
         { ar: 'تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ', tr: 'tabāraka lladhī bi-yadihi l-mulk', fr: 'Béni soit Celui qui détient la royauté,', note: 'le relatif + bi- + le suffixe ـهِ : tout est à vous' },
         { ar: 'وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ', tr: 'wa-huwa ʿalā kulli shayʾin qadīr', fr: 'et qui est capable de toute chose.', note: 'vous venez de lire cette structure plus haut' },
       ]},
-      { titreDialogue: 'Et pour couronner le parcours : votre première conversation complète. Chaque mot vient d\'une leçon.',
+      { titreDialogue: 'Et pour couronner le parcours : Yūsuf a grandi — c\'est lui qui vous salue. Votre première conversation complète : chaque mot vient d\'une leçon.',
         dialogue: [
           { qui: 'A', ar: 'السَّلَامُ عَلَيْكُمْ.', tr: 'as-salāmu ʿalaykum', fr: 'Que la paix soit sur vous.' },
           { qui: 'B', ar: 'وَعَلَيْكُمُ السَّلَامُ وَرَحْمَةُ اللَّهِ.', tr: 'wa-ʿalaykumu s-salāmu wa-raḥmatu llāh', fr: 'Et sur vous la paix, et la miséricorde d\'Allah.' },
