@@ -78,7 +78,7 @@ textes et contrôles restent lisibles dans les deux thèmes.
 
 ## Dialogues, prononciation et corrections
 
-Des dialogues guidés (leçons 8 et 11) mettent en scène des échanges simples
+Des dialogues guidés (à partir du cycle III) mettent en scène des échanges simples
 qui réemploient le vocabulaire déjà appris (salutations, démonstratifs,
 interrogatifs, noms concrets), avec des exercices « quelle réponse convient ».
 
@@ -99,10 +99,10 @@ madda / alif maqṣūra, le schème intensif faʿʿāl des noms divins), un
 vocabulaire concret du quotidien attesté dans le Coran, des salutations
 usuelles, et des proverbes coraniques vérifiés mot pour mot.
 
-## Une méthode qui avance doucement (leçons 1 à 12)
+## Une méthode qui avance doucement
 
-Les douze premières leçons suivent une progression resserrée, pensée pour ne
-jamais aller trop vite :
+Le parcours suit une progression resserrée, pensée pour ne jamais aller trop
+vite — l'alphabet, notamment, s'étale sur huit leçons :
 
 - **peu de nouveautés à la fois** : les lettres sont présentées par petites
   familles (2 à 4), chacune suivie d'un temps d'observation ;
@@ -203,11 +203,14 @@ Le texte coranique est donné en orthographe standard vocalisée et a été vér
 
 ## L'architecture des trente leçons
 
-- **Cycle I, le système d'écriture (1 à 6)** : l'alphabet, les voyelles, le tanwīn, la hamza.
-- **Cycle II, premiers mots et structures (7 à 12)** : l'article, les pronoms, le genre, la phrase nominale, les démonstratifs, la sourate al-Ikhlāṣ.
-- **Cycle III, le verbe et l'annexion (13 à 18)** : l'accompli, l'inaccompli, l'idāfa, les pronoms suffixes, les sourates al-Falaq et an-Nās.
-- **Cycle IV, grammaire approfondie (19 à 24)** : coordination, prépositions, pluriels, négation, relatifs, les sourates al-Kawthar et al-ʿAṣr.
-- **Cycle V, premières lectures coraniques (25 à 30)** : les noms d'Allah, le lexique du culte, la sourate al-Fātiḥa, la synthèse, le bilan.
+La progression détaillée (choix pédagogiques, jalons, table de migration) est
+documentée dans `PROGRESSION.md`.
+
+- **Cycle I, les lettres, une à une (1 à 8)** : l'alphabet entier en huit leçons douces (2 à 4 lettres par leçon), les voyelles, le sukūn, la shadda — jusqu'à lire le Nom d'Allah.
+- **Cycle II, lire le Coran à voix haute (9 à 13)** : la tāʾ marbūṭa, le tanwīn, la hamza, la discrimination des sons proches, et la sourate al-Ikhlāṣ entière.
+- **Cycle III, la phrase sans verbe (14 à 19)** : l'article, les démonstratifs, le genre, la phrase nominale, les prépositions, l'iḍāfa — et la Fātiḥa entière, analysée.
+- **Cycle IV, le verbe et l'invocation (20 à 25)** : la racine, l'accompli, l'inaccompli, les pronoms suffixes, l'impératif des formules, les sourates al-Falaq et an-Nās complètes.
+- **Cycle V, vers la lecture autonome (26 à 30)** : coordination et insistance, négation et exception, pluriels et schèmes des noms divins, relatifs, les sourates al-Kawthar et al-ʿAṣr, la synthèse et al-Mulk.
 
 ## La philosophie pédagogique
 

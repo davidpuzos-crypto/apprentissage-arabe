@@ -140,12 +140,13 @@
 
     /* ---- Grille des cycles et leçons ---- */
     const titresCycles = [
-      'Le système d\'écriture',
-      'Premiers mots et structures',
-      'Le verbe et l\'annexion',
-      'Grammaire approfondie',
-      'Premières lectures coraniques',
+      'Les lettres, une à une',
+      'Lire le Coran à voix haute',
+      'La phrase sans verbe',
+      'Le verbe et l\'invocation',
+      'Vers la lecture autonome',
     ];
+    const plagesCycles = [[1, 8], [9, 13], [14, 19], [20, 25], [26, 30]];
     const conteneurCycles = document.getElementById('cycles');
     for (let c = 1; c <= 5; c++) {
       const bloc = document.createElement('div');
@@ -160,7 +161,7 @@
       }
       const grille = document.createElement('div');
       grille.className = 'grille-lecons';
-      for (let i = (c-1)*6 + 1; i <= c*6; i++) {
+      for (let i = plagesCycles[c-1][0]; i <= plagesCycles[c-1][1]; i++) {
         const lecon = (typeof Lecons !== 'undefined') ? Lecons[i] : null;
         const accessible = Stockage.leconAccessible(i);
         const terminee = Stockage.leconTerminee(i);

@@ -1,6 +1,8 @@
 # Refonte de la progression pédagogique — proposition validée comme référence
 
 Ce document est la **maquette de référence** de la nouvelle progression des 30 leçons.
+**Statut : mise en œuvre dans `donnees/lecons.js`** (structure, renumérotation, fusions et
+nouvelles leçons) — le polissage du contenu peut se poursuivre leçon par leçon.
 Il fixe la structure (quelle notion, à quelle leçon, dans quel ordre, avec quel jalon) ;
 le contenu détaillé de chaque leçon sera réécrit ensuite, leçon par leçon, à partir de
 cette maquette et de la table de migration en fin de document.
